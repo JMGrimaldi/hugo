@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Remettre les pages d&#39;un PDF dans l&#39;ordre - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/remettre-les-pages-dans-l-ordre/">Remettre les pages d&#39;un PDF dans l&#39;ordre</a></h1>
+		<div class="post-date">24 août 2015</div>
+		
+		
+
+<p><img class="fr" src="../../img/shuffle.png"></p>
+
+<p>Je viens de scanner un document imprimé en brochure/booklet après l&rsquo;avoir dégrafé. C&rsquo;est pratique, ça permet d&rsquo;utiliser le chargeur automatique du scanner. Mais cela veut dire que sur chaque page scannée j&rsquo;ai en réalité 2 pages, et dans un ordre assez bizarre: 8 et 9, 10 et 7, etc. Comment les remettre dans l&rsquo;ordre ?</p>
+
+<h2 id="numérologie">Numérologie</h2>
+
+<p>D&rsquo;abord, on constate qu&rsquo;avec 2 pages par scan, le nombre de pages est un multiple de 2. Écrivons-le 2n.</p>
+
+<p>On a les pages 1 à n dans la première moitié de la brochure, et les pages n+1 à 2n dans la seconde moitié. Ce qui veut dire que sur la première page scannée, on a les pages n (à gauche) et n+1 (à droite).</p>
+
+<p>Au verso, c&rsquo;est-à-dire sur la deuxième page scannée, on a les pages n-1 et n+2. Et ainsi de suite jusqu&rsquo;à la n<sup>ième</sup> page scannée, la couverture, où l&rsquo;on a les pages 1 et 2n.</p>
+
+<p><img src="../../img/leaflet.png" alt="Numérotation d'une brochure" />
+</p>
+
+<p>À l&rsquo;inverse, la page 1 est à droite du scan n, la page 2 à gauche du scan n-1, la page 3 à droite du scan n-2, &hellip; la page n à gauche du scan 1, la page n+1 à droite du scan 1, etc.</p>
+
+<ul>
+<li>Si <em>k</em> est compris entre 1 et n, la page <em>k</em> est sur le scan <em>(n-k+1)</em>;</li>
+<li>Si <em>k</em> est supérieur à n, la page <em>k</em> est sur le scan <em>(k-n)</em>;</li>
+<li>La page <em>k</em> est à droite si <em>k</em> est impair, à gauche si <em>k</em> est pair.</li>
+</ul>
+
+<h2 id="mise-en-pratique">Mise en pratique</h2>
+
+<p>Vous aurez besoin d&rsquo;avoir installé ImageMagick, Ghostscript (version 32 bits), et Cygwin si vous êtes sous Windows. Vous aurez également besoin des utilitaires pdfimages et jpegtran :</p>
+
+<ul>
+<li><strong>pdfimages</strong> permet d&rsquo;extraire les images du PDF sans les dégrader. Sous Ubuntu il est dans le package <code>poppler-utils</code> ; sous Windows il faut télécharger <a href="http://www.foolabs.com/xpdf/download.html">Xpdf</a> puis copier <code>pdfimages.exe</code> (celui de bin64/ si l&rsquo;OS le permet, de bin32/ sinon) dans le <code>/usr/local/bin/</code> de Cygwin.</li>
+<li><strong>jpegtran</strong> permet de faire pivoter une image JPEG sans la dégrader. Sous Ubuntu il est dans le package <code>libjpeg-turbo-progs</code> ; sous Windows il est téléchargeable <a href="http://jpegclub.org/jpegtran/">ici</a>, là encore le déposer sous <code>/usr/local/bin/</code> et s&rsquo;assurer qu&rsquo;il est exécutable.</li>
+</ul>
+
+<p>Après ces préliminaires, si l&rsquo;on a un <code>doc.pdf</code> de 8 scans (16 pages à la fin) :</p>
+
+<ol>
+<li><p>On extrait les images du PDF :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span>pdfimages -j doc.pdf doc
+</pre></div>
+
+Cela crée des fichiers <code>doc-0000.jpg</code> à <code>doc-0007.jpg</code>.</p></li>
+
+<li><p>On splitte chaque scan en 2 pages distinctes (<code>-rotate 90</code> tourne la page de 90° avant de la couper en 2 ; le retirer si l&rsquo;orientation est déjà bonne) :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span><span style="font-weight: bold">for </span>i in doc-*.jpg; <span style="font-weight: bold">do </span>convert -quality 95 -rotate 90 -crop 50%x0 <span style="color: #bb8844">&quot;$i&quot;</span> <span style="color: #bb8844">&quot;$i&quot;</span> <span style="font-weight: bold">&amp;&amp;</span> rm <span style="color: #bb8844">&quot;$i&quot;</span>;<span style="font-weight: bold">done</span>
+</pre></div>
+
+Cela remplace <code>doc-0000.jpg</code> par <code>doc-0000-0.jpg</code> (page de gauche) et <code>doc-0000-1.jpg</code> (page de droite), etc.</p></li>
+
+<li><p>Si une page est à l&rsquo;envers (p.ex. dernière page d&rsquo;une brochure au format paysage) on la retourne :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ i</span><span style="font-weight: bold">=</span>doc-0007-0.jpg; jpegtran -rotate 180 <span style="color: #008080">$i</span> <span style="color: #008080">$i</span>
+</pre></div>
+</p></li>
+
+<li><p>Puis on génère la liste des scans à prendre pour remettre les pages dans l&rsquo;ordre :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ pages</span><span style="font-weight: bold">=</span><span style="color: #bb8844">`</span>perl -e <span style="color: #bb8844">&#39;$n=8; for $k (1..$n*2){printf &quot;doc-%.4i-%i.jpg &quot;, ($k&gt;$n?$k-$n:$n-$k+1)-1, $k%2};&#39;`</span>; <span style="color: #999999">echo</span> <span style="color: #008080">$pages</span>
+doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
+</pre></div>
+</p></li>
+
+<li><p>Enfin on construit le PDF final (<code>-density 300</code> correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span>convert -density 300 -quality 80 <span style="color: #008080">$pages</span> out.pdf
+<span style="color: #008080">$ </span>rm *jpg
+</pre></div>
+</p></li>
+</ol>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/cygwin/">cygwin</a>
+
+
+	, 
+	<a href="../../tags/linux/">linux</a>
+
+
+	, 
+	<a href="../../tags/maths/">maths</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

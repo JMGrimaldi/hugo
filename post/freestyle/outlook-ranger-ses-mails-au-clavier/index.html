@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Outlook : Ranger ses mails au clavier - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/freestyle/outlook-ranger-ses-mails-au-clavier/">Outlook : Ranger ses mails au clavier</a></h1>
+		<div class="post-date">28 juillet 2007</div>
+		
+		
+
+<p><img class="fr" src="../../../static/freestyle/inboxzero.jpg"></p>
+
+<p>Les gourous de la gestion d’information, de Robert Scoble à Merlin Mann, distinguent les <em>filers</em> et les <em>pilers</em> : pour gérer leurs mails les filers ont soixante dossiers, les pilers deux ou trois. L’idée des pilers étant de s’appuyer sur des outils de recherche performants pour retrouver l’info. Je suis devenu un piler après avoir lu <a href="http://lifehacker.com/182318/empty-your-inbox-with-the-trusted-trio">cet article</a> et vu <a href="https://www.youtube.com/watch?v=z9UjeTMb3Yk">cette conférence</a>.</p>
+
+<p>J’ai donc déplacé le contenu de mes 147 dossiers dans 1 seul nommé Archive, et traité mon Inbox jusqu’à 0 avec ces 2 dossiers supplémentaires : Action et Hold.</p>
+
+<p>Pour accélérer le traitement de l’Inbox avec Outlook (2003 et plus), voici comment créer un raccourci clavier pour déplacer les mails sélectionnés dans un répertoire. 5 minutes chrono :</p>
+
+<h2 id="créer-une-signature-électronique">Créer une signature électronique</h2>
+
+<p>Cette étape est nécessaire pour lancer des macros Outlook lorsque le niveau de
+sécurité n&rsquo;est pas au plus bas. Il suffit de lancer <code>SELFCERT.EXE</code> qui doit se
+trouver sous <code>Program Files\Microsoft Office\Office</code>, de taper votre nom (j&rsquo;ai
+mis mes initiales) et de faire OK.</p>
+
+<h2 id="créer-une-macro">Créer une macro</h2>
+
+<p>Dans Outlook, faites <em>Outils &gt; Macro &gt; Macros</em>, tapez <em>MoveToArchive</em> puis
+<em>Créer</em>. L&rsquo;éditeur VB s&rsquo;ouvre, profitez-en pour créer toutes vos macros de
+déplacement d&rsquo;un coup en copiant-collant le code de ce fichier :
+<a href="../../../static/MoveToFolder.zip">MoveToFolder.vba</a> (d&rsquo;après
+<a href="https://web.archive.org/web/20100211190325/http://verychewy.com/archive/2006/04/12/outlook-macro-to-move-an-email-to-folder.aspx">Chewy</a>)</p>
+
+<p>Pour affecter votre signature électronique à ce projet, dans l&rsquo;éditeur VB
+faites <em>Outils &gt; Signature électronique</em> et choisissez celle que vous avez
+créée à la 1ère étape. Ça y est, vous pouvez quitter l&rsquo;éditeur VB.</p>
+
+<h2 id="lui-affecter-un-raccourci-clavier">Lui affecter un raccourci clavier</h2>
+
+<p>Dans Outlook cliquez-droit sur une de vos barres de boutons et faites
+<em>Personnaliser</em>, onglet <em>Commandes</em>, catégorie <em>Macros</em>. Vos macros
+apparaissent dans la partie droite, prenez <em>MoveToArchive</em> et faites-la
+glisser sur la barre de boutons. Cliquez-droit sur le nouveau bouton, changez
+le nom pour <code>&amp;X;</code> et choisissez <em>Texte seul pour ce bouton</em>.</p>
+
+<p>Voilà, si vous sélectionner un mail dans votre Inbox et faites Alt+X, le mail
+est déplacé dans <em>Archive</em>. Si la lettre que vous avez choisie est déjà
+affectée à un menu ou un bouton, il faut d&rsquo;abord soit supprimer le &amp; du nom de
+ce menu/bouton, soit choisir une autre lettre.</p>
+
+<p>Maintenant, à vous de vider votre Inbox !</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../../tags/productivit%C3%A9/">productivité</a>
+
+
+	, 
+	<a href="../../../tags/windows/">windows</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

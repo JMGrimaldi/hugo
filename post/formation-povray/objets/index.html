@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Formation POV #4: Objets - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/formation-povray/objets/">Formation POV #4: Objets</a></h1>
+		<div class="post-date">28 avril 2000</div>
+		
+		
+
+<h2 id="primitives">Primitives</h2>
+
+<p>Les primitives sont les objets de base à partir desquels, par combinaisons, on
+va pouvoir obtenir des objets plus complexes.</p>
+
+<p>Les primitives les plus utilisées sont <code>plane</code>, <code>sphere</code>, <code>box</code>, <code>cylinder</code>,
+<code>cone</code>, et <code>torus</code>.</p>
+
+<p><a href="../../../static/pov/prim.pov"><img src="../../../img/pov/prim.jpg" alt="primitives" />
+</a></p>
+
+<h3 id="plane-small-plan-small">plane <small>(plan)</small></h3>
+
+<p><code>plane {<em>&lt;n&gt;</em>,<em>a</em>}</code></p>
+
+<p>Un plan est défini par sa normale extérieure n (l&rsquo;<em>intérieur</em> étant rempli de
+matière) et par l&rsquo;abcisse a de ce plan sur l&rsquo;axe (0,u) où u est n normalisé.</p>
+
+<p>Par exemple, pour faire un <em>plafond</em> à une altitude +10, la normale extérieure
+sera -y et l&rsquo;altitude -10.</p>
+
+<p><img src="../../../img/pov/plane.jpg" alt="plane" />
+</p>
+
+<h3 id="sphere-small-sphère-small">sphere <small>(sphère)</small></h3>
+
+<p><code>sphere {<em>&lt;c&gt;</em>,<em>r</em>}</code></p>
+
+<p>Une sphère est définie par son centre et son rayon.</p>
+
+<p><img src="../../../img/pov/sphere.gif" alt="sphere" />
+</p>
+
+<h3 id="box-small-parallélépipède-rectangle-small">box <small>(parallélépipède rectangle)</small></h3>
+
+<p><code>box {<em>&lt;c1&gt;</em>,<em>&lt;c2&gt;</em>}</code></p>
+
+<p>Un parallélépipède rectangle est défini par les coordonnées de 2 sommets
+opposés. Ses arêtes sont parallèles aux axes.</p>
+
+<p>Ainsi, si les 2 <em>coins</em> sont &lt;x1,y1,z1&gt; et &lt;x2,y2,z2&gt;, la boîte contiendra
+tous les points &lt;x,y,z&gt; tels que x est compris entre x1 et x2, y entre y1 et
+y2 et z entre z1 et z2.</p>
+
+<p><img src="../../../img/pov/box.gif" alt="box" />
+</p>
+
+<h3 id="cylinder-small-cylindre-small">cylinder <small>(cylindre)</small></h3>
+
+<p><code>cylinder {<em>&lt;c1&gt;</em>,<em>&lt;c2&gt;</em>,<em>r</em>}</code></p>
+
+<p>Un (tronc de) cylindre est défini par le centre de ses 2 faces et par son
+rayon.</p>
+
+<p><img src="../../../img/pov/cyl.gif" alt="cylinder" />
+</p>
+
+<h3 id="cone-small-cône-small">cone <small>(cône)</small></h3>
+
+<p><code>cone {<em>&lt;c1&gt;</em>,<em>r1</em>,<em>&lt;c2&gt;</em>,<em>r2</em>}</code></p>
+
+<p>Un (tronc de) cône est défini par le centre de ses 2 faces et par les rayons
+de ces faces.</p>
+
+<p><img src="../../../img/pov/cone.gif" alt="cone" />
+</p>
+
+<h3 id="torus-small-tore-small">torus <small>(tore)</small></h3>
+
+<p><code>torus {<em>R</em>,<em>r</em>}</code></p>
+
+<p>Un tore est défini par son rayon majeur R et son rayon mineur r.</p>
+
+<p>Il est centré en 0 et se situe dans le plan (x0z).</p>
+
+<p><img src="../../../img/pov/torus.gif" alt="torus" />
+</p>
+
+<h2 id="csg">CSG</h2>
+
+<p>La CSG (<em>Constructive Solid Geometry</em>) est un ensemble d&rsquo;opérations permettant
+de combiner des objets pour en faire de plus complexes.<br />
+Ces opérations sont <code>union</code>, <code>intersection</code>, <code>difference</code> et <code>merge</code>.<br />
+Elles utilisent autant d&rsquo;objets que l&rsquo;on veut, mais nous en prendrons 3 (2 sur
+la figure) pour fixer les idées.</p>
+
+<p><a href="../../../static/pov/csg.pov"><img src="../../../img/pov/csg.jpg" alt="CSG" />
+</a></p>
+
+<h3 id="union">union</h3>
+
+<p><code>union {A B C}</code> contient les points qui sont dans A, dans B, ou dans C.</p>
+
+<h3 id="intersection">intersection</h3>
+
+<p><code>intersection {A B C}</code> contient les points qui sont à la fois dans A, B, et C.</p>
+
+<h3 id="difference">difference</h3>
+
+<p><code>difference {A B C}</code> contient les points qui sont dans A, mais pas dans B, ni
+dans C.</p>
+
+<h3 id="merge">merge</h3>
+
+<p>Lorsque l&rsquo;on fait l&rsquo;union d&rsquo;objets transparents, les parois des objets
+constituant l&rsquo;union sont visibles. Quand ce n&rsquo;est pas l&rsquo;effet souhaité, on
+remplace <code>union {A B C}</code> par <code>merge {A B C}</code> :</p>
+
+<p><a href="../../../static/pov/merge.pov"><img src="../../../img/pov/merge.jpg" alt="merge" />
+</a></p>
+
+<p><strong>Note :</strong> Attention aux surfaces coïncidentes quand vous faites des CSG : <code>difference {box {0,1} box {.5,1}}</code> risque de poser des problèmes ; il faut mieux écrire <code>difference {box {0,1} box {.5,2}}</code>.</p>
+
+<h2 id="objets-avancés">Objets avancés</h2>
+
+<p>Il existe d&rsquo;autres objets POV. Tous sont décrits dans la documentation. Voici
+les plus utilisés :</p>
+
+<h3 id="height-field">height_field</h3>
+
+<p><code>height_field {_type_ &quot;_fichier_&quot;}</code></p>
+
+<p>Un <code>height_field</code> prend un fichier image de type gif, tga, pot, png, pgm, ppm
+ou sys, et en fait une surface dont la hauteur de chaque point correspond à la
+couleur de l&rsquo;image.<br />
+Cette surface est inscrite dans une boîte de coins <0,0,0> et <1,1,1>. Il sera
+souvent nécessaire de la redimensionner à l&rsquo;aide d&rsquo;un <code>scale</code>.<br />
+Les height_field sont très pratiques pour faire des terrains vallonnés.<br />
+La méthode la plus simple pour faire un height_field est de créer avec un
+programme de dessin une image en 256 niveaux de gris, le blanc correspondant à
+l&rsquo;altitude maximale et le noir à l&rsquo;altitude minimale.<br />
+Un petit dessin valant parfois mieux qu&rsquo;un long discours, voici un exemple :</p>
+
+<p><center><img src="../../../img/pov/map.gif" alt="image d'origine" />
+<img src="../../../img/pov/hf.jpg" alt="montagne" />
+</center></p>
+
+<p>L&rsquo;image de gauche a été créée à partir d&rsquo;un programme de dessin (Gimp) puis
+sauvée au format gif sous le nom <em>map.gif</em>. Dans l&rsquo;image de droite, le
+height_field est obtenu par :</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">height_field</span> {<span style="font-weight: bold">gif</span> <span style="color: #bb8844">&quot;map.gif&quot;</span>
+ <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
+ <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.005</span>}
+}
+</pre></div>
+</p>
+
+<h3 id="text">text</h3>
+
+<p>On peut utiliser les height_fields pour dessiner du texte, mais pour cela on
+peut aussi utiliser la fonction <code>text</code> :</p>
+
+<p><code>text {ttf &quot;_fichier.ttf_&quot; &quot;_texte_&quot; _épaisseur_,_décalage_}</code></p>
+
+<p>On spécifie le fichier police ttf (truetype) à utiliser, la chaîne de
+caractères dont on veut faire un objet, l&rsquo;épaisseur des caractères et un
+décalage, généralement <0,0,0>, à rajouter au décalage normal entre chaque
+caractère.<br />
+La taille des caractères dépend de la police ; il font généralement entre .5
+et .75 unités de haut.<br />
+Les caractères sont situés dans le plan (x0y), la ligne de base étant l&rsquo;axe X,
+et suivant Z ils vont de 0 à p où p est la profondeur.</p>
+
+<p><img src="../../../img/pov/text.jpg" alt="text" />
+</p>
+
+<p>Dans l&rsquo;image ci-dessus le fichier <em>ariblk.ttf</em> se trouve dans le même
+répertoire que le fichier .pov et l&rsquo;objet texte est obtenu par :</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">text</span> {<span style="font-weight: bold">ttf</span> <span style="color: #bb8844">&quot;ariblk.ttf&quot;</span> <span style="color: #bb8844">&quot;PovRay&quot;</span> <span style="color: #009999">.4</span>,<span style="color: #009999">0</span>
+ <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
+ <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.5</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.01</span>}
+}
+</pre></div>
+</p>
+
+<p><center>[ <a href="../../../post/formation-povray/espace/">Page précédente</a> | <a href="../../../post/formation-povray/">Sommaire</a> | <a href="../../../post/formation-povray/textures/">Page suivante</a> ]</center></p>
+
+	</div>
+	
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

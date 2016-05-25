@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vidéo - JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/tags/vid%C3%A9o/</link>
+    <description>Derniers contenus Vidéo de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 27 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/tags/vid%C3%A9o/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Encodage H.264 avec GStreamer</title>
+      <link>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</link>
+      <pubDate>Sun, 27 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;GStreamer est un programme de manipulation audio-vidéo. Il est notamment utilisé par le logiciel de montage Pitivi pour l&amp;rsquo;encodage. Je vais donc tester les paramètres d&amp;rsquo;encodage pour trouver ceux qui me conviennent le mieux.&lt;/p&gt;
+
+&lt;p&gt;Pour le montage des films du petit dernier, je cherche surtout des paramètres qui préservent la qualité de la prise de vue. La taille du fichier passe ensuite.&lt;/p&gt;
+
+&lt;h1 id=&#34;protocole-de-test&#34;&gt;Protocole de test&lt;/h1&gt;
+
+&lt;p&gt;J&amp;rsquo;ai pris une séquence avec les paramètres du caméscope (Sony HDR-CX220) offrant la meilleure qualité. Cela me donne un fichier &lt;code&gt;00001.MTS&lt;/code&gt; dont j&amp;rsquo;ai changé le conteneur en MP4 sans réencoder (le MTS posait problème à GStreamer) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;avconv -i 00001.MTS -codec copy in.mp4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ensuite j&amp;rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&amp;rsquo;extrais 2s), et l&amp;rsquo;encoder en H.264 en faisant varier les paramètres de la commande &lt;code&gt;x264enc&lt;/code&gt;. Puis j&amp;rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&amp;rsquo;en garde qu&amp;rsquo;une partie pour observer les détails :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 gnlfilesource location=&amp;quot;$PWD/in.mp4&amp;quot; media-start=20000000000 media-duration=2000000000 ! x264enc pass=5 quantizer=21 ! mp4mux ! filesink location=out.mp4
+avconv -ss 00:01:00 -i out.mp4 -vframes 1 out.png
+mogrify -crop 640x200+1000+0 out.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;pass&lt;/code&gt; peut prendre les valeurs suivantes :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0 :&lt;/strong&gt; cbr - Constant Bitrate Encoding (default)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;4 :&lt;/strong&gt; quant - Constant Quantizer (debugging only)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 :&lt;/strong&gt; qual - Constant Quality&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;17 :&lt;/strong&gt; pass1 - VBR Encoding - Pass 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18 :&lt;/strong&gt; pass2 - VBR Encoding - Pass 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;19 :&lt;/strong&gt; pass3 - VBR Encoding - Pass 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;résultats-small-taille-du-fichier-small&#34;&gt;Résultats &lt;small&gt;(taille du fichier)&lt;/small&gt;&lt;/h1&gt;
+
+&lt;h3 id=&#34;x264enc-small-404-ko-small&#34;&gt;x264enc &lt;small&gt;(404 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-default.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-4-quantizer-21-small-4-8-mo-small&#34;&gt;x264enc pass=4 quantizer=21 &lt;small&gt;(4,8 Mo !)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass4-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-10-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=10 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer10.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-21-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=21 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-30-small-400-ko-small&#34;&gt;x264enc pass=5 quantizer=30 &lt;small&gt;(400 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer30.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-17-small-308-ko-small&#34;&gt;x264enc pass=17 &lt;small&gt;(308 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass17.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-18-small-552-ko-small&#34;&gt;x264enc pass=18 &lt;small&gt;(552 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass18.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-19-small-544-ko-small&#34;&gt;x264enc pass=19 &lt;small&gt;(544 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass19.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;La qualité obtenue avec le VBR en 2 passes est sensiblement meilleure qu&amp;rsquo;avec les méthodes en 1 passe. La durée d&amp;rsquo;une 3e passe n&amp;rsquo;est pas justifiée. Je retiens donc le &lt;strong&gt;VBR en 2 passes&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Attention pour encoder un fichier en VBR 2 passes il faudra effectivement lancer les 2 passes, et penser à nettoyer le fichier généré par la 1ère :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 ! progressreport ! x264enc pass=17 ! fakesink
+gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 name=demux ! queue ! audioconvert ! audioresample ! &#39;audio/x-raw-int, rate=44100&#39; ! faac bitrate=128000 ! mp4mux name=mux ! filesink location=out.mp4 demux. ! queue ! progressreport ! x264enc pass=18 ! mux.
+rm -f x264_2pass.log*
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Formation POV #1: Intro - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/formation-povray/intro/">Formation POV #1: Intro</a></h1>
+		<div class="post-date">28 avril 2000</div>
+		
+		
+
+<h2 id="présentation">Présentation</h2>
+
+<p>PovRay (<em>Persistence Of Vision Raytracer</em>) est un programme d&rsquo;image de
+synthèse basé sur un langage de description.<br />
+Ainsi, on écrit un fichier .pov décrivant une <em>scène</em> (objet, éclairage et
+appareil-photo), puis on donne le nom du fichier en argument à Pov, qui crée
+en retour l&rsquo;image correspondante.</p>
+
+<p>Par exemple, on peut écrire un fichier <em>essai.pov</em> contenant le texte suivant :</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">sphere</span> {<span style="color: #009999">0</span>,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">green</span> <span style="color: #009999">1</span>}}
+<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">5</span>,<span style="color: #009999">8</span>,<span style="font-weight: bold">-</span><span style="color: #009999">9</span>&gt; <span style="font-weight: bold">rgb</span> <span style="color: #009999">1</span>}
+<span style="color: #999999">camera</span> {<span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">3</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span> <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>}
+</pre></div>
+</p>
+
+<p><img src="../../../img/pov/scene.gif" alt="une superbe boule verte..." />
+</p>
+
+<p>Ci-dessus le résultat de la commande <code>povray +i essai.pov</code> (le nom de
+l&rsquo;exécutable pouvant varier suivant les systèmes).</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>La dernière version est la 3.1g (<em>était</em> en fait, car la 3.7 est sortie
+depuis). Elle est notamment disponible sous linux et windows. À noter que
+cette dernière version dispose d&rsquo;un excellent éditeur.</p>
+
+<p><strong>Installation windows</strong></p>
+
+<ul>
+<li>télécharger l&rsquo;archive <a href="../../../static/pov/povwin3.exe">ici</a> ;</li>
+<li>lancer <code>povwin3.exe</code> et suivre les instructions ;</li>
+<li>dans l&rsquo;éditeur, pour lancer un rendu, cliquer sur &ldquo;Run&rdquo; ou faire <code>ALT+G</code>.</li>
+</ul>
+
+<p><strong>Installation linux</strong></p>
+
+<ul>
+<li>télécharger l&rsquo;archive <a href="../../../static/pov/povlinux.tgz">ici</a> ;</li>
+<li>la décompresser : <code>tar xvzf povlinux.tgz</code> ;</li>
+<li>aller dans le répertoire ainsi créé : <code>cd povray31/</code> ;</li>
+<li>exécuter le script d&rsquo;install : <code>./install</code> ;</li>
+<li>pour lancer un rendu, sous X, taper <code>x-povray +d +i nomfichier.pov</code><br />
+(on peut modifier les options par défaut dans <code>~/.povrayrc</code>).<br />
+<strong>Note 1 :</strong> La version incluse dans les distributions debian (de la potato à la sid) est la 3.02, depuis laquelle des changements importants ont eu lieu. Préférez donc une installation à partir du tar.gz.<br />
+<strong>Note 2 :</strong> Si <code>/usr/local/man/man1/</code> n&rsquo;existe pas, créez-le avant d&rsquo;exécuter <code>./install</code>&nbsp;: <code>mkdir /usr/local/man/man1</code>.</li>
+</ul>
+
+<p><center>[ <a href="../../../post/formation-povray/">Sommaire</a> | <a href="../../../post/formation-povray/1ere-scene/">Page suivante</a> ]</center></p>
+
+	</div>
+	
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

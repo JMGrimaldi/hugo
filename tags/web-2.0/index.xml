@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web 2.0 - JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/tags/web-2/index.0/</link>
+    <description>Derniers contenus Web 2.0 de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Tue, 01 Jan 2008 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/tags/web-2.0/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Le progrès carbure à l’abondance</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</link>
+      <pubDate>Tue, 01 Jan 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/canderson.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Chris Anderson est l’inventeur en 2004 du concept de la &lt;em&gt;Long tail&lt;/em&gt;. Il est aussi l’éditeur du magazine &lt;em&gt;Wired&lt;/em&gt;. Dans une &lt;a href=&#34;http://www.techdigest.tv/2007/12/liveblog_wireds.html&#34;&gt;allocution&lt;/a&gt; donnée à la conférence Nokia World le 5 décembre dernier, Chris nous fait réfléchir sur l’impact de l’abondance dans le progrès technologique : lors de l’introduction du nucléaire domestique dans les années 50, certains ont affirmé que ce progrès rendrait l’électricité gratuite, car infiniment disponible. On sait aujourd’hui que c’est faux, mais que se passerait-il si c’était vrai : à quoi ressemblerait le monde si l’électricité était réellement gratuite, si on disposait ainsi d’une source d’énergie infinie ?&lt;/p&gt;
+
+&lt;p&gt;Au-delà de cette expérience de pensée, les interfaces graphiques sont apparues lorsque les ingénieurs, tirant parti de la Loi de Moore, ont accepté de gaspiller des transistors, des cycles CPU, de faire comme s’ils étaient gratuits. Et cette évolution a permis à des non-ingénieurs d’accéder à l’informatique, et d’ouvrir de nouvelles perspectives.&lt;/p&gt;
+
+&lt;p&gt;Aujourd’hui le coût du stockage diminue de façon exponentielle : $10/To en 2010. Et alors que de nombreuses entreprises continuent de limiter la taille des boîtes mails internes à quelques centaines de Mo, Yahoo! qui a compris la tendance propose depuis mai 2007 une capacité de stockage infinie pour son webmail !&lt;/p&gt;
+
+&lt;p&gt;Enfin avec l’abondance de la bande passante, la distribution devient gratuite ce qui facilite l’expérimentation et permet à des contenus ou des services d’apparaître. L’Internet devient un magasin avec des étagères de capacité infinie où n’importe qui peut venir placer ses produits. Ce qui permet à des microacteurs d’adresser les besoins des minorités (la &lt;em&gt;Long tail&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;En définitive, quand une ressource devient presque gratuite, faites comme si elle était complètement gratuite, et vendez autre chose ! Et pour tout ce qui touche à la technologie, le coût des ressources finit forcément par tendre vers zéro…&lt;/p&gt;
+
+&lt;p&gt;Et même, avec d’autres motivations que l’argent, comme la réputation, la reconnaissance, des gens écrivent des articles, ou du code, gratuitement.&lt;/p&gt;
+
+&lt;p&gt;D’où l’émergence de nouveaux business models :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Freemium&lt;/em&gt; : offrir gratuitement 99% du service à tout le monde pour qu’une petite fraction des utilisateurs achètent le 1% restant ;&lt;/li&gt;
+&lt;li&gt;musique gratuite, à l’instar de Radiohead : pour vendre des places de concerts à $100&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Et pour les opérateurs télécoms, un dilemme : si la nécessité de leur transformation en opérateurs de services est aujourd’hui évidente, peuvent-il réellement compter sur leur maîtrise du réseau pour proposer à l’utilisateur un meilleur service et obtenir un avantage face à des acteurs comme Google ? Ou bien la &lt;em&gt;commoditisation&lt;/em&gt; des tuyaux ne conduit-elle de toute façon pas à une égalité avec les &lt;em&gt;pure players&lt;/em&gt; du contenu ?&lt;/p&gt;
+
+&lt;p&gt;Je pense que la maîtrise du réseau donne simplement un temps d’avance : cela peut fournir aux telcos un avantage, à condition qu’ils soient très réactifs pour proposer des services innovants, et tirent parti de leurs ressources avant qu’elles ne deviennent gratuites.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Skype out : autopsie et enseignements</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/skype-out-autopsie-et-enseignements/</link>
+      <pubDate>Tue, 21 Aug 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/skype-out-autopsie-et-enseignements/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/skypeout.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Niels Bohr, prix nobel de physique en 1922, disait qu’« un expert est une personne qui a fait toutes les erreurs possibles dans un domaine très restreint. » Tant qu’à faire, si on peut apprendre des erreurs des autres, c’est peut-être un peu moins efficace mais certainement aussi beaucoup moins douloureux.&lt;/p&gt;
+
+&lt;p&gt;En l’occurrence, vous savez sans doute que le réseau Skype a connu les 16 et 17 août derniers une panne qui a privé de téléphone 220 millions d’utilisateurs pendant 2 jours (à relativiser tout de même, la plupart de ces utilisateurs enregistrés utilisant d’autres moyens de communication). Villu Arak a publié hier sur le blog de Skype &lt;a href=&#34;http://heartbeat.skype.com/2007/08/what_happened_on_august_16.html&#34;&gt;ce billet&lt;/a&gt; qui revient sur l’autopsie de l’incident.&lt;/p&gt;
+
+&lt;p&gt;D’après cette analyse, l’étincelle a été une mise à jour Windows distribuée par Windows Update, qui a déclenché le reboot de dizaines de millions de PC dans un laps de temps très court. Il faut savoir que l’architecture de Skype (décrite dans cette &lt;a href=&#34;../../static/freestyle/skype_041125.pdf&#34;&gt;excellente présentation&lt;/a&gt; trouvée &lt;a href=&#34;http://codinginparadise.org/weblog/2004/12/skypes-architecture.html&#34;&gt;ici&lt;/a&gt;) s’appuie sur un réseau P2P de &lt;em&gt;Super Nodes&lt;/em&gt; hébergés sur les machines de certains utilisateurs, et que seul le &lt;em&gt;Login Server&lt;/em&gt; reste centralisé. Mais ce dernier a été submergé de requêtes par les PC qui rebootaient. Les Super Nodes étant des clients comme les autres, très peu étaient fonctionnels, donc même les clients qui avaient réussi à contacter le Login Server ne trouvaient pas de Super Node, recommençaient probablement le processus, d’où un effet boule de neige.&lt;/p&gt;
+
+&lt;p&gt;Le billet parle de fonctions d’auto-réparation du réseau P2P qui n’ont pas joué leur rôle en raison d’un bug dans l’algorithme d’allocation des ressources réseau. Probablement une priorisation des requêtes des Super Nodes, et/ou une temporisation exponentielle des réessais en cas d’échec, qui n’ont pas fonctionné.&lt;/p&gt;
+
+&lt;p&gt;Cet incident montre en tout cas bien que les événements improbables finissent toujours par arriver. Maintenant cela aura-t-il un impact durable sur le business de Skype ? Sincèrement je ne pense pas. Comme le pointe à demi-mots le billet de Skype, les utilisateurs n’ont pas encore aujourd’hui un niveau de confiance très élevé dans les technologies du web. Beaucoup considèrent que les pannes sont le prix à payer pour ces nouveaux services, qui sont encore un simple complément aux services traditionnels que sont le bon vieux fixe ou le réseau mobile, beaucoup plus fiables.&lt;/p&gt;
+
+&lt;p&gt;À retenir en tout cas l’excellente communication de crise sur le blog de Skype avec une transparence totale dès le début de la crise, et un billet toutes les 6 heures pour tenir au courant de la résolution. En espérant que cette leçon-là n’ait pas à servir avant longtemps…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Microsoft 1.0</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/microsoft-1-0/</link>
+      <pubDate>Mon, 30 Jul 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/microsoft-1-0/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/zeppelin.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;2007. Le desktop est depuis longtemps devenu une commodity. Google mène la danse pour développer des applications en ligne s’exécutant dans le navigateur indépendamment de l’OS. Dans un monde où le « Software As A Service » n’est plus seulement un buzzword, où les entreprises proposent à leurs clients non plus des produits à faire fonctionner au prix fort, mais des services hébergés exposés sur des API ouvertes, Steve Ballmer, CEO de Microsoft, ex-maître du monde, se résigne : « There is a big disruption going on in our business. And some investors will say it’s scary, it’s this, it’s that, are you going to embrace it? We have no choice. »&lt;/p&gt;
+
+&lt;p&gt;C’était jeudi dernier face aux analystes financiers. &lt;em&gt;Le verbatim et le powerpoint ne sont plus en ligne.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;La lecture de cette intervention est troublante : plus de trois ans après l’article &lt;a href=&#34;../../post/freestyle/la-prochaine-ouverture/&#34;&gt;Open source paradigm shift&lt;/a&gt; de Tim O’Reilly qui posait les bases du « software as a service », modèle qui s’impose aujourd’hui de plus en plus largement sur le web et dans les entreprises, Steve Ballmer répond avec le « software plus services ». Cette façon de s’agripper aux vieux paradigmes a quelque chose d’anachronique, d’irréel. Comme un pilote d’avion qui verrait décoller une fusée vers Jupiter et s’exclamerait : « Super, en volant un peu plus haut sur Paris-Strasbourg on pourra éviter les cigognes ! »&lt;/p&gt;
+
+&lt;p&gt;Face à une telle myopie, la volonté annoncée de devenir un leader de l’électronique grand public, six ans après le lancement de l’Ipod par Apple, paraît insignifiante. Ce n’est pas en traînant des pieds que Microsoft rattrapera la fuite en avant des rois du service en ligne, Google et Yahoo! en tête. Et les dépenses faramineuses en R&amp;amp;D (30 milliards de dollars depuis 5 ans) laissent une vertigineuse impression de vide : le plus beau des tunneliers ne creusera jamais jusqu’aux étoiles.&lt;/p&gt;
+
+&lt;p&gt;Alors oui, il y a peut-être aujourd’hui plus de PC sous Windows que de voitures dans le monde, mais &lt;a href=&#34;https://web.archive.org/web/20070823141434/http://www.dell.com/open&#34;&gt;le vent tourne&lt;/a&gt; et Steve Ballmer a l’air d’un empereur déchu qui contemple en rêvant son empire alors qu’une armée enfonce les portes du palais. Et qui espère qu’il va se réveiller :&lt;/p&gt;
+
+&lt;p&gt;« Could I get the first slide, please. It’s not working. The first slide please. »&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>La prochaine ouverture ?</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/la-prochaine-ouverture/</link>
+      <pubDate>Sun, 11 Feb 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/la-prochaine-ouverture/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/systeme-solaire-150x150.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Tim O’Reilly cite dans &lt;a href=&#34;https://web.archive.org/web/20070216211349/http://radar.oreilly.com/archives/2007/02/what_we_really.html&#34;&gt;ce billet&lt;/a&gt; Bob Young, l’un des fondateurs de Red Hat qui expliquait qu’avec l’open source, « ce que l’on vend c’est du contrôle » : c’est la possibilité de modifier le logiciel si l’on n’est pas satisfait, ou d’en prendre un autre s’appuyant sur les mêmes standards.&lt;/p&gt;
+
+&lt;p&gt;L’ami Tim tire alors un parallèle intéressant avec son article &lt;a href=&#34;http://archive.oreilly.com/pub/a/oreilly/tim/articles/paradigmshift_0504.html&#34;&gt;Open source paradigm shift&lt;/a&gt;, préliminaire à son invention de la notion de &lt;em&gt;&lt;a href=&#34;https://web.archive.org/web/20080725092148/http://www.oreillynet.com/go/web2&#34;&gt;Web 2.0&lt;/a&gt;&lt;/em&gt;. Dans cet article, Tim O’Reilly rappelle la domination d’IBM sur le monde informatique, grâce à sa main-mise sur le matériel, jusqu’en 1981. À cette époque, IBM décide de proposer une plate-forme matérielle ouverte, en utilisant des composants sur étagère. Mais, incapable d’anticiper la transition du centre de gravité économique que cela allait provoquer, IBM confie le logiciel à une petite société nommée Microsoft. Résultat, l’ouverture du matériel voit des hordes de constructeurs proposer leur propre PC sous Windows, qui devient le nouveau dénominateur commun, le soleil autour duquel tourne désormais la galaxie informatique. Microsoft supplante IBM comme leader de cet univers. Autre conséquence de cette révolution, alors qu’avant 1981 la différenciation entre deux machines venait du matériel, la libéralisation de celui-ci voit le PC devenir une « commodité » : du moment que ça marche, on choisit le moins cher. Michael Dell comprend très vite cette transformation et tire son épingle du jeu. Certes l’ouverture du matériel laisse des niches où la domination reste possible pour les plus rapides à l’image d’Intel, mais la vraie domination est désormais celle du logiciel.&lt;/p&gt;
+
+&lt;p&gt;Or que voit-on aujourd’hui ? Tim explique que s’il demande à une salle qui utilise Linux, trois mains se lèvent. S’il demande qui utilise Google : tout le monde. Or Google tourne sur des serveurs Linux. Cela signifie que le système est à son tour devenu une commodité : du moment que le service tourne, peu importe que les machines soient sous Linux ou sous Windows. Conséquence : du moment que ça marche, on choisira le moins cher. Le support, dont les machines et leur système ne sont plus que des particules indifférenciées, est désormais Internet, et le nouveau centre de gravité c’est le service. Microsoft a été dépassé par Google, qui a verrouillé l’internet avec un système accessible mais fermé : on peut se brancher sur Google, mais pas s’en passer. Les marges sur le logiciel s’évaporent, celles sur le service explosent.&lt;/p&gt;
+
+&lt;p&gt;Et Tim cite Ray Kurzweil, l’un des pionniers de l’intelligence artificielle : « Je suis un inventeur, et je m’intéresse aux tendances long terme parce qu’une invention doit servir non pas dans le monde d’où part l’idée, mais dans le monde où elle arrive. »&lt;/p&gt;
+
+&lt;p&gt;En l’occurrence, le plus important n’est pas tant de comprendre comment le logiciel est devenu une commodité alors que Microsoft a tout fait pour que ça n’arrive pas, mais de trouver où se situe désormais la valeur, et où elle sera demain.&lt;/p&gt;
+
+&lt;p&gt;C’est là que l’on s’aperçoit que le « ce que l’on vend c’est du contrôle » de Bob Young est une constante de la création de valeur : c’est de moins en moins vrai pour le logiciel, puisque ce qui compte désormais c’est que ça marche pour pas cher, mais c’est de plus en plus vrai pour les services. Par exemple Google vend des outils de recherche aux entreprises mais cache ses algorithmes, ce qui sécurise ses marges mais limite l’adaptation à des besoins particuliers. Le client se tourne donc vers des concurrents qui lui permettent de personnaliser les algorithmes.&lt;/p&gt;
+
+&lt;p&gt;Cette poussée est encore timide, après tout Google a explosé vingt ans après l’avènement de Microsoft, mais les services deviendront fatalement à leur tour une commodité. À ce moment où le centre de gravité du monde informatique se déplacera-t-il ? Qui aura su anticiper et verrouiller ce nouvel Eldorado en attendant l’ouverture et la transition au niveau suivant ?&lt;/p&gt;
+
+&lt;p&gt;Tim O’Reilly suggère que ce nouveau soleil pourrait être les données manipulées par les services ouverts : on demandera demain à un appareil où se trouve la piscine la plus proche, et il nous répondra sans que l’on se préoccupe de savoir si la requête a été traitée par Google ou Yahoo!… Mais tout va très vite désormais : les entreprises qui bâtissent des bases de données fermées ont certes un contrôle qu’elles peuvent rentabiliser, mais elles doivent déjà anticiper l’ouverture des données pour ne pas se faire submerger, car les bases ouvertes s’amélioreront plus vite que les bases fermées.&lt;/p&gt;
+
+&lt;p&gt;Pour compléter la réflexion de Tim, je pense effectivement qu’il faut déjà placer ses pions sur les terrains économiques de demain, et Google le fait plutôt bien en proposant déjà des services qui croisent les données issues de ses différentes bases. Cependant il ne faut pas oublier que chaque arbre a besoin de racines et qu’il y a encore une énorme valeur ajoutée à dégager sur la consolidation des étages inférieurs de cet édifice qui relie le matériel au service : l’accès à Internet est-il réellement une commodité lorsque la connexion d’un PC en Wi-fi nécessite de brancher trois câbles, de rentrer un identifiant et un mot de passe, d’appuyer sur deux boutons et de taper une clef de 25 caractères ? Non, et tant que ce n’est pas aussi simple que de tourner le robinet pour faire couler de l’eau, ce n’est pas encore une commodité.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FAI 2.0</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/fai-2-0/</link>
+      <pubDate>Fri, 05 Jan 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/fai-2-0/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://web.archive.org/web/20070114105430/http://www.01net.com/article/337206.html&#34;&gt;Les enquêtes Médiamétrie&lt;/a&gt; sur l’audience Web en France montrent que les portails des FAI sont des poids lourds du web : Free est 3ème et Orange 4ème avec plus de 13 millions de visiteurs uniques chacun, devant Microsoft, eBay, etc. Orange vient même flirter avec le n°1 Google si l’on ajoute Voila.&lt;/p&gt;
+
+&lt;p&gt;Les FAI ont donc un levier de communication formidable, qui dépasse largement leur base de clients. Pourtant, que proposent ces FAI à leurs visiteurs ? Simplement une publication de type magazine. Certes Orange revendique sa transformation d’opérateur télécom en fournisseur de services, mais alors que l’économie du Web bâtit une croissance formidable sur les valeurs 2.0 « social, collaboration, sharing », nos FAI sont absents de cette actualité.&lt;/p&gt;
+
+&lt;p&gt;Oui Orange a lancé une plate-forme de blogs. Mais aucun de ses blogs dans le controversé &lt;a href=&#34;http://www.metronews.fr/fr/article/2006/10/12/11/5714-37/&#34;&gt;Top 100&lt;/a&gt; de Technorati/Edelman. Il faut dire qu’en offrant un outil moins abouti qu’Overblog, Blogger, ou Live Spaces, et en en réservant l’accès aux clients de l’opérateur, la lutte est difficile.&lt;/p&gt;
+
+&lt;p&gt;Plus généralement, alors que Google ou Yahoo! construisent leur succès et leur image sur des services ouverts à tous, les FAI réservent encore trop souvent leurs services à leurs clients. Comme si c’était un critère de choix du FAI… Au contraire, des services innovants, fiables, et gratuits forgent une telle image que Google &lt;a href=&#34;http://www.clubic.com/actualite-34028-google-fai-pourquoi-pas.html&#34;&gt;songerait&lt;/a&gt; à capitaliser sur cette image et devenir FAI : si tu ne vas pas aux géants de l’Internet, les géants viendront à toi…&lt;/p&gt;
+
+&lt;p&gt;Alors oui ça change, il y a une prise de conscience de l’espace libre sur le Web communautaire à occuper au plus vite, et je vois chez Orange des &lt;a href=&#34;https://web.archive.org/web/20070127003755/http://nextdotcom.typepad.com/whats_nextfr_le_blog_de_n/&#34;&gt;initiatives&lt;/a&gt; prometteuses. Un outil comme &lt;a href=&#34;https://web.archive.org/web/20070115230741/http://pikeo.com/&#34;&gt;Pikeo&lt;/a&gt; ou le futur Open Music vont dans le bon sens en étant innovants et surtout ouverts, mais les FAI font encore profil bas.&lt;/p&gt;
+
+&lt;p&gt;En ce début d’année où tous les analystes y vont de leurs pronostics pour 2007, je prédis donc que cette année verra les FAI enfin jouer un rôle significatif dans le Web 2.0. Parce que c’est maintenant où jamais. Bonne année à tous…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>L’économie ne sera pas virtuelle</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</link>
+      <pubDate>Fri, 22 Dec 2006 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</guid>
+      <description>&lt;p&gt;Le dernier billet d’&lt;a href=&#34;http://ecosphere.wordpress.com/2006/12/21/yahoo-facebook-techcrunch-bulle/&#34;&gt;ecosphere&lt;/a&gt; met le doigt sur la bulle 2.0 : les survivants de la nouvelle économie n’ont pas tiré de la déroute de leurs anciens confrères les même leçons que les banques, et dans le contexte des absorptions déjà évoquées &lt;a href=&#34;../../post/freestyle/hype-2-0/&#34;&gt;là&lt;/a&gt; valorisent leurs proies à des tarifs faramineux.&lt;/p&gt;
+
+&lt;p&gt;Ainsi Yahoo! a-t-il valorisé &lt;a href=&#34;http://en.wikipedia.org/wiki/Facebook&#34;&gt;Facebook&lt;/a&gt;, site de social networking centré sur les universités US et qui &lt;a href=&#34;https://web.archive.org/web/20070106222907/http://fr.techcrunch.com/2006/12/16/evidemment-facebook-nest-pas-a-vendre-comme-youtube/&#34;&gt;a rejeté l’offre&lt;/a&gt;, à 1 milliard de dollars. Il faut savoir que le résultat net attendu par Facebook en 2006 est de 9 millions de dollars. Comment arrive-t-on à valoriser une entreprise plus de 100 fois ses bénéfices alors qu’à titre de comparaison le ratio est de 20 pour Microsoft, 40 pour Yahoo!, ou 10 pour Total qui est la plus grosse capitalisation française ?&lt;/p&gt;
+
+&lt;p&gt;C’est simple : on se projette en 2015 (qui sait ce qui se passera d’ici là ?) et on imagine qu’à cet horizon le nombre d’utilisateurs actifs chez les étudiants américains passera de 17% à 55% : 273 milliards de pages vues par an. On imagine aussi que les annonceurs seront prêts à payer 15 fois plus qu’aujourd’hui pour montrer leur publicité à 1000 visiteurs. Comme en plus il y aura plus de 10% d’étudiants supplémentaires d’ici là, c’est le jackpot.&lt;/p&gt;
+
+&lt;p&gt;Le principal problème, ce n’est pas que des concurrents plus séduisants vont sans doute apparaître, annihilant le business de ce site en particulier, mais bien que globalement la publicité seule ne pourra pas financer de tels mastodontes : si ces sites continuent à être financés exclusivement par la publicité, et que les investisseurs parient sur une croissance des revenus supérieure à la croissance des budgets publicitaires, ils vont dans le mur. Et avec eux toute l’économie qui dépend d’eux.&lt;/p&gt;
+
+&lt;p&gt;Pour que les stars d’aujourd’hui gagnent demain 50 fois plus qu’aujourd’hui alors qu’elles sont déjà leaders de leur marché, il faudra que ce marché attire 50 fois plus d’argent. Or Internet attirait déjà fin 2005 &lt;a href=&#34;https://web.archive.org/web/20090101144715/http://www.secrets2moteurs.com/article2784.html&#34;&gt;23%&lt;/a&gt; des budgets publicitaires…&lt;/p&gt;
+
+&lt;p&gt;Les sites condamnés à la rentabilité par leur valorisation d’aujourd’hui devront donc s’écarter du tout gratuit sachant qu’il y aura toujours des communautés plus ou moins désintéressées prêtes à proposer un service gratuit. Il faudra donc que ces sites trouvent quelque chose à vendre : l’économie de demain ne sera pas virtuelle.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hype 2.0</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/hype-2-0/</link>
+      <pubDate>Fri, 08 Dec 2006 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/hype-2-0/</guid>
+      <description>&lt;p&gt;Le Web 2.0 est en plein essor. Ça me faisait sourire, au début. Ça venait après le Wap, après la nouvelle économie. Et puis petit à petit l’évidence est apparue ; le Gartner avait raison avec son Hype cycle : après la vallée des désillusions émerge la pente de l’illumination… pour ceux qui ne connaissent pas :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../static/freestyle/hype_cycle.jpg&#34;&gt;&lt;img src=&#34;../../static/freestyle/hype_cycle-300x205.jpg&#34; alt=&#34;Hype cycle&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Quand on a dit ça on n’a pas dit grand chose, alors revenons à nos boutons. Après le buzz donc, émergent une foultitude de services communautaires avec une réelle valeur ajoutée, mais ajoutée par chaque membre : &lt;a href=&#34;http://www.youtube.com/&#34;&gt;YouTube&lt;/a&gt;, &lt;a href=&#34;http://digg.com/&#34;&gt;digg&lt;/a&gt;, &lt;a href=&#34;https://delicious.com/&#34;&gt;del.icio.us&lt;/a&gt;, &lt;a href=&#34;http://www.flickr.com/&#34;&gt;Flickr&lt;/a&gt;, etc.&lt;/p&gt;
+
+&lt;p&gt;Derrière chacun de ces sites se cache une aventure, un entrepreneur créatif qui a eu l’idée d’un nouveau service et le talent de le rendre efficace et attractif. Du coup beaucoup se posent la question de ce qui reste à créer, à proposer à la communauté. Tels une horde de prospecteurs ratissant le Klondike. Et pour souligner cette soif Flickr cite fièrement Nietzche sur sa page d’accueil : « The mother of excess is not joy but joylessness. ». Kevin Rose, fondateur de digg, &lt;a href=&#34;http://www.zdnet.fr/actualites/kevin-rose-createur-de-diggcom-la-cle-du-web-20-c-est-l-ouverture-et-la-simplicite-39312044.htm&#34;&gt;joue les gourous&lt;/a&gt; et délivre les 3 « tags » de ce Web 2.0 : social, collaboration, sharing.&lt;/p&gt;
+
+&lt;p&gt;Alors certains choisissent de clôner des services existants : &lt;a href=&#34;http://www.dailymotion.com/fr&#34;&gt;Dailymotion&lt;/a&gt; pour YouTube, &lt;a href=&#34;https://web.archive.org/web/20061208213200/http://www.scoopeo.com/?&#34;&gt;Scoopeo&lt;/a&gt; pour digg, etc. Pourquoi pas, certains ajoutent des bonnes idées, reprises ensuite par leurs équivalents… je ne sais pas si c’est la solution la plus efficace, mais ça marche.&lt;/p&gt;
+
+&lt;p&gt;Et d’autres réussissent à inventer de nouveaux services, comme &lt;a href=&#34;https://web.archive.org/web/20061208003529/http://www.43things.com/&#34;&gt;43 Things&lt;/a&gt; dont les membres listent leurs objectifs dans la vie histoire de se soutenir mutuellement. Bref il y a encore beaucoup de services à inventer.&lt;/p&gt;
+
+&lt;p&gt;Mais ce qui est intéressant c’est que tous ces services ont un dénominateur commun : la communauté. Elle se forme autour d’un service, qu’il s’agisse de partager des vidéos, des bonnes adresses, etc. avec des fonctions sociales de base comme l’ajout de commentaires, mais le fait est qu’une fois inscrite elle existe en tant que communauté. Et les sites en profitent pour ajouter au service initial des fonctions de blogging, des boîtes mail, etc.&lt;/p&gt;
+
+&lt;p&gt;On assiste donc tout naturellement au rachat des meilleurs services par de gros acteurs comme Google, désireux de les intégrer à leur portefeuille de services : YouTube, iRows, et ce n’est certainement pas terminé…&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

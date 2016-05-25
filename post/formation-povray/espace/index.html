@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Formation POV #3: Espace - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/formation-povray/espace/">Formation POV #3: Espace</a></h1>
+		<div class="post-date">28 avril 2000</div>
+		
+		
+
+<h2 id="données-de-base">Données de base</h2>
+
+<p>Une <em>scène</em> POV se construit dans un espace à trois dimensions X, Y et Z. Elle
+est constituée d&rsquo;<em>objets</em> paramétrés essentiellement à partir de nombres
+(<em>float</em>) et de vecteurs (<em>vector</em>).</p>
+
+<p>Un <strong>nombre</strong> peut s&rsquo;écrire 2, -3.14, 1.7e3 (=1700), .012 (équivalent à 0.012,
+ou encore à 12e-3),&hellip;</p>
+
+<p>Un <strong>vecteur</strong> est une suite de nombres séparés par des virgules, écrite entre
+&lt; et &gt;.<br />
+Par exemple <2,3.9,.4> et <1,0,0,3.7e6,99> sont des vecteurs.<br />
+On utilise surtout des vecteurs de dimension 3, qui permettent de repérer un
+point de l&rsquo;espace par ses coordonnées x, y et z, une couleur par ses
+composantes rouge, verte et bleue,&hellip;<br />
+On peut abbréger un vecteur dont les 3 composantes sont identiques : si l&rsquo;on
+met un nombre <em>a</em> là où POV attend un vecteur, POV comprendra qu&rsquo;il s&rsquo;agit du
+vecteur <a,a,a>.<br />
+Enfin il existe des vecteurs prédéfinis : <em>x</em> pour <1,0,0>, <em>y</em> pour <0,1,0>
+et <em>z</em> pour <0,0,1>.</p>
+
+<p>On peut appliquer un certain nombres de <strong>fonctions</strong> à ces nombres et à ces
+vecteurs.<br />
+Les plus courantes sont l&rsquo;addition et la multiplication : 1+1, 2<em>8.03,
+3</em><1,2,3>, x-y/2 (qui vaut <1,-.5,0>), &hellip;<br />
+Mais il en existe beaucoup d&rsquo;autres (sections <em>Float Functions</em> et <em>Vector
+Functions</em> de la documentation).</p>
+
+<h2 id="repérage">Repérage</h2>
+
+<p>Comme nous l&rsquo;avons déjà évoqué, l&rsquo;espace de POV est muni d&rsquo;une origine et de
+trois axes X, Y et Z (formant une base orthonormée <strong>in</strong>directe).<br />
+Ainsi la position d&rsquo;un point est repérée par 3 coordonnées x, y et z. Par
+exemple, l&rsquo;origine se trouve en <0,0,0>.</p>
+
+<p>Imaginons que nous nous retrouvions plongés dans cet espace, et que nous
+regardiions l&rsquo;origine. Afin de fixer les idées, nous voyons alors les 3 axes
+ainsi : l&rsquo;axe Y part vers le haut ; l&rsquo;axe X s&rsquo;en va vers la droite ; enfin Z
+s&rsquo;éloigne vers l&rsquo;horizon :</p>
+
+<p><img src="../../../img/pov/espace.gif" alt="repérage" />
+</p>
+
+<h2 id="transformations">Transformations</h2>
+
+<p>La syntaxe générale d&rsquo;un objet est :</p>
+
+<p><code><em>nom_de_l_objet</em> {<em>paramètres</em>,<em>modificateurs</em>}</code></p>
+
+<p>Parmi les <em>modificateurs</em> on trouve la texture, certains mots-clefs (par
+exemple <code>no_shadow</code> qui supprime l&rsquo;ombre portée), mais aussi les
+transformations.<br />
+Elles sont de 4 types : translation, rotation, homothétie, transformation
+matricielle, mais cette dernière est en pratique très peu utilisée et nous
+n&rsquo;en parlerons pas plus ici. Les 3 autres s&rsquo;emploient avec un vecteur de
+dimension 3 :</p>
+
+<p><strong>translation (<code>translate</code>)</strong><br />
+<code>translate <em>&lt;v&gt;</em></code> rajoute <v> aux coordonnées de chaque point de l&rsquo;objet ; par
+exemple <code>translate x</code> déplace l&rsquo;objet d&rsquo;une unité vers la droite.</p>
+
+<p><strong>homothétie (<code>scale</code>)</strong><br />
+<code>scale <em>&lt;sx,sy,sz&gt;</em></code> transforme chaque point <x,y,z> en <sx*x,sy*y,sz*z>. Par
+exemple, <code>scale &lt;1,2,1&gt;</code> étire l&rsquo;objet dans le sens de la hauteur.</p>
+
+<p><strong>rotation (<code>rotate</code>)</strong><br />
+<code>rotate <em>&lt;rx,ry,rz&gt;</em></code> fait tourner l&rsquo;objet de rx degrés autour de X, puis de
+ry autour de Y, enfin de rz autour de Z. Ces rotations s&rsquo;effectuent dans le
+sens inverse des aiguilles d&rsquo;une montre lorsque l&rsquo;on se met sur l&rsquo;axe et que
+l&rsquo;on regarde la pointe de la flèche :</p>
+
+<p><img src="../../../img/pov/rotate.gif" alt="rotation" />
+</p>
+
+<p>On peut mettre autant de transformations que l&rsquo;on veut les unes à la suite des
+autres, mais il faut faire attention à l&rsquo;ordre dans lequel on les met. Ainsi,
+<code>translate x scale 2</code> n&rsquo;est pas équivalent à <code>scale 2 translate x</code> (mais à
+<code>scale 2 translate 2*x</code>).</p>
+
+<h2 id="couleur-de-fond">Couleur de fond</h2>
+
+<p>Si l&rsquo;on ne crée aucun objet et que l&rsquo;on regarde quelque part, on voit du noir.
+On peut changer cette couleur grâce à la commande <code>background</code>, que l&rsquo;on peut
+placer n&rsquo;importe où dans le fichier .pov.</p>
+
+<p>Par exemple, pour avoir un fond blanc comme dans l&rsquo;image ci-dessus (si l&rsquo;on
+utilise <em>White</em>, il faut mettre cette commande après le <code>#include
+&quot;colors.inc&quot;</code>) :</p>
+
+<pre><code>background {White}
+</code></pre>
+
+<p><center>[ <a href="../../../post/formation-povray/1ere-scene/">Page précédente</a> | <a href="../../../post/formation-povray/">Sommaire</a> | <a href="../../../post/formation-povray/objets/">Page suivante</a> ]</center></p>
+
+	</div>
+	
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

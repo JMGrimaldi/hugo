@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Cinergy 250 PCI &amp; Linux - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/cinergy-linux/">Cinergy 250 PCI &amp; Linux</a></h1>
+		<div class="post-date">4 août 2010</div>
+		<em>Cet article publié en août 2009 a été mis à jour.</em>
+		
+
+<p>This page explains how to have Terratec Cinergy 250 PCI video card work under
+Linux. It is done by patching a kernel module.</p>
+
+<p>Thanks to Hermann Pitton for his support in posting this patch to the kernel
+trunk. It is not yet included in 2.6.35 but should arrive some day.</p>
+
+<ul>
+<li><a href="#checking-that-your-card-is-seen">Checking that your card is seen</a></li>
+<li><a href="#patching-the-kernel">Patching the kernel</a></li>
+<li><a href="#watching-tv">Watching TV</a></li>
+</ul>
+
+<h2 id="checking-that-your-card-is-seen">Checking that your card is seen</h2>
+
+<p>Insert your Terratec Cinergy 250 PCI card into your PC, fire it up and check
+the card is recognized with <code>lspci</code> command, which should output something
+like that:</p>
+
+<pre><code>02:00.0 Multimedia controller: Philips Semiconductors SAA7133/SAA7135
+Video Broadcast Decoder (rev d0)
+</code></pre>
+
+<h2 id="patching-the-kernel">Patching the kernel</h2>
+
+<p>Now download the source of your kernel, and apply the following patch to
+<code>drivers/media/video/saa7134/saa7134-cards.c</code> (this patch is for kernel 2.6.34
+but you can manually add the <code>name_comp1</code> section to any other version):</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">    
+<span style="color: #999999">diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c</span>
+<span style="color: #000000; background-color: #ffdddd">--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300</span>
+<span style="color: #000000; background-color: #ddffdd">+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200</span>
+<span style="color: #aaaaaa">@@ -2831,11 +2831,15 @@</span>
+ 			.vmux = 1,
+ 			.amux = TV,
+ 			.tv   = 1,
+<span style="color: #000000; background-color: #ffdddd">-		},{</span>
+<span style="color: #000000; background-color: #ddffdd">+		}, {</span>
+<span style="color: #000000; background-color: #ddffdd">+			.name = name_comp1,</span>
+<span style="color: #000000; background-color: #ddffdd">+			.vmux = 3,</span>
+<span style="color: #000000; background-color: #ddffdd">+			.amux = LINE2,</span>
+<span style="color: #000000; background-color: #ddffdd">+		}, {</span>
+ 			.name = name_svideo,  /* NOT tested */
+ 			.vmux = 8,
+<span style="color: #000000; background-color: #ffdddd">-			.amux = LINE1,</span>
+<span style="color: #000000; background-color: #ffdddd">-		}},</span>
+<span style="color: #000000; background-color: #ddffdd">+			.amux = LINE2,</span>
+<span style="color: #000000; background-color: #ddffdd">+		} },</span>
+ 		.radio = {
+ 			.name   = name_radio,
+ 			.amux   = TV,
+</pre></div>
+</p>
+
+<p>This done, rebuild your module and install it:</p>
+
+<pre><code>make modules modules_install
+</code></pre>
+
+<p>Then reload the module, after unloading it if it was loaded:</p>
+
+<pre><code>rmmod saa7134
+modprobe saa7134
+</code></pre>
+
+<h2 id="watching-tv">Watching TV</h2>
+
+<p>I use the card to acquire video from an external Set-Top Box and watch it on
+the PC; for other usage you might need some tweaking. Here are the last steps:</p>
+
+<ul>
+<li>Plug your STB to the PC using a SCART-Cinch adapter on the STB, and then:<br />
+
+<ul>
+<li>for the audio, a Cinch cable between the white and red plugs of the adapter and the audio input of your soundcard<br /></li>
+<li>for the video, the Cinch-Composite (proprietary) cable provided with the Cinergy card, between the yellow plug of the adapter and the Composite input of the video card</li>
+</ul></li>
+<li>Install and start <code>tvtime</code> (<code>xawtv</code> also works but delivers a less polished image), and check that the image format is on <em>PAL</em> and not <em>SECAM</em></li>
+<li>Enjoy!</li>
+</ul>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

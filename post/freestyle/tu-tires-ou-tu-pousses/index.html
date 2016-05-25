@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tu tires ou tu pousses ? - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/freestyle/tu-tires-ou-tu-pousses/">Tu tires ou tu pousses ?</a></h1>
+		<div class="post-date">28 janvier 2007</div>
+		
+		
+
+<p><img class="fr" src="../../../static/freestyle/devices.jpg"></p>
+
+<p>Le Device Management est l’art de gérer les terminaux, qui peuvent être des PC, des téléphones, des décodeurs télé, en fait n’importe quel équipement connecté à un réseau. Gérer ça veut dire pouvoir faire à distance tout ce que l’on pourrait faire en étant sur place : mettre à jour les logiciels, corriger un mauvais paramétrage, rentrer un code pour accéder à un nouveau service, etc. Mais gérer c’est aussi gérer le nombre, à la manière d’un épicier qui ferait l’inventaire de son magasin : combien de boîtes de haricots, leur date limite, comment on y accède, etc. Pour une Livebox ce sera plutôt son numéro de série, la date de sa premère connexion, ou son IP.</p>
+
+<p>Les applications sont nombreuses : permettre à un expert d’intervenir à distance et d’économiser le temps de déplacement, automatiser à grande échelle des actions répétitives, tout ça pour qu’au final l’utilisateur du terminal ait l’impression que ça marche « tout seul ».</p>
+
+<p>On l’imagine, les facettes de ce domaine sont aussi nombreuses que passionnantes : éthiques, techniques, organisationnelles, ergonomiques. Aujourd’hui nous parlerons d’une question technique fondamentale : mode pull ou mode push ?</p>
+
+<p>Avec la généralisation des protocoles en <a href="http://en.wikipedia.org/wiki/Connection-oriented">mode connecté</a> comme HTTP, le terminal et le serveur échangent des informations au cours d’un dialogue entamé par l’un des deux. Lorsque c’est le terminal qui a appelé le serveur on parle de mode <em>Pull</em> (<em>tirer</em>) ; si c’est le serveur qui a réveillé le terminal c’est du <em>Push</em> (<em>pousser</em>).</p>
+
+<p>Push et Pull sont souvent perçus par les décideurs informatiques comme deux antagonismes présentant chacun des avantages et des inconvénients finalement mal connus. Ce que j’ai observé, c’est que ceux qui font du Push lorgnent sur le Pull, et ceux qui font du Pull bavent sur le Push. Alors lequel choisir ?</p>
+
+<h2 id="pull">Pull</h2>
+
+<p>En mode Pull le terminal est une amoureuse impatiente qui va tous les jours demander à la poste s’il y a du courrier pour elle : le terminal connaît l’adresse du serveur et va régulièrement lui demander s’il a quelquechose pour lui. Le cas échéant, le serveur lui renvoie un paramétrage à appliquer, un nouveau logiciel à installer, oui lui demande de lui décrire sa configuration.</p>
+
+<p><img src="../../../static/freestyle/classe.jpg" alt="classe.jpg" />
+</p>
+
+<table>
+<thead>
+<tr>
+<th>Avantages</th>
+<th>Inconvénients</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><ul><li>ne nécessite pas de connaître le terminal au préalable : autoprovisioning</li><li>fonctionne même s’il y a plusieurs terminaux derrière la même IP (NAT)</li><li>peut être lié à des événements côté terminal pour moins perturber l’utilisateur : mise en veille, etc.</li><li>les reprises sur échec (coupure d’un téléchargement par exemple) sont automatiques</li><li>le lissage de charge se fait tout seul : si l’on dit aux terminaux de venir tous les 5 jours, on en traitera ~20% chaque jour</li><li>sécurité : le terminal appelant une adresse non modifiable, il est très difficile de prendre la place du serveur, ou d’intercepter les messages envoyés à un autre terminal</li></td>
+<td><ul><li>peu réactif : il faut attendre que le terminal vienne</li><li>peu scalable : pour obtenir une réactivité correcte il faut des requêtes très fréquentes, ce qui charge le serveur</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+<p>C’est comme ça que fonctionne le système de mise à jour de tous vos logiciels habituels : Firefox, Windows Update, McAfee, etc. Le principal avantage est de pouvoir décrire les campagnes de déploiement avec des règles génériques (ceux qui sont en version A reçoivent la version B, etc.) et de laisser les choses se faire d’elles-mêmes.</p>
+
+<h2 id="push">Push</h2>
+
+<p>En mode Push le postier connaît l’adresse d’Aglaé et court lui porter les messages dès qu’ils arrivent : c’est même plutôt un coursier qui fera le voyage trois fois dans la journée s’il y a trois messages.</p>
+
+<p><img src="../../../static/freestyle/fedex.jpg" alt="fedex.jpg" />
+</p>
+
+<table>
+<thead>
+<tr>
+<th>Avantages</th>
+<th>Inconvénients</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><ul><li>très réactif : l’action à effectuer est transmise immédiatement</li><li>permet même une interactivité entre un expert et le terminal</li><li>scalable : s’il y a en moyenne pour chaque terminal une action toutes les 3 semaines, pas la peine d’être dimensionné pour traiter une requête toutes les 2 heures</li></ul></td>
+<td><ul><li>on ne peut agir que sur les terminaux que l’on connaît déjà : provisioning nécessaire, souvent en mode Pull</li><li>un <em>network mapping</em> (association entre l’identifiant du terminal et son adresse réseau) fiable est nécessaire, avec une synchronisation à chaque changement d’IP par exemple ; il faut cependant être conscient qu’il ne sera <em>jamais</em> fiable à 100%</li><li>il faut que le terminal soit joignable, et gérer la reprise en cas d’échec</li><li>nécessite une participation de la passerelle s’il y a plusieurs terminaux derrière la même IP</li><li>sécurité : il faut une authentification forte du terminal pour éviter de lui envoyer les données confidentielles destinées à un autre, et du serveur pour éviter de prendre des ordres de n’importe qui</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+<p>C’est comme ça que fonctionnent les systèmes en mode non connecté (SNMP), et surtout la plupart des progiciels de Device Management : IBM Tivoli, Microsoft SMS, etc. Le principal avantage est de permettre des actions <em>en direct</em>. L’inconvénient est que la gestion des campagnes massives nécessite beaucoup de ressources.</p>
+
+<h2 id="and-the-winner-is">And the winner is…</h2>
+
+<p>Alors que choisir ? Je ne tournerai pas autour du pot : commencez par le Pull ! En effet le Pull n’est pas une option : c’est la seule solution réaliste pour établir le <em>network mapping</em> fiable nécessaire au Push. De plus lorsqu’en Push un terminal n’est pas joignable, il faut bien qu’il s’annonce lorsqu’il revient, et que l’on soit capable de traiter cette requête Pull. Si vous faites du Device Management, vous avez besoin du Pull.</p>
+
+<p>La nécessité du Push va ensuite dépendre de ce que vous voulez faire.</p>
+
+<p>S’il s’agit de gérer des campagnes massives d’audit, de mise à jour, de reconfiguration etc. où vous pouvez décrire votre campagne avec des règles génériques et vous permettre d’attendre une journée pour connaître le résultat (ne serait-ce que parce que les capacités de votre réseau ne vous permettraient pas, même en Push, de tout faire en moins de temps), alors restez en Pull : je me suis occupé d’une infrastructure où pour gérer les campagnes en Push sur 100.000 terminaux il fallait 30 personnes. J’ai aussi mis en place des campagnes en Pull sur 4 millions de terminaux, avec 3 personnes.</p>
+
+<p>En revanche sur des actions unitaires le Push ouvre de nouvelles voies : activation de service immédiate, interactivité entre un expert et le terminal dans un processus de diagnostic/réparation, etc.</p>
+
+<p>Il n’y a donc pas de dichotomie entre Push et Pull : les deux sont complémentaires, et la meilleure illustration en est le fonctionnement du TR-069. Il s’agit d’un protocole standard défini par le <a href="https://web.archive.org/web/20070127211200/http://www.dslforum.org/">DSL Forum</a> et en cours d’adoption par l’ensemble du monde des télécoms : dans ce protocole, le Push consiste simplement à demander au terminal de faire une requête Pull. Mais nous en reparlerons…</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../../tags/telcos/">telcos</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

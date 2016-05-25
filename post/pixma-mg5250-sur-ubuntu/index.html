@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Pixma MG5250 sur Ubuntu - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/pixma-mg5250-sur-ubuntu/">Pixma MG5250 sur Ubuntu</a></h1>
+		<div class="post-date">10 août 2015</div>
+		<em>Cet article publié en février 2011 a été mis à jour.</em>
+		
+
+<p>Cette page explique comment installer l&rsquo;imprimante-scanner Canon Pixma MG5250
+sur Ubuntu (testé sur 10.04, 10.10, 13.04).</p>
+
+<h2 id="récupération-des-pilotes-canon">Récupération des pilotes Canon</h2>
+
+<ul>
+<li>Télécharger <code>MG5200series-printer_driver.tar</code> et <code>MG5200series-scanner_driver.tar</code> depuis <a href="http://www.canon.fr/support/consumer_products/products/fax__multifunctionals/inkjet/pixma_mg_series/pixma_mg5250.aspx?type=drivers&amp;language=&amp;os=Linux%20%2864-bit%29">www.canon.fr</a> : <em>Linux IJ Printer Driver (3.40)</em> et <em>Linux IJ Scanner Driver (1.60)</em></li>
+<li>Aller dans le répertoire <code>Téléchargements/</code></li>
+</ul>
+
+<h2 id="installation-de-l-imprimante">Installation de l&rsquo;imprimante</h2>
+
+<p>Prérequis : le package <code>libtiff4</code> doit être installé.</p>
+
+<pre><code>% mkdir printer ; cd printer
+% tar xvf ../MG5200series-printer_driver.tar
+% tar xvzf cnijfilter-mg5200series-3.40-1-deb.tar.gz
+% cd cnijfilter-mg5200series-3.40-1-deb/
+% sudo ./install.sh
+</code></pre>
+
+<p>Suivre les instructions.</p>
+
+<p>Vérifier que l&rsquo;imprimante apparaît bien dans <em>Administration &gt; Impression</em></p>
+
+<p>Si vous rencontrez un problème la doc est dans le fichier <code>guidemg5200series-
+pd-3.40-1_en.tar.gz</code> (à décompresser avec <code>tar xvzf &lt;fichier&gt;</code>)</p>
+
+<p><strong>NB&nbsp;:</strong> le driver Canon limite la résolution à 600dpi</p>
+
+<pre><code>% cd ../.. ; rm -rf printer
+</code></pre>
+
+<h2 id="installation-du-scanner">Installation du scanner</h2>
+
+<pre><code>% mkdir scanner ; cd scanner
+% tar xvf MG5200series-scanner_driver.tar
+% tar xvzf scangearmp-mg5200series-1.60-1-deb.tar.gz
+% cd scangearmp-mg5200series-1.60-1-deb/
+% sudo ./install.sh
+</code></pre>
+
+<ul>
+<li>Lancer Gimp (si besoin&nbsp;: <code>apt-get install gimp</code>), si dans <em>Fichier &gt; Créer</em>, <em>&lsquo;ScanGear MP&rsquo;</em> n&rsquo;apparaît pas sous <em>&lsquo;Capture d&rsquo;écran&rsquo;</em>&nbsp;:
+
+<ul>
+<li>Quitter Gimp</li>
+<li><code>sudo ln -sf /usr/bin/scangearmp /usr/lib/gimp/2.0/plug-ins</code></li>
+<li>Relancer Gimp</li>
+</ul></li>
+<li><em>Fichier &gt; Créer &gt; ScanGear MP</em>&nbsp;; un message d&rsquo;erreur apparaît mais l&rsquo;autodétection du scanner doit vous montrer votre <em>Canon</em>, sélectionnez-le et la fenêtre de numérisation apparaît.</li>
+</ul>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

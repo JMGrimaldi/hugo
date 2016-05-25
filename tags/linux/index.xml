@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux - JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/tags/linux/</link>
+    <description>Derniers contenus Linux de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 27 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Encodage H.264 avec GStreamer</title>
+      <link>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</link>
+      <pubDate>Sun, 27 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;GStreamer est un programme de manipulation audio-vidéo. Il est notamment utilisé par le logiciel de montage Pitivi pour l&amp;rsquo;encodage. Je vais donc tester les paramètres d&amp;rsquo;encodage pour trouver ceux qui me conviennent le mieux.&lt;/p&gt;
+
+&lt;p&gt;Pour le montage des films du petit dernier, je cherche surtout des paramètres qui préservent la qualité de la prise de vue. La taille du fichier passe ensuite.&lt;/p&gt;
+
+&lt;h1 id=&#34;protocole-de-test&#34;&gt;Protocole de test&lt;/h1&gt;
+
+&lt;p&gt;J&amp;rsquo;ai pris une séquence avec les paramètres du caméscope (Sony HDR-CX220) offrant la meilleure qualité. Cela me donne un fichier &lt;code&gt;00001.MTS&lt;/code&gt; dont j&amp;rsquo;ai changé le conteneur en MP4 sans réencoder (le MTS posait problème à GStreamer) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;avconv -i 00001.MTS -codec copy in.mp4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ensuite j&amp;rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&amp;rsquo;extrais 2s), et l&amp;rsquo;encoder en H.264 en faisant varier les paramètres de la commande &lt;code&gt;x264enc&lt;/code&gt;. Puis j&amp;rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&amp;rsquo;en garde qu&amp;rsquo;une partie pour observer les détails :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 gnlfilesource location=&amp;quot;$PWD/in.mp4&amp;quot; media-start=20000000000 media-duration=2000000000 ! x264enc pass=5 quantizer=21 ! mp4mux ! filesink location=out.mp4
+avconv -ss 00:01:00 -i out.mp4 -vframes 1 out.png
+mogrify -crop 640x200+1000+0 out.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;pass&lt;/code&gt; peut prendre les valeurs suivantes :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0 :&lt;/strong&gt; cbr - Constant Bitrate Encoding (default)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;4 :&lt;/strong&gt; quant - Constant Quantizer (debugging only)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 :&lt;/strong&gt; qual - Constant Quality&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;17 :&lt;/strong&gt; pass1 - VBR Encoding - Pass 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18 :&lt;/strong&gt; pass2 - VBR Encoding - Pass 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;19 :&lt;/strong&gt; pass3 - VBR Encoding - Pass 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;résultats-small-taille-du-fichier-small&#34;&gt;Résultats &lt;small&gt;(taille du fichier)&lt;/small&gt;&lt;/h1&gt;
+
+&lt;h3 id=&#34;x264enc-small-404-ko-small&#34;&gt;x264enc &lt;small&gt;(404 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-default.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-4-quantizer-21-small-4-8-mo-small&#34;&gt;x264enc pass=4 quantizer=21 &lt;small&gt;(4,8 Mo !)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass4-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-10-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=10 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer10.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-21-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=21 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-30-small-400-ko-small&#34;&gt;x264enc pass=5 quantizer=30 &lt;small&gt;(400 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass5-quantizer30.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-17-small-308-ko-small&#34;&gt;x264enc pass=17 &lt;small&gt;(308 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass17.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-18-small-552-ko-small&#34;&gt;x264enc pass=18 &lt;small&gt;(552 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass18.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-19-small-544-ko-small&#34;&gt;x264enc pass=19 &lt;small&gt;(544 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/x264enc/out-pass19.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;La qualité obtenue avec le VBR en 2 passes est sensiblement meilleure qu&amp;rsquo;avec les méthodes en 1 passe. La durée d&amp;rsquo;une 3e passe n&amp;rsquo;est pas justifiée. Je retiens donc le &lt;strong&gt;VBR en 2 passes&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Attention pour encoder un fichier en VBR 2 passes il faudra effectivement lancer les 2 passes, et penser à nettoyer le fichier généré par la 1ère :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 ! progressreport ! x264enc pass=17 ! fakesink
+gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 name=demux ! queue ! audioconvert ! audioresample ! &#39;audio/x-raw-int, rate=44100&#39; ! faac bitrate=128000 ! mp4mux name=mux ! filesink location=out.mp4 demux. ! queue ! progressreport ! x264enc pass=18 ! mux.
+rm -f x264_2pass.log*
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backup linux</title>
+      <link>http://people.via.ecp.fr/~jm/post/backup-linux/</link>
+      <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/backup-linux/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/backup.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La semaine dernière en cherchant à recréer mon bootloader j&amp;rsquo;ai perdu une
+partition qui contenait des données importantes. Il était temps que je mette
+enfin en place un système de sauvegarde de mes données ! Cette page décrit le
+système que j&amp;rsquo;ai mis en place pour que vous puissiez facilement le reproduire
+et ne plus perdre vos données&amp;nbsp;!&lt;/p&gt;
+
+&lt;p&gt;Le mécanisme décrit ici fonctionne sur n&amp;rsquo;importe quelle distribution Linux
+puisque le seul programme nécessaire est &lt;code&gt;rsync&lt;/code&gt; en version 2.5.6 ou
+supérieure. Il s&amp;rsquo;appuie sur les scripts de Mike Rubel dont la page très
+détaillée est &lt;a href=&#34;http://www.mikerubel.org/computers/rsync_snapshots/&#34;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;le-résultat&#34;&gt;Le résultat&lt;/h1&gt;
+
+&lt;p&gt;J&amp;rsquo;ai un disque dédié au backup. Le jour où le disque principal lâche ça ne
+sert pas à grand-chose si la sauvegarde est sur le même disque. Ce disque de
+backup contient une seule partition au format &lt;code&gt;ext4&lt;/code&gt;, avec un répertoire
+&lt;code&gt;snapshot&lt;/code&gt; à l&amp;rsquo;intérieur duquel j&amp;rsquo;ai les répertoires suivants :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;daily.0&lt;/strong&gt; : la copie du matin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;daily.1&lt;/strong&gt; : celle de la veille&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;daily.2 etc.&lt;/strong&gt; : celle des jours précédents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weekly.0&lt;/strong&gt; : celle du lundi précédent&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weekly.1 etc.&lt;/strong&gt; : celle des semaines précédentes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;monthly.0 etc.&lt;/strong&gt; : celle du 1er du mois et des mois précédents&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Je conserve 7 &lt;em&gt;daily&lt;/em&gt;, 5 &lt;em&gt;weekly&lt;/em&gt;, et 7 &lt;em&gt;monthly&lt;/em&gt;. Chacun de ces snapshots
+contient l&amp;rsquo;arborescence que j&amp;rsquo;ai choisi de sauvegarder :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/snapshot/
++- daily.0/
+|  +- boot/
+|  +- etc/
+|  +- home/
+|  +- root/
+|  +- usr/
+|  +- var/
++- daily.1
+|  +- ...
++- ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La magie du mécanisme utilisé est que ces 19 sauvegardes ne prennent au total
+qu&amp;rsquo;environ 2 fois le volume sauvegardé.&lt;/p&gt;
+
+&lt;h1 id=&#34;comment-ça-marche&#34;&gt;Comment ça marche ?&lt;/h1&gt;
+
+&lt;p&gt;Avec les systèmes de fichiers ext2, ext3 ou ext4, un fichier est une étiquette (par
+exemple &lt;code&gt;/etc/group&lt;/code&gt; ou &lt;code&gt;/tmp/a&lt;/code&gt;) qui pointe vers un espace de stockage sur le
+disque appelé &lt;em&gt;inode&lt;/em&gt;, où sont écrites les données ainsi que les dates et
+permissions. Vous pouvez voir le numéro d&amp;rsquo;inode d&amp;rsquo;un fichier à l&amp;rsquo;aide de la
+commande &lt;code&gt;ls -i&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% touch /tmp/a
+% ls -i /tmp/a
+3385746 /tmp/a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lorsque vous effacez un fichier, Linux supprime l&amp;rsquo;étiquette et, si aucune
+autre étiquette ne pointe vers le même inode, le libère. &lt;em&gt;Aucune autre
+étiquette&lt;/em&gt; ?! Eh oui, il est possible d&amp;rsquo;avoir plusieurs étiquettes qui
+pointent sur le même inode. Pour savoir combien, &lt;code&gt;stat /tmp/a&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Pour créer une 2nde étiquette on crée un lien physique (à ne pas confondre
+avec les liens symboliques créés par &lt;code&gt;ln -s&lt;/code&gt;) avec la commande &lt;code&gt;ln&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% ln /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+3385746 /tmp/b
+% rm /tmp/b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C&amp;rsquo;est un peu comme la commande &lt;code&gt;cp&lt;/code&gt;, sauf que celle-ci alloue un nouvel inode
+(avec de nouvelles permissions) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% cp /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+2812276 /tmp/b
+% rm /tmp/b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La commande &lt;code&gt;cp -l&lt;/code&gt; crée des liens physiques, et &lt;code&gt;cp -a&lt;/code&gt; copie toute une
+arborescence en préservant les dates et les permissions. &lt;code&gt;cp -al&lt;/code&gt; permet de
+dupliquer toute une arborescence avec des liens physiques ! On a ainsi
+l&amp;rsquo;impression d&amp;rsquo;avoir une copie complète de l&amp;rsquo;arborescence alors que cela
+n&amp;rsquo;occupe presque aucun espace disque.&lt;/p&gt;
+
+&lt;p&gt;Pour notre système de sauvegarde on ne souhaite pas faire de liens physiques
+(c&amp;rsquo;est de toute façon impossible entre deux disques), en revanche entre nos
+différents snapshots ça va nous permettre de gagner beaucoup de place.&lt;/p&gt;
+
+&lt;h1 id=&#34;rsync&#34;&gt;rsync&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;rsync&lt;/code&gt; est un utilitaire en ligne de commande très pratique pour recopier une
+arborescence. &lt;code&gt;rsync -a&lt;/code&gt; fait la même chose que &lt;code&gt;cp -a&lt;/code&gt;, sauf que si
+l&amp;rsquo;arborescence cible existe déjà &lt;code&gt;rsync&lt;/code&gt; ne copiera que les fichiers qui ont
+changé, ce qui va beaucoup plus vite. Et avec l&amp;rsquo;option &lt;code&gt;--delete&lt;/code&gt;, il effacera
+de la cible les fichiers qui ont disparu de la source.&lt;/p&gt;
+
+&lt;p&gt;Attention, si &lt;code&gt;src&lt;/code&gt; est un répertoire, &lt;code&gt;rsync -a src dst&lt;/code&gt; créera un répertoire
+&lt;code&gt;src&lt;/code&gt; sous &lt;code&gt;dst/&lt;/code&gt;, alors que &lt;code&gt;rsync -a src/ dst&lt;/code&gt; (avec un slash) copiera
+directement le &lt;em&gt;contenu&lt;/em&gt; de &lt;code&gt;src&lt;/code&gt; sous &lt;code&gt;dst/&lt;/code&gt;. En revanche, un slash ou non à
+la fin de &lt;code&gt;dst&lt;/code&gt; ne change rien.&lt;/p&gt;
+
+&lt;p&gt;Enfin &lt;code&gt;rsync&lt;/code&gt; possède depuis la version 2.5.6 une option &lt;code&gt;--link-dest&lt;/code&gt; qui
+duplique l&amp;rsquo;arborescence cible avec des liens physiques et met à jour
+uniquement cette copie :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync -a --delete --link-dest=../dest.old source/ dest.new
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;le-script&#34;&gt;Le script&lt;/h1&gt;
+
+&lt;p&gt;Avec tout ça, le principe de notre script de backup est simple :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On lance &lt;code&gt;rsync&lt;/code&gt; en lui demandant de dupliquer &lt;code&gt;daily.0&lt;/code&gt; en &lt;code&gt;daily&lt;/code&gt; et de modifier &lt;code&gt;daily&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;On fait tourner les backups (on supprime &lt;code&gt;daily.6&lt;/code&gt;, on renomme &lt;code&gt;daily.5&lt;/code&gt; en &lt;code&gt;daily.6&lt;/code&gt; et ainsi de suite jusqu&amp;rsquo;à &lt;code&gt;daily&lt;/code&gt; en &lt;code&gt;daily.0&lt;/code&gt;) ;&lt;/li&gt;
+&lt;li&gt;Chaque lundi on fait un &lt;code&gt;cp -al&lt;/code&gt; de &lt;code&gt;daily.0&lt;/code&gt; vers &lt;code&gt;weekly&lt;/code&gt;, et chaque 1er du mois de &lt;code&gt;daily.0&lt;/code&gt; vers &lt;code&gt;monthly&lt;/code&gt;. Et l&amp;rsquo;on fait tourner les backups.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Télécharger le script : &lt;a href=&#34;../../static/snapshot.sh&#34;&gt;snapshot.sh&lt;/a&gt; (4 Ko)&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
+
+&lt;p&gt;Vous pouvez changer le nombre de snapshots conservés au début du script
+(&lt;code&gt;DAILY_MAX&lt;/code&gt; etc.), et l&amp;rsquo;emplacement de votre répertoire de backup
+(&lt;code&gt;SNAPSHOT_RW&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Il faut surtout configurer les répertoires sauvegardés en modifiant la
+variable &lt;code&gt;TOBACKUP&lt;/code&gt;. Attention si vous mettez dans &lt;code&gt;TOBACKUP&lt;/code&gt; le répertoire
+&lt;code&gt;/home/toto&lt;/code&gt;, alors le répertoire créé sous &lt;code&gt;daily.0&lt;/code&gt; sera &lt;code&gt;daily.0/toto&lt;/code&gt; et
+pas &lt;code&gt;daily.0/home/toto&lt;/code&gt;. Pour cela, mettez &lt;code&gt;/home&lt;/code&gt; dans &lt;code&gt;TOBACKUP&lt;/code&gt; et éditez
+ensuite le fichier &lt;code&gt;snapshot_exclude.txt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Le format de ce fichier est le suivant : un &amp;lsquo;-&amp;rsquo; (ou rien) signifie une
+exclusion, un &amp;lsquo;+&amp;rsquo; signifie une inclusion. Pour savoir si un fichier doit être
+copié, &lt;code&gt;rsync&lt;/code&gt; prend les lignes une par une et prend le statut de la 1ère
+ligne qui matche. Si aucune ligne ne matche le fichier est copié. &lt;code&gt;dir/*&lt;/code&gt;
+matche les fichiers/répertoires situés directement sous &lt;code&gt;dir/&lt;/code&gt;, alors que
+&lt;code&gt;dir/**&lt;/code&gt; matche tout ce qui est situé à une profondeur quelconque. Attention
+si l&amp;rsquo;on exclut &lt;code&gt;dir/**&lt;/code&gt; et que l&amp;rsquo;on veut inclure &lt;code&gt;dir/a/b/*&lt;/code&gt; il faut
+explicitement inclure &lt;code&gt;dir/a&lt;/code&gt; et &lt;code&gt;dir/b&lt;/code&gt; en plus de &lt;code&gt;dir/a/b/*&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;À titre d&amp;rsquo;exemple voici mon fichier :
+&lt;a href=&#34;../../static/snapshot_exclude.txt&#34;&gt;snapshot_exclude.txt&lt;/a&gt; (4 Ko)&lt;/p&gt;
+
+&lt;h1 id=&#34;lancement-automatique&#34;&gt;Lancement automatique&lt;/h1&gt;
+
+&lt;p&gt;Placez le script et le fichier d&amp;rsquo;exclusions dans le même répertoire (par
+exemple &lt;code&gt;/root&lt;/code&gt;) et vérifiez que le script a les droits d&amp;rsquo;exécution (&lt;code&gt;chmod
+755 snapshot.sh&lt;/code&gt;). Pour vérifier le bon fonctionnement, lancez
+&lt;code&gt;/root/snapshot.sh daily&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si ça fonctionne, automatisez le lancement en mettant dans &lt;code&gt;/etc/crontab&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Snapshot chaque jour à 2h, et chaque lundi/1er à 15h 12/28
+1 2     * * *   root    /root/scripts/snapshot.sh daily
+12 15   * * 1   root    /root/scripts/snapshot.sh weekly
+28 15   1 * *   root    /root/scripts/snapshot.sh monthly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour sauvegarder sous Ubuntu (ou Debian) la liste des paquets installés,
+ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 2     * * *   root    dpkg --get-selections &amp;gt;| /root/get-selections.txt
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
+      <link>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</link>
+      <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/shuffle.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Je viens de scanner un document imprimé en brochure/booklet après l&amp;rsquo;avoir dégrafé. C&amp;rsquo;est pratique, ça permet d&amp;rsquo;utiliser le chargeur automatique du scanner. Mais cela veut dire que sur chaque page scannée j&amp;rsquo;ai en réalité 2 pages, et dans un ordre assez bizarre: 8 et 9, 10 et 7, etc. Comment les remettre dans l&amp;rsquo;ordre ?&lt;/p&gt;
+
+&lt;h2 id=&#34;numérologie&#34;&gt;Numérologie&lt;/h2&gt;
+
+&lt;p&gt;D&amp;rsquo;abord, on constate qu&amp;rsquo;avec 2 pages par scan, le nombre de pages est un multiple de 2. Écrivons-le 2n.&lt;/p&gt;
+
+&lt;p&gt;On a les pages 1 à n dans la première moitié de la brochure, et les pages n+1 à 2n dans la seconde moitié. Ce qui veut dire que sur la première page scannée, on a les pages n (à gauche) et n+1 (à droite).&lt;/p&gt;
+
+&lt;p&gt;Au verso, c&amp;rsquo;est-à-dire sur la deuxième page scannée, on a les pages n-1 et n+2. Et ainsi de suite jusqu&amp;rsquo;à la n&lt;sup&gt;ième&lt;/sup&gt; page scannée, la couverture, où l&amp;rsquo;on a les pages 1 et 2n.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/leaflet.png&#34; alt=&#34;Numérotation d&#39;une brochure&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;À l&amp;rsquo;inverse, la page 1 est à droite du scan n, la page 2 à gauche du scan n-1, la page 3 à droite du scan n-2, &amp;hellip; la page n à gauche du scan 1, la page n+1 à droite du scan 1, etc.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est compris entre 1 et n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(n-k+1)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est supérieur à n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(k-n)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;La page &lt;em&gt;k&lt;/em&gt; est à droite si &lt;em&gt;k&lt;/em&gt; est impair, à gauche si &lt;em&gt;k&lt;/em&gt; est pair.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;mise-en-pratique&#34;&gt;Mise en pratique&lt;/h2&gt;
+
+&lt;p&gt;Vous aurez besoin d&amp;rsquo;avoir installé ImageMagick, Ghostscript (version 32 bits), et Cygwin si vous êtes sous Windows. Vous aurez également besoin des utilitaires pdfimages et jpegtran :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pdfimages&lt;/strong&gt; permet d&amp;rsquo;extraire les images du PDF sans les dégrader. Sous Ubuntu il est dans le package &lt;code&gt;poppler-utils&lt;/code&gt; ; sous Windows il faut télécharger &lt;a href=&#34;http://www.foolabs.com/xpdf/download.html&#34;&gt;Xpdf&lt;/a&gt; puis copier &lt;code&gt;pdfimages.exe&lt;/code&gt; (celui de bin64/ si l&amp;rsquo;OS le permet, de bin32/ sinon) dans le &lt;code&gt;/usr/local/bin/&lt;/code&gt; de Cygwin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;jpegtran&lt;/strong&gt; permet de faire pivoter une image JPEG sans la dégrader. Sous Ubuntu il est dans le package &lt;code&gt;libjpeg-turbo-progs&lt;/code&gt; ; sous Windows il est téléchargeable &lt;a href=&#34;http://jpegclub.org/jpegtran/&#34;&gt;ici&lt;/a&gt;, là encore le déposer sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; et s&amp;rsquo;assurer qu&amp;rsquo;il est exécutable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Après ces préliminaires, si l&amp;rsquo;on a un &lt;code&gt;doc.pdf&lt;/code&gt; de 8 scans (16 pages à la fin) :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On extrait les images du PDF :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;pdfimages -j doc.pdf doc
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for &lt;/span&gt;i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do &lt;/span&gt;convert -quality 95 -rotate 90 -crop 50%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate 180 &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;convert -density 300 -quality 80 &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
+&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;rm *jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pixma MG5250 sur Ubuntu</title>
+      <link>http://people.via.ecp.fr/~jm/post/pixma-mg5250-sur-ubuntu/</link>
+      <pubDate>Mon, 10 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/pixma-mg5250-sur-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;Cette page explique comment installer l&amp;rsquo;imprimante-scanner Canon Pixma MG5250
+sur Ubuntu (testé sur 10.04, 10.10, 13.04).&lt;/p&gt;
+
+&lt;h2 id=&#34;récupération-des-pilotes-canon&#34;&gt;Récupération des pilotes Canon&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Télécharger &lt;code&gt;MG5200series-printer_driver.tar&lt;/code&gt; et &lt;code&gt;MG5200series-scanner_driver.tar&lt;/code&gt; depuis &lt;a href=&#34;http://www.canon.fr/support/consumer_products/products/fax__multifunctionals/inkjet/pixma_mg_series/pixma_mg5250.aspx?type=drivers&amp;amp;language=&amp;amp;os=Linux%20%2864-bit%29&#34;&gt;www.canon.fr&lt;/a&gt; : &lt;em&gt;Linux IJ Printer Driver (3.40)&lt;/em&gt; et &lt;em&gt;Linux IJ Scanner Driver (1.60)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Aller dans le répertoire &lt;code&gt;Téléchargements/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;installation-de-l-imprimante&#34;&gt;Installation de l&amp;rsquo;imprimante&lt;/h2&gt;
+
+&lt;p&gt;Prérequis : le package &lt;code&gt;libtiff4&lt;/code&gt; doit être installé.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% mkdir printer ; cd printer
+% tar xvf ../MG5200series-printer_driver.tar
+% tar xvzf cnijfilter-mg5200series-3.40-1-deb.tar.gz
+% cd cnijfilter-mg5200series-3.40-1-deb/
+% sudo ./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Suivre les instructions.&lt;/p&gt;
+
+&lt;p&gt;Vérifier que l&amp;rsquo;imprimante apparaît bien dans &lt;em&gt;Administration &amp;gt; Impression&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Si vous rencontrez un problème la doc est dans le fichier &lt;code&gt;guidemg5200series-
+pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &amp;lt;fichier&amp;gt;&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB&amp;nbsp;:&lt;/strong&gt; le driver Canon limite la résolution à 600dpi&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% cd ../.. ; rm -rf printer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installation-du-scanner&#34;&gt;Installation du scanner&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% mkdir scanner ; cd scanner
+% tar xvf MG5200series-scanner_driver.tar
+% tar xvzf scangearmp-mg5200series-1.60-1-deb.tar.gz
+% cd scangearmp-mg5200series-1.60-1-deb/
+% sudo ./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lancer Gimp (si besoin&amp;nbsp;: &lt;code&gt;apt-get install gimp&lt;/code&gt;), si dans &lt;em&gt;Fichier &amp;gt; Créer&lt;/em&gt;, &lt;em&gt;&amp;lsquo;ScanGear MP&amp;rsquo;&lt;/em&gt; n&amp;rsquo;apparaît pas sous &lt;em&gt;&amp;lsquo;Capture d&amp;rsquo;écran&amp;rsquo;&lt;/em&gt;&amp;nbsp;:
+
+&lt;ul&gt;
+&lt;li&gt;Quitter Gimp&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo ln -sf /usr/bin/scangearmp /usr/lib/gimp/2.0/plug-ins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Relancer Gimp&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Fichier &amp;gt; Créer &amp;gt; ScanGear MP&lt;/em&gt;&amp;nbsp;; un message d&amp;rsquo;erreur apparaît mais l&amp;rsquo;autodétection du scanner doit vous montrer votre &lt;em&gt;Canon&lt;/em&gt;, sélectionnez-le et la fenêtre de numérisation apparaît.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installer Ubuntu sur Samsung 370R5E-S02</title>
+      <link>http://people.via.ecp.fr/~jm/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
+      <pubDate>Sun, 21 Jul 2013 22:11:16 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
+      <description>
+
+&lt;p&gt;Le Samsung 370R5E-S02 est un portable 15,6″ équipé d’un CPU Intel Core i5 3210M. Cette page décrit quelques particularités de l’installation d’Ubuntu 13.04 sur ce PC.&lt;/p&gt;
+
+&lt;h3 id=&#34;installer-les-drivers-de-la-carte-radeon&#34;&gt;Installer les drivers de la carte Radeon&lt;/h3&gt;
+
+&lt;p&gt;La partie graphique est assurée par un système hybride: en usage normal c’est le composant intégré Intel HD Graphics 4000 qui est utilisé ; si besoin la carte dédiée AMD Radeon 8750M peut prendre le relais.&lt;/p&gt;
+
+&lt;p&gt;Pour utiliser la carte Radeon ou simplement réduire la consommation lorsqu’on utilise le composant Intel, il faut installer les derniers drivers AMD pour Linux :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Installez les prérequis :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo apt-get install debhelper execstack dh-modaliases dkms
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Téléchargez les drivers (version &lt;a href=&#34;http://support.amd.com/en-us/download/desktop?os=Linux+x86&#34;&gt;13.12&lt;/a&gt; à date ; utiliser la version bêta n’est pas nécessaire) ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compilez les packages d’installation :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;mkdir tmp; &lt;span style=&#34;color: #999999&#34;&gt;cd &lt;/span&gt;tmp
+unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
+chmod +x *run
+./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&amp;lt;/pre&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Installez les packages :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo dpkg -i *deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande &lt;code&gt;amdconfig --pxl&lt;/code&gt; ne fonctionne pas) :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo amdconfig --initial -f
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebootez.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Si vous ne parvenez plus à ouvrir de session X, ouvrez un shell avec votre compte puis : &lt;code&gt;mv .Xauthority* /tmp; sudo service lightdm restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si à l’ouverture de session Unity a disparu (plus de lanceur, de barre etc.), installez &lt;code&gt;compizconfig-settings-manager&lt;/code&gt;, lancez &lt;code&gt;ccsm&lt;/code&gt; et réactivez le plugin Unity.&lt;/p&gt;
+
+&lt;p&gt;Pour voir quel GPU est actif :&lt;br /&gt;
+&lt;code&gt;amdconfig --pxl&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Pour voir la consommation du PC sur les 2 dernières minutes :&lt;br /&gt;
+&lt;code&gt;upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep &amp;quot;(rate)&amp;quot; -A4&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si vous n’avez pas un usage intensif de la 3D, passez sur le GPU intégré Intel, vous pourrez observer une baisse de la consommation d’environ 30% : &lt;code&gt;sudo amdconfig --px-igpu&lt;/code&gt;, puis fermez/rouvrez la session X (&lt;code&gt;sudo service lightdm restart&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Pour revenir au GPU dédié Radeon : &lt;code&gt;sudo amdconfig --px-dgpu&lt;/code&gt; (puis fermez/rouvrez la session X).&lt;/p&gt;
+
+&lt;p&gt;Pour plus de détails sur l’installation, voyez &lt;a href=&#34;http://wiki.cchtml.com/index.php/Ubuntu_Raring_Installation_Guide&#34;&gt;ce lien&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;désactiver-la-carte-radeon&#34;&gt;Désactiver la carte Radeon&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Cette partie n’était utile que lorsque les drivers AMD ne reconnaissaient pas la carte Radeon (version 13.6-beta) ; désormais ces drivers désactivent la carte lorsqu’on utilise le GPU Intel. Je laisse cette partie pour mémoire.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Pour désactiver la carte 8750M on utilise le module &lt;code&gt;acpi_call&lt;/code&gt; :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Pour l’installer tapez les commandes suivantes dans un terminal :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;git clone https://github.com/marcoDallas/acpi_call_GUI.git
+&lt;span style=&#34;color: #999999&#34;&gt;cd &lt;/span&gt;acpi_call_GUI
+sudo chmod +x install.sh&amp;lt;/pre&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+Éditez &lt;code&gt;install.sh&lt;/code&gt; et remplacez &lt;code&gt;gksudo&lt;/code&gt; par &lt;code&gt;gksu&lt;/code&gt;, puis exécutez &lt;code&gt;sudo ./install.sh&lt;/code&gt;. Après l’installation lancez acpi_call_GUI avec la commande &lt;code&gt;java -jar $HOME/acpi_call_GUI.jar&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sélectionnez &lt;em&gt;Install acpi_call&lt;/em&gt; puis &lt;em&gt;Execute&lt;/em&gt;, et saisissez le code &lt;code&gt;\_SB.PCI0.PEG0.PEGP._OFF&lt;/code&gt; ; cela installe le module et crée sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; deux répertoires &lt;code&gt;acpi_call/&lt;/code&gt; et &lt;code&gt;acpi_call_GUI/&lt;/code&gt;. Pour vérifier que le module est bien chargé, dans une console tapez &lt;code&gt;lsmod | grep acpi_call&lt;/code&gt; et vérifiez qu’une ligne est renvoyée ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exécutez ensuite &lt;em&gt;Turn off discrete GPU&lt;/em&gt;, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande &lt;code&gt;upower etc.&lt;/code&gt; ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (&lt;em&gt;0×0&lt;/em&gt; si la désactivation s’est bien passée) :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;\_SB.PCI0.PEG0.PEGP._OFF&amp;#39;&lt;/span&gt; | sudo tee /proc/acpi/call
+sudo cat /proc/acpi/call
+&lt;/pre&gt;&lt;/div&gt;
+
+Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant &lt;em&gt;OFF&lt;/em&gt; par &lt;em&gt;ON&lt;/em&gt; ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si cela fonctionne, exécutez &lt;em&gt;Automate disabling discrete GPU every boot&lt;/em&gt;, cela ajoute dans &lt;code&gt;/etc/rc.local&lt;/code&gt; (vérifiez que ce fichier est exécutable) un appel à &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; et déplacer la ligne &lt;code&gt;sudo insmod acpi_call.ko&lt;/code&gt; après la ligne &lt;code&gt;fi&lt;/code&gt; (au passage on peut supprimer le &lt;em&gt;sudo&lt;/em&gt; devant &lt;em&gt;insmod&lt;/em&gt;) ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Le bouton &lt;em&gt;Automate etc.&lt;/em&gt; ajoute également dans &lt;code&gt;/etc/rc.local&lt;/code&gt; un appel à &lt;code&gt;deactivate.sh&lt;/code&gt;. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : &lt;code&gt;sleep 60 &amp;amp;&amp;amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;amp;&lt;/code&gt;. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous &lt;code&gt;/etc/pm/sleep.d/&lt;/code&gt; un script &lt;code&gt;99_acpi&lt;/code&gt; à qui j’ai rajouté les droits +x, avec le contenu suivant :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt; in
+	thaw|resume&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+&lt;span style=&#34;font-weight: bold&#34;&gt;esac&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Envoi de mails sur Ubuntu</title>
+      <link>http://people.via.ecp.fr/~jm/post/envoi-de-mails-sur-ubuntu/</link>
+      <pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/envoi-de-mails-sur-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;Cette page explique comment envoyer des mails en ligne de commande avec Ubuntu
+et un compte Gmail (vous pouvez utiliser n&amp;rsquo;importe quel serveur SMTP mais les
+mécanismes de sécurité seront alors différents).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt; &lt;code&gt;%&lt;/code&gt; représente le début de la ligne de commande.&lt;/p&gt;
+
+&lt;h2 id=&#34;installer-les-programmes-nécessaires&#34;&gt;Installer les programmes nécessaires&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% sudo apt-get install mailutils exim4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;configurer-exim&#34;&gt;Configurer exim&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% sudo dpkg-reconfigure exim4-config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sélectionner &lt;code&gt;Envoi via relais (« smarthost ») - réception SMTP ou fetchmail&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du &lt;em&gt;smarthost&lt;/em&gt; :&lt;/li&gt;
+&lt;li&gt;Entrez &lt;code&gt;smtp.gmail.com::587&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du destinataire des courriels de root et postmaster : entrez votre username habituel&lt;/li&gt;
+&lt;li&gt;La configuration est terminée.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Le SMTP Google requiert une authentification avec un compte Google (et
+n&amp;rsquo;autorise l&amp;rsquo;envoi que de 100 mails par jour) :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Éditez &lt;code&gt;/etc/exim4/passwd.client&lt;/code&gt; (NB: ce fichier doit être lisible par le user et/ou le groupe &lt;code&gt;Debian-exim&lt;/code&gt;) et ajoutez la ligne suivante :
+&lt;pre&gt;*.google.com:yourAccountName@gmail.com:y0uRpaSsw0RD&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Sauvegardez le fichier puis lancez la commande suivante :
+&lt;pre&gt;% sudo update-exim4.conf&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tester-l-installation&#34;&gt;Tester l&amp;rsquo;installation&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% echo Testing  | mail -s Bla your@mail.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si cela ne marche pas votre serveur SMTP a probablement des mécanismes de
+sécurité: vérification de votre IP, authentification par mot de passe,
+vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-vous sur ces mécanismes.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cinergy 250 PCI &amp; Linux</title>
+      <link>http://people.via.ecp.fr/~jm/post/cinergy-linux/</link>
+      <pubDate>Wed, 04 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/cinergy-linux/</guid>
+      <description>
+
+&lt;p&gt;This page explains how to have Terratec Cinergy 250 PCI video card work under
+Linux. It is done by patching a kernel module.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Hermann Pitton for his support in posting this patch to the kernel
+trunk. It is not yet included in 2.6.35 but should arrive some day.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#checking-that-your-card-is-seen&#34;&gt;Checking that your card is seen&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#patching-the-kernel&#34;&gt;Patching the kernel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#watching-tv&#34;&gt;Watching TV&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;checking-that-your-card-is-seen&#34;&gt;Checking that your card is seen&lt;/h2&gt;
+
+&lt;p&gt;Insert your Terratec Cinergy 250 PCI card into your PC, fire it up and check
+the card is recognized with &lt;code&gt;lspci&lt;/code&gt; command, which should output something
+like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;02:00.0 Multimedia controller: Philips Semiconductors SAA7133/SAA7135
+Video Broadcast Decoder (rev d0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;patching-the-kernel&#34;&gt;Patching the kernel&lt;/h2&gt;
+
+&lt;p&gt;Now download the source of your kernel, and apply the following patch to
+&lt;code&gt;drivers/media/video/saa7134/saa7134-cards.c&lt;/code&gt; (this patch is for kernel 2.6.34
+but you can manually add the &lt;code&gt;name_comp1&lt;/code&gt; section to any other version):&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    
+&lt;span style=&#34;color: #999999&#34;&gt;diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200&lt;/span&gt;
+&lt;span style=&#34;color: #aaaaaa&#34;&gt;@@ -2831,11 +2831,15 @@&lt;/span&gt;
+ 			.vmux = 1,
+ 			.amux = TV,
+ 			.tv   = 1,
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		},{&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.name = name_comp1,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.vmux = 3,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
+ 			.name = name_svideo,  /* NOT tested */
+ 			.vmux = 8,
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-			.amux = LINE1,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		}},&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		} },&lt;/span&gt;
+ 		.radio = {
+ 			.name   = name_radio,
+ 			.amux   = TV,
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This done, rebuild your module and install it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;make modules modules_install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then reload the module, after unloading it if it was loaded:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rmmod saa7134
+modprobe saa7134
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;watching-tv&#34;&gt;Watching TV&lt;/h2&gt;
+
+&lt;p&gt;I use the card to acquire video from an external Set-Top Box and watch it on
+the PC; for other usage you might need some tweaking. Here are the last steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Plug your STB to the PC using a SCART-Cinch adapter on the STB, and then:&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;for the audio, a Cinch cable between the white and red plugs of the adapter and the audio input of your soundcard&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;for the video, the Cinch-Composite (proprietary) cable provided with the Cinergy card, between the yellow plug of the adapter and the Composite input of the video card&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Install and start &lt;code&gt;tvtime&lt;/code&gt; (&lt;code&gt;xawtv&lt;/code&gt; also works but delivers a less polished image), and check that the image format is on &lt;em&gt;PAL&lt;/em&gt; and not &lt;em&gt;SECAM&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Enjoy!&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exports NFS</title>
+      <link>http://people.via.ecp.fr/~jm/post/exports-nfs/</link>
+      <pubDate>Tue, 24 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/exports-nfs/</guid>
+      <description>
+
+&lt;p&gt;Cette page explique comment faire une installation très simple de partages NFS
+sur son réseau local, avec des systèmes Debian ou Ubuntu.&lt;/p&gt;
+
+&lt;p&gt;NFS (&lt;em&gt;Network File System&lt;/em&gt;) vous permet d&amp;rsquo;exporter des répertoires depuis le
+serveur NFS, et de les monter sur les clients pour qu&amp;rsquo;ils soient vus comme un
+répertoire local.&lt;/p&gt;
+
+&lt;p&gt;Les ports utilisés côté serveur sont le 111 (TCP et UDP) pour portmap, et le
+2049 (TCP et UDP) pour nfsd.&lt;/p&gt;
+
+&lt;h3 id=&#34;serveur&#34;&gt;Serveur&lt;/h3&gt;
+
+&lt;p&gt;On commence par installer le serveur NFS, en root :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install portmap nfs-kernel-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Puis on déclare les répertoires exportés en modifiant &lt;code&gt;/etc/exports&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/srv    192.168.0.0/255.255.255.0(rw,sync,no_subtree_check)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Après chaque modif de &lt;code&gt;/etc/exports&lt;/code&gt;, en root :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;exportfs -ra
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On met ce que l&amp;rsquo;on veut dans &lt;code&gt;/srv&lt;/code&gt;, par exemple :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /srv; ln -s /home .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Vérifier que portmap ne répond pas uniquement sur l&amp;rsquo;interface loopback : dans
+&lt;code&gt;/etc/default/portmap&lt;/code&gt; s&amp;rsquo;il y a une ligne &lt;code&gt;-i 127.0.0.1&lt;/code&gt; la mettre en
+commentaire, puis redémarrer portmap par &lt;code&gt;/etc/init.d/portmap restart&lt;/code&gt;.
+Autrement un scan depuis le client par &lt;code&gt;nmap -p 111,2049 mon_serveur&lt;/code&gt; montre
+que le port 111 est fermé.&lt;/p&gt;
+
+&lt;h3 id=&#34;client&#34;&gt;Client&lt;/h3&gt;
+
+&lt;p&gt;Côté client, il est recommandé d&amp;rsquo;ajouter une ligne en dur dans le fichier
+&lt;code&gt;/etc/hosts&lt;/code&gt; pour ne pas avoir de souci en cas de panne DNS, par exemple :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;192.168.1.15    mon_serveur
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Il faut également le client NFS :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install portmap nfs-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ensuite pour monter le partage, on crée un point de montage puis on monte :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir /mnt/mon_serveur
+mount mon_serveur:/srv /mnt/mon_serveur
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Passerelle ADSL-Wifi</title>
+      <link>http://people.via.ecp.fr/~jm/post/passerelle-adsl-wifi/</link>
+      <pubDate>Sat, 13 Aug 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/passerelle-adsl-wifi/</guid>
+      <description>
+
+&lt;p&gt;La page &lt;a href=&#34;../../post/speedtouch-debian/&#34;&gt;Speedtouch &amp;amp; Debian&lt;/a&gt; expliquait comment connecter
+votre PC à Internet. Mais si vous voulez vous connecter avec un 2nd PC sans
+débrancher le 1er, il faut transformer ce dernier en passerelle. Et pour peu
+que le 2nd PC soit un laptop, ce serait bien pratique de le relier en Wifi !
+Cette page vous explique comment faire tout ça avec une debian (sarge), un
+noyau 2.4 ou 2.6, une carte WLAN NetGear WG311 (802.11g) et les drivers
+madwifi. On peut sans doute l&amp;rsquo;adapter facilement à d&amp;rsquo;autres configurations.&lt;/p&gt;
+
+&lt;p&gt;Matériel nécessaire :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;un 1er PC sous Debian et noyau 2.4 ou 2.6 connecté à Internet via l&amp;rsquo;interface ppp0 (ou autre, par exemple eth0, dans ce cas remplacer ppp0 dans le fichier &lt;code&gt;iptables-start&lt;/code&gt; plus bas) ;&lt;/li&gt;
+&lt;li&gt;une carte Wifi supportant le mode Master avec les drivers madwifi (ici la NetGear WG311) ;&lt;/li&gt;
+&lt;li&gt;un 2nd PC équipé d&amp;rsquo;une carte Wifi.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#rappels-réseau&#34;&gt;Rappels réseau&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#configuration-du-noyau&#34;&gt;Configuration du noyau&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installation-des-drivers-madwifi&#34;&gt;Installation des drivers madwifi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#configuration-de-l-interface-wifi-ath0&#34;&gt;Configuration de l&amp;rsquo;interface Wifi ath0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installation-de-la-passerelle&#34;&gt;Installation de la passerelle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#configuration-du-dhcp&#34;&gt;Configuration du DHCP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#aller-plus-loin&#34;&gt;Aller plus loin&amp;hellip;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;rappels-réseau&#34;&gt;Rappels réseau&lt;/h1&gt;
+
+&lt;p&gt;On va monter un petit réseau ; c&amp;rsquo;est pas très compliqué mais ce sera encore
+plus agréable si vous avez les idées claires sur les notions réseau de base.
+Pour cela n&amp;rsquo;hésitez pas à jeter un oeil sur cette &lt;a href=&#34;http://www.aboutdebian.com/network.htm&#34;&gt;excellente
+page&lt;/a&gt;. Pour ce qui est du principe
+d&amp;rsquo;une passerelle, j&amp;rsquo;ai pour ma part vu la lumière grâce à &lt;a href=&#34;http://formation-debian.via.ecp.fr/firewall.html#fig-nat&#34;&gt;ces
+schémas&lt;/a&gt; (merci alexis !).&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration-du-noyau&#34;&gt;Configuration du noyau&lt;/h1&gt;
+
+&lt;p&gt;En root dans le répertoire où l&amp;rsquo;on a décompressé les sources d&amp;rsquo;un noyau 2.4
+(en 2.6 &lt;em&gt;Networking options&lt;/em&gt; est sous &lt;em&gt;Device Drivers &amp;gt; Networking support &amp;gt;
+Networking support&lt;/em&gt;, et il n&amp;rsquo;y a plus de &lt;em&gt;Socket Filtering&lt;/em&gt; à activer), faire
+un &lt;code&gt;make xconfig&lt;/code&gt; et choisir les options suivantes.&lt;/p&gt;
+
+&lt;h2 id=&#34;networking-options&#34;&gt;Networking options&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;        [y] Packet socket: mmapped IO
+        [y] Network packet filtering (replaces ipchains)
+        [y] Socket Filtering
+        IP: Netfilter Configuration
+            [m] Connection tracking (required for masq/NAT)
+            [m] FTP protocol support
+            [m] IRC protocol support
+            [m] IP tables support (required for filtering/masq/NAT)
+            [m] netfilter MARK match support
+            [m] Multiple port match support
+            [m] Connection state match support
+            [m] Packet filtering
+            [m] REJECT target support
+            [m] Full NAT
+            [m] MASQUERADE target support
+            [m] Packet mangling
+            [m] LOG target support
+            [m] TCPMSS target support
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;network-device-support&#34;&gt;Network device support&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;        Wireless LAN (non-hamradio)
+            [y] Wireless LAN (non-hamradio)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cela fait, compiler le noyau et les modules, et les installer (&lt;code&gt;make dep clean
+bzImage modules modules_install&lt;/code&gt;, ou bien en 2.6 &lt;code&gt;make; make modules_install&lt;/code&gt;
+et copie des fichiers bzImage, voire System.map et .config, enfin lilo ou
+équivalent).&lt;/p&gt;
+
+&lt;p&gt;Rebooter avec ce beau noyau.&lt;/p&gt;
+
+&lt;h1 id=&#34;installation-des-drivers-madwifi&#34;&gt;Installation des drivers madwifi&lt;/h1&gt;
+
+&lt;p&gt;La carte doit être insérée dans un port PCI et apparaître avec un &lt;code&gt;lspci&lt;/code&gt;
+(pour ma part j&amp;rsquo;ai alors une ligne &lt;code&gt;0000:00:09.0 Ethernet controller: Atheros
+Communications, Inc. AR5212 802.11abg NIC (rev 01)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Le Wifi 802.11g (qui permet un débit théorique de 54 Mbps, contre 11 Mbps avec
+la norme 802.11b) n&amp;rsquo;est pas encore supporté en natif dans le noyau linux ;
+heureusement des projets parallèles permettent néanmoins d&amp;rsquo;exploiter les
+chipsets haut débit. Les deux principaux sont
+&lt;a href=&#34;http://sourceforge.net/projects/madwifi&#34;&gt;madwifi&lt;/a&gt; (chipsets Atheros) et
+&lt;a href=&#34;http://www.prism54.org/&#34;&gt;Prism54&lt;/a&gt; (chipsets Prism). Une recherche sur Google
+montre que des gens sont parvenus à faire fonctionner la WG311 avec les deux
+drivers, mais le plus adapté est le madwifi (et il permet le mode &lt;em&gt;Master&lt;/em&gt;,
+cf. plus loin).&lt;/p&gt;
+
+&lt;p&gt;En root dans un répertoire où les sources des drivers seront stockés sous
+&lt;code&gt;madwifi/&lt;/code&gt; (par exemple &lt;code&gt;~root&lt;/code&gt;), faire :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/madwifi co madwifi
+cd madwifi
+make
+make install
+modprobe ath_pci
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour que la prochaine fois le chargement du module soit automatique, rajouter
+dans &lt;code&gt;/etc/modutils/aliases&lt;/code&gt; une ligne &lt;code&gt;alias ath0 ath_pci&lt;/code&gt; puis exécuter
+&lt;code&gt;update-modules&lt;/code&gt; pour mettre à jour &lt;code&gt;/etc/modules.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration-de-l-interface-wifi-ath0&#34;&gt;Configuration de l&amp;rsquo;interface Wifi ath0&lt;/h1&gt;
+
+&lt;p&gt;Il faut tout d&amp;rsquo;abord installer les utilitaires wireless (not. &lt;code&gt;iwpriv&lt;/code&gt; et
+&lt;code&gt;iwconfig&lt;/code&gt;) : &lt;code&gt;apt-get install wireless-tools&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ensuite on complète le &lt;code&gt;/etc/network/interfaces&lt;/code&gt; :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Interface WLAN : cf. iwconfig(8)&lt;/span&gt;
+auto ath0
+iface ath0 inet static
+	address		192.168.0.1
+	netmask		255.255.255.0
+	pre-up /sbin/iwpriv ath0 mode 3
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a&lt;/span&gt;
+	wireless_essid	Nom-du-reseau
+	wireless_mode	Master
+	wireless_channel	9
+	wireless_key	off
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;wireless_mode Master&lt;/code&gt; indique à la carte de fonctionner en mode &lt;em&gt;Access Point&lt;/em&gt; (&lt;em&gt;HostAP&lt;/em&gt;), comme les bornes que l&amp;rsquo;on trouve dans le commerce. La norme Wifi spécifie un autre mode permettant à deux équipements de se parler, c&amp;rsquo;est le mode &lt;em&gt;Ad-Hoc&lt;/em&gt; destiné par exemple à l&amp;rsquo;interconnexion de laptops lors d&amp;rsquo;une réunion, mais ce mode est moins fiable et moins performant, alors puisque l&amp;rsquo;on peut s&amp;rsquo;en passer&amp;hellip;&lt;/li&gt;
+&lt;li&gt;dans un 1er temps, &lt;code&gt;wireless_key off&lt;/code&gt; permet de désactiver le contrôle d&amp;rsquo;accès ; quand le réseau fonctionnera dans ce mode on pourra par exemple remplacer cette ligne par &lt;code&gt;wireless_key s:abcdefghijklm&lt;/code&gt; et, si le laptop est un Windows, entrer dans la section &lt;em&gt;Clefs partagées&lt;/em&gt; de l&amp;rsquo;utilitaire wireless le mot de passe &lt;em&gt;abcdefghijklm&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On peut maintenant monter l&amp;rsquo;interface : &lt;code&gt;ifup ath0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;iwconfig ath0&lt;/code&gt; permet d&amp;rsquo;avoir des infos sur l&amp;rsquo;état de la carte Wifi. Et si le
+2nd poste scanne les fréquences il doit voir apparaître le réseau &lt;em&gt;Nom-du-
+reseau&lt;/em&gt;, sans encryption, utilisant le canal 9. On doit même pouvoir s&amp;rsquo;y
+connecter et faire un &lt;code&gt;ping 192.168.0.1&lt;/code&gt;. Mais on ne peut pas encore aller sur
+Internet&amp;hellip;&lt;/p&gt;
+
+&lt;h1 id=&#34;installation-de-la-passerelle&#34;&gt;Installation de la passerelle&lt;/h1&gt;
+
+&lt;p&gt;Notre passerelle utilisera le mécanisme de &lt;em&gt;translation d&amp;rsquo;adresse réseau&lt;/em&gt;
+(&lt;em&gt;NAT&lt;/em&gt; en Anglais, &lt;em&gt;masquerading&lt;/em&gt; en Linuxien), qui est implémenté par le
+programme &lt;code&gt;iptables&lt;/code&gt; (qui est aussi ze firewall de référence, mais on ne
+s&amp;rsquo;attardera pas ici sur cette partie). On installe donc iptables : &lt;code&gt;apt-get
+install iptables&lt;/code&gt;. Puis on fait un fichier d&amp;rsquo;initialisation des tables de
+filtrage que l&amp;rsquo;on place sous &lt;code&gt;/etc/network/if-pre-up.d/&lt;/code&gt; sans lui donner de
+suffixe &lt;code&gt;.sh&lt;/code&gt;, de sorte qu&amp;rsquo;il sera appelé par le &lt;code&gt;run-parts&lt;/code&gt; avant le montage
+de l&amp;rsquo;interface lo (mais si on veut tester sans rebooter on peut très bien le
+lancer à la main, voire faire un &lt;code&gt;/etc/init.d/networking restart&lt;/code&gt;) :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/network/if-pre-up.d/iptables-start&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Initialise les règles de filtrage iptables&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Remise à zéro des règles&lt;/span&gt;
+iptables -F
+iptables -t nat -F
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Politiques par défaut&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions entrantes&lt;/span&gt;
+iptables -P INPUT ACCEPT
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions destinées à être forwardées&lt;/span&gt;
+iptables -P FORWARD ACCEPT
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions sortantes&lt;/span&gt;
+iptables -P OUTPUT ACCEPT
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de filtrage&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Pas de filtrage&lt;/span&gt;
+iptables -A INPUT -j ACCEPT
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles pour le partage de connexion (le NAT)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le système fait serveur NAT ; l&amp;#39;interface extérieure est ppp0&lt;/span&gt;
+iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Si la connexion que vous partagez est une connexion ADSL, vous&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# serez probablement confronté au fameux problème du MTU. En résumé,&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le problème vient du fait que le MTU de la liaison entre votre&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# fournisseur d&amp;#39;accès et le serveur NAT est un petit peu inférieur au&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# sont derrière le NAT. Pour résoudre ce problème :&lt;/span&gt;
+iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS -o ppp0 --clamp-mss-to-pmtu
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de port forwarding&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Décommentez la ligne suivante pour que les requêtes TCP reçues sur&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le port 80 de l&amp;#39;interface eth0 soient forwardées à la machine dont&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# l&amp;#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# forwardée au client)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Là encore, lorsque le réseau fonctionnera, ce sera une bonne idée de le
+sécuriser en rajoutant dans ce fichier des règles un peu moins laxistes.&lt;/p&gt;
+
+&lt;p&gt;NB : si iptables refuse de démarrer en prétextant des &lt;em&gt;unresolved symbols&lt;/em&gt; à
+gogo, recompiler le noyau en commençant par un &lt;code&gt;make mrproper&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enfin on n&amp;rsquo;oublie surtout pas&lt;/strong&gt; d&amp;rsquo;activer l&amp;rsquo;ip_forwarding dans le noyau : &lt;code&gt;echo 1 &amp;gt;| /proc/sys/net/ipv4/ip_forward&lt;/code&gt;, et pour que ce soit fait à chaque démarrage on rajoute dans &lt;code&gt;/etc/sysctl.conf&lt;/code&gt; une ligne &lt;code&gt;net/ipv4/ip_forward=1&lt;/code&gt; (Debian fournit désormais un fichier &lt;code&gt;/etc/network/options&lt;/code&gt;; s&amp;rsquo;il existe sur votre système contentez-vous plutôt de changer &lt;code&gt;ip_forward=no&lt;/code&gt; à &lt;code&gt;yes&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Voilà, si la carte est bien installée sur le laptop on doit pouvoir pinguer
+une IP extérieure ; si ça ne fonctionne pas on peut regarder ce qui transite
+sur les interfaces avec un &lt;code&gt;tcpdump -i ath0&lt;/code&gt; et un &lt;code&gt;tcpdump -i ppp0&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration-du-dhcp&#34;&gt;Configuration du DHCP&lt;/h1&gt;
+
+&lt;p&gt;Le problème c&amp;rsquo;est qu&amp;rsquo;à moins de configurer en dur les serveurs DNS sur le
+laptop, on ne peut atteindre que des IP, pas des noms genre &lt;code&gt;www.cnedra.org&lt;/code&gt;.
+La solution c&amp;rsquo;est d&amp;rsquo;installer un serveur DHCP qui enverra au client la liste
+des serveurs DNS de notre FAI (ici codée en dur avec ceux de Wanadoo ; on
+pourrait imaginer un mécanisme de recopie à partir du resolv.conf lorsque ppp0
+est montée&amp;hellip;) : &lt;code&gt;apt-get install dhcp3-server&lt;/code&gt;, puis on édite
+&lt;code&gt;/etc/dhcp3/dhcpd.conf&lt;/code&gt; :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/dhcp3/dhcpd.conf&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Config du serveur DHCP de l&amp;#39;ISC (package &amp;#39;dhcp3-server&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# cf. dhcpd.conf(5)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Options globales&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# (s&amp;#39;appliqueront par défaut à tous les sous-réseaux)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Nom de domaine&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#option domain-name &amp;quot;exemple.org&amp;quot;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresses des serveurs DNS (séparées par une virgule)&lt;/span&gt;
+option domain-name-servers 80.10.246.1, 80.10.246.132;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Durée du bail en secondes&lt;/span&gt;
+default-lease-time 6000;
+max-lease-time 6000;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous&lt;/span&gt;
+authoritative;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration des sous-réseaux et des machines&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration du sous-réseau 192.168.0.0/255.255.255.0&lt;/span&gt;
+subnet 192.168.0.0 netmask 255.255.255.0
+&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresse du routeur&lt;/span&gt;
+	option routers 192.168.0.1;
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Plage d&amp;#39;adresses à attribuer pour les machines non déclarées&lt;/span&gt;
+	range 192.168.0.100 192.168.0.200;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#	deny unknown-clients;&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# La déclaration d&amp;#39;une machine permet de lui attribuer une adresse IP fixe&lt;/span&gt;
+host MonLaptop
+&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
+  hardware ethernet 00:0b:cd:5a:fb:43;	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# @MAC de la carte Wifi du laptop&lt;/span&gt;
+  fixed-address 192.168.0.12;
+&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;NB : là encore pour sécuriser on pourrait retirer le commentaire devant &lt;code&gt;deny
+unknown-clients&lt;/code&gt;, mais cela rendrait moins souple l&amp;rsquo;extension du réseau.&lt;/p&gt;
+
+&lt;p&gt;Voilà, maintenant si on renouvelle la config réseau du laptop (sous Windows :
+&lt;code&gt;ipconfig /renew&lt;/code&gt;, puis &lt;code&gt;ipconfig /all&lt;/code&gt; pour voir la nouvelle config) les
+serveurs DNS devraient être bien configurés, et l&amp;rsquo;on pourra accéder à
+&lt;code&gt;www.cnedra.org&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;aller-plus-loin&#34;&gt;Aller plus loin&amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;On peut vouloir accéder à un VPN depuis notre laptop ; dans ce cas commencer
+par essayer d&amp;rsquo;établir la connexion comme si l&amp;rsquo;on était branché directement. En
+effet si le protocole utilisé par le VPN est L2TP, notre passerelle linux ne
+nécessite aucune modification ; en revanche il est probable si le laptop est
+sous Windows 2000 qu&amp;rsquo;il faudra appliquer un
+&lt;a href=&#34;http://support.microsoft.com/default.aspx?scid=kb;en-us;818043&#34;&gt;patch&lt;/a&gt;
+permettant au L2TP de traverser le NAT).&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Voilà, on a créé notre Access-Point Wifi ; il faut maintenant bien sûr faire
+attention aux problèmes de sécurité qui ne sont qu&amp;rsquo;évoqués dans cette page ;
+cela dit il n&amp;rsquo;est pas interdit de trouver charmante la perspective d&amp;rsquo;un
+maillage d&amp;rsquo;Access-Points ouverts qui couvrirait nos agglomérations. À bon
+entendeur&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SpeedTouch &amp; Debian</title>
+      <link>http://people.via.ecp.fr/~jm/post/speedtouch-debian/</link>
+      <pubDate>Sun, 26 Jun 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/speedtouch-debian/</guid>
+      <description>
+
+&lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
+
+&lt;p&gt;Cette page explique comment installer le modem ADSL Alcatel &lt;em&gt;Speed Touch USB&lt;/em&gt;
+sous Linux avec une distribution Debian. En effet, ayant eu à réaliser cette
+installation, j&amp;rsquo;ai perdu quelques heures à essayer d&amp;rsquo;utiliser, par exemple, le
+package &lt;code&gt;kernel-patch-2.4-speedtouch&lt;/code&gt;, ou encore à chercher quoi mettre dans
+mon &lt;code&gt;/etc/network/interfaces&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pas besoin ici de patcher le kernel : on va juste recompiler le noyau,
+installer un ou deux packages, récupérer un fichier et éditer quelques
+fichiers de configuration.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#configuration-du-noyau&#34;&gt;Configuration du noyau&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installation-des-pilotes-du-modem-et-du-microcode&#34;&gt;Installation des pilotes du modem et du microcode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#configuration&#34;&gt;Configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#connexion-et-automatisation&#34;&gt;Connexion et automatisation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Les noyaux 2.6 à partir du 2.6.10 intègrent un mécanisme de chargement de
+firmware plus rapide et plus fiable que _modem_run_ : plus la peine
+d&amp;rsquo;installer le package &lt;code&gt;speedtouch&lt;/code&gt;, il faut séparer le fichier &lt;code&gt;mgmt.o&lt;/code&gt; en 2
+(le chargeur et le firmware) grâce à l&amp;rsquo;utilitaire firmware-extractor (cf.
+Google), placer les fichiers sous &lt;code&gt;/usr/local/lib/firmware/&lt;/code&gt;, et enfin comme
+on fait du pppoatm, créer un fichier &lt;code&gt;/etc/modprobe.d/speedtouch&lt;/code&gt; contenant la
+ligne suivante :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;install speedtch modprobe pppoatm; modprobe --ignore-install speedtch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cela a pour effet de remplacer le chargement du module speedtouch par la ligne
+voulue (il faudra bien sûr avoir compilé le module Speedtouch avec le noyau).&lt;/p&gt;
+
+&lt;p&gt;La configuration de l&amp;rsquo;interface &lt;code&gt;ppp0&lt;/code&gt; devient alors simplement :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;iface ppp0 inet ppp
+    provider    adsl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Il faut également modifier le fichier &lt;code&gt;peers/adsl&lt;/code&gt; pour supprimer la ligne
+&lt;code&gt;pty ...&lt;/code&gt; et à la place rajouter à la fin du fichier :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;plugin  pppoatm.so
+8.35
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Il semble que le seul moyen pour rouvrir la session PPP après la coupure qui a
+lieu toutes les 24h soit de mettre un &lt;code&gt;pon adsl&lt;/code&gt; dans la crontab (j&amp;rsquo;ai essayé
+un pon sur le post-down de ppp0, ainsi que les paramètres holdoff et lcp-
+restart du fichier de peer, mais plouf).&lt;/p&gt;
+
+&lt;p&gt;Enfin le paramétrage en &lt;code&gt;auto&lt;/code&gt; de l&amp;rsquo;interface pour la monter au démarrage ne
+fonctionne pas (il intervient sans doute trop tôt par rapport au chargement du
+firmware) ; à la place on peut modifier &lt;code&gt;/etc/init.d/ppp&lt;/code&gt; (voici &lt;a href=&#34;../../static/ppp&#34;&gt;mon
+fichier&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;configuration-du-noyau&#34;&gt;Configuration du noyau&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Il est possible que j&amp;rsquo;oublie ici quelques fonctions déjà activées chez moi et
+dont je n&amp;rsquo;ai donc pas ressenti le manque.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans le répertoire où l&amp;rsquo;on a décompressé les sources d&amp;rsquo;un noyau 2.4, faire un
+&lt;code&gt;make xconfig&lt;/code&gt; et choisir les options suivantes.&lt;/p&gt;
+
+&lt;h3 id=&#34;support-usb&#34;&gt;Support USB&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;USB support &amp;gt; Support for USB [M]&lt;/li&gt;
+&lt;li&gt;USB support &amp;gt; Preliminary USB device filesystem [Y]&lt;/li&gt;
+&lt;li&gt;USB support &amp;gt; UHCI (Intel PIIX4, VIA, &amp;hellip;) support [M]&lt;br /&gt;
+&lt;em&gt;Ici la doc de ma carte-mère indiquait un bus USB compatible Intel Universal
+HCI ; il est possible que vous ayez plutôt besoin du module OHCI, dans le
+doute compilez les deux, ça ne coûte rien.&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;autres-fonctions-à-activer&#34;&gt;Autres fonctions à activer&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Code maturity level options &amp;gt; Prompt for development and/or incomplete code/drivers [Y]&lt;/li&gt;
+&lt;li&gt;Networking options &amp;gt; Asynchronous Transfer Mode (ATM)(EXPERIMENTAL) [Y]&lt;br /&gt;
+&lt;em&gt;Le support ATM est nécessaire pour faire du PPP over ATM (pppoa) ; il est également possible de faire du PPP over Ethernet (pppoe), mais il paraît que c&amp;rsquo;est moins bien.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Network device support &amp;gt; PPP (point-to-point protocol) support [M]&lt;/li&gt;
+&lt;li&gt;Network device support &amp;gt; PPP support for sync tty ports [M]&lt;/li&gt;
+&lt;li&gt;Character devices &amp;gt; HDLC line discipline support [M]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cela fait, compiler le noyau et les modules, et les installer (&lt;code&gt;make dep clean
+bzImage&lt;/code&gt;, puis &lt;code&gt;make modules&lt;/code&gt; et &lt;code&gt;make modules_install&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Rajouter &lt;code&gt;usb-uhci&lt;/code&gt; (ou &lt;code&gt;usb-ohci&lt;/code&gt; si c&amp;rsquo;est celui-ci que vous avez choisi,
+voire les deux si vous ne savez pas) dans &lt;code&gt;/etc/modules&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour achever l&amp;rsquo;installation du support USB, rajouter la ligne suivante dans
+&lt;code&gt;/etc/fstab&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;none            /proc/bus/usb   usbdevfs        default         0       0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Avec mon 2.4.19, le module &lt;code&gt;n_hdlc&lt;/code&gt; n&amp;rsquo;était pas correctement installé :
+rajouter &lt;code&gt;alias tty-ldisc-13 n_hdlc&lt;/code&gt; dans &lt;code&gt;/etc/modutils/ppp&lt;/code&gt; puis faire
+&lt;code&gt;update-modules&lt;/code&gt; pour proprement mettre à jour &lt;code&gt;/etc/modules.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Rebootez avec votre beau noyau tout neuf ; &lt;code&gt;/proc/bus/usb&lt;/code&gt; doit contenir un
+fichier virtuel &lt;code&gt;devices&lt;/code&gt;, sur lequel vous pouvez faire un &lt;code&gt;cat&lt;/code&gt;. Si votre
+SpeedTouch est branché, il y a une ligne &lt;code&gt;S: Product=Speed Touch USB&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation-des-pilotes-du-modem-et-du-microcode&#34;&gt;Installation des pilotes du modem et du microcode&lt;/h2&gt;
+
+&lt;p&gt;Là il faut d&amp;rsquo;une part les pilotes, d&amp;rsquo;autre part le microcode (&lt;em&gt;firmware&lt;/em&gt;) du
+modem. J&amp;rsquo;imagine que le microcode sert d&amp;rsquo;interface entre le matériel et les
+pilotes. Pour ces derniers, il existe d&amp;rsquo;une part les pilotes propriétaires
+Alcatel (c&amp;rsquo;est à leur utilisation qu&amp;rsquo;est destiné le package &lt;code&gt;kernel-
+patch-2.4-spedtouch&lt;/code&gt;), d&amp;rsquo;autre part les pilotes OpenSource (leur page est
+&lt;a href=&#34;http://speedtouch.sourceforge.net/&#34;&gt;ici&lt;/a&gt;) initialement développés par Benoît
+Papillault, censément plus performants, plus stables, et forcément plus
+évolutifs.&lt;/p&gt;
+
+&lt;h3 id=&#34;pilotes&#34;&gt;Pilotes&lt;/h3&gt;
+
+&lt;p&gt;Ce sont donc ces derniers que nous allons utiliser, d&amp;rsquo;autant qu&amp;rsquo;en attendant
+le package debian de la dernière version, celui de l&amp;rsquo;avant-dernière fonctionne
+sans problème : &lt;a href=&#34;http://prdownloads.sourceforge.net/speedtouch/speedtouch_1.0-1.1rc2-1_i386.deb?download&#34;&gt;speedtouch_1.0-1.1rc2-1_i386.deb&lt;/a&gt;. Télécharger et
+installer ce package (&lt;code&gt;dpkg --install speedtouch_1.0-1.1rc2-1_i386.deb&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;microcode&#34;&gt;Microcode&lt;/h3&gt;
+
+&lt;p&gt;Si vous avez déjà installé le modem sous Windows, vous avez un fichier
+&lt;code&gt;[Partition Windows]/windows/system/alcaudsl.sys&lt;/code&gt;. Copiez-le sous le nom
+&lt;code&gt;mgmt.o&lt;/code&gt; dans le répertoire &lt;code&gt;/usr/local/share/speedtouch/&lt;/code&gt; que vous aurez créé
+(vous pouvez aussi le laisser en place, mais vous devrez adapter la suite de
+la configuration).&lt;/p&gt;
+
+&lt;p&gt;Si vous n&amp;rsquo;avez rien installé mais que vous avez les pilotes sous la main, vous
+devez pouvoir y trouver ce fichier, par exemple sur le CD du pack Wanadoo
+Extense : &lt;code&gt;[CD]/Datas/drivers/SpeedTouch/Driver/alcaudsl.sys&lt;/code&gt;. Copiez-le comme
+au paragraphe précédent.&lt;/p&gt;
+
+&lt;p&gt;Sinon, allez sur le site d&amp;rsquo;Alcatel
+&lt;a href=&#34;https://web.archive.org/web/20050610013324/http://www.speedtouchdsl.com/supuser.htm&#34;&gt;ici&lt;/a&gt;, choisissez &lt;em&gt;Driver Upgrade
+for Linux&lt;/em&gt;, fournissez les infos demandées, puis &lt;em&gt;Continue&lt;/em&gt;, téléchargez la
+&lt;em&gt;Binary release&lt;/em&gt; (&lt;code&gt;speedmgmt.tar.gz&lt;/code&gt;), décompressez le fichier, et copiez
+&lt;code&gt;mgmt.o&lt;/code&gt; dans le répertoire &lt;code&gt;/usr/local/share/speedtouch/&lt;/code&gt; que vous aurez
+créé.&lt;/p&gt;
+
+&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
+
+&lt;h3 id=&#34;ppp&#34;&gt;PPP&lt;/h3&gt;
+
+&lt;p&gt;Si ce n&amp;rsquo;est pas déjà fait installez le package &lt;code&gt;ppp&lt;/code&gt;. Puis créez un fichier
+&lt;code&gt;/etc/ppp/peers/adsl&lt;/code&gt; ainsi fait, où vous remplacerez xxxxxxx par votre
+identifiant de connexion et, si vous n&amp;rsquo;êtes pas chez Wanadoo (France Télécom
+Interactive = fti), fti/xxxxxxx@fti par xxxxxxx@clubadsl1 pour Club-Internet,
+xxxxxxx@nerim.fsa pour Nerim, etc. :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# See pppd(8) for details
+
+debug
+kdebug 1
+noipdefault
+defaultroute
+pty &amp;quot;/usr/sbin/pppoa3 -m 1 -c -vpi 8 -vci 35&amp;quot;
+sync
+user &amp;quot;fti/xxxxxxx@fti&amp;quot;
+noauth
+noaccomp
+nopcomp
+noccp
+novj
+holdoff 4
+persist
+maxfail 25
+usepeerdns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ensuite, stockez votre mot de passe dans &lt;code&gt;/etc/ppp/chap-secrets&lt;/code&gt; (CHAP est le
+protocole utilisé par Wanadoo ; si vous avez un autre FAI dont vous ignorez le
+protocole éditez de même &lt;code&gt;/etc/ppp/pap-secrets&lt;/code&gt;, pour le protocole PAP utilisé
+par exemple par Club-Internet), qui doit ressembler à ceci (remplacez
+fti/xxxxxxx@fti par la même chose que ci-dessus et yyyyyyy par votre mot de
+passe de connexion) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Secrets for authentication using CHAP
+# client        server  secret                  IP addresses
+fti/xxxxxxx@fti *       yyyyyyy                 *
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;réseau&#34;&gt;Réseau&lt;/h3&gt;
+
+&lt;p&gt;Le &lt;code&gt;usepeerdns&lt;/code&gt; de la config de ppp ci-dessus fait qu&amp;rsquo;à la connexion
+&lt;code&gt;/etc/resolv.conf&lt;/code&gt; est renommé en &lt;code&gt;/etc/resolv.conf.ppp.bak&lt;/code&gt; et remplacé par
+un fichier récupéré chez l&amp;rsquo;hébergeur, qui contient les IP des serveurs DNS.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;En cas de problème de DNS (messages _Hôte inconnu&lt;/em&gt; à répétition), effacer le
+&lt;code&gt;/etc/resolv.conf&lt;/code&gt; existant éventuellement, puis créer un lien vers le fichier
+&lt;code&gt;/etc/ppp/resolv.conf&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ln -s /etc/ppp/resolv.conf /etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(ne pas oublier de donner les droits de passage &amp;ndash;x à tous les utilisateurs
+sur &lt;code&gt;/etc/ppp/&lt;/code&gt;)_&lt;/p&gt;
+
+&lt;p&gt;Autre fichier important, &lt;code&gt;/etc/network/interfaces&lt;/code&gt;. Vous n&amp;rsquo;avez pas de carte
+réseau, donc pas d&amp;rsquo;interface eth0 (à la place vous avez ppp0, configuré
+ailleurs), mais il faut toujours une interface de loopback. Bref utilisez ce
+fichier :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+
+# The loopback interface
+auto lo
+iface lo inet loopback
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;connexion-et-automatisation&#34;&gt;Connexion et automatisation&lt;/h2&gt;
+
+&lt;p&gt;Voilà, tout est prêt. Commencez par télécharger le microcode sur le modem :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;modem_run -f /usr/local/share/speedtouch/mgmt.o
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La lampe de gauche est verte et fixe ; celle de droite est verte et clignote.
+Ne vous inquiétez pas si un message du genre &lt;code&gt;usb_control/bulk_msg: timeout /
+usbdevfs: USBDEVFS_BULK failed etc.&lt;/code&gt; apparaît. Au bout d&amp;rsquo;une trentaine de
+secondes la lampe de droite doit  être verte et fixe également. Sinon vérifiez
+que votre ligne téléphonique fonctionne (en décrochant le téléphone) puis que
+votre ligne ADSL a bien été ouverte (en appelant FT).&lt;/p&gt;
+
+&lt;p&gt;Ensuite, connectez-vous :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pppd call adsl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour voir ce qui se passe, n&amp;rsquo;hésitez pas à surveiller votre syslog (&lt;code&gt;tail -f
+/var/log/syslog&lt;/code&gt;) ; si vous recevez des paquets (ça doit prendre 2 secondes)
+c&amp;rsquo;est bon, vous pouvez surfer (&lt;code&gt;ifconfig ppp0&lt;/code&gt; vous fournit des infos sur la
+connexion). Sinon le syslog doit justement vous indiquer où est le problème.&lt;/p&gt;
+
+&lt;p&gt;Il reste simplement à automatiser le démarrage au boot en rajoutant dans
+&lt;code&gt;/etc/network/interfaces&lt;/code&gt; (on peut ajuster le &lt;code&gt;sleep 20&lt;/code&gt;, le tout étant
+qu&amp;rsquo;après un &lt;code&gt;ifdown ppp0; ifup ppp0&lt;/code&gt;, la connexion soit encore établie) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Connexion ADSL
+auto ppp0
+iface ppp0 inet ppp
+    provider    adsl
+    pre-up      ps -e | grep -q modem_run || modem_run -i 3 -n 3 -f /usr/local/share/speedtouch/mgmt.o
+    post-down   sleep 20; ifup ppp0 &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JOnAS</title>
+      <link>http://people.via.ecp.fr/~jm/post/jonas/</link>
+      <pubDate>Sat, 25 Sep 2004 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/jonas/</guid>
+      <description>
+
+&lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
+
+&lt;p&gt;Cette page vous explique comment installer le Serveur d&amp;rsquo;Application JOnAS sur
+une Debian &lt;em&gt;Sarge&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#pré-requis&#34;&gt;Pré-requis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installation&#34;&gt;Installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#démarrage&#34;&gt;Démarrage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#connexion-mysql&#34;&gt;Connexion MySQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#création-d-un-groupe&#34;&gt;Création d&amp;rsquo;un groupe&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#interfaçage-avec-eclipse&#34;&gt;Interfaçage avec Eclipse&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#et-après&#34;&gt;Et après&amp;hellip;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;pré-requis&#34;&gt;Pré-requis&lt;/h2&gt;
+
+&lt;p&gt;JOnAS est livré lié au moteur de servlets Tomcat, mais il a également besoin
+du JDK (Java Development Kit), d&amp;rsquo;Ant (&lt;em&gt;make&lt;/em&gt; basé sur Java) et de la librairie
+BCEL qui permet à Ant de compiler JOnAS.&lt;/p&gt;
+
+&lt;p&gt;Pour le JDK, le mieux est de récupérer le package debian de Blackdown ; pour
+cela ajouter la ligne suivante dans &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deb ftp://ftp.easynet.be/blackdown/debian testing main non-free
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;puis après un &lt;code&gt;apt-get update&lt;/code&gt; installer le package &lt;code&gt;j2sdk1.4&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Les autres composants cités sont dans la debian : &lt;code&gt;ant&lt;/code&gt; et &lt;code&gt;libbcel-java&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;JOnAS est diffusé par son éditeur ObjectWeb sous licence LGPL, moins
+restrictive que la GPL.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;on récupère le .tgz de jonas+tomcat sur &lt;a href=&#34;http://jonas.ow2.org/xwiki/bin/view/Main/Downloads&#34;&gt;http://jonas.ow2.org/xwiki/bin/view/Main/Downloads&lt;/a&gt; (&lt;code&gt;jonas4.1-tomcat5.0.25.tgz&lt;/code&gt; lors de l&amp;rsquo;écriture de cette page) ;&lt;/li&gt;
+&lt;li&gt;on le décompresse sous &lt;code&gt;/usr/local/&lt;/code&gt; ; mettons que le répertoire ainsi créé est &lt;code&gt;JONAS_4_1_2/&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;on crée un lien symbolique sous &lt;code&gt;/usr/local/&lt;/code&gt; : &lt;code&gt;ln -s JONAS_4_1_2 jonas&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;sous &lt;code&gt;/usr/local/jonas/&lt;/code&gt;, on lance &lt;code&gt;ant&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;on ajoute dans &lt;code&gt;/etc/zsh/zshenv&lt;/code&gt; (si l&amp;rsquo;on utilise zsh) les lignes suivantes :
+&lt;pre&gt;export JONAS_ROOT=&amp;ldquo;/usr/local/jonas&amp;rdquo;
+export PATH=&amp;ldquo;$JONAS_ROOT/bin/unix:$PATH&amp;rdquo;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;démarrage&#34;&gt;Démarrage&lt;/h2&gt;
+
+&lt;p&gt;Dans un shell, taper &lt;code&gt;jonas start&lt;/code&gt;, puis avec un browser ouvrir
+&lt;a href=&#34;http://localhost:9000/ &#34;&gt;http://localhost:9000/ &lt;/a&gt;; normalement l&amp;rsquo;écran d&amp;rsquo;accueil de JOnAS doit
+apparaître.&lt;/p&gt;
+
+&lt;h2 id=&#34;connexion-mysql&#34;&gt;Connexion MySQL&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;On suppose ici que MySQL est déjà installé.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Arrêter JOnAS : `jonas stop&lt;/p&gt;
+
+&lt;p&gt;Installer le package &lt;code&gt;libmysql-java&lt;/code&gt;, modifier dans
+&lt;code&gt;$JONAS_ROOT/bin/unix/config_env&lt;/code&gt; la ligne &lt;code&gt;MYSQL_CLASSES&lt;/code&gt; :
+&lt;code&gt;MYSQL_CLASSES=/usr/share/java/mysql.jar&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;S&amp;rsquo;il y a une ligne &lt;code&gt;skip-networking&lt;/code&gt; dans &lt;code&gt;/etc/mysql/my.cnf&lt;/code&gt; (par défaut sous
+Debian), la mettre en commentaire et redémarrer MySQL ; sinon JOnAS verra
+simplement &lt;em&gt;Connection refused&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dans MySQL, créer un utilisateur &lt;code&gt;jonas@_&amp;lt;hostname&amp;gt;_&lt;/code&gt;, puis faire un &lt;code&gt;create
+database db_jonas;&lt;/code&gt; et un &lt;code&gt;grant all on db_jonas.* to jonas@_..._;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Éditer &lt;code&gt;$JONAS_ROOT/conf/MySQL.properties&lt;/code&gt;, vérifier le nom de la base et
+ajouter le username (&lt;code&gt;jonas&lt;/code&gt;) et le password (à choisir).&lt;/p&gt;
+
+&lt;p&gt;Éditer &lt;code&gt;jonas.properties&lt;/code&gt; et à la ligne &lt;code&gt;jonas.service.dbm.datasources&lt;/code&gt;
+remplacer &lt;code&gt;HSQL1&lt;/code&gt; par &lt;code&gt;MySQL&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lancer un &lt;code&gt;jonas check&lt;/code&gt; pour vérifier que la syntaxe est bonne. Pour
+réellement tester la connexion avec MySQL il faudra exécuter l&amp;rsquo;exemple &lt;em&gt;eb&lt;/em&gt;
+sous &lt;code&gt;$JONAS_ROOT/examples/src/eb/&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;création-d-un-groupe&#34;&gt;Création d&amp;rsquo;un groupe&lt;/h2&gt;
+
+&lt;p&gt;Jusqu&amp;rsquo;ici on lançait Jonas en root. Comme on veut pouvoir le contrôler depuis
+Eclipse (section suivante&amp;hellip;), qu&amp;rsquo;il ne serait pas judicieux de lancer en
+root, il faut donner aux développeurs les droits sur Jonas. On crée donc un
+groupe :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;groupadd jonas
+cd $JONAS_ROOT
+chown -R .jonas *
+chmod -R g+w *
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On rajoute ensuite l&amp;rsquo;utilisateur &lt;code&gt;lambda&lt;/code&gt; dans ce groupe : &lt;code&gt;addgroup lambda
+jonas&lt;/code&gt; ; il pourra désormais lui aussi jouer à &lt;code&gt;jonas start&lt;/code&gt;. Attention, son
+appartenance ne sera reconnue que lorsqu&amp;rsquo;il se sera relogué. En particulier,
+si l&amp;rsquo;on est dans une session X, il faut la fermer puis rouvrir.&lt;/p&gt;
+
+&lt;h2 id=&#34;interfaçage-avec-eclipse&#34;&gt;Interfaçage avec Eclipse&lt;/h2&gt;
+
+&lt;p&gt;Eclipse est l&amp;rsquo;IDE d&amp;rsquo;IBM. Il est dans la Debian avec le package &lt;code&gt;eclipse-sdk&lt;/code&gt;
+&lt;em&gt;(il s&amp;rsquo;agit à cette heure de la version 2.1 alors que la 3.0 est sortie, mais
+de toute façon cette dernière version connaît des problèmes avec le plugin que
+l&amp;rsquo;on veut installer)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Le plugin JOPE permet depuis Eclipse de contrôler Jonas et les déploiements
+que l&amp;rsquo;on y fait.&lt;/p&gt;
+
+&lt;p&gt;On télécharge ce plugin sur &lt;a href=&#34;http://forge.ow2.org/projects/jope/&#34;&gt;http://forge.ow2.org/projects/jope/&lt;/a&gt; (version 1.1.4 pour Eclipse 2.x ici), on
+le dézipe sous &lt;code&gt;/usr/local/share/eclipse/plugins/&lt;/code&gt; (que l&amp;rsquo;on crée si besoin),
+et on lance Eclipse.&lt;/p&gt;
+
+&lt;p&gt;On va sous &lt;em&gt;Window &amp;gt; Open Perspective &amp;gt; Java&lt;/em&gt;. Dans &lt;em&gt;Window &amp;gt; Customize
+Perspective&amp;hellip;&lt;/em&gt;, sous &lt;em&gt;File&amp;gt;New&lt;/em&gt; on coche &lt;em&gt;Jonas EJB&lt;/em&gt; et &lt;em&gt;Jonas Project&lt;/em&gt;, sous
+&lt;em&gt;Other&lt;/em&gt; on coche &lt;em&gt;Jonas&lt;/em&gt;. Et dans &lt;em&gt;JVM Settings &amp;gt; Classpath&lt;/em&gt; on ajoute
+&lt;code&gt;/usr/share/java/mysql.jar&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ensuite sous &lt;em&gt;Window &amp;gt; Preferences &amp;gt; Jonas&lt;/em&gt;, on choisit la &lt;em&gt;Jonas version&lt;/em&gt;
+(4.1 dans notre cas) et l&amp;rsquo;on met &lt;code&gt;/usr/local/jonas/&lt;/code&gt; dans &lt;em&gt;Jonas root&lt;/em&gt; et
+&lt;em&gt;Jonas server&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enfin dans &lt;em&gt;Window &amp;gt; Preferences &amp;gt; Ant &amp;gt; Runtime &amp;gt; Classpath&lt;/em&gt; on coche &lt;em&gt;Set
+ANT_HOME&lt;/em&gt; et l&amp;rsquo;on indique &lt;code&gt;/usr/share/ant&lt;/code&gt; (sans quoi ant ne trouvera pas
+&lt;code&gt;bcel.jar&lt;/code&gt; et fera des erreurs du genre &lt;code&gt;dependent class not found:
+org/apache/bcel/classfile/Visitor&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;et-après&#34;&gt;Et après&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;Pour la suite, il y a déjà un excellent tutoriel
+&lt;a href=&#34;http://stessy.developpez.com/j2ee/eclipse/jonas/ejb/firstEjb/&#34;&gt;ici&lt;/a&gt;&amp;hellip; bons
+beans !&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>gCDrip</title>
+      <link>http://people.via.ecp.fr/~jm/post/gcdrip/</link>
+      <pubDate>Thu, 01 Jan 2004 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/gcdrip/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-gcdrip&#34;&gt;What is gCDrip?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#screenshots&#34;&gt;Screenshots&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#current-and-future-features&#34;&gt;Current and future features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-install&#34;&gt;How to install&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#downloads&#34;&gt;Downloads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#contact&#34;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-is-gcdrip&#34;&gt;What is gCDrip?&lt;/h2&gt;
+
+&lt;p&gt;gCDrip is a &lt;strong&gt;CD ripping and encoding interface&lt;/strong&gt; for &lt;strong&gt;Gtk+&lt;/strong&gt;. It relies on
+&lt;code&gt;cdparanoia&lt;/code&gt; for ripping, &lt;code&gt;lame&lt;/code&gt; for encoding, and &lt;code&gt;id3&lt;/code&gt; for ID3-tagging.&lt;/p&gt;
+
+&lt;p&gt;gCDrip is also a comprehensive &lt;strong&gt;Gtk-Perl&lt;/strong&gt; example.&lt;/p&gt;
+
+&lt;p&gt;gCDrip is designed to run on Linux boxes, but it will run on any box with
+cdparanoia, lame, id3 and Gtk-Perl installed.&lt;/p&gt;
+
+&lt;p&gt;gCDrip is &lt;strong&gt;free software&lt;/strong&gt;, released under the &lt;strong&gt;GNU General Public
+License&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../static/gcdrip/shot1.png&#34;&gt;&lt;img src=&#34;../../static/gcdrip/shot1t.jpg&#34; alt=&#34;[Shot 1]&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;current-and-future-features&#34;&gt;Current and future features&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Latest version of gCDrip is 1.0&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Main features include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;single script file, very easy to run&lt;/li&gt;
+&lt;li&gt;clear interface: just launch and rip&lt;/li&gt;
+&lt;li&gt;highly configurable output naming&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;CDDB&lt;/em&gt; querying on freedb.org&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Future versions might bring:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;gtk2 support&lt;/li&gt;
+&lt;li&gt;ability to see progress outside the terminal&lt;/li&gt;
+&lt;li&gt;ability to stop ripping in a clean manner&lt;/li&gt;
+&lt;li&gt;support for other output formats, as ogg, flac, etc.&lt;/li&gt;
+&lt;li&gt;ability to rip only selected tracks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-to-install&#34;&gt;How to install&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;download and &lt;code&gt;gunzip&lt;/code&gt; the script&lt;/li&gt;
+&lt;li&gt;make sure you have Perl with &lt;code&gt;Gtk&lt;/code&gt; and &lt;code&gt;CDDB_get&lt;/code&gt; modules installed (under Debian the packages are &lt;code&gt;libgtk-perl&lt;/code&gt; and &lt;code&gt;libcddb-get-perl&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;make sure you can launch &lt;code&gt;cdparanoia&lt;/code&gt;, &lt;code&gt;lame&lt;/code&gt; and &lt;code&gt;id3&lt;/code&gt; from the command-line&lt;/li&gt;
+&lt;li&gt;insert a CD in your drive&lt;/li&gt;
+&lt;li&gt;run the script from a terminal in an X-session: &lt;code&gt;./gCDrip.pl&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;downloads&#34;&gt;Downloads&lt;/h2&gt;
+
+&lt;p&gt;1/1/2004&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gcdrip/gCDrip.pl.gz&#34;&gt;gCDrip 1.0&lt;/a&gt; (4 Ko)&lt;/p&gt;
+
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+
+&lt;p&gt;Don&amp;rsquo;t hesitate to &lt;a href=&#34;mailto:jm@via.ecp.fr&#34;&gt;email me&lt;/a&gt; if you have any question or
+comment.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>deldup</title>
+      <link>http://people.via.ecp.fr/~jm/post/deldup/</link>
+      <pubDate>Wed, 12 Nov 2003 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/deldup/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-deldup&#34;&gt;What is deldup?&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;deldup.pl&lt;/code&gt; deletes duplicates from a UNIX mailbox, relying on a checksum of
+the body. It modifies the mbox in-place, so make a backup before applying and
+use at your own risk.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;deldup.pl&lt;/code&gt; is released under the GNU GPL.&lt;/p&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;First make sure you have Perl with &lt;code&gt;String::CRC32&lt;/code&gt; and &lt;code&gt;Mail::Box&lt;/code&gt; modules
+installed (under Debian the packages are &lt;code&gt;libstring-crc32-perl&lt;/code&gt; and &lt;code&gt;libmail-
+box-perl&lt;/code&gt;), then simply run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;deldup.pl filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;downloads&#34;&gt;Downloads&lt;/h2&gt;
+
+&lt;p&gt;11/11/2003&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/deldup.pl&#34;&gt;deldup.pl 1.2&lt;/a&gt; (4 Ko)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fontes &amp; linux</title>
+      <link>http://people.via.ecp.fr/~jm/post/fontes-linux/</link>
+      <pubDate>Sun, 23 Feb 2003 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/fontes-linux/</guid>
+      <description>
+
+&lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
+
+&lt;p&gt;Cette page explique comment installer des fontes truetype et type1 sous Linux,
+plus précisément sous XFree86, avec une distribution Debian.&lt;/p&gt;
+
+&lt;h2 id=&#34;fontes-truetype&#34;&gt;Fontes truetype&lt;/h2&gt;
+
+&lt;h3 id=&#34;avec-xfree-4&#34;&gt;Avec XFree 4&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;(Pour des fontes asiatiques, des fontes de symboles, et plus généralement des
+fontes d&amp;rsquo;autre encodage que iso8859-1, jisx0201.1976-0, ou jisx0208.1983-0,
+voyez plutôt &lt;a href=&#34;../../static/msg01817.html&#34;&gt;TrueType fonts in X4&lt;/a&gt;.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fermez le serveur X ;&lt;/li&gt;
+&lt;li&gt;installez le package fttools (&lt;em&gt;freetype tools&lt;/em&gt;) ;&lt;/li&gt;
+&lt;li&gt;éditez &lt;code&gt;/etc/X11/XF86Config&lt;/code&gt; (ou &lt;code&gt;/etc/X11/XF86Config-v4&lt;/code&gt; si l&amp;rsquo;autre n&amp;rsquo;existe
+pas)&amp;nbsp;:
+
+&lt;ul&gt;
+&lt;li&gt;Vérifiez la présence de la ligne suivante dans la section &amp;ldquo;Modules&amp;rdquo;&amp;nbsp;:&lt;br /&gt;
+&lt;pre&gt;Load        &amp;ldquo;freetype&amp;rdquo;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Dans la section &amp;ldquo;Files&amp;rdquo;, rajoutez la ligne suivante&lt;br /&gt;
+&lt;pre&gt;FontPath   &amp;ldquo;/usr/share/fonts/truetype&amp;rdquo;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;copiez des fontes .ttf dans &lt;code&gt;/usr/share/fonts/truetype/&lt;/code&gt; (créez ce répertoire
+s&amp;rsquo;il n&amp;rsquo;existe pas)&lt;br /&gt;
+&lt;strong&gt;Note :&lt;/strong&gt; Si vous avez une partition windows, vous pouvez remplacer le répertoire &lt;code&gt;truetype/&lt;/code&gt; par un lien symbolique vers votre &lt;code&gt;windows/fonts/&lt;/code&gt;, de la manière suivante (si la partition windows est montée en &lt;code&gt;/mnt/win&lt;/code&gt;)
+&lt;pre&gt;rmdir /usr/share/fonts/truetype
+ln -s /mnt/win/windows/fonts /usr/share/fonts/truetype&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Placez-vous dans &lt;code&gt;/usr/share/fonts/truetype/&lt;/code&gt; et créez &lt;code&gt;fonts.dir&lt;/code&gt; en tapant
+&lt;code&gt;mkttfdir&lt;/code&gt;&lt;br /&gt;
+&lt;em&gt;Attention, vous devrez répéter cette opération à chaque fois que vous
+modifierez le contenu du répertoire des fontes).&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Ouvrez une session X.&lt;br /&gt;
+Si tout s&amp;rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;avec-un-xfree86-antérieur-à-la-version-4&#34;&gt;Avec un XFree86 antérieur à la version 4&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fermez le serveur X ;&lt;/li&gt;
+&lt;li&gt;installez le package xfstt ;&lt;/li&gt;
+&lt;li&gt;éditez &lt;code&gt;/etc/X11/XF86Config&lt;/code&gt; :&lt;br /&gt;
+Dans la section &amp;ldquo;Files&amp;rdquo;, rajoutez la ligne suivante
+&lt;pre&gt;FontPath   &amp;ldquo;unix/:7101&amp;rdquo;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;copiez des fontes .ttf dans &lt;code&gt;/usr/share/fonts/truetype/&lt;/code&gt;&lt;br /&gt;
+&lt;strong&gt;Note :&lt;/strong&gt; Si vous avez une partition windows, vous pouvez remplacer le répertoire &lt;code&gt;truetype/&lt;/code&gt; par un lien symbolique vers votre &lt;code&gt;windows/fonts/&lt;/code&gt;, de la manière suivante (si la partition windows est montée en &lt;code&gt;/mnt/win&lt;/code&gt;)
+&lt;pre&gt;rmdir /usr/share/fonts/truetype
+ln -s /mnt/win/windows/fonts /usr/share/fonts/truetype&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Mettez à jour la base des fontes truetype : &lt;code&gt;xfstt --sync&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Lancez le serveur (au boot c&amp;rsquo;est &lt;em&gt;automatique&lt;/em&gt;, grâce à &lt;code&gt;/etc/init.d/xfstt&lt;/code&gt;) :
+&lt;code&gt;xfstt &amp;amp;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Ouvrez une session X.&lt;br /&gt;
+Si tout s&amp;rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).&lt;br /&gt;
+&lt;strong&gt;Note :&lt;/strong&gt; Si le nom de vos fontes apparaît mais que vous ne pouvez pas les utiliser, vérifiez que &lt;em&gt;xfstt&lt;/em&gt; a les droits en lecture sur ces fontes. En fait &lt;em&gt;xfstt&lt;/em&gt; a les mêmes droits que l&amp;rsquo;utilisateur spécifié dans &lt;code&gt;/etc/init.d/xfstt&lt;/code&gt; (&lt;em&gt;nobody&lt;/em&gt; par défaut). Vous pouvez notamment mettre &lt;em&gt;root&lt;/em&gt;, si vous n&amp;rsquo;êtes pas parano.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;fontes-type1&#34;&gt;Fontes type1&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fermez le serveur X ;&lt;/li&gt;
+&lt;li&gt;installez le package type1inst ;&lt;/li&gt;
+&lt;li&gt;Mettons que vos fontes se trouvent dans &lt;code&gt;/mnt/win/psfonts/&lt;/code&gt; ; tapez ce qui
+suit
+&lt;pre&gt;
+cd /mnt/win/psfonts/
+type1inst
+&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;éditez &lt;code&gt;/etc/X11/XF86Config&lt;/code&gt; :
+
+&lt;ul&gt;
+&lt;li&gt;Dans la section &amp;ldquo;Files&amp;rdquo; (au tout début normalement), rajoutez la ligne suivante
+&lt;pre&gt;FontPath   &amp;ldquo;/mnt/win/psfonts/&amp;rdquo;&lt;/pre&gt;
+&lt;strong&gt;Note :&lt;/strong&gt; Rajoutez cette ligne avant les autres du même type, c&amp;rsquo;est-à-dire après les &lt;code&gt;75dpi/:unscaled&lt;/code&gt; et &lt;code&gt;100dpi/:unscaled&lt;/code&gt;, mais avant Speedo, Type1 et ce qui suit. Cela donne la priorité aux fontes que vous ajoutez, par rapport à celles de base dont certaines sont de piètre qualité (helvetica par exemple).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Ouvrez une session X.&lt;br /&gt;
+Si tout s&amp;rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>gSoko</title>
+      <link>http://people.via.ecp.fr/~jm/post/gsoko/</link>
+      <pubDate>Mon, 25 Sep 2000 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/gsoko/</guid>
+      <description>
+
+&lt;div class=&#34;message&#34;&gt;Updated on March 26, 2005&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-gsoko&#34;&gt;What is gSoko?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#screenshots&#34;&gt;Screenshots&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#current-and-future-features&#34;&gt;Current and future features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-install&#34;&gt;How to install&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#downloads&#34;&gt;Downloads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#contact&#34;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-is-gsoko&#34;&gt;What is gSoko?&lt;/h2&gt;
+
+&lt;p&gt;gSoko is a &lt;strong&gt;gtk+&lt;/strong&gt; clone of the famous &lt;strong&gt;Sokoban&lt;/strong&gt; game.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The goal of the game is to push all the boxes on the squares with a red pattern.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;gSoko is designed to run on Linux boxes, but it might also compile under other
+systems where the gtk+ libs are available (e.g. Windows).&lt;/p&gt;
+
+&lt;p&gt;gSoko is &lt;strong&gt;free software&lt;/strong&gt;, released under the &lt;strong&gt;GNU General Public
+License&lt;/strong&gt; (though the code is not very clean yet).&lt;/p&gt;
+
+&lt;h2 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;a href=&#34;../../static/gsoko/shot1.jpg&#34;&gt;&lt;img src=&#34;../../static/gsoko/shot1t.jpg&#34; alt=&#34;[Shot 1]&#34; /&gt;
+&lt;/a&gt;
+&lt;a href=&#34;../../static/gsoko/shot2.jpg&#34;&gt;&lt;img src=&#34;../../static/gsoko/shot2t.jpg&#34; alt=&#34;[Shot 2]&#34; /&gt;
+&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;current-and-future-features&#34;&gt;Current and future features&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Latest version of gSoko is 0.4.2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Main features include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;animated moves&lt;/li&gt;
+&lt;li&gt;50 levels (more to come)&lt;/li&gt;
+&lt;li&gt;automatically save/reload level to/from &lt;code&gt;$HOME/.gsokorc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;multiple undo&lt;/li&gt;
+&lt;li&gt;nice graphics (thx The Gimp)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Future versions should bring:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;gtk2 support&lt;/li&gt;
+&lt;li&gt;score&lt;/li&gt;
+&lt;li&gt;more levels&lt;/li&gt;
+&lt;li&gt;skinability&lt;/li&gt;
+&lt;li&gt;cleaner code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-to-install&#34;&gt;How to install&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;download the binaries&lt;/li&gt;
+&lt;li&gt;untar: &lt;code&gt;tar xvzf gsoko-0.4.2-bin.tar.gz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;run gsoko: &lt;code&gt;cd gsoko; ./gsoko&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;finish the 50 levels :)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;downloads&#34;&gt;Downloads&lt;/h2&gt;
+
+&lt;p&gt;3/6/2003&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4.2-bin.tar.gz&#34;&gt;gSoko 0.4.2 binaries&lt;/a&gt; (68 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4.2-src.tar.gz&#34;&gt;gSoko 0.4.2 sources&lt;/a&gt; (68 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko_0.4.2-1_i386.deb&#34;&gt;gSoko 0.4.2 Debian package&lt;/a&gt; (68 Ko)&lt;/p&gt;
+
+&lt;p&gt;30/7/2002&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4-1.i386.rpm&#34;&gt;gSoko 0.4 binary RPM&lt;/a&gt; (75 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4-1.src.rpm&#34;&gt;gSoko 0.4 source RPM&lt;/a&gt; (65 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko.spec&#34;&gt;SPEC file used to build the RPMs&lt;/a&gt; (1 Ko)&lt;/p&gt;
+
+&lt;p&gt;13/7/2002&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4-bin.tar.gz&#34;&gt;gSoko 0.4 binaries&lt;/a&gt; (68 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.4-src.tar.gz&#34;&gt;gSoko 0.4 sources&lt;/a&gt; (68 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.3-bin.tar.gz&#34;&gt;gSoko 0.3 binaries&lt;/a&gt; (63 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.3-src.tar.gz&#34;&gt;gSoko 0.3 sources&lt;/a&gt; (62 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.1-bin.tar.gz&#34;&gt;gSoko 0.1 binaries&lt;/a&gt; (62 Ko)&lt;/p&gt;
+
+&lt;p&gt;&amp;gt; &lt;a href=&#34;../../static/gsoko/gsoko-0.1-src.tar.gz&#34;&gt;gSoko 0.1 sources&lt;/a&gt; (59 Ko)&lt;/p&gt;
+
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+
+&lt;p&gt;Don&amp;rsquo;t hesitate to &lt;a href=&#34;mailto:jm@via.ecp.fr&#34;&gt;email me&lt;/a&gt; if you have any question or
+comment.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

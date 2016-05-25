@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/</link>
+    <description>Derniers contenus de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sun, 27 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Encodage H.264 avec GStreamer</title>
+      <link>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</link>
+      <pubDate>Sun, 27 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;GStreamer est un programme de manipulation audio-vidéo. Il est notamment utilisé par le logiciel de montage Pitivi pour l&amp;rsquo;encodage. Je vais donc tester les paramètres d&amp;rsquo;encodage pour trouver ceux qui me conviennent le mieux.&lt;/p&gt;
+
+&lt;p&gt;Pour le montage des films du petit dernier, je cherche surtout des paramètres qui préservent la qualité de la prise de vue. La taille du fichier passe ensuite.&lt;/p&gt;
+
+&lt;h1 id=&#34;protocole-de-test&#34;&gt;Protocole de test&lt;/h1&gt;
+
+&lt;p&gt;J&amp;rsquo;ai pris une séquence avec les paramètres du caméscope (Sony HDR-CX220) offrant la meilleure qualité. Cela me donne un fichier &lt;code&gt;00001.MTS&lt;/code&gt; dont j&amp;rsquo;ai changé le conteneur en MP4 sans réencoder (le MTS posait problème à GStreamer) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;avconv -i 00001.MTS -codec copy in.mp4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ensuite j&amp;rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&amp;rsquo;extrais 2s), et l&amp;rsquo;encoder en H.264 en faisant varier les paramètres de la commande &lt;code&gt;x264enc&lt;/code&gt;. Puis j&amp;rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&amp;rsquo;en garde qu&amp;rsquo;une partie pour observer les détails :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 gnlfilesource location=&amp;quot;$PWD/in.mp4&amp;quot; media-start=20000000000 media-duration=2000000000 ! x264enc pass=5 quantizer=21 ! mp4mux ! filesink location=out.mp4
+avconv -ss 00:01:00 -i out.mp4 -vframes 1 out.png
+mogrify -crop 640x200+1000+0 out.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;pass&lt;/code&gt; peut prendre les valeurs suivantes :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0 :&lt;/strong&gt; cbr - Constant Bitrate Encoding (default)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;4 :&lt;/strong&gt; quant - Constant Quantizer (debugging only)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5 :&lt;/strong&gt; qual - Constant Quality&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;17 :&lt;/strong&gt; pass1 - VBR Encoding - Pass 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18 :&lt;/strong&gt; pass2 - VBR Encoding - Pass 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;19 :&lt;/strong&gt; pass3 - VBR Encoding - Pass 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;résultats-small-taille-du-fichier-small&#34;&gt;Résultats &lt;small&gt;(taille du fichier)&lt;/small&gt;&lt;/h1&gt;
+
+&lt;h3 id=&#34;x264enc-small-404-ko-small&#34;&gt;x264enc &lt;small&gt;(404 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-default.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-4-quantizer-21-small-4-8-mo-small&#34;&gt;x264enc pass=4 quantizer=21 &lt;small&gt;(4,8 Mo !)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass4-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-10-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=10 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass5-quantizer10.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-21-small-452-ko-small&#34;&gt;x264enc pass=5 quantizer=21 &lt;small&gt;(452 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass5-quantizer21.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-5-quantizer-30-small-400-ko-small&#34;&gt;x264enc pass=5 quantizer=30 &lt;small&gt;(400 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass5-quantizer30.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-17-small-308-ko-small&#34;&gt;x264enc pass=17 &lt;small&gt;(308 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass17.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-18-small-552-ko-small&#34;&gt;x264enc pass=18 &lt;small&gt;(552 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass18.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;x264enc-pass-19-small-544-ko-small&#34;&gt;x264enc pass=19 &lt;small&gt;(544 Ko)&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/x264enc/out-pass19.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;La qualité obtenue avec le VBR en 2 passes est sensiblement meilleure qu&amp;rsquo;avec les méthodes en 1 passe. La durée d&amp;rsquo;une 3e passe n&amp;rsquo;est pas justifiée. Je retiens donc le &lt;strong&gt;VBR en 2 passes&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Attention pour encoder un fichier en VBR 2 passes il faudra effectivement lancer les 2 passes, et penser à nettoyer le fichier généré par la 1ère :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 ! progressreport ! x264enc pass=17 ! fakesink
+gst-launch-0.10 filesrc location=&amp;quot;$PWD/in.mp4&amp;quot; ! decodebin2 name=demux ! queue ! audioconvert ! audioresample ! &#39;audio/x-raw-int, rate=44100&#39; ! faac bitrate=128000 ! mp4mux name=mux ! filesink location=out.mp4 demux. ! queue ! progressreport ! x264enc pass=18 ! mux.
+rm -f x264_2pass.log*
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backup linux</title>
+      <link>http://people.via.ecp.fr/~jm/post/backup-linux/</link>
+      <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/backup-linux/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/backup.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La semaine dernière en cherchant à recréer mon bootloader j&amp;rsquo;ai perdu une
+partition qui contenait des données importantes. Il était temps que je mette
+enfin en place un système de sauvegarde de mes données ! Cette page décrit le
+système que j&amp;rsquo;ai mis en place pour que vous puissiez facilement le reproduire
+et ne plus perdre vos données&amp;nbsp;!&lt;/p&gt;
+
+&lt;p&gt;Le mécanisme décrit ici fonctionne sur n&amp;rsquo;importe quelle distribution Linux
+puisque le seul programme nécessaire est &lt;code&gt;rsync&lt;/code&gt; en version 2.5.6 ou
+supérieure. Il s&amp;rsquo;appuie sur les scripts de Mike Rubel dont la page très
+détaillée est &lt;a href=&#34;http://www.mikerubel.org/computers/rsync_snapshots/&#34;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;le-résultat&#34;&gt;Le résultat&lt;/h1&gt;
+
+&lt;p&gt;J&amp;rsquo;ai un disque dédié au backup. Le jour où le disque principal lâche ça ne
+sert pas à grand-chose si la sauvegarde est sur le même disque. Ce disque de
+backup contient une seule partition au format &lt;code&gt;ext4&lt;/code&gt;, avec un répertoire
+&lt;code&gt;snapshot&lt;/code&gt; à l&amp;rsquo;intérieur duquel j&amp;rsquo;ai les répertoires suivants :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;daily.0&lt;/strong&gt; : la copie du matin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;daily.1&lt;/strong&gt; : celle de la veille&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;daily.2 etc.&lt;/strong&gt; : celle des jours précédents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weekly.0&lt;/strong&gt; : celle du lundi précédent&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weekly.1 etc.&lt;/strong&gt; : celle des semaines précédentes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;monthly.0 etc.&lt;/strong&gt; : celle du 1er du mois et des mois précédents&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Je conserve 7 &lt;em&gt;daily&lt;/em&gt;, 5 &lt;em&gt;weekly&lt;/em&gt;, et 7 &lt;em&gt;monthly&lt;/em&gt;. Chacun de ces snapshots
+contient l&amp;rsquo;arborescence que j&amp;rsquo;ai choisi de sauvegarder :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/snapshot/
++- daily.0/
+|  +- boot/
+|  +- etc/
+|  +- home/
+|  +- root/
+|  +- usr/
+|  +- var/
++- daily.1
+|  +- ...
++- ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La magie du mécanisme utilisé est que ces 19 sauvegardes ne prennent au total
+qu&amp;rsquo;environ 2 fois le volume sauvegardé.&lt;/p&gt;
+
+&lt;h1 id=&#34;comment-ça-marche&#34;&gt;Comment ça marche ?&lt;/h1&gt;
+
+&lt;p&gt;Avec les systèmes de fichiers ext2, ext3 ou ext4, un fichier est une étiquette (par
+exemple &lt;code&gt;/etc/group&lt;/code&gt; ou &lt;code&gt;/tmp/a&lt;/code&gt;) qui pointe vers un espace de stockage sur le
+disque appelé &lt;em&gt;inode&lt;/em&gt;, où sont écrites les données ainsi que les dates et
+permissions. Vous pouvez voir le numéro d&amp;rsquo;inode d&amp;rsquo;un fichier à l&amp;rsquo;aide de la
+commande &lt;code&gt;ls -i&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% touch /tmp/a
+% ls -i /tmp/a
+3385746 /tmp/a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lorsque vous effacez un fichier, Linux supprime l&amp;rsquo;étiquette et, si aucune
+autre étiquette ne pointe vers le même inode, le libère. &lt;em&gt;Aucune autre
+étiquette&lt;/em&gt; ?! Eh oui, il est possible d&amp;rsquo;avoir plusieurs étiquettes qui
+pointent sur le même inode. Pour savoir combien, &lt;code&gt;stat /tmp/a&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Pour créer une 2nde étiquette on crée un lien physique (à ne pas confondre
+avec les liens symboliques créés par &lt;code&gt;ln -s&lt;/code&gt;) avec la commande &lt;code&gt;ln&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% ln /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+3385746 /tmp/b
+% rm /tmp/b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C&amp;rsquo;est un peu comme la commande &lt;code&gt;cp&lt;/code&gt;, sauf que celle-ci alloue un nouvel inode
+(avec de nouvelles permissions) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% cp /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+2812276 /tmp/b
+% rm /tmp/b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La commande &lt;code&gt;cp -l&lt;/code&gt; crée des liens physiques, et &lt;code&gt;cp -a&lt;/code&gt; copie toute une
+arborescence en préservant les dates et les permissions. &lt;code&gt;cp -al&lt;/code&gt; permet de
+dupliquer toute une arborescence avec des liens physiques ! On a ainsi
+l&amp;rsquo;impression d&amp;rsquo;avoir une copie complète de l&amp;rsquo;arborescence alors que cela
+n&amp;rsquo;occupe presque aucun espace disque.&lt;/p&gt;
+
+&lt;p&gt;Pour notre système de sauvegarde on ne souhaite pas faire de liens physiques
+(c&amp;rsquo;est de toute façon impossible entre deux disques), en revanche entre nos
+différents snapshots ça va nous permettre de gagner beaucoup de place.&lt;/p&gt;
+
+&lt;h1 id=&#34;rsync&#34;&gt;rsync&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;rsync&lt;/code&gt; est un utilitaire en ligne de commande très pratique pour recopier une
+arborescence. &lt;code&gt;rsync -a&lt;/code&gt; fait la même chose que &lt;code&gt;cp -a&lt;/code&gt;, sauf que si
+l&amp;rsquo;arborescence cible existe déjà &lt;code&gt;rsync&lt;/code&gt; ne copiera que les fichiers qui ont
+changé, ce qui va beaucoup plus vite. Et avec l&amp;rsquo;option &lt;code&gt;--delete&lt;/code&gt;, il effacera
+de la cible les fichiers qui ont disparu de la source.&lt;/p&gt;
+
+&lt;p&gt;Attention, si &lt;code&gt;src&lt;/code&gt; est un répertoire, &lt;code&gt;rsync -a src dst&lt;/code&gt; créera un répertoire
+&lt;code&gt;src&lt;/code&gt; sous &lt;code&gt;dst/&lt;/code&gt;, alors que &lt;code&gt;rsync -a src/ dst&lt;/code&gt; (avec un slash) copiera
+directement le &lt;em&gt;contenu&lt;/em&gt; de &lt;code&gt;src&lt;/code&gt; sous &lt;code&gt;dst/&lt;/code&gt;. En revanche, un slash ou non à
+la fin de &lt;code&gt;dst&lt;/code&gt; ne change rien.&lt;/p&gt;
+
+&lt;p&gt;Enfin &lt;code&gt;rsync&lt;/code&gt; possède depuis la version 2.5.6 une option &lt;code&gt;--link-dest&lt;/code&gt; qui
+duplique l&amp;rsquo;arborescence cible avec des liens physiques et met à jour
+uniquement cette copie :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync -a --delete --link-dest=../dest.old source/ dest.new
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;le-script&#34;&gt;Le script&lt;/h1&gt;
+
+&lt;p&gt;Avec tout ça, le principe de notre script de backup est simple :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;On lance &lt;code&gt;rsync&lt;/code&gt; en lui demandant de dupliquer &lt;code&gt;daily.0&lt;/code&gt; en &lt;code&gt;daily&lt;/code&gt; et de modifier &lt;code&gt;daily&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;On fait tourner les backups (on supprime &lt;code&gt;daily.6&lt;/code&gt;, on renomme &lt;code&gt;daily.5&lt;/code&gt; en &lt;code&gt;daily.6&lt;/code&gt; et ainsi de suite jusqu&amp;rsquo;à &lt;code&gt;daily&lt;/code&gt; en &lt;code&gt;daily.0&lt;/code&gt;) ;&lt;/li&gt;
+&lt;li&gt;Chaque lundi on fait un &lt;code&gt;cp -al&lt;/code&gt; de &lt;code&gt;daily.0&lt;/code&gt; vers &lt;code&gt;weekly&lt;/code&gt;, et chaque 1er du mois de &lt;code&gt;daily.0&lt;/code&gt; vers &lt;code&gt;monthly&lt;/code&gt;. Et l&amp;rsquo;on fait tourner les backups.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Télécharger le script : &lt;a href=&#34;./static/snapshot.sh&#34;&gt;snapshot.sh&lt;/a&gt; (4 Ko)&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration&#34;&gt;Configuration&lt;/h1&gt;
+
+&lt;p&gt;Vous pouvez changer le nombre de snapshots conservés au début du script
+(&lt;code&gt;DAILY_MAX&lt;/code&gt; etc.), et l&amp;rsquo;emplacement de votre répertoire de backup
+(&lt;code&gt;SNAPSHOT_RW&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Il faut surtout configurer les répertoires sauvegardés en modifiant la
+variable &lt;code&gt;TOBACKUP&lt;/code&gt;. Attention si vous mettez dans &lt;code&gt;TOBACKUP&lt;/code&gt; le répertoire
+&lt;code&gt;/home/toto&lt;/code&gt;, alors le répertoire créé sous &lt;code&gt;daily.0&lt;/code&gt; sera &lt;code&gt;daily.0/toto&lt;/code&gt; et
+pas &lt;code&gt;daily.0/home/toto&lt;/code&gt;. Pour cela, mettez &lt;code&gt;/home&lt;/code&gt; dans &lt;code&gt;TOBACKUP&lt;/code&gt; et éditez
+ensuite le fichier &lt;code&gt;snapshot_exclude.txt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Le format de ce fichier est le suivant : un &amp;lsquo;-&amp;rsquo; (ou rien) signifie une
+exclusion, un &amp;lsquo;+&amp;rsquo; signifie une inclusion. Pour savoir si un fichier doit être
+copié, &lt;code&gt;rsync&lt;/code&gt; prend les lignes une par une et prend le statut de la 1ère
+ligne qui matche. Si aucune ligne ne matche le fichier est copié. &lt;code&gt;dir/*&lt;/code&gt;
+matche les fichiers/répertoires situés directement sous &lt;code&gt;dir/&lt;/code&gt;, alors que
+&lt;code&gt;dir/**&lt;/code&gt; matche tout ce qui est situé à une profondeur quelconque. Attention
+si l&amp;rsquo;on exclut &lt;code&gt;dir/**&lt;/code&gt; et que l&amp;rsquo;on veut inclure &lt;code&gt;dir/a/b/*&lt;/code&gt; il faut
+explicitement inclure &lt;code&gt;dir/a&lt;/code&gt; et &lt;code&gt;dir/b&lt;/code&gt; en plus de &lt;code&gt;dir/a/b/*&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;À titre d&amp;rsquo;exemple voici mon fichier :
+&lt;a href=&#34;./static/snapshot_exclude.txt&#34;&gt;snapshot_exclude.txt&lt;/a&gt; (4 Ko)&lt;/p&gt;
+
+&lt;h1 id=&#34;lancement-automatique&#34;&gt;Lancement automatique&lt;/h1&gt;
+
+&lt;p&gt;Placez le script et le fichier d&amp;rsquo;exclusions dans le même répertoire (par
+exemple &lt;code&gt;/root&lt;/code&gt;) et vérifiez que le script a les droits d&amp;rsquo;exécution (&lt;code&gt;chmod
+755 snapshot.sh&lt;/code&gt;). Pour vérifier le bon fonctionnement, lancez
+&lt;code&gt;/root/snapshot.sh daily&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si ça fonctionne, automatisez le lancement en mettant dans &lt;code&gt;/etc/crontab&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Snapshot chaque jour à 2h, et chaque lundi/1er à 15h 12/28
+1 2     * * *   root    /root/scripts/snapshot.sh daily
+12 15   * * 1   root    /root/scripts/snapshot.sh weekly
+28 15   1 * *   root    /root/scripts/snapshot.sh monthly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour sauvegarder sous Ubuntu (ou Debian) la liste des paquets installés,
+ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;0 2     * * *   root    dpkg --get-selections &amp;gt;| /root/get-selections.txt
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Niveau des champions d&#39;échecs sur 150 ans</title>
+      <link>http://people.via.ecp.fr/~jm/post/niveau-des-champions-d-%C3%A9checs/</link>
+      <pubDate>Tue, 25 Aug 2015 22:39:58 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/niveau-des-champions-d-%C3%A9checs/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/kasparov.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Le système Elo est le système de classement des joueurs d&amp;rsquo;échecs. Il est censé refléter la probabilité de gain d&amp;rsquo;une partie : si un joueur classé 2000 joue contre un joueur classé 1800, sa probabilité de gain est de 75%. S&amp;rsquo;il joue contre un 1600, elle dépasse 90%.&lt;/p&gt;
+
+&lt;p&gt;Ça marche relativement bien, mais l&amp;rsquo;Elo a des défauts. Un nouveau joueur a besoin d&amp;rsquo;une dizaine de parties pour que son niveau converge, l&amp;rsquo;algorithme fait intervenir des coefficients arbitraires, et on lui reproche une inflation des niveaux les plus élevés.&lt;/p&gt;
+
+&lt;p&gt;TrueSkill est une version améliorée du système Elo, développée par Microsoft pour classer les adeptes de son jeu Halo et optimiser la recherche d&amp;rsquo;adversaire. Il a une approche probabiliste plus précise et évite l&amp;rsquo;inflation du classement.&lt;/p&gt;
+
+&lt;p&gt;Voici un excellent article sur l&amp;rsquo;application de TrueSkill aux échecs sur les 150 dernières années : &lt;a href=&#34;http://research.microsoft.com/pubs/74417/NIPS2007_0931.pdf&#34;&gt;http://research.microsoft.com/pu&amp;hellip;&lt;/a&gt; L&amp;rsquo;article s&amp;rsquo;appuie sur l&amp;rsquo;algorithme TrueSkill et sur une base de 3,5 millions de parties pour classer les champions d&amp;rsquo;échecs à travers les âges (la marge d&amp;rsquo;erreur est représentée) :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;./img/trueskill-chess.png&#34;&gt;&lt;img src=&#34;./img/trueskill-chess-450x313.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Cette étude montre que le niveau des meilleurs joueurs d&amp;rsquo;échecs a augmenté régulièrement au cours des 50 dernières années. Il y a une forte incertitude sur le niveau de Bobby Fischer car il a arrêté de jouer entre 1972 et 1992, mais il s&amp;rsquo;agit d&amp;rsquo;une exception et la quantité de données sur les autres joueurs (200K joueurs non représentés ici) rend la comparaison plutôt fiable.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
+      <link>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</link>
+      <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/shuffle.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Je viens de scanner un document imprimé en brochure/booklet après l&amp;rsquo;avoir dégrafé. C&amp;rsquo;est pratique, ça permet d&amp;rsquo;utiliser le chargeur automatique du scanner. Mais cela veut dire que sur chaque page scannée j&amp;rsquo;ai en réalité 2 pages, et dans un ordre assez bizarre: 8 et 9, 10 et 7, etc. Comment les remettre dans l&amp;rsquo;ordre ?&lt;/p&gt;
+
+&lt;h2 id=&#34;numérologie&#34;&gt;Numérologie&lt;/h2&gt;
+
+&lt;p&gt;D&amp;rsquo;abord, on constate qu&amp;rsquo;avec 2 pages par scan, le nombre de pages est un multiple de 2. Écrivons-le 2n.&lt;/p&gt;
+
+&lt;p&gt;On a les pages 1 à n dans la première moitié de la brochure, et les pages n+1 à 2n dans la seconde moitié. Ce qui veut dire que sur la première page scannée, on a les pages n (à gauche) et n+1 (à droite).&lt;/p&gt;
+
+&lt;p&gt;Au verso, c&amp;rsquo;est-à-dire sur la deuxième page scannée, on a les pages n-1 et n+2. Et ainsi de suite jusqu&amp;rsquo;à la n&lt;sup&gt;ième&lt;/sup&gt; page scannée, la couverture, où l&amp;rsquo;on a les pages 1 et 2n.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/leaflet.png&#34; alt=&#34;Numérotation d&#39;une brochure&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;À l&amp;rsquo;inverse, la page 1 est à droite du scan n, la page 2 à gauche du scan n-1, la page 3 à droite du scan n-2, &amp;hellip; la page n à gauche du scan 1, la page n+1 à droite du scan 1, etc.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est compris entre 1 et n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(n-k+1)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est supérieur à n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(k-n)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;La page &lt;em&gt;k&lt;/em&gt; est à droite si &lt;em&gt;k&lt;/em&gt; est impair, à gauche si &lt;em&gt;k&lt;/em&gt; est pair.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;mise-en-pratique&#34;&gt;Mise en pratique&lt;/h2&gt;
+
+&lt;p&gt;Vous aurez besoin d&amp;rsquo;avoir installé ImageMagick, Ghostscript (version 32 bits), et Cygwin si vous êtes sous Windows. Vous aurez également besoin des utilitaires pdfimages et jpegtran :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pdfimages&lt;/strong&gt; permet d&amp;rsquo;extraire les images du PDF sans les dégrader. Sous Ubuntu il est dans le package &lt;code&gt;poppler-utils&lt;/code&gt; ; sous Windows il faut télécharger &lt;a href=&#34;http://www.foolabs.com/xpdf/download.html&#34;&gt;Xpdf&lt;/a&gt; puis copier &lt;code&gt;pdfimages.exe&lt;/code&gt; (celui de bin64/ si l&amp;rsquo;OS le permet, de bin32/ sinon) dans le &lt;code&gt;/usr/local/bin/&lt;/code&gt; de Cygwin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;jpegtran&lt;/strong&gt; permet de faire pivoter une image JPEG sans la dégrader. Sous Ubuntu il est dans le package &lt;code&gt;libjpeg-turbo-progs&lt;/code&gt; ; sous Windows il est téléchargeable &lt;a href=&#34;http://jpegclub.org/jpegtran/&#34;&gt;ici&lt;/a&gt;, là encore le déposer sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; et s&amp;rsquo;assurer qu&amp;rsquo;il est exécutable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Après ces préliminaires, si l&amp;rsquo;on a un &lt;code&gt;doc.pdf&lt;/code&gt; de 8 scans (16 pages à la fin) :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On extrait les images du PDF :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;pdfimages -j doc.pdf doc
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for &lt;/span&gt;i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do &lt;/span&gt;convert -quality 95 -rotate 90 -crop 50%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate 180 &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;convert -density 300 -quality 80 &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
+&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;rm *jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Série noire</title>
+      <link>http://people.via.ecp.fr/~jm/post/s%C3%A9rie-noire/</link>
+      <pubDate>Sat, 22 Aug 2015 14:38:46 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/s%C3%A9rie-noire/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/panne.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Certains disent que la foudre ne tombe jamais deux fois au même endroit. D&amp;rsquo;autres que les problèmes volent en escadrille. J&amp;rsquo;ai fait le test&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Il y a 15 jours au bureau, mon PC pro a rendu l&amp;rsquo;âme. Le lendemain c&amp;rsquo;était un netbook à la maison. Quatre jours plus tard, le nano-PC qui me sert de NAS. Le surlendemain, mon disque dur principal ne répondait plus.&lt;/p&gt;
+
+&lt;p&gt;J&amp;rsquo;ai remplacé ce qui était HS et aujourd&amp;rsquo;hui tout fonctionne. Et j&amp;rsquo;ai appris 2-3 choses au passage :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Heureusement que j&amp;rsquo;avais un backup. J&amp;rsquo;ai écrit &lt;a href=&#34;./post/backup-linux/&#34;&gt;un billet&lt;/a&gt; sur mon système de sauvegarde quotidienne. Grâce à lui, j&amp;rsquo;ai pu traverser cette série noire avec beaucoup plus de sérénité. Certes, mon NAS étant HS depuis 2 jours lorsque mon disque dur a lâché j&amp;rsquo;ai cru perdre les heures de travail de l&amp;rsquo;intervalle, mais à aucun moment je n&amp;rsquo;ai pensé avoir perdu 15 ans de photos.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On peut récupérer un disque dur HS sans débourser une fortune auprès d&amp;rsquo;un labo de récupération de données.&lt;br /&gt;
+Mon disque dur, un Seagate Backup+ Slim d&amp;rsquo;1To âgé d&amp;rsquo;à peine 1 an, se mettait bien sous tension mais n&amp;rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&amp;rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.&lt;br /&gt;
+Sous Ubuntu, le disque apparaissait avec &lt;code&gt;lsusb&lt;/code&gt;, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&amp;rsquo;allait pas plus loin. &lt;code&gt;/var/log/syslog&lt;/code&gt; montrait l&amp;rsquo;erreur suivante :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
+sd 6:0:0:0: Attached scsi generic sg1 &lt;span style=&#34;color: #999999&#34;&gt;type &lt;/span&gt;0
+sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; Spinning up disk...
+usb 4-1: USB disconnect, device number 2
+......................ready
+sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; READ CAPACITY failed
+sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;
+Result: &lt;span style=&#34;color: #008080&#34;&gt;hostbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DID_NO_CONNECT &lt;span style=&#34;color: #008080&#34;&gt;driverbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DRIVER_OK
+&lt;/pre&gt;&lt;/div&gt;
+
+Puis j&amp;rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&amp;rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&amp;rsquo;avais rien à perdre.&lt;br /&gt;
+Alors j&amp;rsquo;ai suivi &lt;a href=&#34;https://www.youtube.com/watch?v=ijFCOvwd_Zo&#34;&gt;cette vidéo&lt;/a&gt; pour sortir le disque dur de son boîtier, puis &lt;a href=&#34;https://www.youtube.com/watch?v=7m5cil6KezI&#34;&gt;celle-ci&lt;/a&gt; pour ouvrir le disque et décoincer la tête de lecture.&lt;br /&gt;
+Bingo, le disque est reparti ! À cause des poussières qui se sont déposées lors de l&amp;rsquo;ouverture et risquent de le faire tomber en panne je ne l&amp;rsquo;utilise plus comme disque principal, en revanche il a remplacé mon backup, qui fonctionne bien mais ne faisait que 500Mo.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Au passage, j&amp;rsquo;ai appris sur les &lt;a href=&#34;https://bbs.archlinux.org/viewtopic.php?id=183190&#34;&gt;forums&lt;/a&gt; que le support UAS (protocole de transfert USB) du noyau Linux était instable avec les disques durs Seagate. Cela explique peut-être les plantages que j&amp;rsquo;avais souvent depuis quelques mois. J&amp;rsquo;ai donc désactivé ce protocole en créant dans &lt;code&gt;/etc/modprobe.d/&lt;/code&gt; un fichier &lt;code&gt;ignore_uas.conf&lt;/code&gt; contenant la ligne suivante (0bc2:ab21 est le Vendor_ID:Product_ID du disque, que l&amp;rsquo;on trouve via &lt;code&gt;lsusb&lt;/code&gt;) :
+&lt;pre&gt;options usb-storage quirks=0bc2:ab21:u&lt;/pre&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enfin attention quand on manipule des équipements informatiques ! Leur longévité lorsqu&amp;rsquo;on les laisse tranquillement tourner dans un coin peut nous faire oublier que ce sont de petites choses fragiles. Or la panne du nano-PC est probablement liée aux manipulations de récupération des données du netbook (transport, greffes de disque dur, &amp;hellip;), et celle du disque dur au fait qu&amp;rsquo;il a été beaucoup baladé lorsque le nano-PC était HS.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bref, pour répondre à la question du début je penche plutôt du côté de l&amp;rsquo;escadrille. En espérant qu&amp;rsquo;elle aille par-dessus monts, et bois, et mers, et vents, et ne revienne pas de sitôt.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cygwin: installer apt-cyg</title>
+      <link>http://people.via.ecp.fr/~jm/post/installer-apt-cyg/</link>
+      <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/installer-apt-cyg/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/apt-cyg.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Sous Cygwin, &lt;em&gt;apt-cyg&lt;/em&gt; fournit un fonctionnement proche d’&lt;em&gt;apt-get&lt;/em&gt;, que je trouve plus efficace que l’interface par défaut &lt;em&gt;setup.exe&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour l’installer, lancez cygwin et tapez les commandes suivantes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/local/bin/
+curl -kL rawgit.com/transcode-open/apt-cyg/master/apt-cyg &amp;gt; apt-cyg
+chmod +x apt-cyg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NB :&lt;/strong&gt; chez moi la version de gzip installée n&amp;rsquo;accepte pas l&amp;rsquo;option -k, ce qui provoque une erreur quand on supprime un package. Pour l&amp;rsquo;éviter, remplacez la ligne :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;gzip -dk setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+par :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;gzip -dc setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst.gz &amp;gt; setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La première fois, lancez &lt;em&gt;apt-cyg&lt;/em&gt; en précisant le miroir à utiliser et le répertoire de téléchargement. Si l’opération fonctionne, il s’en souviendra pour le prochain lancement:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-cyg -m ftp://ftp.funet.fi/pub/mirrors/cygwin.com/pub/cygwin/ -c /tmp update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour voir la liste des commandes disponibles, lancez &lt;em&gt;apt-cyg&lt;/em&gt; sans arguments. Si vous enchaînez plusieurs commandes, ajoutez l’option &lt;code&gt;-u&lt;/code&gt; pour ne pas retélécharger la base à chaque fois.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Définir la vue par défaut des dossiers Windows</title>
+      <link>http://people.via.ecp.fr/~jm/post/vue-par-d%C3%A9faut/</link>
+      <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/vue-par-d%C3%A9faut/</guid>
+      <description>&lt;p&gt;Comment faire, dans l&amp;rsquo;explorateur de fichiers Windows 7, pour que la vue du dossier actuel (tri par Nom ou par Type, largeur des colonnes, etc.) s&amp;rsquo;applique à tous les dossiers ?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ajustez la vue souhaitée ;&lt;/li&gt;
+&lt;li&gt;Appuyez sur la touche &lt;code&gt;Alt&lt;/code&gt; pour faire apparaître le menu ;&lt;/li&gt;
+&lt;li&gt;Allez dans &lt;em&gt;Outils &amp;gt; Options des dossiers&amp;hellip;&lt;/em&gt;, onglet &lt;em&gt;Affichage&lt;/em&gt; ;&lt;/li&gt;
+&lt;li&gt;Appuyez sur le bouton &lt;em&gt;Appliquer aux dossiers&lt;/em&gt; et confirmez.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatiser Excel</title>
+      <link>http://people.via.ecp.fr/~jm/post/automatiser-excel/</link>
+      <pubDate>Mon, 10 Aug 2015 17:47:49 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/automatiser-excel/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/excel.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Combien d&amp;rsquo;heures ai-je passé sous Excel à faire des tâches répétitives, comme supprimer une colonne sur deux 35 fois de suite pour transformer un calendrier par demi-journées en un calendrier par journées ? Trop.&lt;/p&gt;
+
+&lt;p&gt;Aujourd&amp;rsquo;hui nous voyons donc comment automatiser cela, sur l&amp;rsquo;exemple de la suppression d&amp;rsquo;une colonne sur deux 35 fois de suite.&lt;/p&gt;
+
+&lt;h2 id=&#34;activer-les-macros&#34;&gt;Activer les macros&lt;/h2&gt;
+
+&lt;p&gt;L&amp;rsquo;exécution de code sous Excel passe nécessairement par la création d&amp;rsquo;une &lt;em&gt;macro&lt;/em&gt;. Pour activer cette fonctionnalité avec Excel 2010, allez dans le menu &lt;em&gt;Fichier &amp;gt; Options&lt;/em&gt;, puis &lt;em&gt;Personnaliser le Ruban&lt;/em&gt; et activez l&amp;rsquo;onglet &lt;em&gt;Développeur&lt;/em&gt; dans la colonne de droite. Faites &lt;em&gt;OK&lt;/em&gt;, un nouvel onglet &lt;em&gt;Développeur&lt;/em&gt; doit maintenant apparaître dans le ruban en haut.&lt;/p&gt;
+
+&lt;p&gt;Dans cet onglet, cliquez sur &lt;em&gt;Sécurité des macros &amp;gt; Paramètres des macros&lt;/em&gt; puis &lt;em&gt;Activer toutes les macros (non recommandé &amp;hellip;)&lt;/em&gt; et &lt;em&gt;OK&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dans l&amp;rsquo;onglet &lt;em&gt;Développeur&lt;/em&gt; cliquez ensuite sur le bouton &lt;em&gt;Macros&lt;/em&gt;, une boîte de dialogue s&amp;rsquo;ouvre. Saisissez le nom de votre macro (par exemple, &lt;em&gt;efface_1_colonne_sur_2&lt;/em&gt;) puis cliquez sur &lt;em&gt;Créer&lt;/em&gt;. La fenêtre &lt;em&gt;Microsoft Visual Basic pour Applications&lt;/em&gt; apparaît pour saisir le code.&lt;/p&gt;
+
+&lt;h2 id=&#34;saisir-le-code&#34;&gt;Saisir le code&lt;/h2&gt;
+
+&lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
+    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
+    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
+    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
+    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Quelques explications :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;La 1ère ligne (&lt;code&gt;Range(&amp;quot;C1&amp;quot;).Select&lt;/code&gt;) positionne le curseur en C1 ;&lt;/li&gt;
+&lt;li&gt;Puis on rentre dans une boucle &lt;em&gt;For &amp;hellip; Next&lt;/em&gt; qui commence avec &lt;code&gt;i&lt;/code&gt; à 1 ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ActiveCell.Offset(0, i)&lt;/code&gt; indique la cellule située 0 lignes plus bas et &lt;code&gt;i&lt;/code&gt; colonnes plus à droite que C1, c&amp;rsquo;est-à-dire D1, et &lt;code&gt;.EntireColumn.Delete&lt;/code&gt; efface toute la colonne (D) ;&lt;/li&gt;
+&lt;li&gt;Puis on recommence la boucle avec &lt;code&gt;i&lt;/code&gt; qui vaut 2, on efface la colonne E, et ainsi de suite 35 fois.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;laisser-faire&#34;&gt;Laisser faire&lt;/h2&gt;
+
+&lt;p&gt;Pour exécuter cette macro, appuyez sur le bouton &lt;em&gt;Exécuter&lt;/em&gt; dans la barre de menu (la petite flèche verte), ou appuyez simplement sur F5. Si le fichier est ouvert en lecture seule Excel vous demandera alors d&amp;rsquo;en enregistrer une copie.&lt;/p&gt;
+
+&lt;p&gt;L&amp;rsquo;opération s&amp;rsquo;exécute automatiquement. Vous pouvez ensuite fermer la fenêtre &lt;em&gt;Visual Basic&lt;/em&gt;. Bravo, vous venez de gagner 10 minutes !&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Powered by Hugo</title>
+      <link>http://people.via.ecp.fr/~jm/post/powered-by-hugo/</link>
+      <pubDate>Mon, 10 Aug 2015 10:07:10 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/powered-by-hugo/</guid>
+      <description>
+
+&lt;p&gt;Depuis deux jours ce site a fait peau neuve, à la fois côté vitrine et dans l&amp;rsquo;arrière-boutique.&lt;/p&gt;
+
+&lt;h2 id=&#34;côté-vitrine&#34;&gt;Côté vitrine&lt;/h2&gt;
+
+&lt;p&gt;Le site adopte désormais un format blog qui facilitera l&amp;rsquo;ajout de nouveaux articles.&lt;/p&gt;
+
+&lt;p&gt;Il a également bénéficié d&amp;rsquo;un lifting intégral, avec une interface épurée et un texte plus gros pour moins fatiguer vos petits yeux. Je me suis inspiré des thèmes &lt;a href=&#34;http://hyde.getpoole.com/&#34;&gt;Hyde&lt;/a&gt; et &lt;a href=&#34;http://demo.studiopress.com/wintersong/&#34;&gt;Wintersong&lt;/a&gt;, ainsi que des couleurs de &lt;a href=&#34;http://csswizardry.com/&#34;&gt;CSS Wizardry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enfin la présentation s&amp;rsquo;adapte à la taille de l&amp;rsquo;écran pour être parfaitement lisible sur un smartphone. Ouf, il était temps !&lt;/p&gt;
+
+&lt;p&gt;C&amp;rsquo;est le second lifting en quinze ans, un événement rare sur lequel il convient de revenir en images :&lt;/p&gt;
+
+&lt;p&gt;&lt;style&gt;
+._pbh {display: inline-block; box-sizing: border-box; text-align: center; font-size: 85%; font-weight: bold; line-height: 0; padding: 5px;  width: 30%; min-width: 150px;}
+._pbh img {border: 1px solid #ccc;}
+&lt;/style&gt;
+&lt;center&gt;
+&lt;span class=&#34;_pbh&#34;&gt;&lt;a href=&#34;./img/jm-2015.jpg&#34;&gt;&lt;img src=&#34;./img/jm-2015.th.jpg&#34; alt=&#34;2015&#34; /&gt;
+&lt;/a&gt;2015&lt;/span&gt;
+&lt;span class=&#34;_pbh&#34;&gt;&lt;a href=&#34;./img/jm-2012.jpg&#34;&gt;&lt;img src=&#34;./img/jm-2012.th.jpg&#34; alt=&#34;2012&#34; /&gt;
+&lt;/a&gt;2012&lt;/span&gt;
+&lt;span class=&#34;_pbh&#34;&gt;&lt;a href=&#34;./img/jm-2000.jpg&#34;&gt;&lt;img src=&#34;./img/jm-2000.th.jpg&#34; alt=&#34;2000&#34; /&gt;
+&lt;/a&gt;2000&lt;/span&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;dans-l-arrière-boutique&#34;&gt;Dans l&amp;rsquo;arrière  boutique&lt;/h2&gt;
+
+&lt;p&gt;Le site utilise désormais le moteur &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, un générateur de sites statiques ultraperformant qui a pris la place de mon script maison &lt;a href=&#34;./post/jmparse/&#34;&gt;JMparse&lt;/a&gt;.
+Les avantages d&amp;rsquo;un site statique, par rapport à un site dynamique qui utilise une base de données (avec Wordpress par exemple), c&amp;rsquo;est qu&amp;rsquo;on peut l&amp;rsquo;héberger n&amp;rsquo;importe où (pas besoin de PHP, de MySQL, ni de la moindre puissance de calcul) et que les risques de sécurité sont pratiquement nuls. Autre avantage (qui pourra ne pas en être un pour les moins geeks), écrire un article revient à éditer un simple fichier texte. En revanche il faut s&amp;rsquo;en remettre à des services tiers pour les commentaires ou la recherche.&lt;/p&gt;
+
+&lt;p&gt;Il existe beaucoup de générateurs de sites statiques et le plus populaire est &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt;. J&amp;rsquo;ai choisi Hugo parce qu&amp;rsquo;il est 100 fois plus rapide : un utilisateur &lt;a href=&#34;http://kieranhealy.org/blog/archives/2014/02/24/powered-by-hugo/&#34;&gt;raconte&lt;/a&gt; que pour son site avec quelques milliers de pages, la génération prend 7 minutes avec Jekyll, et 3 secondes avec Hugo ! De plus l&amp;rsquo;installation d&amp;rsquo;Hugo est très simple puisque c&amp;rsquo;est un exécutable avec zéro dépendance.&lt;/p&gt;
+
+&lt;p&gt;La conversion des contenus de l&amp;rsquo;ancien site vers le nouveau m&amp;rsquo;a pris une dizaine de jours mais je suis très satisfait du résultat, plus moderne et plus facile à gérer. Merci Hugo !&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pixma MG5250 sur Ubuntu</title>
+      <link>http://people.via.ecp.fr/~jm/post/pixma-mg5250-sur-ubuntu/</link>
+      <pubDate>Mon, 10 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/pixma-mg5250-sur-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;Cette page explique comment installer l&amp;rsquo;imprimante-scanner Canon Pixma MG5250
+sur Ubuntu (testé sur 10.04, 10.10, 13.04).&lt;/p&gt;
+
+&lt;h2 id=&#34;récupération-des-pilotes-canon&#34;&gt;Récupération des pilotes Canon&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Télécharger &lt;code&gt;MG5200series-printer_driver.tar&lt;/code&gt; et &lt;code&gt;MG5200series-scanner_driver.tar&lt;/code&gt; depuis &lt;a href=&#34;http://www.canon.fr/support/consumer_products/products/fax__multifunctionals/inkjet/pixma_mg_series/pixma_mg5250.aspx?type=drivers&amp;amp;language=&amp;amp;os=Linux%20%2864-bit%29&#34;&gt;www.canon.fr&lt;/a&gt; : &lt;em&gt;Linux IJ Printer Driver (3.40)&lt;/em&gt; et &lt;em&gt;Linux IJ Scanner Driver (1.60)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Aller dans le répertoire &lt;code&gt;Téléchargements/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;installation-de-l-imprimante&#34;&gt;Installation de l&amp;rsquo;imprimante&lt;/h2&gt;
+
+&lt;p&gt;Prérequis : le package &lt;code&gt;libtiff4&lt;/code&gt; doit être installé.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% mkdir printer ; cd printer
+% tar xvf ../MG5200series-printer_driver.tar
+% tar xvzf cnijfilter-mg5200series-3.40-1-deb.tar.gz
+% cd cnijfilter-mg5200series-3.40-1-deb/
+% sudo ./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Suivre les instructions.&lt;/p&gt;
+
+&lt;p&gt;Vérifier que l&amp;rsquo;imprimante apparaît bien dans &lt;em&gt;Administration &amp;gt; Impression&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Si vous rencontrez un problème la doc est dans le fichier &lt;code&gt;guidemg5200series-
+pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &amp;lt;fichier&amp;gt;&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB&amp;nbsp;:&lt;/strong&gt; le driver Canon limite la résolution à 600dpi&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% cd ../.. ; rm -rf printer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installation-du-scanner&#34;&gt;Installation du scanner&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% mkdir scanner ; cd scanner
+% tar xvf MG5200series-scanner_driver.tar
+% tar xvzf scangearmp-mg5200series-1.60-1-deb.tar.gz
+% cd scangearmp-mg5200series-1.60-1-deb/
+% sudo ./install.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lancer Gimp (si besoin&amp;nbsp;: &lt;code&gt;apt-get install gimp&lt;/code&gt;), si dans &lt;em&gt;Fichier &amp;gt; Créer&lt;/em&gt;, &lt;em&gt;&amp;lsquo;ScanGear MP&amp;rsquo;&lt;/em&gt; n&amp;rsquo;apparaît pas sous &lt;em&gt;&amp;lsquo;Capture d&amp;rsquo;écran&amp;rsquo;&lt;/em&gt;&amp;nbsp;:
+
+&lt;ul&gt;
+&lt;li&gt;Quitter Gimp&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo ln -sf /usr/bin/scangearmp /usr/lib/gimp/2.0/plug-ins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Relancer Gimp&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Fichier &amp;gt; Créer &amp;gt; ScanGear MP&lt;/em&gt;&amp;nbsp;; un message d&amp;rsquo;erreur apparaît mais l&amp;rsquo;autodétection du scanner doit vous montrer votre &lt;em&gt;Canon&lt;/em&gt;, sélectionnez-le et la fenêtre de numérisation apparaît.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Accéder à GnuCash en Python</title>
+      <link>http://people.via.ecp.fr/~jm/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</link>
+      <pubDate>Mon, 06 Jan 2014 19:19:29 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</guid>
+      <description>&lt;p&gt;Il existe un module Python pour accéder aux fichiers GnuCash. Cela permet d’analyser vos comptes. Mais ce module est si mal documenté que le plus simple est encore de lire le source du module! Voici donc quelques exemples concrets d’utilisation.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Installer le module sous Ubuntu&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo apt-get install python-gnucash
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Ouvrir un fichier de données et afficher l’arborescence des comptes&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
+FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
+
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
+a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()
+&lt;span style=&#34;font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;atree&lt;/span&gt;(a, prefix&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;):
+	s &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; prefix&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
+	&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; suba &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_children():
+		suba &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Account(instance &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; suba)
+		s &lt;span style=&#34;font-weight: bold&#34;&gt;+=&lt;/span&gt; atree(suba, &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;  &amp;#39;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;prefix)
+	&lt;span style=&#34;font-weight: bold&#34;&gt;return&lt;/span&gt; s
+&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; atree(a_root)
+session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
+session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Afficher la transaction la plus récente d’un compte, avec ses détails&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
+FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
+COMPTE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;label du compte dans GnuCash&amp;quot;&lt;/span&gt;
+
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
+a &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;lookup_by_name(COMPTE)
+end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; s &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetSplitList():
+	cur &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDate()
+	&lt;span style=&#34;font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;not&lt;/span&gt; end &lt;span style=&#34;font-weight: bold&#34;&gt;or&lt;/span&gt; cur &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; end:
+		end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; cur, s
+t &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent
+t_date &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;date&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;fromtimestamp(end)&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;%d/%m/%Y&amp;#39;&lt;/span&gt;)
+target &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetOtherSplit()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAccount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()
+&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
+session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
+session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Passer de FancyBox à fancyBox2</title>
+      <link>http://people.via.ecp.fr/~jm/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
+      <pubDate>Wed, 01 Jan 2014 14:59:25 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
+      <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
+
+&lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
+			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
+			});
+		}
+	});
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Version &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox2&lt;/a&gt; :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
+			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
+			});
+		}
+	});
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Connecter Google Drive dans Owncloud</title>
+      <link>http://people.via.ecp.fr/~jm/post/connecter-google-drive-dans-owncloud/</link>
+      <pubDate>Sun, 17 Nov 2013 01:21:42 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/connecter-google-drive-dans-owncloud/</guid>
+      <description>&lt;p&gt;Google ayant compliqué la procédure d’accès à ses API, voici comment récupérer un ID/secret pour connecter Google Drive dans Owncloud 5 et plus :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Allez sur la &lt;a href=&#34;https://cloud.google.com/console&#34;&gt;console Google Cloud&lt;/a&gt; ;&lt;/li&gt;
+&lt;li&gt;Créez un nouveau projet, choisissez un nom (p.ex. &lt;em&gt;API Project&lt;/em&gt;) et un ID pour ce projet ;&lt;/li&gt;
+&lt;li&gt;Entrez dans la console du projet en cliquant sur son nom, puis &lt;em&gt;APIs &amp;amp; auth &amp;gt; Registered apps&lt;/em&gt;, et choisissez &lt;em&gt;Register app&lt;/em&gt;  ;&lt;/li&gt;
+&lt;li&gt;Choisissez un nom pour cette application (p.ex. &lt;em&gt;Owncloud&lt;/em&gt;), comme plate-forme &lt;em&gt;Web Application&lt;/em&gt;, et cliquez sur &lt;em&gt;Register&lt;/em&gt;  ;&lt;/li&gt;
+&lt;li&gt;Sur l’écran suivant qui vous demande de choisir le mode d’autorisation, sélectionnez &lt;em&gt;OAuth 2.0 Client ID&lt;/em&gt;  ;&lt;/li&gt;
+&lt;li&gt;Renseignez dans &lt;em&gt;REDIRECT URI&lt;/em&gt; l’adresse de la page d’admin Owncloud (&lt;em&gt;http://&lt;adresse de votre cloud&gt;/index.php/settings/personal&lt;/em&gt;) puis cliquez sur &lt;em&gt;Generate&lt;/em&gt; et notez les valeurs de &lt;em&gt;Client ID&lt;/em&gt; et &lt;em&gt;Client Secret&lt;/em&gt;  ;&lt;/li&gt;
+&lt;li&gt;Dans l’admin Owncloud, dans la rubrique &lt;em&gt;Stockage externe&lt;/em&gt; ajoutez une source Google Drive, et dans &lt;em&gt;Client ID/secret&lt;/em&gt; saisissez les valeurs notées à l’étape précédente.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Booter le Samsung 370R5E-S02 sur un support USB</title>
+      <link>http://people.via.ecp.fr/~jm/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</link>
+      <pubDate>Wed, 02 Oct 2013 22:53:58 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</guid>
+      <description>&lt;p&gt;Le PC Samsung 370R5E-S02 est livré avec Windows 8 préinstallé, et les réglages par défaut du BIOS ne permettent pas de booter sur un support USB.&lt;/p&gt;
+
+&lt;p&gt;Pour changer cela :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Bootez le PC et appuyez sur F2 dès le splash screen jusqu’à l’apparition de la config du BIOS ;&lt;/li&gt;
+&lt;li&gt;Dans l’onglet &lt;em&gt;Advanced&lt;/em&gt;, mettez &lt;em&gt;Fast BIOS Mode&lt;/em&gt; à &lt;em&gt;[Disabled]&lt;/em&gt; ;&lt;/li&gt;
+&lt;li&gt;Dans l’onglet &lt;em&gt;Boot&lt;/em&gt;, mettez &lt;em&gt;Secure Boot&lt;/em&gt; à &lt;em&gt;[Disabled]&lt;/em&gt; ;&lt;/li&gt;
+&lt;li&gt;Appuyez sur F10 pour sauvegarder la configuration et redémarrer ;&lt;/li&gt;
+&lt;li&gt;À nouveau, appuyez sur F2 pour entrer dans la config du BIOS ;&lt;/li&gt;
+&lt;li&gt;Dans l’onglet &lt;em&gt;Boot&lt;/em&gt;, sélectionnez &lt;em&gt;Boot Device Priority&lt;/em&gt; et dans &lt;em&gt;Boot Option #1&lt;/em&gt; choisissez votre support USB (&lt;strong&gt;NB :&lt;/strong&gt; avec un disque externe, il peut falloir un reboot supplémentaire pour qu’il soit reconnu), puis appuyez sur F10.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Batterie Bolloré : prête pour la maison ?</title>
+      <link>http://people.via.ecp.fr/~jm/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</link>
+      <pubDate>Fri, 13 Sep 2013 23:05:58 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</guid>
+      <description>&lt;p&gt;Si &lt;em&gt;Blue solutions&lt;/em&gt; fait &lt;a href=&#34;http://tempsreel.nouvelobs.com/economie/20130913.OBS6970/bollore-prepare-l-entree-en-bourse-de-ses-batteries.html&#34;&gt;parler&lt;/a&gt; d’elle ces jours-ci, c’est qu’elle entre en bourse le 20 octobre. Cette filiale du groupe Bolloré fournit la batterie de la &lt;em&gt;Bluecar&lt;/em&gt; utilisée par Autolib’.&lt;/p&gt;
+
+&lt;p&gt;Les caractéristiques de cette batterie Lithium-Métal-Polymère sont décrites sur le &lt;a href=&#34;http://www.bluecar.fr/les-batteries-lmp-lithium-metal-polymere&#34;&gt;site de Bluecar&lt;/a&gt; : volume de 300 L (environ 28 x 75 x 140 cm), poids de 300 kg, capacité de 30 kWh, durée de vie de 400.000 km ce qui avec une consommation de &lt;a href=&#34;http://fr.wikipedia.org/wiki/Bollor%C3%A9_Bluecar&#34;&gt;14 kWh aux 100 km&lt;/a&gt; correspond à 56.000 kWh.&lt;/p&gt;
+
+&lt;p&gt;De telles caractéristiques permettent d’envisager une utilisation domestique. Cependant, si le jour où chaque foyer pourra stocker son énergie on assistera à une révolution aussi importante que celle d’Internet, pour amorcer cette transformation il faudra y trouver un intérêt économique sur la base des usages actuels.&lt;/p&gt;
+
+&lt;p&gt;Si une famille consomme 7000 kWh par an dont 4900 kWh (70%) en heures pleines, alors le stockage permettrait de déplacer cette consommation en heures creuses et d’économiser 4900 * 0,04 ~ 200 € par an pendant 8 ans (durée de vie de 56.000 kWh), soit 1600 € en tout.&lt;/p&gt;
+
+&lt;p&gt;C’est lorsque le prix d’installation (batterie + système de gestion) passera sous ce seuil que la révolution énergétique pourra commencer. Nous n’en sommes peut-être plus très loin…&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

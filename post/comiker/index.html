@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Comiker - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/comiker/">Comiker</a></h1>
+		<div class="post-date">16 septembre 2010</div>
+		
+		<p>Comiker is a cartoon maker I wrote to learn Python programming. I am an avid
+reader of webcomics like <a href="http://dilbert.com/">Dilbert</a> or <a href="http://xkcd.com">xkcd</a> where
+the drawing is quite repetitive and I thought it would be great to let people
+create their own comics even if they cannot draw.</p>
+
+<p><center><a href="http://comiker-hrd.appspot.com">comiker-hrd.appspot.com</a></center></p>
+
+<p>I used the <a href="http://flask.pocoo.org">Flask</a> microframework after reading that
+<a href="http://www.quora.com">Quora</a> makers would have used it instead of Pylons if it had
+been there at the time they started.</p>
+
+<p>Comiker uses twitter OAuth for login. I initially wanted to make it with
+Facebook Connect but recent evolutions (like the removal of post-authorize
+callback) made development on a local machine a real pain.</p>
+
+<p>Comiker is hosted on <a href="https://developers.google.com/appengine/?csw=1">Google Appengine</a> (GAE)
+which provides a great service for free as long as your site does not get
+millions of visitors per day. The datastore API is great and my code was much
+lighter after I ported it from sqlite3 to the datastore. The main issue though
+was for image manipulation because GAE did not provide the standard Python
+Image Library. Instead it had its own images API which did not allow text
+rendering. I had to use <a href="http://code.google.com/p/pybmp/">pybmp</a> module which is a
+pure Python bmp module with TTF rendering, tweak it and mix it with Google
+images API.</p>
+
+<p>Eventually Comiker allows comic ranking like
+thefunniest.info (now defunct), but uses Microsoft
+<a href="http://research.microsoft.com/en-us/projects/trueskill/details.aspx">TrueSkill</a> algorithm which is an improved Elo system,
+especially in that it handles new players in a much cleaner way.</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/projets/">projets</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

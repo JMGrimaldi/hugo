@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>SpeedTouch &amp; Debian - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/speedtouch-debian/">SpeedTouch &amp; Debian</a></h1>
+		<div class="post-date">26 juin 2005</div>
+		<em>Cet article publié en août 2002 a été mis à jour.</em>
+		
+
+<div class="message">Cet article est obsolète.</div>
+
+<p>Cette page explique comment installer le modem ADSL Alcatel <em>Speed Touch USB</em>
+sous Linux avec une distribution Debian. En effet, ayant eu à réaliser cette
+installation, j&rsquo;ai perdu quelques heures à essayer d&rsquo;utiliser, par exemple, le
+package <code>kernel-patch-2.4-speedtouch</code>, ou encore à chercher quoi mettre dans
+mon <code>/etc/network/interfaces</code>.</p>
+
+<p>Pas besoin ici de patcher le kernel : on va juste recompiler le noyau,
+installer un ou deux packages, récupérer un fichier et éditer quelques
+fichiers de configuration.</p>
+
+<ul>
+<li><a href="#configuration-du-noyau">Configuration du noyau</a></li>
+<li><a href="#installation-des-pilotes-du-modem-et-du-microcode">Installation des pilotes du modem et du microcode</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#connexion-et-automatisation">Connexion et automatisation</a></li>
+</ul>
+
+<p>Les noyaux 2.6 à partir du 2.6.10 intègrent un mécanisme de chargement de
+firmware plus rapide et plus fiable que _modem_run_ : plus la peine
+d&rsquo;installer le package <code>speedtouch</code>, il faut séparer le fichier <code>mgmt.o</code> en 2
+(le chargeur et le firmware) grâce à l&rsquo;utilitaire firmware-extractor (cf.
+Google), placer les fichiers sous <code>/usr/local/lib/firmware/</code>, et enfin comme
+on fait du pppoatm, créer un fichier <code>/etc/modprobe.d/speedtouch</code> contenant la
+ligne suivante :</p>
+
+<pre><code>install speedtch modprobe pppoatm; modprobe --ignore-install speedtch
+</code></pre>
+
+<p>Cela a pour effet de remplacer le chargement du module speedtouch par la ligne
+voulue (il faudra bien sûr avoir compilé le module Speedtouch avec le noyau).</p>
+
+<p>La configuration de l&rsquo;interface <code>ppp0</code> devient alors simplement :</p>
+
+<pre><code>iface ppp0 inet ppp
+    provider    adsl
+</code></pre>
+
+<p>Il faut également modifier le fichier <code>peers/adsl</code> pour supprimer la ligne
+<code>pty ...</code> et à la place rajouter à la fin du fichier :</p>
+
+<pre><code>plugin  pppoatm.so
+8.35
+</code></pre>
+
+<p>Il semble que le seul moyen pour rouvrir la session PPP après la coupure qui a
+lieu toutes les 24h soit de mettre un <code>pon adsl</code> dans la crontab (j&rsquo;ai essayé
+un pon sur le post-down de ppp0, ainsi que les paramètres holdoff et lcp-
+restart du fichier de peer, mais plouf).</p>
+
+<p>Enfin le paramétrage en <code>auto</code> de l&rsquo;interface pour la monter au démarrage ne
+fonctionne pas (il intervient sans doute trop tôt par rapport au chargement du
+firmware) ; à la place on peut modifier <code>/etc/init.d/ppp</code> (voici <a href="../../static/ppp">mon
+fichier</a>).</p>
+
+<h2 id="configuration-du-noyau">Configuration du noyau</h2>
+
+<p><em>Il est possible que j&rsquo;oublie ici quelques fonctions déjà activées chez moi et
+dont je n&rsquo;ai donc pas ressenti le manque.</em></p>
+
+<p>Dans le répertoire où l&rsquo;on a décompressé les sources d&rsquo;un noyau 2.4, faire un
+<code>make xconfig</code> et choisir les options suivantes.</p>
+
+<h3 id="support-usb">Support USB</h3>
+
+<ul>
+<li>USB support &gt; Support for USB [M]</li>
+<li>USB support &gt; Preliminary USB device filesystem [Y]</li>
+<li>USB support &gt; UHCI (Intel PIIX4, VIA, &hellip;) support [M]<br />
+<em>Ici la doc de ma carte-mère indiquait un bus USB compatible Intel Universal
+HCI ; il est possible que vous ayez plutôt besoin du module OHCI, dans le
+doute compilez les deux, ça ne coûte rien.</em></li>
+</ul>
+
+<h3 id="autres-fonctions-à-activer">Autres fonctions à activer</h3>
+
+<ul>
+<li>Code maturity level options &gt; Prompt for development and/or incomplete code/drivers [Y]</li>
+<li>Networking options &gt; Asynchronous Transfer Mode (ATM)(EXPERIMENTAL) [Y]<br />
+<em>Le support ATM est nécessaire pour faire du PPP over ATM (pppoa) ; il est également possible de faire du PPP over Ethernet (pppoe), mais il paraît que c&rsquo;est moins bien.</em></li>
+<li>Network device support &gt; PPP (point-to-point protocol) support [M]</li>
+<li>Network device support &gt; PPP support for sync tty ports [M]</li>
+<li>Character devices &gt; HDLC line discipline support [M]</li>
+</ul>
+
+<p>Cela fait, compiler le noyau et les modules, et les installer (<code>make dep clean
+bzImage</code>, puis <code>make modules</code> et <code>make modules_install</code>).</p>
+
+<p>Rajouter <code>usb-uhci</code> (ou <code>usb-ohci</code> si c&rsquo;est celui-ci que vous avez choisi,
+voire les deux si vous ne savez pas) dans <code>/etc/modules</code>.</p>
+
+<p>Pour achever l&rsquo;installation du support USB, rajouter la ligne suivante dans
+<code>/etc/fstab</code> :</p>
+
+<pre><code>none            /proc/bus/usb   usbdevfs        default         0       0
+</code></pre>
+
+<p>Avec mon 2.4.19, le module <code>n_hdlc</code> n&rsquo;était pas correctement installé :
+rajouter <code>alias tty-ldisc-13 n_hdlc</code> dans <code>/etc/modutils/ppp</code> puis faire
+<code>update-modules</code> pour proprement mettre à jour <code>/etc/modules.conf</code>.</p>
+
+<p>Rebootez avec votre beau noyau tout neuf ; <code>/proc/bus/usb</code> doit contenir un
+fichier virtuel <code>devices</code>, sur lequel vous pouvez faire un <code>cat</code>. Si votre
+SpeedTouch est branché, il y a une ligne <code>S: Product=Speed Touch USB</code>.</p>
+
+<h2 id="installation-des-pilotes-du-modem-et-du-microcode">Installation des pilotes du modem et du microcode</h2>
+
+<p>Là il faut d&rsquo;une part les pilotes, d&rsquo;autre part le microcode (<em>firmware</em>) du
+modem. J&rsquo;imagine que le microcode sert d&rsquo;interface entre le matériel et les
+pilotes. Pour ces derniers, il existe d&rsquo;une part les pilotes propriétaires
+Alcatel (c&rsquo;est à leur utilisation qu&rsquo;est destiné le package <code>kernel-
+patch-2.4-spedtouch</code>), d&rsquo;autre part les pilotes OpenSource (leur page est
+<a href="http://speedtouch.sourceforge.net/">ici</a>) initialement développés par Benoît
+Papillault, censément plus performants, plus stables, et forcément plus
+évolutifs.</p>
+
+<h3 id="pilotes">Pilotes</h3>
+
+<p>Ce sont donc ces derniers que nous allons utiliser, d&rsquo;autant qu&rsquo;en attendant
+le package debian de la dernière version, celui de l&rsquo;avant-dernière fonctionne
+sans problème : <a href="http://prdownloads.sourceforge.net/speedtouch/speedtouch_1.0-1.1rc2-1_i386.deb?download">speedtouch_1.0-1.1rc2-1_i386.deb</a>. Télécharger et
+installer ce package (<code>dpkg --install speedtouch_1.0-1.1rc2-1_i386.deb</code>).</p>
+
+<h3 id="microcode">Microcode</h3>
+
+<p>Si vous avez déjà installé le modem sous Windows, vous avez un fichier
+<code>[Partition Windows]/windows/system/alcaudsl.sys</code>. Copiez-le sous le nom
+<code>mgmt.o</code> dans le répertoire <code>/usr/local/share/speedtouch/</code> que vous aurez créé
+(vous pouvez aussi le laisser en place, mais vous devrez adapter la suite de
+la configuration).</p>
+
+<p>Si vous n&rsquo;avez rien installé mais que vous avez les pilotes sous la main, vous
+devez pouvoir y trouver ce fichier, par exemple sur le CD du pack Wanadoo
+Extense : <code>[CD]/Datas/drivers/SpeedTouch/Driver/alcaudsl.sys</code>. Copiez-le comme
+au paragraphe précédent.</p>
+
+<p>Sinon, allez sur le site d&rsquo;Alcatel
+<a href="https://web.archive.org/web/20050610013324/http://www.speedtouchdsl.com/supuser.htm">ici</a>, choisissez <em>Driver Upgrade
+for Linux</em>, fournissez les infos demandées, puis <em>Continue</em>, téléchargez la
+<em>Binary release</em> (<code>speedmgmt.tar.gz</code>), décompressez le fichier, et copiez
+<code>mgmt.o</code> dans le répertoire <code>/usr/local/share/speedtouch/</code> que vous aurez
+créé.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<h3 id="ppp">PPP</h3>
+
+<p>Si ce n&rsquo;est pas déjà fait installez le package <code>ppp</code>. Puis créez un fichier
+<code>/etc/ppp/peers/adsl</code> ainsi fait, où vous remplacerez xxxxxxx par votre
+identifiant de connexion et, si vous n&rsquo;êtes pas chez Wanadoo (France Télécom
+Interactive = fti), fti/xxxxxxx@fti par xxxxxxx@clubadsl1 pour Club-Internet,
+xxxxxxx@nerim.fsa pour Nerim, etc. :</p>
+
+<pre><code># See pppd(8) for details
+
+debug
+kdebug 1
+noipdefault
+defaultroute
+pty &quot;/usr/sbin/pppoa3 -m 1 -c -vpi 8 -vci 35&quot;
+sync
+user &quot;fti/xxxxxxx@fti&quot;
+noauth
+noaccomp
+nopcomp
+noccp
+novj
+holdoff 4
+persist
+maxfail 25
+usepeerdns
+</code></pre>
+
+<p>Ensuite, stockez votre mot de passe dans <code>/etc/ppp/chap-secrets</code> (CHAP est le
+protocole utilisé par Wanadoo ; si vous avez un autre FAI dont vous ignorez le
+protocole éditez de même <code>/etc/ppp/pap-secrets</code>, pour le protocole PAP utilisé
+par exemple par Club-Internet), qui doit ressembler à ceci (remplacez
+fti/xxxxxxx@fti par la même chose que ci-dessus et yyyyyyy par votre mot de
+passe de connexion) :</p>
+
+<pre><code># Secrets for authentication using CHAP
+# client        server  secret                  IP addresses
+fti/xxxxxxx@fti *       yyyyyyy                 *
+</code></pre>
+
+<h3 id="réseau">Réseau</h3>
+
+<p>Le <code>usepeerdns</code> de la config de ppp ci-dessus fait qu&rsquo;à la connexion
+<code>/etc/resolv.conf</code> est renommé en <code>/etc/resolv.conf.ppp.bak</code> et remplacé par
+un fichier récupéré chez l&rsquo;hébergeur, qui contient les IP des serveurs DNS.</p>
+
+<p><em>En cas de problème de DNS (messages _Hôte inconnu</em> à répétition), effacer le
+<code>/etc/resolv.conf</code> existant éventuellement, puis créer un lien vers le fichier
+<code>/etc/ppp/resolv.conf</code> :</p>
+
+<pre><code>ln -s /etc/ppp/resolv.conf /etc/resolv.conf
+</code></pre>
+
+<p>(ne pas oublier de donner les droits de passage &ndash;x à tous les utilisateurs
+sur <code>/etc/ppp/</code>)_</p>
+
+<p>Autre fichier important, <code>/etc/network/interfaces</code>. Vous n&rsquo;avez pas de carte
+réseau, donc pas d&rsquo;interface eth0 (à la place vous avez ppp0, configuré
+ailleurs), mais il faut toujours une interface de loopback. Bref utilisez ce
+fichier :</p>
+
+<pre><code># /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+
+# The loopback interface
+auto lo
+iface lo inet loopback
+</code></pre>
+
+<h2 id="connexion-et-automatisation">Connexion et automatisation</h2>
+
+<p>Voilà, tout est prêt. Commencez par télécharger le microcode sur le modem :</p>
+
+<pre><code>modem_run -f /usr/local/share/speedtouch/mgmt.o
+</code></pre>
+
+<p>La lampe de gauche est verte et fixe ; celle de droite est verte et clignote.
+Ne vous inquiétez pas si un message du genre <code>usb_control/bulk_msg: timeout /
+usbdevfs: USBDEVFS_BULK failed etc.</code> apparaît. Au bout d&rsquo;une trentaine de
+secondes la lampe de droite doit  être verte et fixe également. Sinon vérifiez
+que votre ligne téléphonique fonctionne (en décrochant le téléphone) puis que
+votre ligne ADSL a bien été ouverte (en appelant FT).</p>
+
+<p>Ensuite, connectez-vous :</p>
+
+<pre><code>pppd call adsl
+</code></pre>
+
+<p>Pour voir ce qui se passe, n&rsquo;hésitez pas à surveiller votre syslog (<code>tail -f
+/var/log/syslog</code>) ; si vous recevez des paquets (ça doit prendre 2 secondes)
+c&rsquo;est bon, vous pouvez surfer (<code>ifconfig ppp0</code> vous fournit des infos sur la
+connexion). Sinon le syslog doit justement vous indiquer où est le problème.</p>
+
+<p>Il reste simplement à automatiser le démarrage au boot en rajoutant dans
+<code>/etc/network/interfaces</code> (on peut ajuster le <code>sleep 20</code>, le tout étant
+qu&rsquo;après un <code>ifdown ppp0; ifup ppp0</code>, la connexion soit encore établie) :</p>
+
+<pre><code># Connexion ADSL
+auto ppp0
+iface ppp0 inet ppp
+    provider    adsl
+    pre-up      ps -e | grep -q modem_run || modem_run -i 3 -n 3 -f /usr/local/share/speedtouch/mgmt.o
+    post-down   sleep 20; ifup ppp0 &amp;
+</code></pre>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

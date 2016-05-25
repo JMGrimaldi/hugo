@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>minishowcase-jm - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/minishowcase-jm/">minishowcase-jm</a></h1>
+		<div class="post-date">26 octobre 2010</div>
+		
+		
+
+<div class="message">Updated on Jul 30, 2011</div>
+
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#how-to-install">How to install</a></li>
+<li><a href="#advanced-configuration">Advanced configuration</a></li>
+<li><a href="#downloads">Downloads</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<h1 id="what-is-it">What is it?</h1>
+
+<p>Minishowcase is the simplest online photo gallery you can find: put your files
+in a directory and browse them. You just need a webserver like Apache with PHP
+enabled. No database, no image preprocessing, no pain.</p>
+
+<p>Minishowcase-scubabeer was a version that added subfolders with only 2-levels
+depth (and no images allowed at 1st level).</p>
+
+<p>Minishowcase-jm is my own fork over the latest official version (v09b142),
+which adds infinite subfolders and addresses some limitations of the official
+version:</p>
+
+<ul>
+<li>subfolders with infinite depth</li>
+<li>spaces allowed in file and folder names</li>
+<li>better support of non-ASCII characters</li>
+<li>removed picture autoresize which looks ugly in small windows</li>
+</ul>
+
+<p><img src="../../static/minishowcase-jm/minishowcase-jm.png" alt="" />
+</p>
+
+<h1 id="how-to-install">How to install</h1>
+
+<ul>
+<li>download the zipfile below</li>
+<li>unzip in your web server root directory (PHP needed); this will create a <code>minishowcase/</code> folder (which you can safely rename)</li>
+<li>check minishowcase is accessible through <code>http://&lt;yourserver&gt;/minishowcase</code> (or whatever you renamed it)</li>
+<li>make sure the <code>minishowcase/cache</code> folder is writeable by your webserver (in Ubuntu set group ownership to <code>www-data</code> then <code>chmod g+w cache</code>), else thumbnails will be regenerated each time</li>
+<li>put your own directory structure with your photo files under <code>minishowcase/galleries/</code></li>
+</ul>
+
+<h1 id="advanced-configuration">Advanced configuration</h1>
+
+<ul>
+<li>to protect one of your subfolders put a <code>password.php</code> in it, containing the password in clear text (if you use Apache the included <code>minishowcase/.htaccess</code> file will prevent access to these files)</li>
+</ul>
+
+<h1 id="downloads">Downloads</h1>
+
+<p>30/07/2011<br />
+&gt; <a href="../../static/minishowcase-jm/minishowcase-jm.v09b142-1.2.zip">minishowcase-jm v09b142-1.2 ZIP</a> (752 Ko)<br />
+<em>Fixed &ldquo;Unknown modifier &lsquo;+&rsquo;&rdquo; error which happened in some setups (thanks John
+N. and K.Krivas for reporting the error)</em></p>
+
+<p>24/02/2011<br />
+&gt; <a href="../../static/minishowcase-jm/minishowcase-jm.v09b142-1.1.zip">minishowcase-jm v09b142-1.1 ZIP</a> (752 Ko)<br />
+<em>Fixed PHP warning on deprecated _ereg_replace</em> (thanks to R.Pearce)_</p>
+
+<p>26/10/2010<br />
+&gt; <a href="../../static/minishowcase-jm/minishowcase-jm.v09b142.zip">minishowcase-jm v09b142 ZIP</a>
+(752 Ko)</p>
+
+<h1 id="contact">Contact</h1>
+
+<p>Don&rsquo;t hesitate to <a href="mailto:jm@via.ecp.fr">email me</a> if you have any question or
+comment.</p>
+
+<p>You can also get general support from the official <a href="http://minishowcase.net/">minishowcase
+website</a>.</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/projets/">projets</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

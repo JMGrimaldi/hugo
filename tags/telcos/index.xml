@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Telcos - JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/tags/telcos/</link>
+    <description>Derniers contenus Telcos de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Tue, 01 Jan 2008 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/tags/telcos/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Le progrès carbure à l’abondance</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</link>
+      <pubDate>Tue, 01 Jan 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/canderson.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Chris Anderson est l’inventeur en 2004 du concept de la &lt;em&gt;Long tail&lt;/em&gt;. Il est aussi l’éditeur du magazine &lt;em&gt;Wired&lt;/em&gt;. Dans une &lt;a href=&#34;http://www.techdigest.tv/2007/12/liveblog_wireds.html&#34;&gt;allocution&lt;/a&gt; donnée à la conférence Nokia World le 5 décembre dernier, Chris nous fait réfléchir sur l’impact de l’abondance dans le progrès technologique : lors de l’introduction du nucléaire domestique dans les années 50, certains ont affirmé que ce progrès rendrait l’électricité gratuite, car infiniment disponible. On sait aujourd’hui que c’est faux, mais que se passerait-il si c’était vrai : à quoi ressemblerait le monde si l’électricité était réellement gratuite, si on disposait ainsi d’une source d’énergie infinie ?&lt;/p&gt;
+
+&lt;p&gt;Au-delà de cette expérience de pensée, les interfaces graphiques sont apparues lorsque les ingénieurs, tirant parti de la Loi de Moore, ont accepté de gaspiller des transistors, des cycles CPU, de faire comme s’ils étaient gratuits. Et cette évolution a permis à des non-ingénieurs d’accéder à l’informatique, et d’ouvrir de nouvelles perspectives.&lt;/p&gt;
+
+&lt;p&gt;Aujourd’hui le coût du stockage diminue de façon exponentielle : $10/To en 2010. Et alors que de nombreuses entreprises continuent de limiter la taille des boîtes mails internes à quelques centaines de Mo, Yahoo! qui a compris la tendance propose depuis mai 2007 une capacité de stockage infinie pour son webmail !&lt;/p&gt;
+
+&lt;p&gt;Enfin avec l’abondance de la bande passante, la distribution devient gratuite ce qui facilite l’expérimentation et permet à des contenus ou des services d’apparaître. L’Internet devient un magasin avec des étagères de capacité infinie où n’importe qui peut venir placer ses produits. Ce qui permet à des microacteurs d’adresser les besoins des minorités (la &lt;em&gt;Long tail&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;En définitive, quand une ressource devient presque gratuite, faites comme si elle était complètement gratuite, et vendez autre chose ! Et pour tout ce qui touche à la technologie, le coût des ressources finit forcément par tendre vers zéro…&lt;/p&gt;
+
+&lt;p&gt;Et même, avec d’autres motivations que l’argent, comme la réputation, la reconnaissance, des gens écrivent des articles, ou du code, gratuitement.&lt;/p&gt;
+
+&lt;p&gt;D’où l’émergence de nouveaux business models :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Freemium&lt;/em&gt; : offrir gratuitement 99% du service à tout le monde pour qu’une petite fraction des utilisateurs achètent le 1% restant ;&lt;/li&gt;
+&lt;li&gt;musique gratuite, à l’instar de Radiohead : pour vendre des places de concerts à $100&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Et pour les opérateurs télécoms, un dilemme : si la nécessité de leur transformation en opérateurs de services est aujourd’hui évidente, peuvent-il réellement compter sur leur maîtrise du réseau pour proposer à l’utilisateur un meilleur service et obtenir un avantage face à des acteurs comme Google ? Ou bien la &lt;em&gt;commoditisation&lt;/em&gt; des tuyaux ne conduit-elle de toute façon pas à une égalité avec les &lt;em&gt;pure players&lt;/em&gt; du contenu ?&lt;/p&gt;
+
+&lt;p&gt;Je pense que la maîtrise du réseau donne simplement un temps d’avance : cela peut fournir aux telcos un avantage, à condition qu’ils soient très réactifs pour proposer des services innovants, et tirent parti de leurs ressources avant qu’elles ne deviennent gratuites.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Skype out : autopsie et enseignements</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/skype-out-autopsie-et-enseignements/</link>
+      <pubDate>Tue, 21 Aug 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/skype-out-autopsie-et-enseignements/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/skypeout.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Niels Bohr, prix nobel de physique en 1922, disait qu’« un expert est une personne qui a fait toutes les erreurs possibles dans un domaine très restreint. » Tant qu’à faire, si on peut apprendre des erreurs des autres, c’est peut-être un peu moins efficace mais certainement aussi beaucoup moins douloureux.&lt;/p&gt;
+
+&lt;p&gt;En l’occurrence, vous savez sans doute que le réseau Skype a connu les 16 et 17 août derniers une panne qui a privé de téléphone 220 millions d’utilisateurs pendant 2 jours (à relativiser tout de même, la plupart de ces utilisateurs enregistrés utilisant d’autres moyens de communication). Villu Arak a publié hier sur le blog de Skype &lt;a href=&#34;http://heartbeat.skype.com/2007/08/what_happened_on_august_16.html&#34;&gt;ce billet&lt;/a&gt; qui revient sur l’autopsie de l’incident.&lt;/p&gt;
+
+&lt;p&gt;D’après cette analyse, l’étincelle a été une mise à jour Windows distribuée par Windows Update, qui a déclenché le reboot de dizaines de millions de PC dans un laps de temps très court. Il faut savoir que l’architecture de Skype (décrite dans cette &lt;a href=&#34;../../static/freestyle/skype_041125.pdf&#34;&gt;excellente présentation&lt;/a&gt; trouvée &lt;a href=&#34;http://codinginparadise.org/weblog/2004/12/skypes-architecture.html&#34;&gt;ici&lt;/a&gt;) s’appuie sur un réseau P2P de &lt;em&gt;Super Nodes&lt;/em&gt; hébergés sur les machines de certains utilisateurs, et que seul le &lt;em&gt;Login Server&lt;/em&gt; reste centralisé. Mais ce dernier a été submergé de requêtes par les PC qui rebootaient. Les Super Nodes étant des clients comme les autres, très peu étaient fonctionnels, donc même les clients qui avaient réussi à contacter le Login Server ne trouvaient pas de Super Node, recommençaient probablement le processus, d’où un effet boule de neige.&lt;/p&gt;
+
+&lt;p&gt;Le billet parle de fonctions d’auto-réparation du réseau P2P qui n’ont pas joué leur rôle en raison d’un bug dans l’algorithme d’allocation des ressources réseau. Probablement une priorisation des requêtes des Super Nodes, et/ou une temporisation exponentielle des réessais en cas d’échec, qui n’ont pas fonctionné.&lt;/p&gt;
+
+&lt;p&gt;Cet incident montre en tout cas bien que les événements improbables finissent toujours par arriver. Maintenant cela aura-t-il un impact durable sur le business de Skype ? Sincèrement je ne pense pas. Comme le pointe à demi-mots le billet de Skype, les utilisateurs n’ont pas encore aujourd’hui un niveau de confiance très élevé dans les technologies du web. Beaucoup considèrent que les pannes sont le prix à payer pour ces nouveaux services, qui sont encore un simple complément aux services traditionnels que sont le bon vieux fixe ou le réseau mobile, beaucoup plus fiables.&lt;/p&gt;
+
+&lt;p&gt;À retenir en tout cas l’excellente communication de crise sur le blog de Skype avec une transparence totale dès le début de la crise, et un billet toutes les 6 heures pour tenir au courant de la résolution. En espérant que cette leçon-là n’ait pas à servir avant longtemps…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Faut-il virer ses clients ?</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/faut-il-virer-ses-clients/</link>
+      <pubDate>Sun, 19 Aug 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/faut-il-virer-ses-clients/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/exit.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans son livre &lt;em&gt;The 4-hour workweek&lt;/em&gt;, en tête des ventes du New York Times dans la catégorie Business au début du mois, Tim Ferris recommande aux entrepreneurs de virer les clients pour lesquels le rapport gains/efforts est le plus faible : en application de la &lt;a href=&#34;http://fr.wikipedia.org/wiki/Loi_de_Pareto&#34;&gt;loi de Pareto&lt;/a&gt; (ou loi des 80/20), 20% des clients représentent en effet 80% du chiffre d’affaires. Et 20%, pas nécessairement les mêmes justement, représentent 80% des réclamations, de l’insatisfaction, et au final du stress pour l’entreprise. Tim conseille donc simplement de virer les 20% de clients les plus récriminants, et à la limite de ne garder que les 20% les plus productifs.&lt;/p&gt;
+
+&lt;p&gt;Plusieurs secteurs font déjà ce genre de sélection : agences immobilières, boîtes de nuit, cabinets d’assurances, … Mais on y est moins habitués pour d’autres produits.&lt;/p&gt;
+
+&lt;p&gt;Or l’opérateur mobile Sprint-Nextel (3e aux US) vient de &lt;a href=&#34;https://web.archive.org/web/20070823230423/http://www.news4jax.com/news/13650557/detail.html&#34;&gt;virer 1200 clients&lt;/a&gt; qui se plaignaient trop, et appelaient la hotline 40 fois plus que la moyenne (40K appels par mois). Sur les 44 millions de clients de Sprint ça paraît peu, mais en poussant cette logique un peu plus loin je ne vois pas pourquoi ça s’arrêterait. Une bonne occasion pour les concurrents de regagner ces clients et de les satisfaire vraiment !&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Au service de l’état</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/au-service-de-l-%C3%A9tat/</link>
+      <pubDate>Thu, 17 May 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/au-service-de-l-%C3%A9tat/</guid>
+      <description>&lt;p&gt;Chez un opérateur Internet, quand un client s’abonne à la Voix sur IP par exemple, il faut configurer le logiciel qui tourne dans sa box : adresse du serveur VoIP, login et mot de passe du client, etc. C’est ce qu’on appelle l’activation du terminal. Alors soit on envoie ces infos au client par mail et c’est à lui de les rentrer dans la box, soit on essaye de lui faciliter la vie avec un mécanisme d’auto-provisioning.&lt;/p&gt;
+
+&lt;p&gt;Ça paraît simple, mais ça ne l’est pas tant que ça : il faut être certain qu’on configure la bonne box, il ne faut pas que n’importe qui puisse faire la même chose, la box peut être éteinte, lors d’un échange de box il faut automatiquement déconfigurer l’ancienne et reconfigurer la nouvelle, etc.&lt;/p&gt;
+
+&lt;p&gt;Souvent aujourd’hui, ce genre d’activation est géré par événements : pour schématiser, l’abonnement est saisi dans l’application de commande, qui passe l’info d’un côté à l’application de facturation, de l’autre à l’application de livraison, cette dernière transmet à une application d’aiguillage qui d’abord envoie l’ordre d’activation à la plate-forme VoIP qui génère la configuration, puis passe cette configuration à la brique de gestion des box, qui enfin la dépose là où il faut, quand elle parvient à joindre la box. Ouf !&lt;/p&gt;
+
+&lt;p&gt;Ce qu’il faut retenir c’est qu’il y a plein d’interfaces, que le processus complet dure des heures voire des jours, et qu’à chaque fois qu’on passe un ordre on transmet toutes les infos nécessaires (quelle offre, pour quel client, quels paramètres etc.). Résultat ces infos sont dupliquées à chaque niveau, avec tous les risques de désynchronisation qui en découlent : par exemple si le client change son abonnement avant que la configuration n’ait été mise sur sa box, on a au début de la chaîne la nouvelle configuration, alors qu’à la fin de la chaîne l’ancienne configuration attend toujours d’être déposée. Si pour une raison quelconque la nouvelle arrive avant l’ancienne, on a un problème. À l’opposé si on perd un ordre l’activation ne se fera jamais, mais comment s’en rend-on compte avant que le client mécontent nous appelle ?&lt;/p&gt;
+
+&lt;p&gt;Et si le client réinitialise sa box et perd la configuration, comment réémettre l’ordre d’activation ? Ce cas montre l’erreur fondamentale d’une gestion reposant uniquement sur le passage d’ordres : on prétend connaître l’état du terminal qui se trouve chez le client, alors qu’il a pu lui arriver n’importe quoi. Un terminal chez le client n’est pas un équipement réseau comme les autres. C’est un peu comme si on avait donné à tous les clients les clefs de nos salles machines. Il faut repenser la gestion de ces fragiles terminaisons que sont les box. Un ordre qui se perd ou une box qui efface sa configuration ne doivent plus être considérés comme des anomalies sur lesquelles on pose un pansement, mais comme des éléments normaux de la vie du réseau.&lt;/p&gt;
+
+&lt;p&gt;La solution c’est de passer d’un enchaînement d’ordres à une synchronisation d’états : lorsque la configuration est générée, au lieu de la passer dans un ordre à la brique de gestion des box qui la passera à son tour à la box si tant est qu’elle soit connectée, on ne fait rien ! De toute façon il faut que ça marche sans qu’on ne fasse rien à ce niveau-là, parce que des ordres peuvent se perdre, ou parce que la box peut effacer sa configuration. Donc on attend : on garde la configuration bien au chaud dans une base unique, un référentiel, et on attend que la box viennent nous demander si on a une configuration pour elle. Pour ça il faut qu’elle soit programmée pour venir nous voir réguilèrement. À ce moment on est sûr que la box est joignable, on connaît son état réel (a-t-elle modifié sa conf sans nous prévenir ?), et comme on n’a pas dupliqué la configuration à tous les étages on est sûr que celle qu’on va chercher dans le référentiel est la bonne. C’est juste de la synchronisation. Et si ça rate ce n’est pas grave : on se synchronisera la fois d’après.&lt;/p&gt;
+
+&lt;p&gt;Moralité : simplicité&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Plaintes à haut débit en 2006</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</link>
+      <pubDate>Sun, 18 Mar 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</guid>
+      <description>&lt;p&gt;Je reviens après quelques semaines, vacances lointaines, autres priorités, etc. L’&lt;a href=&#34;https://web.archive.org/web/20070322172425/http://www.afutt.org/particuliers/index.html&#34;&gt;Afutt&lt;/a&gt; publie aujourd’hui dans le JDD son observatoire annuel des plaintes dans le secteur des télécoms. J’y ai ajouté le ratio plaintes/parc qui permet de voir chez qui les clients sont les plus mécontents. Résultat des courses :&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Opérateur&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Plaintes&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Pourcentage&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Parc&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Plaintes/parc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Alice&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1849&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;31%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5.4%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5.66&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Free&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1310&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;22%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;20.3%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1.07&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Club Internet&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1267&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;21%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4.6%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4.55&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Neuf&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;834&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;14%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;10.1%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1.36&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Noos&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;619&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;10%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4.1%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2.49&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Orange&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;175&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;48.6%&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0.06&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;On peut alors comparer ce taux de plaintes à celui publié dans l’&lt;a href=&#34;../../static/freestyle/observatoireplaintes2005.pdf&#34;&gt;observatoire 2005&lt;/a&gt; :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../static/freestyle/afutt2006.png&#34; alt=&#34;Plaintes/parc 2005-2006&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Free, qui en 2005 réalisait 51% des plaintes avec à peine 17% du parc, a bien redressé la barre. Neuf, qui entretemps a absorbé AOL et son excellente satisfaction client, s’améliore également. Enfin Orange conserve le haut du panier.&lt;/p&gt;
+
+&lt;p&gt;En revanche Alice et Club Internet voient leur taux de plaintes exploser. Club Internet qui est à vendre connaît des difficultés financières et ceci explique sans doute cela. Pour Alice, il semble que ce soit la qualité de service qui soit transparente…&lt;/p&gt;
+
+&lt;p&gt;Le JDD note certes que les bons résultats d’Orange s’expliquent par le fait que l’opérateur historique maîtrise l’installation de bout en bout. Cela dit pour le client c’est surtout le résultat qui compte…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tu tires ou tu pousses ?</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/tu-tires-ou-tu-pousses/</link>
+      <pubDate>Sun, 28 Jan 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/tu-tires-ou-tu-pousses/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/devices.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Le Device Management est l’art de gérer les terminaux, qui peuvent être des PC, des téléphones, des décodeurs télé, en fait n’importe quel équipement connecté à un réseau. Gérer ça veut dire pouvoir faire à distance tout ce que l’on pourrait faire en étant sur place : mettre à jour les logiciels, corriger un mauvais paramétrage, rentrer un code pour accéder à un nouveau service, etc. Mais gérer c’est aussi gérer le nombre, à la manière d’un épicier qui ferait l’inventaire de son magasin : combien de boîtes de haricots, leur date limite, comment on y accède, etc. Pour une Livebox ce sera plutôt son numéro de série, la date de sa premère connexion, ou son IP.&lt;/p&gt;
+
+&lt;p&gt;Les applications sont nombreuses : permettre à un expert d’intervenir à distance et d’économiser le temps de déplacement, automatiser à grande échelle des actions répétitives, tout ça pour qu’au final l’utilisateur du terminal ait l’impression que ça marche « tout seul ».&lt;/p&gt;
+
+&lt;p&gt;On l’imagine, les facettes de ce domaine sont aussi nombreuses que passionnantes : éthiques, techniques, organisationnelles, ergonomiques. Aujourd’hui nous parlerons d’une question technique fondamentale : mode pull ou mode push ?&lt;/p&gt;
+
+&lt;p&gt;Avec la généralisation des protocoles en &lt;a href=&#34;http://en.wikipedia.org/wiki/Connection-oriented&#34;&gt;mode connecté&lt;/a&gt; comme HTTP, le terminal et le serveur échangent des informations au cours d’un dialogue entamé par l’un des deux. Lorsque c’est le terminal qui a appelé le serveur on parle de mode &lt;em&gt;Pull&lt;/em&gt; (&lt;em&gt;tirer&lt;/em&gt;) ; si c’est le serveur qui a réveillé le terminal c’est du &lt;em&gt;Push&lt;/em&gt; (&lt;em&gt;pousser&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Push et Pull sont souvent perçus par les décideurs informatiques comme deux antagonismes présentant chacun des avantages et des inconvénients finalement mal connus. Ce que j’ai observé, c’est que ceux qui font du Push lorgnent sur le Pull, et ceux qui font du Pull bavent sur le Push. Alors lequel choisir ?&lt;/p&gt;
+
+&lt;h2 id=&#34;pull&#34;&gt;Pull&lt;/h2&gt;
+
+&lt;p&gt;En mode Pull le terminal est une amoureuse impatiente qui va tous les jours demander à la poste s’il y a du courrier pour elle : le terminal connaît l’adresse du serveur et va régulièrement lui demander s’il a quelquechose pour lui. Le cas échéant, le serveur lui renvoie un paramétrage à appliquer, un nouveau logiciel à installer, oui lui demande de lui décrire sa configuration.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../static/freestyle/classe.jpg&#34; alt=&#34;classe.jpg&#34; /&gt;
+&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Avantages&lt;/th&gt;
+&lt;th&gt;Inconvénients&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;ul&gt;&lt;li&gt;ne nécessite pas de connaître le terminal au préalable : autoprovisioning&lt;/li&gt;&lt;li&gt;fonctionne même s’il y a plusieurs terminaux derrière la même IP (NAT)&lt;/li&gt;&lt;li&gt;peut être lié à des événements côté terminal pour moins perturber l’utilisateur : mise en veille, etc.&lt;/li&gt;&lt;li&gt;les reprises sur échec (coupure d’un téléchargement par exemple) sont automatiques&lt;/li&gt;&lt;li&gt;le lissage de charge se fait tout seul : si l’on dit aux terminaux de venir tous les 5 jours, on en traitera ~20% chaque jour&lt;/li&gt;&lt;li&gt;sécurité : le terminal appelant une adresse non modifiable, il est très difficile de prendre la place du serveur, ou d’intercepter les messages envoyés à un autre terminal&lt;/li&gt;&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;&lt;li&gt;peu réactif : il faut attendre que le terminal vienne&lt;/li&gt;&lt;li&gt;peu scalable : pour obtenir une réactivité correcte il faut des requêtes très fréquentes, ce qui charge le serveur&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;C’est comme ça que fonctionne le système de mise à jour de tous vos logiciels habituels : Firefox, Windows Update, McAfee, etc. Le principal avantage est de pouvoir décrire les campagnes de déploiement avec des règles génériques (ceux qui sont en version A reçoivent la version B, etc.) et de laisser les choses se faire d’elles-mêmes.&lt;/p&gt;
+
+&lt;h2 id=&#34;push&#34;&gt;Push&lt;/h2&gt;
+
+&lt;p&gt;En mode Push le postier connaît l’adresse d’Aglaé et court lui porter les messages dès qu’ils arrivent : c’est même plutôt un coursier qui fera le voyage trois fois dans la journée s’il y a trois messages.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../static/freestyle/fedex.jpg&#34; alt=&#34;fedex.jpg&#34; /&gt;
+&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Avantages&lt;/th&gt;
+&lt;th&gt;Inconvénients&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;ul&gt;&lt;li&gt;très réactif : l’action à effectuer est transmise immédiatement&lt;/li&gt;&lt;li&gt;permet même une interactivité entre un expert et le terminal&lt;/li&gt;&lt;li&gt;scalable : s’il y a en moyenne pour chaque terminal une action toutes les 3 semaines, pas la peine d’être dimensionné pour traiter une requête toutes les 2 heures&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;&lt;li&gt;on ne peut agir que sur les terminaux que l’on connaît déjà : provisioning nécessaire, souvent en mode Pull&lt;/li&gt;&lt;li&gt;un &lt;em&gt;network mapping&lt;/em&gt; (association entre l’identifiant du terminal et son adresse réseau) fiable est nécessaire, avec une synchronisation à chaque changement d’IP par exemple ; il faut cependant être conscient qu’il ne sera &lt;em&gt;jamais&lt;/em&gt; fiable à 100%&lt;/li&gt;&lt;li&gt;il faut que le terminal soit joignable, et gérer la reprise en cas d’échec&lt;/li&gt;&lt;li&gt;nécessite une participation de la passerelle s’il y a plusieurs terminaux derrière la même IP&lt;/li&gt;&lt;li&gt;sécurité : il faut une authentification forte du terminal pour éviter de lui envoyer les données confidentielles destinées à un autre, et du serveur pour éviter de prendre des ordres de n’importe qui&lt;/li&gt;&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;C’est comme ça que fonctionnent les systèmes en mode non connecté (SNMP), et surtout la plupart des progiciels de Device Management : IBM Tivoli, Microsoft SMS, etc. Le principal avantage est de permettre des actions &lt;em&gt;en direct&lt;/em&gt;. L’inconvénient est que la gestion des campagnes massives nécessite beaucoup de ressources.&lt;/p&gt;
+
+&lt;h2 id=&#34;and-the-winner-is&#34;&gt;And the winner is…&lt;/h2&gt;
+
+&lt;p&gt;Alors que choisir ? Je ne tournerai pas autour du pot : commencez par le Pull ! En effet le Pull n’est pas une option : c’est la seule solution réaliste pour établir le &lt;em&gt;network mapping&lt;/em&gt; fiable nécessaire au Push. De plus lorsqu’en Push un terminal n’est pas joignable, il faut bien qu’il s’annonce lorsqu’il revient, et que l’on soit capable de traiter cette requête Pull. Si vous faites du Device Management, vous avez besoin du Pull.&lt;/p&gt;
+
+&lt;p&gt;La nécessité du Push va ensuite dépendre de ce que vous voulez faire.&lt;/p&gt;
+
+&lt;p&gt;S’il s’agit de gérer des campagnes massives d’audit, de mise à jour, de reconfiguration etc. où vous pouvez décrire votre campagne avec des règles génériques et vous permettre d’attendre une journée pour connaître le résultat (ne serait-ce que parce que les capacités de votre réseau ne vous permettraient pas, même en Push, de tout faire en moins de temps), alors restez en Pull : je me suis occupé d’une infrastructure où pour gérer les campagnes en Push sur 100.000 terminaux il fallait 30 personnes. J’ai aussi mis en place des campagnes en Pull sur 4 millions de terminaux, avec 3 personnes.&lt;/p&gt;
+
+&lt;p&gt;En revanche sur des actions unitaires le Push ouvre de nouvelles voies : activation de service immédiate, interactivité entre un expert et le terminal dans un processus de diagnostic/réparation, etc.&lt;/p&gt;
+
+&lt;p&gt;Il n’y a donc pas de dichotomie entre Push et Pull : les deux sont complémentaires, et la meilleure illustration en est le fonctionnement du TR-069. Il s’agit d’un protocole standard défini par le &lt;a href=&#34;https://web.archive.org/web/20070127211200/http://www.dslforum.org/&#34;&gt;DSL Forum&lt;/a&gt; et en cours d’adoption par l’ensemble du monde des télécoms : dans ce protocole, le Push consiste simplement à demander au terminal de faire une requête Pull. Mais nous en reparlerons…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dopage à l’IP fixe</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/dopage-%C3%A0-l-ip-fixe/</link>
+      <pubDate>Wed, 17 Jan 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/dopage-%C3%A0-l-ip-fixe/</guid>
+      <description>&lt;p&gt;XiTi vient de publier son &lt;a href=&#34;https://web.archive.org/web/20070210082044/http://www.xitimonitor.com/fr-FR/Technique/FAI_Janvier_2007/index-1-1-3-71.html&#34;&gt;Palmarès des FAI en France&lt;/a&gt;, calculé en décembre 2006 par la provenance des requêtes sur une base de 5189 sites.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../static/freestyle/FAI-200701-1.png&#34;&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/FAI-200701-1-150x150.png&#34;&gt;&lt;/a&gt;&lt;br /&gt;
+Le résultat en images ci-contre. Orange a comme d’habitude un peu moins de 50%. Mais ce qui est étonnant c’est la faible part de Neuf+AOL (14.1%), alors que Neuf et Free (crédité ici de 20.3%) sont &lt;a href=&#34;http://www.sur-la-toile.com/mod_News_article_2403___.html&#34;&gt;notoirement au coude à coude&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Comment donc est mesurée cette part de marché ? Simplement XiTi prend l’ensemble des adresses IP ayant visité les sites du panel, et ventile par FAI.&lt;/p&gt;
+
+&lt;p&gt;Il faut savoir que certains FAI donnent à leurs clients une IP fixe (c’est pratique pour héberger un serveur) alors que d’autres attribuent une nouvelle IP à chaque session, ce qui nécessite globalement moins d’IP puisque tous les clients ne sont pas connectés en même temps. Avec la méthode de XiTi, les FAI en IP fixe ont donc un score dopé.&lt;/p&gt;
+
+&lt;p&gt;Free est en IP fixe, Neuf en IP dynamique.&lt;/p&gt;
+
+&lt;p&gt;J’ai signalé ce biais à XiTi, qui m’a répondu (rapidement d’ailleurs) qu’ils l’estimaient très faible. Une autre explication du bon score de Free dans cette étude serait la part des accès bas débit, mais je suis sceptique car alors Orange devrait être plus proche des 40% que des 50%… À suivre lors des prochaines annonces du nombre d’abonnés par les FAI…&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FAI 2.0</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/fai-2-0/</link>
+      <pubDate>Fri, 05 Jan 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/fai-2-0/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://web.archive.org/web/20070114105430/http://www.01net.com/article/337206.html&#34;&gt;Les enquêtes Médiamétrie&lt;/a&gt; sur l’audience Web en France montrent que les portails des FAI sont des poids lourds du web : Free est 3ème et Orange 4ème avec plus de 13 millions de visiteurs uniques chacun, devant Microsoft, eBay, etc. Orange vient même flirter avec le n°1 Google si l’on ajoute Voila.&lt;/p&gt;
+
+&lt;p&gt;Les FAI ont donc un levier de communication formidable, qui dépasse largement leur base de clients. Pourtant, que proposent ces FAI à leurs visiteurs ? Simplement une publication de type magazine. Certes Orange revendique sa transformation d’opérateur télécom en fournisseur de services, mais alors que l’économie du Web bâtit une croissance formidable sur les valeurs 2.0 « social, collaboration, sharing », nos FAI sont absents de cette actualité.&lt;/p&gt;
+
+&lt;p&gt;Oui Orange a lancé une plate-forme de blogs. Mais aucun de ses blogs dans le controversé &lt;a href=&#34;http://www.metronews.fr/fr/article/2006/10/12/11/5714-37/&#34;&gt;Top 100&lt;/a&gt; de Technorati/Edelman. Il faut dire qu’en offrant un outil moins abouti qu’Overblog, Blogger, ou Live Spaces, et en en réservant l’accès aux clients de l’opérateur, la lutte est difficile.&lt;/p&gt;
+
+&lt;p&gt;Plus généralement, alors que Google ou Yahoo! construisent leur succès et leur image sur des services ouverts à tous, les FAI réservent encore trop souvent leurs services à leurs clients. Comme si c’était un critère de choix du FAI… Au contraire, des services innovants, fiables, et gratuits forgent une telle image que Google &lt;a href=&#34;http://www.clubic.com/actualite-34028-google-fai-pourquoi-pas.html&#34;&gt;songerait&lt;/a&gt; à capitaliser sur cette image et devenir FAI : si tu ne vas pas aux géants de l’Internet, les géants viendront à toi…&lt;/p&gt;
+
+&lt;p&gt;Alors oui ça change, il y a une prise de conscience de l’espace libre sur le Web communautaire à occuper au plus vite, et je vois chez Orange des &lt;a href=&#34;https://web.archive.org/web/20070127003755/http://nextdotcom.typepad.com/whats_nextfr_le_blog_de_n/&#34;&gt;initiatives&lt;/a&gt; prometteuses. Un outil comme &lt;a href=&#34;https://web.archive.org/web/20070115230741/http://pikeo.com/&#34;&gt;Pikeo&lt;/a&gt; ou le futur Open Music vont dans le bon sens en étant innovants et surtout ouverts, mais les FAI font encore profil bas.&lt;/p&gt;
+
+&lt;p&gt;En ce début d’année où tous les analystes y vont de leurs pronostics pour 2007, je prédis donc que cette année verra les FAI enfin jouer un rôle significatif dans le Web 2.0. Parce que c’est maintenant où jamais. Bonne année à tous…&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

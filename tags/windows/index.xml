@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows - JM.Grimaldi</title>
+    <link>http://people.via.ecp.fr/~jm/tags/windows/</link>
+    <description>Derniers contenus Windows de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Tue, 11 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://people.via.ecp.fr/~jm/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Définir la vue par défaut des dossiers Windows</title>
+      <link>http://people.via.ecp.fr/~jm/post/vue-par-d%C3%A9faut/</link>
+      <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/vue-par-d%C3%A9faut/</guid>
+      <description>&lt;p&gt;Comment faire, dans l&amp;rsquo;explorateur de fichiers Windows 7, pour que la vue du dossier actuel (tri par Nom ou par Type, largeur des colonnes, etc.) s&amp;rsquo;applique à tous les dossiers ?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ajustez la vue souhaitée ;&lt;/li&gt;
+&lt;li&gt;Appuyez sur la touche &lt;code&gt;Alt&lt;/code&gt; pour faire apparaître le menu ;&lt;/li&gt;
+&lt;li&gt;Allez dans &lt;em&gt;Outils &amp;gt; Options des dossiers&amp;hellip;&lt;/em&gt;, onglet &lt;em&gt;Affichage&lt;/em&gt; ;&lt;/li&gt;
+&lt;li&gt;Appuyez sur le bouton &lt;em&gt;Appliquer aux dossiers&lt;/em&gt; et confirmez.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatiser Excel</title>
+      <link>http://people.via.ecp.fr/~jm/post/automatiser-excel/</link>
+      <pubDate>Mon, 10 Aug 2015 17:47:49 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/automatiser-excel/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/excel.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Combien d&amp;rsquo;heures ai-je passé sous Excel à faire des tâches répétitives, comme supprimer une colonne sur deux 35 fois de suite pour transformer un calendrier par demi-journées en un calendrier par journées ? Trop.&lt;/p&gt;
+
+&lt;p&gt;Aujourd&amp;rsquo;hui nous voyons donc comment automatiser cela, sur l&amp;rsquo;exemple de la suppression d&amp;rsquo;une colonne sur deux 35 fois de suite.&lt;/p&gt;
+
+&lt;h2 id=&#34;activer-les-macros&#34;&gt;Activer les macros&lt;/h2&gt;
+
+&lt;p&gt;L&amp;rsquo;exécution de code sous Excel passe nécessairement par la création d&amp;rsquo;une &lt;em&gt;macro&lt;/em&gt;. Pour activer cette fonctionnalité avec Excel 2010, allez dans le menu &lt;em&gt;Fichier &amp;gt; Options&lt;/em&gt;, puis &lt;em&gt;Personnaliser le Ruban&lt;/em&gt; et activez l&amp;rsquo;onglet &lt;em&gt;Développeur&lt;/em&gt; dans la colonne de droite. Faites &lt;em&gt;OK&lt;/em&gt;, un nouvel onglet &lt;em&gt;Développeur&lt;/em&gt; doit maintenant apparaître dans le ruban en haut.&lt;/p&gt;
+
+&lt;p&gt;Dans cet onglet, cliquez sur &lt;em&gt;Sécurité des macros &amp;gt; Paramètres des macros&lt;/em&gt; puis &lt;em&gt;Activer toutes les macros (non recommandé &amp;hellip;)&lt;/em&gt; et &lt;em&gt;OK&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dans l&amp;rsquo;onglet &lt;em&gt;Développeur&lt;/em&gt; cliquez ensuite sur le bouton &lt;em&gt;Macros&lt;/em&gt;, une boîte de dialogue s&amp;rsquo;ouvre. Saisissez le nom de votre macro (par exemple, &lt;em&gt;efface_1_colonne_sur_2&lt;/em&gt;) puis cliquez sur &lt;em&gt;Créer&lt;/em&gt;. La fenêtre &lt;em&gt;Microsoft Visual Basic pour Applications&lt;/em&gt; apparaît pour saisir le code.&lt;/p&gt;
+
+&lt;h2 id=&#34;saisir-le-code&#34;&gt;Saisir le code&lt;/h2&gt;
+
+&lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
+    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
+    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
+    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
+    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Quelques explications :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;La 1ère ligne (&lt;code&gt;Range(&amp;quot;C1&amp;quot;).Select&lt;/code&gt;) positionne le curseur en C1 ;&lt;/li&gt;
+&lt;li&gt;Puis on rentre dans une boucle &lt;em&gt;For &amp;hellip; Next&lt;/em&gt; qui commence avec &lt;code&gt;i&lt;/code&gt; à 1 ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ActiveCell.Offset(0, i)&lt;/code&gt; indique la cellule située 0 lignes plus bas et &lt;code&gt;i&lt;/code&gt; colonnes plus à droite que C1, c&amp;rsquo;est-à-dire D1, et &lt;code&gt;.EntireColumn.Delete&lt;/code&gt; efface toute la colonne (D) ;&lt;/li&gt;
+&lt;li&gt;Puis on recommence la boucle avec &lt;code&gt;i&lt;/code&gt; qui vaut 2, on efface la colonne E, et ainsi de suite 35 fois.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;laisser-faire&#34;&gt;Laisser faire&lt;/h2&gt;
+
+&lt;p&gt;Pour exécuter cette macro, appuyez sur le bouton &lt;em&gt;Exécuter&lt;/em&gt; dans la barre de menu (la petite flèche verte), ou appuyez simplement sur F5. Si le fichier est ouvert en lecture seule Excel vous demandera alors d&amp;rsquo;en enregistrer une copie.&lt;/p&gt;
+
+&lt;p&gt;L&amp;rsquo;opération s&amp;rsquo;exécute automatiquement. Vous pouvez ensuite fermer la fenêtre &lt;em&gt;Visual Basic&lt;/em&gt;. Bravo, vous venez de gagner 10 minutes !&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Traverser un proxy NTLM/SSPI</title>
+      <link>http://people.via.ecp.fr/~jm/post/traverser-un-proxy-ntlm-sspi/</link>
+      <pubDate>Mon, 02 Sep 2013 20:10:23 +0200</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/traverser-un-proxy-ntlm-sspi/</guid>
+      <description>&lt;p&gt;Sous Windows, un proxy NTLM/SSPI récupère automatiquement l’identité de votre session pour vous donner accès à Internet. L’avantage est que vous n’avez pas à saisir de mot de passe ; l’inconvénient est que si vous utilisez un outil qui ne supporte pas ce protocole (svn, wget, …), la connexion est impossible.&lt;/p&gt;
+
+&lt;p&gt;La solution est d’installer un proxy local qui gèrera l’authentification auprès du proxy SSPI. Le programme qui permet de faire cela s’appelle Cntlm.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Téléchargez l’archive &lt;a href=&#34;http://sourceforge.net/projects/cntlm/files/cntlm/cntlm%200.92.3/cntlm-0.92.3-win32.zip/download&#34;&gt;cntlm-0.92.3-win32.zip&lt;/a&gt; et décompressez-la dans le dossier &lt;code&gt;Mes Programmes\&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Éditez le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; et renseignez les infos &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; de votre compte Windows (le &lt;code&gt;Password&lt;/code&gt; est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, &lt;em&gt;Shift+Clic droit&lt;/em&gt; sur le répertoire, puis &lt;em&gt;Ouvrir une fenêtre de commandes ici&lt;/em&gt;), et lancez la commande suivante :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;cntlm -M http://test.com
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Cntlm vous demande de saisir votre &lt;em&gt;Password&lt;/em&gt; (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;Config profile  1/4... OK &lt;span style=&#34;font-weight: bold&#34;&gt;(&lt;/span&gt;HTTP code: 200&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; 
+----------------------------&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt; Profile  0 &lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;------
+Auth            NTLMv2
+PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
+------------------------------------------------
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ajoutez ces 2 lignes (&lt;em&gt;Auth&lt;/em&gt; et &lt;em&gt;PassNTLMv2&lt;/em&gt;) dans le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; après &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;cntlm -v
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ensuite paramétrez votre navigateur pour utiliser le proxy &lt;code&gt;localhost:3128&lt;/code&gt; et vérifiez que la navigation se fait bien en HTTP et en HTTPS ;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si cela fonctionne, vous pouvez arrêter Cntlm et le lancer en tâche de fond en retirant l’option &lt;code&gt;-v&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Vous pouvez désormais utiliser ce proxy local avec tous les outils qui ne supportaient pas le proxy SSPI.&lt;/p&gt;
+
+&lt;p&gt;Pour aller plus loin, il est possible via PuTTY d’ouvrir une session SSH à travers ce proxy HTTP, et d’utiliser la fonction &lt;em&gt;Tunnel&lt;/em&gt; pour mirrorer sur la machine locale un port de la machine distante. Par exemple, si votre machine distante héberge un serveur MySQL sur le port 3306, en forwardant ce port de votre machine locale vers la machine distante vos applications pourront accéder à cette base à l’adresse &lt;em&gt;localhost:3306&lt;/em&gt;, sans se soucier de l’existence d’un proxy.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Outlook : Ranger ses mails au clavier</title>
+      <link>http://people.via.ecp.fr/~jm/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
+      <pubDate>Sat, 28 Jul 2007 00:00:00 +0000</pubDate>
+      
+      <guid>http://people.via.ecp.fr/~jm/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/inboxzero.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Les gourous de la gestion d’information, de Robert Scoble à Merlin Mann, distinguent les &lt;em&gt;filers&lt;/em&gt; et les &lt;em&gt;pilers&lt;/em&gt; : pour gérer leurs mails les filers ont soixante dossiers, les pilers deux ou trois. L’idée des pilers étant de s’appuyer sur des outils de recherche performants pour retrouver l’info. Je suis devenu un piler après avoir lu &lt;a href=&#34;http://lifehacker.com/182318/empty-your-inbox-with-the-trusted-trio&#34;&gt;cet article&lt;/a&gt; et vu &lt;a href=&#34;https://www.youtube.com/watch?v=z9UjeTMb3Yk&#34;&gt;cette conférence&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;J’ai donc déplacé le contenu de mes 147 dossiers dans 1 seul nommé Archive, et traité mon Inbox jusqu’à 0 avec ces 2 dossiers supplémentaires : Action et Hold.&lt;/p&gt;
+
+&lt;p&gt;Pour accélérer le traitement de l’Inbox avec Outlook (2003 et plus), voici comment créer un raccourci clavier pour déplacer les mails sélectionnés dans un répertoire. 5 minutes chrono :&lt;/p&gt;
+
+&lt;h2 id=&#34;créer-une-signature-électronique&#34;&gt;Créer une signature électronique&lt;/h2&gt;
+
+&lt;p&gt;Cette étape est nécessaire pour lancer des macros Outlook lorsque le niveau de
+sécurité n&amp;rsquo;est pas au plus bas. Il suffit de lancer &lt;code&gt;SELFCERT.EXE&lt;/code&gt; qui doit se
+trouver sous &lt;code&gt;Program Files\Microsoft Office\Office&lt;/code&gt;, de taper votre nom (j&amp;rsquo;ai
+mis mes initiales) et de faire OK.&lt;/p&gt;
+
+&lt;h2 id=&#34;créer-une-macro&#34;&gt;Créer une macro&lt;/h2&gt;
+
+&lt;p&gt;Dans Outlook, faites &lt;em&gt;Outils &amp;gt; Macro &amp;gt; Macros&lt;/em&gt;, tapez &lt;em&gt;MoveToArchive&lt;/em&gt; puis
+&lt;em&gt;Créer&lt;/em&gt;. L&amp;rsquo;éditeur VB s&amp;rsquo;ouvre, profitez-en pour créer toutes vos macros de
+déplacement d&amp;rsquo;un coup en copiant-collant le code de ce fichier :
+&lt;a href=&#34;../../static/MoveToFolder.zip&#34;&gt;MoveToFolder.vba&lt;/a&gt; (d&amp;rsquo;après
+&lt;a href=&#34;https://web.archive.org/web/20100211190325/http://verychewy.com/archive/2006/04/12/outlook-macro-to-move-an-email-to-folder.aspx&#34;&gt;Chewy&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Pour affecter votre signature électronique à ce projet, dans l&amp;rsquo;éditeur VB
+faites &lt;em&gt;Outils &amp;gt; Signature électronique&lt;/em&gt; et choisissez celle que vous avez
+créée à la 1ère étape. Ça y est, vous pouvez quitter l&amp;rsquo;éditeur VB.&lt;/p&gt;
+
+&lt;h2 id=&#34;lui-affecter-un-raccourci-clavier&#34;&gt;Lui affecter un raccourci clavier&lt;/h2&gt;
+
+&lt;p&gt;Dans Outlook cliquez-droit sur une de vos barres de boutons et faites
+&lt;em&gt;Personnaliser&lt;/em&gt;, onglet &lt;em&gt;Commandes&lt;/em&gt;, catégorie &lt;em&gt;Macros&lt;/em&gt;. Vos macros
+apparaissent dans la partie droite, prenez &lt;em&gt;MoveToArchive&lt;/em&gt; et faites-la
+glisser sur la barre de boutons. Cliquez-droit sur le nouveau bouton, changez
+le nom pour &lt;code&gt;&amp;amp;X;&lt;/code&gt; et choisissez &lt;em&gt;Texte seul pour ce bouton&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Voilà, si vous sélectionner un mail dans votre Inbox et faites Alt+X, le mail
+est déplacé dans &lt;em&gt;Archive&lt;/em&gt;. Si la lettre que vous avez choisie est déjà
+affectée à un menu ou un bouton, il faut d&amp;rsquo;abord soit supprimer le &amp;amp; du nom de
+ce menu/bouton, soit choisir une autre lettre.&lt;/p&gt;
+
+&lt;p&gt;Maintenant, à vous de vider votre Inbox !&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

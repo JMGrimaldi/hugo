@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Automatiser Excel - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2015</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/automatiser-excel/">Automatiser Excel</a></h1>
+		<div class="post-date">10 août 2015</div>
+		
+		
+
+<p><img class="fr" src="../../img/excel.png"></p>
+
+<p>Combien d&rsquo;heures ai-je passé sous Excel à faire des tâches répétitives, comme supprimer une colonne sur deux 35 fois de suite pour transformer un calendrier par demi-journées en un calendrier par journées ? Trop.</p>
+
+<p>Aujourd&rsquo;hui nous voyons donc comment automatiser cela, sur l&rsquo;exemple de la suppression d&rsquo;une colonne sur deux 35 fois de suite.</p>
+
+<h2 id="activer-les-macros">Activer les macros</h2>
+
+<p>L&rsquo;exécution de code sous Excel passe nécessairement par la création d&rsquo;une <em>macro</em>. Pour activer cette fonctionnalité avec Excel 2010, allez dans le menu <em>Fichier &gt; Options</em>, puis <em>Personnaliser le Ruban</em> et activez l&rsquo;onglet <em>Développeur</em> dans la colonne de droite. Faites <em>OK</em>, un nouvel onglet <em>Développeur</em> doit maintenant apparaître dans le ruban en haut.</p>
+
+<p>Dans cet onglet, cliquez sur <em>Sécurité des macros &gt; Paramètres des macros</em> puis <em>Activer toutes les macros (non recommandé &hellip;)</em> et <em>OK</em>.</p>
+
+<p>Dans l&rsquo;onglet <em>Développeur</em> cliquez ensuite sur le bouton <em>Macros</em>, une boîte de dialogue s&rsquo;ouvre. Saisissez le nom de votre macro (par exemple, <em>efface_1_colonne_sur_2</em>) puis cliquez sur <em>Créer</em>. La fenêtre <em>Microsoft Visual Basic pour Applications</em> apparaît pour saisir le code.</p>
+
+<h2 id="saisir-le-code">Saisir le code</h2>
+
+<p>Saisissez le code suivant :</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="font-weight: bold">Sub</span> <span style="color: #990000; font-weight: bold">efface_1_colonne_sur_2</span>()
+    Range(<span style="color: #bb8844">&quot;C1&quot;</span>).Select
+    <span style="font-weight: bold">For</span> i <span style="font-weight: bold">=</span> <span style="color: #009999">1</span> <span style="font-weight: bold">To</span> <span style="color: #009999">35</span>
+    ActiveCell.Offset(<span style="color: #009999">0</span>, i).EntireColumn.Delete
+    <span style="font-weight: bold">Next</span>
+<span style="font-weight: bold">End</span> <span style="font-weight: bold">Sub</span>
+</pre></div>
+</p>
+
+<p>Quelques explications :</p>
+
+<ul>
+<li>La 1ère ligne (<code>Range(&quot;C1&quot;).Select</code>) positionne le curseur en C1 ;</li>
+<li>Puis on rentre dans une boucle <em>For &hellip; Next</em> qui commence avec <code>i</code> à 1 ;</li>
+<li><code>ActiveCell.Offset(0, i)</code> indique la cellule située 0 lignes plus bas et <code>i</code> colonnes plus à droite que C1, c&rsquo;est-à-dire D1, et <code>.EntireColumn.Delete</code> efface toute la colonne (D) ;</li>
+<li>Puis on recommence la boucle avec <code>i</code> qui vaut 2, on efface la colonne E, et ainsi de suite 35 fois.</li>
+</ul>
+
+<h2 id="laisser-faire">Laisser faire</h2>
+
+<p>Pour exécuter cette macro, appuyez sur le bouton <em>Exécuter</em> dans la barre de menu (la petite flèche verte), ou appuyez simplement sur F5. Si le fichier est ouvert en lecture seule Excel vous demandera alors d&rsquo;en enregistrer une copie.</p>
+
+<p>L&rsquo;opération s&rsquo;exécute automatiquement. Vous pouvez ensuite fermer la fenêtre <em>Visual Basic</em>. Bravo, vous venez de gagner 10 minutes !</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/windows/">windows</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
