@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maths - JM.Grimaldi</title>
-    <link>http://people.via.ecp.fr/~jm/tags/maths/</link>
+    <link>http://grimaldi.me/tags/maths/</link>
     <description>Derniers contenus Maths de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Tue, 25 Aug 2015 22:39:58 +0200</lastBuildDate>
-    <atom:link href="http://people.via.ecp.fr/~jm/tags/maths/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/maths/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Niveau des champions d&#39;échecs sur 150 ans</title>
-      <link>http://people.via.ecp.fr/~jm/post/niveau-des-champions-d-%C3%A9checs/</link>
+      <link>http://grimaldi.me/post/niveau-des-champions-d-%C3%A9checs/</link>
       <pubDate>Tue, 25 Aug 2015 22:39:58 +0200</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/niveau-des-champions-d-%C3%A9checs/</guid>
+      <guid>http://grimaldi.me/post/niveau-des-champions-d-%C3%A9checs/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/kasparov.jpg&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Le système Elo est le système de classement des joueurs d&amp;rsquo;échecs. Il est censé refléter la probabilité de gain d&amp;rsquo;une partie : si un joueur classé 2000 joue contre un joueur classé 1800, sa probabilité de gain est de 75%. S&amp;rsquo;il joue contre un 1600, elle dépasse 90%.&lt;/p&gt;
@@ -34,10 +34,10 @@
     
     <item>
       <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</link>
+      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
       <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</guid>
+      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/shuffle.png&#34;&gt;&lt;/p&gt;

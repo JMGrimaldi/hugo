@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Encodage H.264 avec GStreamer - JM.Grimaldi</title>
 	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/encodage-h264-avec-gstreamer/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -36,14 +37,14 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2015</div>
+	<div class="copyright">&copy; 2000-2016</div>
 </div>
 
 <div class="content">
 	<div class="post">
 		<h1 class="post-title"><a href="../../post/encodage-h264-avec-gstreamer/">Encodage H.264 avec GStreamer</a></h1>
-		<div class="post-date">27 décembre 2015</div>
-		
+		<div class="post-date">28 mai 2016</div>
+		<em>Cet article publié en décembre 2015 a été mis à jour.</em>
 		
 
 <p><img class="fr" src="../../img/x264enc/film.jpg" /></p>
@@ -59,7 +60,7 @@
 <pre><code>avconv -i 00001.MTS -codec copy in.mp4
 </code></pre>
 
-<p>Ensuite j&rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&rsquo;extrais 2s), et l&rsquo;encoder en H.264 en faisant varier les paramètres de la commande <code>x264enc</code>. Puis j&rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&rsquo;en garde qu&rsquo;une partie pour observer les détails :</p>
+<p>Ensuite j&rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&rsquo;extrais 2s), et l&rsquo;encoder en H.264 en faisant varier les paramètres de la commande <code>x264enc</code> (<strong>NB :</strong> l&rsquo;utilisation de <code>gnlfilesource</code> nécessite l&rsquo;installation du package <code>gstreamer0.10-gnonlin</code>). Puis j&rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&rsquo;en garde qu&rsquo;une partie pour observer les détails :</p>
 
 <pre><code>gst-launch-0.10 gnlfilesource location=&quot;$PWD/in.mp4&quot; media-start=20000000000 media-duration=2000000000 ! x264enc pass=5 quantizer=21 ! mp4mux ! filesink location=out.mp4
 avconv -ss 00:01:00 -i out.mp4 -vframes 1 out.png

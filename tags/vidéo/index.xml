@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vidéo - JM.Grimaldi</title>
-    <link>http://people.via.ecp.fr/~jm/tags/vid%C3%A9o/</link>
+    <link>http://grimaldi.me/tags/vid%C3%A9o/</link>
     <description>Derniers contenus Vidéo de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sun, 27 Dec 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://people.via.ecp.fr/~jm/tags/vid%C3%A9o/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 May 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://grimaldi.me/tags/vid%C3%A9o/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Encodage H.264 avec GStreamer</title>
-      <link>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</link>
-      <pubDate>Sun, 27 Dec 2015 00:00:00 +0000</pubDate>
+      <link>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</link>
+      <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/encodage-h264-avec-gstreamer/</guid>
+      <guid>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
@@ -30,7 +30,7 @@
 &lt;pre&gt;&lt;code&gt;avconv -i 00001.MTS -codec copy in.mp4
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Ensuite j&amp;rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&amp;rsquo;extrais 2s), et l&amp;rsquo;encoder en H.264 en faisant varier les paramètres de la commande &lt;code&gt;x264enc&lt;/code&gt;. Puis j&amp;rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&amp;rsquo;en garde qu&amp;rsquo;une partie pour observer les détails :&lt;/p&gt;
+&lt;p&gt;Ensuite j&amp;rsquo;utilise GStreamer pour extraire une courte séquence (je saute 20s et j&amp;rsquo;extrais 2s), et l&amp;rsquo;encoder en H.264 en faisant varier les paramètres de la commande &lt;code&gt;x264enc&lt;/code&gt; (&lt;strong&gt;NB :&lt;/strong&gt; l&amp;rsquo;utilisation de &lt;code&gt;gnlfilesource&lt;/code&gt; nécessite l&amp;rsquo;installation du package &lt;code&gt;gstreamer0.10-gnonlin&lt;/code&gt;). Puis j&amp;rsquo;extrais une image (1s après le début, et en PNG pour ne pas perdre en qualité), et je n&amp;rsquo;en garde qu&amp;rsquo;une partie pour observer les détails :&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;gst-launch-0.10 gnlfilesource location=&amp;quot;$PWD/in.mp4&amp;quot; media-start=20000000000 media-duration=2000000000 ! x264enc pass=5 quantizer=21 ! mp4mux ! filesink location=out.mp4
 avconv -ss 00:01:00 -i out.mp4 -vframes 1 out.png

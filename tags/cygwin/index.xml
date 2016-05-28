@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cygwin - JM.Grimaldi</title>
-    <link>http://people.via.ecp.fr/~jm/tags/cygwin/</link>
+    <link>http://grimaldi.me/tags/cygwin/</link>
     <description>Derniers contenus Cygwin de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Mon, 24 Aug 2015 17:29:09 +0200</lastBuildDate>
-    <atom:link href="http://people.via.ecp.fr/~jm/tags/cygwin/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/cygwin/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</link>
+      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
       <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/remettre-les-pages-dans-l-ordre/</guid>
+      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/shuffle.png&#34;&gt;&lt;/p&gt;
@@ -86,10 +86,10 @@ doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0
     
     <item>
       <title>Cygwin: installer apt-cyg</title>
-      <link>http://people.via.ecp.fr/~jm/post/installer-apt-cyg/</link>
+      <link>http://grimaldi.me/post/installer-apt-cyg/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/installer-apt-cyg/</guid>
+      <guid>http://grimaldi.me/post/installer-apt-cyg/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/apt-cyg.png&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Sous Cygwin, &lt;em&gt;apt-cyg&lt;/em&gt; fournit un fonctionnement proche d’&lt;em&gt;apt-get&lt;/em&gt;, que je trouve plus efficace que l’interface par défaut &lt;em&gt;setup.exe&lt;/em&gt;.&lt;/p&gt;
@@ -123,10 +123,10 @@ par :
     
     <item>
       <title>Cygwin: installer Scrapy</title>
-      <link>http://people.via.ecp.fr/~jm/post/cygwin-installer-scrapy/</link>
+      <link>http://grimaldi.me/post/cygwin-installer-scrapy/</link>
       <pubDate>Thu, 22 Aug 2013 18:46:52 +0200</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/cygwin-installer-scrapy/</guid>
+      <guid>http://grimaldi.me/post/cygwin-installer-scrapy/</guid>
       <description>&lt;p&gt;Scrapy est un robot d’indexation en Python qui vous permet de parcourir tout un site web pour télécharger ce qui vous intéresse.&lt;/p&gt;
 
 &lt;p&gt;Pour l’installer sous Cygwin, commencez par &lt;a href=&#34;../../post/installer-apt-cyg/&#34;&gt;installer apt-cyg&lt;/a&gt;.&lt;/p&gt;
@@ -151,10 +151,10 @@ python ez_setup.py
     
     <item>
       <title>Cygwin: télécharger via un proxy sans mot de passe</title>
-      <link>http://people.via.ecp.fr/~jm/post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/</link>
+      <link>http://grimaldi.me/post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/</link>
       <pubDate>Thu, 22 Aug 2013 18:17:24 +0200</pubDate>
       
-      <guid>http://people.via.ecp.fr/~jm/post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/</guid>
+      <guid>http://grimaldi.me/post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/</guid>
       <description>&lt;p&gt;Si le proxy vous authentifie sans que vous ayez à saisir de mot de passe, c’est qu’il utilise le protocole NTLM/SSPI qui lui permet de récupérer votre identifiant Windows.&lt;/p&gt;
 
 &lt;p&gt;Peu de programmes sont compatibles avec ce protocole, et semble-t-il aucun n’est fourni avec Cygwin. Heureusement, vous pouvez télécharger une version de curl compatible depuis &lt;a href=&#34;http://curl.haxx.se/latest.cgi?curl=win32-ssl-sspi&#34;&gt;cette page&lt;/a&gt;. Placez-la dans le répertoire &lt;code&gt;cygwin\usr\local\bin&lt;/code&gt; ; vous aurez également besoin d’ajouter dans ce répertoire les DLL &lt;a href=&#34;../../static/libssl32.zip&#34;&gt;libssl32.dll&lt;/a&gt; et &lt;a href=&#34;../../static/libeay32.zip&#34;&gt;libeay32.dll&lt;/a&gt;.&lt;/p&gt;
