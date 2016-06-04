@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Backup linux - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/backup-linux/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/backup-linux/">Backup linux</a></h1>
+		<div class="post-date">27 août 2015</div>
+		<em>Cet article publié en août 2010 a été mis à jour.</em>
+		
+
+<p><img class="fr" src="../../img/backup.jpg" /></p>
+
+<p>La semaine dernière en cherchant à recréer mon bootloader j&rsquo;ai perdu une
+partition qui contenait des données importantes. Il était temps que je mette
+enfin en place un système de sauvegarde de mes données ! Cette page décrit le
+système que j&rsquo;ai mis en place pour que vous puissiez facilement le reproduire
+et ne plus perdre vos données&nbsp;!</p>
+
+<p>Le mécanisme décrit ici fonctionne sur n&rsquo;importe quelle distribution Linux
+puisque le seul programme nécessaire est <code>rsync</code> en version 2.5.6 ou
+supérieure. Il s&rsquo;appuie sur les scripts de Mike Rubel dont la page très
+détaillée est <a href="http://www.mikerubel.org/computers/rsync_snapshots/">ici</a>.</p>
+
+<h1 id="le-résultat">Le résultat</h1>
+
+<p>J&rsquo;ai un disque dédié au backup. Le jour où le disque principal lâche ça ne
+sert pas à grand-chose si la sauvegarde est sur le même disque. Ce disque de
+backup contient une seule partition au format <code>ext4</code>, avec un répertoire
+<code>snapshot</code> à l&rsquo;intérieur duquel j&rsquo;ai les répertoires suivants :</p>
+
+<ul>
+<li><strong>daily.0</strong> : la copie du matin</li>
+<li><strong>daily.1</strong> : celle de la veille</li>
+<li><strong>daily.2 etc.</strong> : celle des jours précédents</li>
+<li><strong>weekly.0</strong> : celle du lundi précédent</li>
+<li><strong>weekly.1 etc.</strong> : celle des semaines précédentes</li>
+<li><strong>monthly.0 etc.</strong> : celle du 1er du mois et des mois précédents</li>
+</ul>
+
+<p>Je conserve 7 <em>daily</em>, 5 <em>weekly</em>, et 7 <em>monthly</em>. Chacun de ces snapshots
+contient l&rsquo;arborescence que j&rsquo;ai choisi de sauvegarder :</p>
+
+<pre><code>/snapshot/
++- daily.0/
+|  +- boot/
+|  +- etc/
+|  +- home/
+|  +- root/
+|  +- usr/
+|  +- var/
++- daily.1
+|  +- ...
++- ...
+</code></pre>
+
+<p>La magie du mécanisme utilisé est que ces 19 sauvegardes ne prennent au total
+qu&rsquo;environ 2 fois le volume sauvegardé.</p>
+
+<h1 id="comment-ça-marche">Comment ça marche ?</h1>
+
+<p>Avec les systèmes de fichiers ext2, ext3 ou ext4, un fichier est une étiquette (par
+exemple <code>/etc/group</code> ou <code>/tmp/a</code>) qui pointe vers un espace de stockage sur le
+disque appelé <em>inode</em>, où sont écrites les données ainsi que les dates et
+permissions. Vous pouvez voir le numéro d&rsquo;inode d&rsquo;un fichier à l&rsquo;aide de la
+commande <code>ls -i</code> :</p>
+
+<pre><code>% touch /tmp/a
+% ls -i /tmp/a
+3385746 /tmp/a
+</code></pre>
+
+<p>Lorsque vous effacez un fichier, Linux supprime l&rsquo;étiquette et, si aucune
+autre étiquette ne pointe vers le même inode, le libère. <em>Aucune autre
+étiquette</em> ?! Eh oui, il est possible d&rsquo;avoir plusieurs étiquettes qui
+pointent sur le même inode. Pour savoir combien, <code>stat /tmp/a</code></p>
+
+<p>Pour créer une 2nde étiquette on crée un lien physique (à ne pas confondre
+avec les liens symboliques créés par <code>ln -s</code>) avec la commande <code>ln</code> :</p>
+
+<pre><code>% ln /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+3385746 /tmp/b
+% rm /tmp/b
+</code></pre>
+
+<p>C&rsquo;est un peu comme la commande <code>cp</code>, sauf que celle-ci alloue un nouvel inode
+(avec de nouvelles permissions) :</p>
+
+<pre><code>% cp /tmp/a /tmp/b
+% ls -i /tmp/a /tmp/b
+3385746 /tmp/a
+2812276 /tmp/b
+% rm /tmp/b
+</code></pre>
+
+<p>La commande <code>cp -l</code> crée des liens physiques, et <code>cp -a</code> copie toute une
+arborescence en préservant les dates et les permissions. <code>cp -al</code> permet de
+dupliquer toute une arborescence avec des liens physiques ! On a ainsi
+l&rsquo;impression d&rsquo;avoir une copie complète de l&rsquo;arborescence alors que cela
+n&rsquo;occupe presque aucun espace disque.</p>
+
+<p>Pour notre système de sauvegarde on ne souhaite pas faire de liens physiques
+(c&rsquo;est de toute façon impossible entre deux disques), en revanche entre nos
+différents snapshots ça va nous permettre de gagner beaucoup de place.</p>
+
+<h1 id="rsync">rsync</h1>
+
+<p><code>rsync</code> est un utilitaire en ligne de commande très pratique pour recopier une
+arborescence. <code>rsync -a</code> fait la même chose que <code>cp -a</code>, sauf que si
+l&rsquo;arborescence cible existe déjà <code>rsync</code> ne copiera que les fichiers qui ont
+changé, ce qui va beaucoup plus vite. Et avec l&rsquo;option <code>--delete</code>, il effacera
+de la cible les fichiers qui ont disparu de la source.</p>
+
+<p>Attention, si <code>src</code> est un répertoire, <code>rsync -a src dst</code> créera un répertoire
+<code>src</code> sous <code>dst/</code>, alors que <code>rsync -a src/ dst</code> (avec un slash) copiera
+directement le <em>contenu</em> de <code>src</code> sous <code>dst/</code>. En revanche, un slash ou non à
+la fin de <code>dst</code> ne change rien.</p>
+
+<p>Enfin <code>rsync</code> possède depuis la version 2.5.6 une option <code>--link-dest</code> qui
+duplique l&rsquo;arborescence cible avec des liens physiques et met à jour
+uniquement cette copie :</p>
+
+<pre><code>rsync -a --delete --link-dest=../dest.old source/ dest.new
+</code></pre>
+
+<h1 id="le-script">Le script</h1>
+
+<p>Avec tout ça, le principe de notre script de backup est simple :</p>
+
+<ul>
+<li>On lance <code>rsync</code> en lui demandant de dupliquer <code>daily.0</code> en <code>daily</code> et de modifier <code>daily</code> ;</li>
+<li>On fait tourner les backups (on supprime <code>daily.6</code>, on renomme <code>daily.5</code> en <code>daily.6</code> et ainsi de suite jusqu&rsquo;à <code>daily</code> en <code>daily.0</code>) ;</li>
+<li>Chaque lundi on fait un <code>cp -al</code> de <code>daily.0</code> vers <code>weekly</code>, et chaque 1er du mois de <code>daily.0</code> vers <code>monthly</code>. Et l&rsquo;on fait tourner les backups.</li>
+</ul>
+
+<p>Télécharger le script : <a href="../../static/snapshot.sh">snapshot.sh</a> (4 Ko)</p>
+
+<h1 id="configuration">Configuration</h1>
+
+<p>Vous pouvez changer le nombre de snapshots conservés au début du script
+(<code>DAILY_MAX</code> etc.), et l&rsquo;emplacement de votre répertoire de backup
+(<code>SNAPSHOT_RW</code>).</p>
+
+<p>Il faut surtout configurer les répertoires sauvegardés en modifiant la
+variable <code>TOBACKUP</code>. Attention si vous mettez dans <code>TOBACKUP</code> le répertoire
+<code>/home/toto</code>, alors le répertoire créé sous <code>daily.0</code> sera <code>daily.0/toto</code> et
+pas <code>daily.0/home/toto</code>. Pour cela, mettez <code>/home</code> dans <code>TOBACKUP</code> et éditez
+ensuite le fichier <code>snapshot_exclude.txt</code>.</p>
+
+<p>Le format de ce fichier est le suivant : un &lsquo;-&rsquo; (ou rien) signifie une
+exclusion, un &lsquo;+&rsquo; signifie une inclusion. Pour savoir si un fichier doit être
+copié, <code>rsync</code> prend les lignes une par une et prend le statut de la 1ère
+ligne qui matche. Si aucune ligne ne matche le fichier est copié. <code>dir/*</code>
+matche les fichiers/répertoires situés directement sous <code>dir/</code>, alors que
+<code>dir/**</code> matche tout ce qui est situé à une profondeur quelconque. Attention
+si l&rsquo;on exclut <code>dir/**</code> et que l&rsquo;on veut inclure <code>dir/a/b/*</code> il faut
+explicitement inclure <code>dir/a</code> et <code>dir/b</code> en plus de <code>dir/a/b/*</code>.</p>
+
+<p>À titre d&rsquo;exemple voici mon fichier :
+<a href="../../static/snapshot_exclude.txt">snapshot_exclude.txt</a> (4 Ko)</p>
+
+<h1 id="lancement-automatique">Lancement automatique</h1>
+
+<p>Placez le script et le fichier d&rsquo;exclusions dans le même répertoire (par
+exemple <code>/root</code>) et vérifiez que le script a les droits d&rsquo;exécution (<code>chmod
+755 snapshot.sh</code>). Pour vérifier le bon fonctionnement, lancez
+<code>/root/snapshot.sh daily</code></p>
+
+<p>Si ça fonctionne, automatisez le lancement en mettant dans <code>/etc/crontab</code> :</p>
+
+<pre><code># Snapshot chaque jour à 2h, et chaque lundi/1er à 15h 12/28
+1 2     * * *   root    /root/scripts/snapshot.sh daily
+12 15   * * 1   root    /root/scripts/snapshot.sh weekly
+28 15   1 * *   root    /root/scripts/snapshot.sh monthly
+</code></pre>
+
+<p>Pour sauvegarder sous Ubuntu (ou Debian) la liste des paquets installés,
+ajoutez la commande suivante pour qu&rsquo;elle se lance avant le daily :</p>
+
+<pre><code>0 2     * * *   root    dpkg --get-selections &gt;| /root/get-selections.txt
+</code></pre>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

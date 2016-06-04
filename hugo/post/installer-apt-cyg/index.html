@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Cygwin: installer apt-cyg - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/installer-apt-cyg/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/installer-apt-cyg/">Cygwin: installer apt-cyg</a></h1>
+		<div class="post-date">22 août 2015</div>
+		<em>Cet article publié en août 2013 a été mis à jour.</em>
+		<p><img class="fr" src="../../img/apt-cyg.png"></p>
+
+<p>Sous Cygwin, <em>apt-cyg</em> fournit un fonctionnement proche d’<em>apt-get</em>, que je trouve plus efficace que l’interface par défaut <em>setup.exe</em>.</p>
+
+<p>Pour l’installer, lancez cygwin et tapez les commandes suivantes:</p>
+
+<pre><code>cd /usr/local/bin/
+curl -kL rawgit.com/transcode-open/apt-cyg/master/apt-cyg &gt; apt-cyg
+chmod +x apt-cyg
+</code></pre>
+
+<ul>
+<li><strong>NB :</strong> chez moi la version de gzip installée n&rsquo;accepte pas l&rsquo;option -k, ce qui provoque une erreur quand on supprime un package. Pour l&rsquo;éviter, remplacez la ligne :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">gzip -dk setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst.gz
+</pre></div>
+
+par :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">gzip -dc setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst.gz &gt; setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst
+</pre></div>
+</li>
+</ul>
+
+<p>La première fois, lancez <em>apt-cyg</em> en précisant le miroir à utiliser et le répertoire de téléchargement. Si l’opération fonctionne, il s’en souviendra pour le prochain lancement:</p>
+
+<pre><code>apt-cyg -m ftp://ftp.funet.fi/pub/mirrors/cygwin.com/pub/cygwin/ -c /tmp update
+</code></pre>
+
+<p>Pour voir la liste des commandes disponibles, lancez <em>apt-cyg</em> sans arguments. Si vous enchaînez plusieurs commandes, ajoutez l’option <code>-u</code> pour ne pas retélécharger la base à chaque fois.</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/cygwin/">cygwin</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

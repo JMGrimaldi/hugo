@@ -316,6 +316,27 @@ span.cv {
 .fl {float: left; margin: .8em 1em .8em 0 !important;}
 .fr {float: right; margin: .8em 0 .8em 1em !important;}
 
+/* Social links */
+.share a {
+	display: inline-block;
+	margin-bottom: 8px;
+	padding: 8px 12px;
+	background: #55acee;
+	color: #fff !important;
+	font-weight: normal;
+	text-decoration: none;
+}
+.share a.facebook {background: #6d84b4;}
+.share a.google {background: #dd4b39;}
+.share a.linkedin {background: #0077b5;}
+.share a:hover {opacity: 0.8;}
+.share .icon {
+	font-family: "fontello";
+	font-weight: normal;
+	padding: 0;
+	margin: 0 0.1em;
+}
+
 /* Responsive design */
 @media screen and (max-width : 800px) {
 	body {font-size: 16px;}

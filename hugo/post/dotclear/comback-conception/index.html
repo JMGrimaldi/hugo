@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ComBack : conception - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/dotclear/comback-conception/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/dotclear/comback-conception/">ComBack : conception</a></h1>
+		<div class="post-date">11 mai 2006</div>
+		
+		
+
+<p>Mon dernier billet présentait le plugin ComBack pour DotClear qui permet aux auteurs d&rsquo;un blog de répondre aux commentaires de leurs visiteurs. Pourquoi avoir créé une nouvelle table ? Pourquoi un nouvel écran de gestion ? Pourquoi le ciel est bleu ? Autant de questions brûlantes qui trouvent leur réponse ici (sauf une)&hellip;</p>
+
+<h3 id="analyse-de-l-existant">Analyse de l&rsquo;existant</h3>
+
+<ul>
+<li>Côté blog l&rsquo;affichage des commentaires déjà postés est fait dans le thème :
+
+<ul>
+<li><code>list.php</code> (liste des billets) qui affiche le nombre de comms pour chaque billet via <code>dcPostNbComments()</code></li>
+<li><code>post.php</code> (affichage d&rsquo;un billet) qui parcourt les commentaires (<code>while ($comments-&gt;fetch())</code>) et affiche les différents éléments dcComment*() correspondant à chacun : <code>ID, Date, Time, Author, Content</code></li>
+</ul></li>
+<li>Côté admin les écrans de gestion des commentaires sont sous <code>ecrire/</code> :
+
+<ul>
+<li><code>comments.php</code> (liste des commentaires) qui récupère le nombre de commentaires (<code>$blog-&gt;getNbComments()</code>) pour faire la pagination, ainsi que la liste complète (<code>$blog-&gt;getComments()</code>), et leur contenu (<code>$comments-&gt;getData()</code>), qu&rsquo;il affiche pour chacun (<code>ligne_comment()</code>)</li>
+<li><code>poster.php</code> (édition d&rsquo;un billet) qui récupère les commentaire du post (<code>$blog-&gt;getComments()</code>), les affiche (<code>showComments()</code>) avec pour chacun : auteur, date, mail, site, IP, contenu, et liens de mise en/hors ligne, de suppression, et de modification. Cet écran permet également d&rsquo;ajouter un commentaire. Et c&rsquo;est lui qui gère la suppression des comms (<code>$blog-&gt;delComment()</code>) et leur mise en/hors ligne (<code>$blog-&gt;statusComment()</code>)</li>
+<li><code>comment.php</code> (modification d&rsquo;un commentaire) affiche les différents champs du comm dans des zones éditables (sauf IP et date) et permet d&rsquo;enregistrer ou supprimer le comm</li>
+</ul></li>
+</ul>
+
+<h3 id="limitations-des-plugins-dotclear">Limitations des plugins dotclear</h3>
+
+<p>Un plugin dotclear ne permet pas de modifier les écrans d&rsquo;administration, simplement d&rsquo;en ajouter de nouveaux. Toucher aux fichiers existants, les fichiers <em>core</em>, serait une plaie pour la maintenabilité.</p>
+
+<h3 id="stockage-des-commentaires">Stockage des commentaires</h3>
+
+<p>Les commentaires sont stockés dans la table <code>dc_comment</code> :</p>
+
+<ul>
+<li>comment_id (int(11)) : ID unique du commentaire, non affiché</li>
+<li>post_id (int(11)) : ID du billet</li>
+<li>comment_dt (datetime) : date de création du comm</li>
+<li>comment_upddt (datetime) : date de modification du comm</li>
+<li>comment_auteur (varchar(255)) : nom du commentateur</li>
+<li>comment_email (varchar(255)) : son mail</li>
+<li>comment_site (varchar(255)) : sa page</li>
+<li>comment_content (longtext) : texte du commentaire</li>
+<li>comment_ip (varchar(15)) : IP du commentateur</li>
+<li>comment_pub (int(1)) : en/hors ligne</li>
+<li>comment_trackback (int(1)) : trackback ou commentaire</li>
+</ul>
+
+<p>Cette table sert également à stocker les trackbacks, identifiés par un comment_trackback à 1 contre 0 pour les commentaires. Ces trackbacks sont créés lorsqu&rsquo;un billet externe possède un lien vers notre billet. L&rsquo;auteur du trackback est le titre du blog externe, le site est l&rsquo;adresse du billet externe, le contenu est son titre et ses premiers mots. Ces trackbacks sont extraits des listes de commentaires avant de les lister (fonction <code>extractTrackbacks()</code>).</p>
+
+<h3 id="autres-contraintes">Autres contraintes</h3>
+
+<p>En tant qu&rsquo;utilisateur, si un jour je décide de retirer le plugin ComBack, j&rsquo;aimerais que mes réponses ne soient pas tout à fait perdues. Cela m&rsquo;aurait orienté plutôt vers l&rsquo;utilisation des commentaires pour gérer les réponses que vers la création d&rsquo;un nouvel objet. Mais alors pour adapter par exemple le comptage des commentaires (qui ne doit pas prendre en compte les réponses) j&rsquo;aurais dû redéfinir des fonctions existantes : incompatible avec une maintenabilité satisfaisante&hellip;</p>
+
+<p>De plus, l&rsquo;utilisation des formulaires existants pour les commentaires est problématique car il ne faut pas que n&rsquo;importe quel visiteur puisse pourrir les commentaires en ajoutant des réponses. Et utiliser des champs <em>réservés</em> comme comment_trackback va encore à l&rsquo;encontre de la maintenabilité.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Ces points font que j&rsquo;ai finalement choisi de gérer les réponses séparément des commentaires. Si quelqu&rsquo;un veut retirer ComBack et récupérer le contenu des réponses, il pourra faire un script de migration.</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../../tags/dotclear/">dotclear</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

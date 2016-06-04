@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Traverser un proxy NTLM/SSPI - JM.Grimaldi</title>
+	<meta charset="utf-8">
+	<title>Traverser un proxy NTLM/SSPI</title>
 	<meta name="generator" content="Hugo 0.14" />
 	<link rel="canonical" href="http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="../../css/google-cse.css">
 
 	<link rel="shortcut icon" href="../../img/favicon.ico">
-
 	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
 </head>
 
@@ -44,7 +43,13 @@
 	<div class="post">
 		<h1 class="post-title"><a href="../../post/traverser-un-proxy-ntlm-sspi/">Traverser un proxy NTLM/SSPI</a></h1>
 		<div class="post-date">2 septembre 2013</div>
-		
+		<div class="share">
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe80d;</span> Partager sur Twitter</a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe802;</span> Partager sur Facebook</a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe806;</span></a>
+</div>
+
 		<p>Sous Windows, un proxy NTLM/SSPI récupère automatiquement l’identité de votre session pour vous donner accès à Internet. L’avantage est que vous n’avez pas à saisir de mot de passe ; l’inconvénient est que si vous utilisez un outil qui ne supporte pas ce protocole (svn, wget, …), la connexion est impossible.</p>
 
 <p>La solution est d’installer un proxy local qui gèrera l’authentification auprès du proxy SSPI. Le programme qui permet de faire cela s’appelle Cntlm.</p>
@@ -84,9 +89,10 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 
 <p>Pour aller plus loin, il est possible via PuTTY d’ouvrir une session SSH à travers ce proxy HTTP, et d’utiliser la fonction <em>Tunnel</em> pour mirrorer sur la machine locale un port de la machine distante. Par exemple, si votre machine distante héberge un serveur MySQL sur le port 3306, en forwardant ce port de votre machine locale vers la machine distante vos applications pourront accéder à cette base à l’adresse <em>localhost:3306</em>, sans se soucier de l’existence d’un proxy.</p>
 
+		
 	</div>
 	
-
+	<hr />
 	
 
 	
@@ -121,11 +127,12 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 
 	
 
+	
+
 
 
 
 	
-		<hr />
 		<div class="tags"><b>En lire plus sur :</b>
 		
 	
@@ -134,7 +141,6 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 
 </div>
 
-	
 	
 </div>
 </body>
@@ -162,4 +168,5 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
   })();
 </script>
 
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 

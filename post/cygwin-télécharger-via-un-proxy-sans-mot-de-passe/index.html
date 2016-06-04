@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Cygwin: télécharger via un proxy sans mot de passe - JM.Grimaldi</title>
+	<meta charset="utf-8">
+	<title>Cygwin: télécharger via un proxy sans mot de passe</title>
 	<meta name="generator" content="Hugo 0.14" />
 	<link rel="canonical" href="http://grimaldi.me/post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="../../css/google-cse.css">
 
 	<link rel="shortcut icon" href="../../img/favicon.ico">
-
 	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
 </head>
 
@@ -44,7 +43,13 @@
 	<div class="post">
 		<h1 class="post-title"><a href="../../post/cygwin-t%C3%A9l%C3%A9charger-via-un-proxy-sans-mot-de-passe/">Cygwin: télécharger via un proxy sans mot de passe</a></h1>
 		<div class="post-date">22 août 2013</div>
-		
+		<div class="share">
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Cygwin%3a%20t%c3%a9l%c3%a9charger%20via%20un%20proxy%20sans%20mot%20de%20passe&url=http%3a%2f%2fgrimaldi.me%2fpost%2fcygwin-t%25C3%25A9l%25C3%25A9charger-via-un-proxy-sans-mot-de-passe%2f"><span class="icon">&#xe80d;</span> Partager sur Twitter</a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fcygwin-t%25C3%25A9l%25C3%25A9charger-via-un-proxy-sans-mot-de-passe%2f"><span class="icon">&#xe802;</span> Partager sur Facebook</a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Cygwin%3a%20t%c3%a9l%c3%a9charger%20via%20un%20proxy%20sans%20mot%20de%20passe&url=http%3a%2f%2fgrimaldi.me%2fpost%2fcygwin-t%25C3%25A9l%25C3%25A9charger-via-un-proxy-sans-mot-de-passe%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Cygwin%3a%20t%c3%a9l%c3%a9charger%20via%20un%20proxy%20sans%20mot%20de%20passe&url=http%3a%2f%2fgrimaldi.me%2fpost%2fcygwin-t%25C3%25A9l%25C3%25A9charger-via-un-proxy-sans-mot-de-passe%2f"><span class="icon">&#xe806;</span></a>
+</div>
+
 		<p>Si le proxy vous authentifie sans que vous ayez à saisir de mot de passe, c’est qu’il utilise le protocole NTLM/SSPI qui lui permet de récupérer votre identifiant Windows.</p>
 
 <p>Peu de programmes sont compatibles avec ce protocole, et semble-t-il aucun n’est fourni avec Cygwin. Heureusement, vous pouvez télécharger une version de curl compatible depuis <a href="http://curl.haxx.se/latest.cgi?curl=win32-ssl-sspi">cette page</a>. Placez-la dans le répertoire <code>cygwin\usr\local\bin</code> ; vous aurez également besoin d’ajouter dans ce répertoire les DLL <a href="../../static/libssl32.zip">libssl32.dll</a> et <a href="../../static/libeay32.zip">libeay32.dll</a>.</p>
@@ -63,9 +68,10 @@
 
 <p><em><strong>Edit :</strong> L’<a href="../../post/traverser-un-proxy-ntlm-sspi/">utilisation de Cntlm</a> est une solution bien plus générique, mais elle nécessite de stocker un hash de vos credentials, ce qui est moins sécurisé.</em></p>
 
+		
 	</div>
 	
-
+	<hr />
 	
 
 	
@@ -100,11 +106,12 @@
 
 	
 
+	
+
 
 
 
 	
-		<hr />
 		<div class="tags"><b>En lire plus sur :</b>
 		
 	
@@ -113,7 +120,6 @@
 
 </div>
 
-	
 	
 </div>
 </body>
@@ -141,4 +147,5 @@
   })();
 </script>
 
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 

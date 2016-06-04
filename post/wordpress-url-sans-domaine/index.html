@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>WordPress : URL sans domaine - JM.Grimaldi</title>
+	<meta charset="utf-8">
+	<title>WordPress : URL sans domaine</title>
 	<meta name="generator" content="Hugo 0.14" />
 	<link rel="canonical" href="http://grimaldi.me/post/wordpress-url-sans-domaine/">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="../../css/google-cse.css">
 
 	<link rel="shortcut icon" href="../../img/favicon.ico">
-
 	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
 </head>
 
@@ -44,16 +43,23 @@
 	<div class="post">
 		<h1 class="post-title"><a href="../../post/wordpress-url-sans-domaine/">WordPress : URL sans domaine</a></h1>
 		<div class="post-date">6 septembre 2013</div>
-		
+		<div class="share">
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=WordPress%20%3a%20URL%20sans%20domaine&url=http%3a%2f%2fgrimaldi.me%2fpost%2fwordpress-url-sans-domaine%2f"><span class="icon">&#xe80d;</span> Partager sur Twitter</a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fwordpress-url-sans-domaine%2f"><span class="icon">&#xe802;</span> Partager sur Facebook</a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=WordPress%20%3a%20URL%20sans%20domaine&url=http%3a%2f%2fgrimaldi.me%2fpost%2fwordpress-url-sans-domaine%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=WordPress%20%3a%20URL%20sans%20domaine&url=http%3a%2f%2fgrimaldi.me%2fpost%2fwordpress-url-sans-domaine%2f"><span class="icon">&#xe806;</span></a>
+</div>
+
 		<p>La configuration de WordPress vous oblige à saisir une URL complète pour l’adresse web de votre site. Cela empêche d’accéder au même site depuis plusieurs adresses, par exemple <em>mondomaine.com</em>, <em>localhost</em>, ou <em>192.168.1.42</em>, ce qui peut être gênant si par exemple on héberge son site à la maison et que l’IP publique n’y est pas routée.</p>
 
 <p>Pour contourner ce problème, si votre site a comme adresse <em>mondomaine.com/foobar/</em>, éditez la table <em>wp_options</em> de votre base de données (vous pouvez utilisez phpMyAdmin avec une base MySQL, ou sqlitebrowser <a href="../../post/installer-wordpress-avec-sqlite/">avec une base SQLite</a>) et remplacez les entrées <em>siteurl</em> et <em>home</em> par <code>/foobar</code>, au lieu de <code>http://mondomaine.com/foobar</code> .</p>
 
 <p>Si votre site est à la racine du domaine, remplacez <code>/foobar</code> par <code>/</code> .</p>
 
+		
 	</div>
 	
-
+	<hr />
 	
 
 	
@@ -88,11 +94,12 @@
 
 	
 
+	
+
 
 
 
 	
-		<hr />
 		<div class="tags"><b>En lire plus sur :</b>
 		
 	
@@ -101,7 +108,6 @@
 
 </div>
 
-	
 	
 </div>
 </body>
@@ -129,4 +135,5 @@
   })();
 </script>
 
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 

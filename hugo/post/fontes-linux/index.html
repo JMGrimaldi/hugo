@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Fontes &amp; linux - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/fontes-linux/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/fontes-linux/">Fontes &amp; linux</a></h1>
+		<div class="post-date">23 février 2003</div>
+		<em>Cet article publié en avril 2000 a été mis à jour.</em>
+		
+
+<div class="message">Cet article est obsolète.</div>
+
+<p>Cette page explique comment installer des fontes truetype et type1 sous Linux,
+plus précisément sous XFree86, avec une distribution Debian.</p>
+
+<h2 id="fontes-truetype">Fontes truetype</h2>
+
+<h3 id="avec-xfree-4">Avec XFree 4</h3>
+
+<p><em>(Pour des fontes asiatiques, des fontes de symboles, et plus généralement des
+fontes d&rsquo;autre encodage que iso8859-1, jisx0201.1976-0, ou jisx0208.1983-0,
+voyez plutôt <a href="../../static/msg01817.html">TrueType fonts in X4</a>.)</em></p>
+
+<ul>
+<li>fermez le serveur X ;</li>
+<li>installez le package fttools (<em>freetype tools</em>) ;</li>
+<li>éditez <code>/etc/X11/XF86Config</code> (ou <code>/etc/X11/XF86Config-v4</code> si l&rsquo;autre n&rsquo;existe
+pas)&nbsp;:
+
+<ul>
+<li>Vérifiez la présence de la ligne suivante dans la section &ldquo;Modules&rdquo;&nbsp;:<br />
+<pre>Load        &ldquo;freetype&rdquo;</pre></li>
+<li>Dans la section &ldquo;Files&rdquo;, rajoutez la ligne suivante<br />
+<pre>FontPath   &ldquo;/usr/share/fonts/truetype&rdquo;</pre></li>
+</ul></li>
+<li>copiez des fontes .ttf dans <code>/usr/share/fonts/truetype/</code> (créez ce répertoire
+s&rsquo;il n&rsquo;existe pas)<br />
+<strong>Note :</strong> Si vous avez une partition windows, vous pouvez remplacer le répertoire <code>truetype/</code> par un lien symbolique vers votre <code>windows/fonts/</code>, de la manière suivante (si la partition windows est montée en <code>/mnt/win</code>)
+<pre>rmdir /usr/share/fonts/truetype
+ln -s /mnt/win/windows/fonts /usr/share/fonts/truetype</pre></li>
+<li>Placez-vous dans <code>/usr/share/fonts/truetype/</code> et créez <code>fonts.dir</code> en tapant
+<code>mkttfdir</code><br />
+<em>Attention, vous devrez répéter cette opération à chaque fois que vous
+modifierez le contenu du répertoire des fontes).</em></li>
+<li>Ouvrez une session X.<br />
+Si tout s&rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).</li>
+</ul>
+
+<h3 id="avec-un-xfree86-antérieur-à-la-version-4">Avec un XFree86 antérieur à la version 4</h3>
+
+<ul>
+<li>fermez le serveur X ;</li>
+<li>installez le package xfstt ;</li>
+<li>éditez <code>/etc/X11/XF86Config</code> :<br />
+Dans la section &ldquo;Files&rdquo;, rajoutez la ligne suivante
+<pre>FontPath   &ldquo;unix/:7101&rdquo;</pre></li>
+<li>copiez des fontes .ttf dans <code>/usr/share/fonts/truetype/</code><br />
+<strong>Note :</strong> Si vous avez une partition windows, vous pouvez remplacer le répertoire <code>truetype/</code> par un lien symbolique vers votre <code>windows/fonts/</code>, de la manière suivante (si la partition windows est montée en <code>/mnt/win</code>)
+<pre>rmdir /usr/share/fonts/truetype
+ln -s /mnt/win/windows/fonts /usr/share/fonts/truetype</pre></li>
+<li>Mettez à jour la base des fontes truetype : <code>xfstt --sync</code></li>
+<li>Lancez le serveur (au boot c&rsquo;est <em>automatique</em>, grâce à <code>/etc/init.d/xfstt</code>) :
+<code>xfstt &amp;</code></li>
+<li>Ouvrez une session X.<br />
+Si tout s&rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).<br />
+<strong>Note :</strong> Si le nom de vos fontes apparaît mais que vous ne pouvez pas les utiliser, vérifiez que <em>xfstt</em> a les droits en lecture sur ces fontes. En fait <em>xfstt</em> a les mêmes droits que l&rsquo;utilisateur spécifié dans <code>/etc/init.d/xfstt</code> (<em>nobody</em> par défaut). Vous pouvez notamment mettre <em>root</em>, si vous n&rsquo;êtes pas parano.</li>
+</ul>
+
+<h2 id="fontes-type1">Fontes type1</h2>
+
+<ul>
+<li>fermez le serveur X ;</li>
+<li>installez le package type1inst ;</li>
+<li>Mettons que vos fontes se trouvent dans <code>/mnt/win/psfonts/</code> ; tapez ce qui
+suit
+<pre>
+cd /mnt/win/psfonts/
+type1inst
+</pre></li>
+<li>éditez <code>/etc/X11/XF86Config</code> :
+
+<ul>
+<li>Dans la section &ldquo;Files&rdquo; (au tout début normalement), rajoutez la ligne suivante
+<pre>FontPath   &ldquo;/mnt/win/psfonts/&rdquo;</pre>
+<strong>Note :</strong> Rajoutez cette ligne avant les autres du même type, c&rsquo;est-à-dire après les <code>75dpi/:unscaled</code> et <code>100dpi/:unscaled</code>, mais avant Speedo, Type1 et ce qui suit. Cela donne la priorité aux fontes que vous ajoutez, par rapport à celles de base dont certaines sont de piètre qualité (helvetica par exemple).</li>
+</ul></li>
+<li>Ouvrez une session X.<br />
+Si tout s&rsquo;est bien passé, les fontes que vous avez ajoutées sont accessibles,
+par exemple, depuis Gimp (outil texte).</li>
+</ul>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
