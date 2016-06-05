@@ -1,6 +1,0 @@
-<Files *.pl>
-	SetHandler	None
-</Files>
-RemoveHandler	.pl
-AddType	'text/plain; charset=UTF-8'	.pl .sh
-ErrorDocument 404 /~jm/404.html
