@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Au service de l’état - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/freestyle/au-service-de-l-%C3%A9tat/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/freestyle/au-service-de-l-%C3%A9tat/">Au service de l’état</a></h1>
+		<div class="post-date">17 mai 2007</div>
+		
+		<p>Chez un opérateur Internet, quand un client s’abonne à la Voix sur IP par exemple, il faut configurer le logiciel qui tourne dans sa box : adresse du serveur VoIP, login et mot de passe du client, etc. C’est ce qu’on appelle l’activation du terminal. Alors soit on envoie ces infos au client par mail et c’est à lui de les rentrer dans la box, soit on essaye de lui faciliter la vie avec un mécanisme d’auto-provisioning.</p>
+
+<p>Ça paraît simple, mais ça ne l’est pas tant que ça : il faut être certain qu’on configure la bonne box, il ne faut pas que n’importe qui puisse faire la même chose, la box peut être éteinte, lors d’un échange de box il faut automatiquement déconfigurer l’ancienne et reconfigurer la nouvelle, etc.</p>
+
+<p>Souvent aujourd’hui, ce genre d’activation est géré par événements : pour schématiser, l’abonnement est saisi dans l’application de commande, qui passe l’info d’un côté à l’application de facturation, de l’autre à l’application de livraison, cette dernière transmet à une application d’aiguillage qui d’abord envoie l’ordre d’activation à la plate-forme VoIP qui génère la configuration, puis passe cette configuration à la brique de gestion des box, qui enfin la dépose là où il faut, quand elle parvient à joindre la box. Ouf !</p>
+
+<p>Ce qu’il faut retenir c’est qu’il y a plein d’interfaces, que le processus complet dure des heures voire des jours, et qu’à chaque fois qu’on passe un ordre on transmet toutes les infos nécessaires (quelle offre, pour quel client, quels paramètres etc.). Résultat ces infos sont dupliquées à chaque niveau, avec tous les risques de désynchronisation qui en découlent : par exemple si le client change son abonnement avant que la configuration n’ait été mise sur sa box, on a au début de la chaîne la nouvelle configuration, alors qu’à la fin de la chaîne l’ancienne configuration attend toujours d’être déposée. Si pour une raison quelconque la nouvelle arrive avant l’ancienne, on a un problème. À l’opposé si on perd un ordre l’activation ne se fera jamais, mais comment s’en rend-on compte avant que le client mécontent nous appelle ?</p>
+
+<p>Et si le client réinitialise sa box et perd la configuration, comment réémettre l’ordre d’activation ? Ce cas montre l’erreur fondamentale d’une gestion reposant uniquement sur le passage d’ordres : on prétend connaître l’état du terminal qui se trouve chez le client, alors qu’il a pu lui arriver n’importe quoi. Un terminal chez le client n’est pas un équipement réseau comme les autres. C’est un peu comme si on avait donné à tous les clients les clefs de nos salles machines. Il faut repenser la gestion de ces fragiles terminaisons que sont les box. Un ordre qui se perd ou une box qui efface sa configuration ne doivent plus être considérés comme des anomalies sur lesquelles on pose un pansement, mais comme des éléments normaux de la vie du réseau.</p>
+
+<p>La solution c’est de passer d’un enchaînement d’ordres à une synchronisation d’états : lorsque la configuration est générée, au lieu de la passer dans un ordre à la brique de gestion des box qui la passera à son tour à la box si tant est qu’elle soit connectée, on ne fait rien ! De toute façon il faut que ça marche sans qu’on ne fasse rien à ce niveau-là, parce que des ordres peuvent se perdre, ou parce que la box peut effacer sa configuration. Donc on attend : on garde la configuration bien au chaud dans une base unique, un référentiel, et on attend que la box viennent nous demander si on a une configuration pour elle. Pour ça il faut qu’elle soit programmée pour venir nous voir réguilèrement. À ce moment on est sûr que la box est joignable, on connaît son état réel (a-t-elle modifié sa conf sans nous prévenir ?), et comme on n’a pas dupliqué la configuration à tous les étages on est sûr que celle qu’on va chercher dans le référentiel est la bonne. C’est juste de la synchronisation. Et si ça rate ce n’est pas grave : on se synchronisera la fois d’après.</p>
+
+<p>Moralité : simplicité</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../../tags/telcos/">telcos</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

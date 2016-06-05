@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>JOnAS - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/jonas/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/jonas/">JOnAS</a></h1>
+		<div class="post-date">25 septembre 2004</div>
+		
+		
+
+<div class="message">Cet article est obsolète.</div>
+
+<p>Cette page vous explique comment installer le Serveur d&rsquo;Application JOnAS sur
+une Debian <em>Sarge</em>.</p>
+
+<ul>
+<li><a href="#pré-requis">Pré-requis</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#démarrage">Démarrage</a></li>
+<li><a href="#connexion-mysql">Connexion MySQL</a></li>
+<li><a href="#création-d-un-groupe">Création d&rsquo;un groupe</a></li>
+<li><a href="#interfaçage-avec-eclipse">Interfaçage avec Eclipse</a></li>
+<li><a href="#et-après">Et après&hellip;</a></li>
+</ul>
+
+<h2 id="pré-requis">Pré-requis</h2>
+
+<p>JOnAS est livré lié au moteur de servlets Tomcat, mais il a également besoin
+du JDK (Java Development Kit), d&rsquo;Ant (<em>make</em> basé sur Java) et de la librairie
+BCEL qui permet à Ant de compiler JOnAS.</p>
+
+<p>Pour le JDK, le mieux est de récupérer le package debian de Blackdown ; pour
+cela ajouter la ligne suivante dans <code>/etc/apt/sources.list</code> :</p>
+
+<pre><code>deb ftp://ftp.easynet.be/blackdown/debian testing main non-free
+</code></pre>
+
+<p>puis après un <code>apt-get update</code> installer le package <code>j2sdk1.4</code></p>
+
+<p>Les autres composants cités sont dans la debian : <code>ant</code> et <code>libbcel-java</code></p>
+
+<h2 id="installation">Installation</h2>
+
+<p>JOnAS est diffusé par son éditeur ObjectWeb sous licence LGPL, moins
+restrictive que la GPL.</p>
+
+<ul>
+<li>on récupère le .tgz de jonas+tomcat sur <a href="http://jonas.ow2.org/xwiki/bin/view/Main/Downloads">http://jonas.ow2.org/xwiki/bin/view/Main/Downloads</a> (<code>jonas4.1-tomcat5.0.25.tgz</code> lors de l&rsquo;écriture de cette page) ;</li>
+<li>on le décompresse sous <code>/usr/local/</code> ; mettons que le répertoire ainsi créé est <code>JONAS_4_1_2/</code> ;</li>
+<li>on crée un lien symbolique sous <code>/usr/local/</code> : <code>ln -s JONAS_4_1_2 jonas</code> ;</li>
+<li>sous <code>/usr/local/jonas/</code>, on lance <code>ant</code> ;</li>
+<li>on ajoute dans <code>/etc/zsh/zshenv</code> (si l&rsquo;on utilise zsh) les lignes suivantes :
+<pre>export JONAS_ROOT=&ldquo;/usr/local/jonas&rdquo;
+export PATH=&ldquo;$JONAS_ROOT/bin/unix:$PATH&rdquo;</pre></li>
+</ul>
+
+<h2 id="démarrage">Démarrage</h2>
+
+<p>Dans un shell, taper <code>jonas start</code>, puis avec un browser ouvrir
+<a href="http://localhost:9000/ ">http://localhost:9000/ </a>; normalement l&rsquo;écran d&rsquo;accueil de JOnAS doit
+apparaître.</p>
+
+<h2 id="connexion-mysql">Connexion MySQL</h2>
+
+<p><em>On suppose ici que MySQL est déjà installé.</em></p>
+
+<p>Arrêter JOnAS : `jonas stop</p>
+
+<p>Installer le package <code>libmysql-java</code>, modifier dans
+<code>$JONAS_ROOT/bin/unix/config_env</code> la ligne <code>MYSQL_CLASSES</code> :
+<code>MYSQL_CLASSES=/usr/share/java/mysql.jar</code></p>
+
+<p>S&rsquo;il y a une ligne <code>skip-networking</code> dans <code>/etc/mysql/my.cnf</code> (par défaut sous
+Debian), la mettre en commentaire et redémarrer MySQL ; sinon JOnAS verra
+simplement <em>Connection refused</em>.</p>
+
+<p>Dans MySQL, créer un utilisateur <code>jonas@_&lt;hostname&gt;_</code>, puis faire un <code>create
+database db_jonas;</code> et un <code>grant all on db_jonas.* to jonas@_..._;</code></p>
+
+<p>Éditer <code>$JONAS_ROOT/conf/MySQL.properties</code>, vérifier le nom de la base et
+ajouter le username (<code>jonas</code>) et le password (à choisir).</p>
+
+<p>Éditer <code>jonas.properties</code> et à la ligne <code>jonas.service.dbm.datasources</code>
+remplacer <code>HSQL1</code> par <code>MySQL</code></p>
+
+<p>Lancer un <code>jonas check</code> pour vérifier que la syntaxe est bonne. Pour
+réellement tester la connexion avec MySQL il faudra exécuter l&rsquo;exemple <em>eb</em>
+sous <code>$JONAS_ROOT/examples/src/eb/</code></p>
+
+<h2 id="création-d-un-groupe">Création d&rsquo;un groupe</h2>
+
+<p>Jusqu&rsquo;ici on lançait Jonas en root. Comme on veut pouvoir le contrôler depuis
+Eclipse (section suivante&hellip;), qu&rsquo;il ne serait pas judicieux de lancer en
+root, il faut donner aux développeurs les droits sur Jonas. On crée donc un
+groupe :</p>
+
+<pre><code>groupadd jonas
+cd $JONAS_ROOT
+chown -R .jonas *
+chmod -R g+w *
+</code></pre>
+
+<p>On rajoute ensuite l&rsquo;utilisateur <code>lambda</code> dans ce groupe : <code>addgroup lambda
+jonas</code> ; il pourra désormais lui aussi jouer à <code>jonas start</code>. Attention, son
+appartenance ne sera reconnue que lorsqu&rsquo;il se sera relogué. En particulier,
+si l&rsquo;on est dans une session X, il faut la fermer puis rouvrir.</p>
+
+<h2 id="interfaçage-avec-eclipse">Interfaçage avec Eclipse</h2>
+
+<p>Eclipse est l&rsquo;IDE d&rsquo;IBM. Il est dans la Debian avec le package <code>eclipse-sdk</code>
+<em>(il s&rsquo;agit à cette heure de la version 2.1 alors que la 3.0 est sortie, mais
+de toute façon cette dernière version connaît des problèmes avec le plugin que
+l&rsquo;on veut installer)</em>.</p>
+
+<p>Le plugin JOPE permet depuis Eclipse de contrôler Jonas et les déploiements
+que l&rsquo;on y fait.</p>
+
+<p>On télécharge ce plugin sur <a href="http://forge.ow2.org/projects/jope/">http://forge.ow2.org/projects/jope/</a> (version 1.1.4 pour Eclipse 2.x ici), on
+le dézipe sous <code>/usr/local/share/eclipse/plugins/</code> (que l&rsquo;on crée si besoin),
+et on lance Eclipse.</p>
+
+<p>On va sous <em>Window &gt; Open Perspective &gt; Java</em>. Dans <em>Window &gt; Customize
+Perspective&hellip;</em>, sous <em>File&gt;New</em> on coche <em>Jonas EJB</em> et <em>Jonas Project</em>, sous
+<em>Other</em> on coche <em>Jonas</em>. Et dans <em>JVM Settings &gt; Classpath</em> on ajoute
+<code>/usr/share/java/mysql.jar</code></p>
+
+<p>Ensuite sous <em>Window &gt; Preferences &gt; Jonas</em>, on choisit la <em>Jonas version</em>
+(4.1 dans notre cas) et l&rsquo;on met <code>/usr/local/jonas/</code> dans <em>Jonas root</em> et
+<em>Jonas server</em>.</p>
+
+<p>Enfin dans <em>Window &gt; Preferences &gt; Ant &gt; Runtime &gt; Classpath</em> on coche <em>Set
+ANT_HOME</em> et l&rsquo;on indique <code>/usr/share/ant</code> (sans quoi ant ne trouvera pas
+<code>bcel.jar</code> et fera des erreurs du genre <code>dependent class not found:
+org/apache/bcel/classfile/Visitor</code>).</p>
+
+<h2 id="et-après">Et après&hellip;</h2>
+
+<p>Pour la suite, il y a déjà un excellent tutoriel
+<a href="http://stessy.developpez.com/j2ee/eclipse/jonas/ejb/firstEjb/">ici</a>&hellip; bons
+beans !</p>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

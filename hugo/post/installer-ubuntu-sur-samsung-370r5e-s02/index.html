@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Installer Ubuntu sur Samsung 370R5E-S02 - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/installer-ubuntu-sur-samsung-370r5e-s02/">Installer Ubuntu sur Samsung 370R5E-S02</a></h1>
+		<div class="post-date">21 juillet 2013</div>
+		
+		
+
+<p>Le Samsung 370R5E-S02 est un portable 15,6″ équipé d’un CPU Intel Core i5 3210M. Cette page décrit quelques particularités de l’installation d’Ubuntu 13.04 sur ce PC.</p>
+
+<h3 id="installer-les-drivers-de-la-carte-radeon">Installer les drivers de la carte Radeon</h3>
+
+<p>La partie graphique est assurée par un système hybride: en usage normal c’est le composant intégré Intel HD Graphics 4000 qui est utilisé ; si besoin la carte dédiée AMD Radeon 8750M peut prendre le relais.</p>
+
+<p>Pour utiliser la carte Radeon ou simplement réduire la consommation lorsqu’on utilise le composant Intel, il faut installer les derniers drivers AMD pour Linux :</p>
+
+<ol>
+<li><p>Installez les prérequis :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">sudo apt-get install debhelper execstack dh-modaliases dkms
+</pre></div>
+</p></li>
+
+<li><p>Téléchargez les drivers (version <a href="http://support.amd.com/en-us/download/desktop?os=Linux+x86">13.12</a> à date ; utiliser la version bêta n’est pas nécessaire) ;</p></li>
+
+<li><p>Compilez les packages d’installation :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">mkdir tmp; <span style="color: #999999">cd </span>tmp
+unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
+chmod +x *run
+./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&lt;/pre&gt;
+</pre></div>
+</p></li>
+
+<li><p>Installez les packages :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">sudo dpkg -i *deb
+</pre></div>
+</p></li>
+
+<li><p>Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande <code>amdconfig --pxl</code> ne fonctionne pas) :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">sudo amdconfig --initial -f
+</pre></div>
+</p></li>
+
+<li><p>Rebootez.</p></li>
+</ol>
+
+<p>Si vous ne parvenez plus à ouvrir de session X, ouvrez un shell avec votre compte puis : <code>mv .Xauthority* /tmp; sudo service lightdm restart</code></p>
+
+<p>Si à l’ouverture de session Unity a disparu (plus de lanceur, de barre etc.), installez <code>compizconfig-settings-manager</code>, lancez <code>ccsm</code> et réactivez le plugin Unity.</p>
+
+<p>Pour voir quel GPU est actif :<br />
+<code>amdconfig --pxl</code></p>
+
+<p>Pour voir la consommation du PC sur les 2 dernières minutes :<br />
+<code>upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep &quot;(rate)&quot; -A4</code></p>
+
+<p>Si vous n’avez pas un usage intensif de la 3D, passez sur le GPU intégré Intel, vous pourrez observer une baisse de la consommation d’environ 30% : <code>sudo amdconfig --px-igpu</code>, puis fermez/rouvrez la session X (<code>sudo service lightdm restart</code>).</p>
+
+<p>Pour revenir au GPU dédié Radeon : <code>sudo amdconfig --px-dgpu</code> (puis fermez/rouvrez la session X).</p>
+
+<p>Pour plus de détails sur l’installation, voyez <a href="http://wiki.cchtml.com/index.php/Ubuntu_Raring_Installation_Guide">ce lien</a>.</p>
+
+<h3 id="désactiver-la-carte-radeon">Désactiver la carte Radeon</h3>
+
+<p><em>Cette partie n’était utile que lorsque les drivers AMD ne reconnaissaient pas la carte Radeon (version 13.6-beta) ; désormais ces drivers désactivent la carte lorsqu’on utilise le GPU Intel. Je laisse cette partie pour mémoire.</em></p>
+
+<p>Pour désactiver la carte 8750M on utilise le module <code>acpi_call</code> :</p>
+
+<ol>
+<li><p>Pour l’installer tapez les commandes suivantes dans un terminal :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">git clone https://github.com/marcoDallas/acpi_call_GUI.git
+<span style="color: #999999">cd </span>acpi_call_GUI
+sudo chmod +x install.sh&lt;/pre&gt;
+</pre></div>
+
+Éditez <code>install.sh</code> et remplacez <code>gksudo</code> par <code>gksu</code>, puis exécutez <code>sudo ./install.sh</code>. Après l’installation lancez acpi_call_GUI avec la commande <code>java -jar $HOME/acpi_call_GUI.jar</code> ;</p></li>
+
+<li><p>Sélectionnez <em>Install acpi_call</em> puis <em>Execute</em>, et saisissez le code <code>\_SB.PCI0.PEG0.PEGP._OFF</code> ; cela installe le module et crée sous <code>/usr/local/bin/</code> deux répertoires <code>acpi_call/</code> et <code>acpi_call_GUI/</code>. Pour vérifier que le module est bien chargé, dans une console tapez <code>lsmod | grep acpi_call</code> et vérifiez qu’une ligne est renvoyée ;</p></li>
+
+<li><p>Exécutez ensuite <em>Turn off discrete GPU</em>, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande <code>upower etc.</code> ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (<em>0×0</em> si la désactivation s’est bien passée) :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">echo</span> <span style="color: #bb8844">&#39;\_SB.PCI0.PEG0.PEGP._OFF&#39;</span> | sudo tee /proc/acpi/call
+sudo cat /proc/acpi/call
+</pre></div>
+
+Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant <em>OFF</em> par <em>ON</em> ;</p></li>
+
+<li><p>Si cela fonctionne, exécutez <em>Automate disabling discrete GPU every boot</em>, cela ajoute dans <code>/etc/rc.local</code> (vérifiez que ce fichier est exécutable) un appel à <code>agg_acpi_call.sh</code> qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier <code>agg_acpi_call.sh</code> et déplacer la ligne <code>sudo insmod acpi_call.ko</code> après la ligne <code>fi</code> (au passage on peut supprimer le <em>sudo</em> devant <em>insmod</em>) ;</p></li>
+
+<li><p>Le bouton <em>Automate etc.</em> ajoute également dans <code>/etc/rc.local</code> un appel à <code>deactivate.sh</code>. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : <code>sleep 60 &amp;&amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;</code>. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous <code>/etc/pm/sleep.d/</code> un script <code>99_acpi</code> à qui j’ai rajouté les droits +x, avec le contenu suivant :
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999988; font-style: italic">#!/bin/sh</span>
+<span style="font-weight: bold">case</span> <span style="color: #bb8844">&quot;$1&quot;</span> in
+	thaw|resume<span style="font-weight: bold">)</span> /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+<span style="font-weight: bold">esac</span>
+</pre></div>
+</p></li>
+</ol>
+
+	</div>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<hr />
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/pc/">pc</a>
+
+
+	, 
+	<a href="../../tags/linux/">linux</a>
+
+
+</div>
+
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

@@ -16,9 +16,11 @@
 
 
 <body>
-<div class="sidebar">
+<div id="sidebar">
+	<div id="sb-expand" class="toggle mini">+</div>
+	<div id="sb-roll" class="toggle">&#x2715;</div>
 	<img class="avatar" src="../img/jm.jpg">
-	<h1><a href="../">JM.Grimaldi</a></h1>
+	<h1 class="mini"><a href="../">JM.Grimaldi</a></h1>
 	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
 	<nav>
 		<a href="../cv/">CV</a> /
@@ -315,3 +317,17 @@ sur Ubuntu (testé sur 10.04, 10.10, 13.04).</p>
 </script>
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script>
+$(function(){
+	$('#sb-expand').click(function(){
+		$('#sidebar > *').css('display', 'block');
+		$('#sb-expand').hide();
+	});
+	$('#sb-roll').click(function(){
+		$('#sidebar > *').hide();
+		$('#sidebar > *.mini').css('display', 'initial');
+	});
+});
+</script>

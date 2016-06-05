@@ -37,7 +37,7 @@ a:hover > img {
 }
 
 /* Layout */
-div.sidebar {
+div#sidebar {
 	box-sizing: border-box;
 	position: fixed;
 	top: 0px;
@@ -60,6 +60,19 @@ div.content {
 }
 
 /* Sidebar */
+div.toggle {
+	position: absolute;
+	right: 16px;
+	font-size: 24px;
+	line-height: 1.3em;
+	width: 32px;
+	height: 32px;
+	border: 1px solid #aaa;
+	color: #fff;
+	cursor: pointer;
+	display: none;
+}
+
 img.avatar {
 	display: block;
 	border-radius: 50%;
@@ -68,10 +81,10 @@ img.avatar {
 	margin: 0px auto 30px;
 	border: none;
 }
-.sidebar h1 {
+#sidebar h1 {
 	margin-top: 0;
 }
-.sidebar p {
+#sidebar p {
 	margin: 0 auto;
 	max-width: 16em;
 }
@@ -338,11 +351,17 @@ span.cv {
 }
 
 /* Responsive design */
+.short-width {display: none;}
+
 @media screen and (max-width : 800px) {
 	body {font-size: 16px;}
 }
 
 @media screen and (max-width : 700px) {
-	div.sidebar {position: static; width: 100%; padding: 1em 1em 2em;}
-	div.content {margin: 0; max-width: 100%;}
+	div#sidebar {position: static; width: 100%; padding: 1em 1em;}
+	div.content {margin: -1.5em 0 0 0; max-width: 100%;}
+	.large-width {display: none;}
+	.short-width {display: initial;}
+	div#sidebar > * {display: none;}
+	div#sidebar > *.mini {display: initial;}
 }

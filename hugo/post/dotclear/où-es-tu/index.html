@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Où es-tu ? - JM.Grimaldi</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/dotclear/o%C3%B9-es-tu/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../css/fonts.css">
+	<link rel="stylesheet" href="../../../css/style.css">
+	<link rel="stylesheet" href="../../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<link href="../../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div class="sidebar">
+	<img class="avatar" src="../../../img/jm.jpg">
+	<h1><a href="../../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../../cv/">CV</a> /
+		<a href="../../../">Articles</a> /
+		<a href="../../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../../post/dotclear/o%C3%B9-es-tu/">Où es-tu ?</a></h1>
+		<div class="post-date">30 avril 2006</div>
+		
+		
+
+<p><img class="fr" src="../../../static/dotclear/globe_terrestre.jpg"></p>
+
+<p>Géoloquoi ? Géolocalisation. Ça consiste à lier une position géographique à un site Internet, avec une latitude et une longitude. Par exemple, savoir que la pizzeria « La Gourmande » est située en 48.8565,2.3025, c&rsquo;est-à-dire 48 degrés 51 minutes (60e de degré) et 23 secondes (60e de minute) de latitude Nord pour 2°18&rsquo;9&rdquo; de longitude Est. Ou encore que la machine hébergeant ce blog est en 48.85814,2.30055.</p>
+
+<h3 id="mais-à-quoi-ça-sert">Mais à quoi ça sert ?</h3>
+
+<p>Ça permet par exemple à un moteur de recherche de trier les résultats par proximité géographique : si je cherche « pizzeria » je trouverai le site web de celles qui peuvent me livrer. On peut également représenter facilement le maillage d&rsquo;un réseau wi-fi. Ou localiser ses voisins blogueurs&hellip;</p>
+
+<h3 id="comment-ça-marche">Comment ça marche ?</h3>
+
+<p>L&rsquo;information est dans le contenu de la page : comme elle est destinée à être indexée, on s&rsquo;assure d&rsquo;abord que l&rsquo;on a bien une métadonnée de titre (cf. <a href="https://web.archive.org/web/20050429005107/http://dublincore.org/">DCMI</a>), dont le contenu est en général le même que la balise html &lt;title&gt; (dotclear positionne cette balise par défaut) :</p>
+
+<pre><code>&lt;meta name=&quot;DC.title&quot; content=&quot;Titre de mon site&quot; /&gt;
+</code></pre>
+
+<p>Ensuite une page géolocalisée contient simplement un méta-tag ICBM :</p>
+
+<pre><code>&lt;meta name=&quot;ICBM&quot; content=&quot;latitude, longitude&quot; /&gt;
+</code></pre>
+
+<p>Pour l&rsquo;anecdote ce charmant sigle signifie « InterContinental Ballistic Missile »&hellip;</p>
+
+<p>Un nouveau système de balises a fait son apparition, baptisé <a href="http://geotags.com/geo/geotags2.html">Geo Tag</a>, qui permet d&rsquo;indiquer non seulement la latitude/longitude, mais également la région et le nom de l&rsquo;endroit. Comme c&rsquo;est une aberration du point de vue de la modélisation de données (chaque site Parisien doit répéter que Paris est dans le 75) je boycotte ce système.</p>
+
+<p>Au fait pour trouver vos coordonnées il suffit de taper une adresse sur <a href="http://maps.google.fr">Google Maps</a> puis de relever les coordonnées en faisant « Obtenir l’URL de cette page ».</p>
+
+<p>Enfin vous n&rsquo;avez plus qu&rsquo;à référencer votre site sur un service de géolocalisation comme <em>GeoURL (n&rsquo;existe plus)</em> ou <a href="https://web.archive.org/web/20060425203742/http://www.feedmap.net/BlogMap/">feedmap</a>, qui vous proposeront ensuite une liste des sites voisins.</p>
+
+	</div>
+	
+	
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+

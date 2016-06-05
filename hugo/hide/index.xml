@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hides - JM.Grimaldi</title>
+    <link>http://grimaldi.me/hide/</link>
+    <description>Derniers contenus Hides de JM.Grimaldi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <atom:link href="http://grimaldi.me/hide/index.xml" rel="self" type="application/rss+xml" />
+    
+  </channel>
+</rss>

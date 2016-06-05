@@ -1,0 +1,174 @@
+Questionnaire : La veille technologique
+Introduction
+- Présentez votre entreprise brièvement.
+
+L'Ecole Pour l'Informatique et les Techniques Avancees (EPITA) est une
+école d'ingenieur née il y a une dizaine d'années.
+URL : http://www.epita.fr
+Elle forme des ingénieurs spécialistes en informatique. Les six
+spécialisations possibles sont :
+- Systèmes et Réseaux
+- Télécom
+- Multimédia
+- Sciences Cognitives et Informatique Avancée
+- Génie Industriel et Systèmes Temps Réels
+- Génie Logiciel
+L'effectif est de 1500 étudiants toutes promos confondues.
+En date du 1er octobre 1999, elle s'est dotée d'une Cellule de Veille
+appelée Cellule Veille et Internet (CVI) afin de promouvoir les nouvelles
+technologies aupres de ses etudiants et de ses clients.
+
+- Depuis combien de temps faites-vous de la veille ?
+
+La notion de veille dure depuis la création de l'école qui s'est toujours
+posée en pionnière des nouvelles technologies du fait
+de la durée de l'enseignement (3 ans pour le cycle ingénieur) qui implique
+de savoir quel sera le marché à la sortie des étudiants.
+
+- Quel type de veille pratiquez-vous (veille concurrentielle, veille
+stratégique, veille technologique, ...) ?
+
+La veille concurrentielle est peu pratiquée car c'est une activité que nous
+n'exercons que pour d'autres sociétés (Telecom surtout)
+La veille stratégique et technologique est par contre beaucoup plus
+pratiquée pour les raisons citées plus haut.
+
+- Rôle et importance des nouvelles technologies ?
+Le but premier est de montrer n savoir et un savoir-faire dans les
+nouvelles technologies avant les autres.
+Le second est qu'il faut être capable de détecter les nouvelles
+technologies suffisamment tot pour fournir des experts au marché
+à courte échéance.
+
+I) Collecte de l'information
+- Faites-vous appel à une société externe spécialisée dans les services de
+veille, ou avez-vous un service de veille interne dans votre entreprise ?
+Nous en avons déjà parlé. La CVI (http://www.epita.net) a 4 mois.
+2/ Service de veille dans l'entreprise
+- Nombre de personnes concernées ?
+Le service a un effectif de 10 personnes fixes + 10 externes
+- Organisation de ce service (hiérarchie, travail saisonnier, ...) ?
+Directeur de l'école : Fabrice Bardèche
+Directeur Technique du service : Yannick LEJEUNE
+Membres : 10 étudiants sélectionnés sur résultats et entretiens
+- Moyens mis en oeuvre (informatique, intranet, ...) ?
+Internet avec Ligne spécialisée 2 Mo
+Réseau local : 5 postes de travail (PC) + 1 IMac + 2 Serveurs(PC)
+auxquels s'ajoute le réseau de l'école (300 postes PC+10 stations alpha+5
+serveurs PCs+ 5 serveurs Mips)
+- Moyens, outils utilisés pour la collecte d'information (sources ?
+internet ?) ?
+Sources : Presse informatique, Internet par les sites et les listes de
+diffusion (plus d'une cinquantaine par jour)
+- Importance donnée aux nouvelles technologies pour la collecte ?
+La collecte est effectuée par des opérateurs humains mais aussi par des
+systèmes multiagents que nous avons réalisé
+ou par des agents de type Coppernic.
+- Moteurs de recherche utilisés ? Votre entreprise utilise-t-elle des
+moteurs spéciaux pour la veille, conçoit-elle ses propres moteurs ?
+Google, Cora, Coppernic, DMOZ, Altavista, NorthernLight
+- Ethique de l'entreprise (illégalité, espionnage, ...) ?
+Aucun travail illégal n'est éxécuté malgré certaines demandes
+- Les membres de l'équipe de veille sont-ils des spécialistes recrutés ?
+sont-ils formés par l'entreprise ?
+Les membres de l'équipe sont des étudiants passionnés de nouvelles
+technologies recrutés pour leur expérience
+à partir de leurs résultats, de leur expérience professionnelle et
+d'entretiens.
+- Organisation de la veille dans l'entreprise (utilisez-vous le schéma
+classique Décideurs>Analyseurs>Observateurs ) ?
+Non le système est issu de l'organisation des systèmes collaboratifs comme
+DMoz où tout le monde contribue au travail
+des autres, je constitue le seul point central de validation et de
+coordination
+- Réseaux de complicité ?
+Secret mais avec beaucoup d'entreprises et de jeunes créateurs de start-up
+II) Traitement de l'information
+1/ Stockage de l'information
+- Moyens utilisés pour le stockage (sur papier, sur support informatique,
+...) ?
+Bases Lotus Notes, préférence pour le 0 papier.
+L'information reste sur un serveur décentralisé et sécurisé
+- Durée du stockage suivant le type d'informations récoltées, suivant
+l'utilisation prévue pour ces informations (long terme, court terme, ...) ?
+Bases de données dynamiques ?
+Les bases de données sont toutes dynamiques et un système XML de stockage
+normalisé
+- Sécurité de l'information stockée ? Droits d'accès ?
+La question est bizarre mais bon !!! Les bases sont sécurisées par des
+experts en sécurité, l'EPITA est reconnu pour ses faits et méfaits dans le
+domaine.
+- Présélection de l'information avant stockage ?
+Oui humaine
+- Coût du stockage ?
+Coût des disques durs (plusieurs dizaine de Go)
+2/ Analyse de l'information
+- Logiciels, bases de données utilisés pour l'analyse ? analyse statistique
+? recherche de mots-clés dans les documents collectés ? (ORACLE, ...)
+Cocoon, Umap, Keyword vectoring
+- Méthodes d'analyse utilisées (statistique, recherche ciblée ou non, ...) ?
+2 méthodes :
+Recherche locale sur un sujet à base de mots-clé pour obtenir des réponses
+Veille globale à base d'articles divers pour obtenir de nouvelles questions
+
+Comment fournir de la valeur ajoutée à l'information récoltée ?
+Il s'agit de valider l'information en indiquant sa pertinence et sa
+validité à court terme ou à long terme
+
+- Validation de l'information, taux de confiance en les résultats ?
+III) Diffusion de l'information
+- Quoi diffuser à qui ? Hiérarchie, rôle des différents niveaux
+hiérarchiques ?
+
+La veille grand public est diffusée au public et aux étudiants, la veille
+stratégique ou concurrentielle aux entreprises-clientes.
+
+- Moyens de diffusion utilisés ? (rapports écrits ou oraux, intranet, ...)
+La diffusion se fait sur notre site web pour ce qui est de la veille grand
+public, la veille d'entreprises se fait par mails (cryptés pour certains)
+ou par envois recommandés.
+
+- Fréquence des réunions (régulières ou fonction des résultats obtenus) ?
+Chaque jour
+
+- Obstacles, difficultés, perte d'information dans la transmission ?
+Aucun
+
+Conclusion
+- Retombées de la veille (et investissement dans la veille) à court ou à
+long terme ?
+
+Contrats de partenariats technologiques, rémunération de services,
+augmentation des flux sur notre site
+
+- Intérêt des nouvelles technologies ? Envisagez-vous de vous équiper dans
+le futur ? Suivez-vous l'évolution (très rapide) de ces technologies ?
+
+La Cellule s'équipe de tout se qui sort à un cout raisonnable et le plus
+vite possible. Nous sommes inscrits dans la majorité des programmes de
+beta-testing disponibles. Le reste de l'école ne suit le mouvement que
+lorsque le marché entérine nos décisions
+
+- Bogue de l'an 2000 ?
+
+Juste sur du javascript a cause d'une mauvaise implémentation de Netscape
+
+- Avez-vous déjà été victime d'espionnage, ou de tentatives de
+désinformation ?
+NON
+
+
+Pour le rendez-vous n'hésitez pas, vous trouverez plus de renseignements
+sur http://www.epita.fr pour l'EPITA et sur http://www.epita.net pour la
+Cellule de Veille.
+
+Quoiqu'il advienne j'aimerais recevoir une copie de votre travail une fois
+celui-ci terminé.
+
+A bientot
+
+
+------------------------------------
+Yannick LEJEUNE
+Tel : 0144080053
+Email : lejeun_a@epita.fr

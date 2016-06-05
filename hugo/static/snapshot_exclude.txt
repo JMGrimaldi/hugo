@@ -1,0 +1,24 @@
+- /home/**/firefox/*/Cache
+- /home/*/.gvfs
+- /home/*/.evolution/cache
+- /home/*/.cache
+- .*.swp
+
++ /var/mail
++ /var/mail/**
++ /var/local
++ /var/local/**
++ /var/lib
++ /var/lib/mysql
++ /var/lib/mysql/**
++ /var/spool
++ /var/spool/cron
++ /var/spool/cron/crontabs
++ /var/spool/cron/crontabs/**
+- /var/**
+
++ /usr/src
++ /usr/src/**
++ /usr/local
++ /usr/local/**
+- /usr/**

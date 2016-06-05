@@ -16,9 +16,11 @@
 
 
 <body>
-<div class="sidebar">
+<div id="sidebar">
+	<div id="sb-expand" class="toggle mini">+</div>
+	<div id="sb-roll" class="toggle">&#x2715;</div>
 	<img class="avatar" src="../img/jm.jpg">
-	<h1><a href="../">JM.Grimaldi</a></h1>
+	<h1 class="mini"><a href="../">JM.Grimaldi</a></h1>
 	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
 	<nav>
 		<a href="../cv/">CV</a> /
@@ -45,35 +47,35 @@
 	
 	<li><a href="../tags/linux/">linux</a> <small>(15)</small></li>
 	
-	<li><a href="../tags/mots/">mots</a> <small>(14)</small></li>
-	
 	<li><a href="../tags/cin%C3%A9ma/">cinéma</a> <small>(14)</small></li>
+	
+	<li><a href="../tags/mots/">mots</a> <small>(14)</small></li>
 	
 	<li><a href="../tags/telcos/">telcos</a> <small>(8)</small></li>
 	
-	<li><a href="../tags/web-2.0/">web-2.0</a> <small>(7)</small></li>
-	
 	<li><a href="../tags/productivit%C3%A9/">productivité</a> <small>(7)</small></li>
+	
+	<li><a href="../tags/web-2.0/">web-2.0</a> <small>(7)</small></li>
 	
 	<li><a href="../tags/projets/">projets</a> <small>(5)</small></li>
 	
-	<li><a href="../tags/cygwin/">cygwin</a> <small>(4)</small></li>
+	<li><a href="../tags/windows/">windows</a> <small>(4)</small></li>
 	
 	<li><a href="../tags/business/">business</a> <small>(4)</small></li>
 	
 	<li><a href="../tags/dotclear/">dotclear</a> <small>(4)</small></li>
 	
-	<li><a href="../tags/windows/">windows</a> <small>(4)</small></li>
+	<li><a href="../tags/cygwin/">cygwin</a> <small>(4)</small></li>
 	
 	<li><a href="../tags/pc/">pc</a> <small>(3)</small></li>
 	
 	<li><a href="../tags/voyages/">voyages</a> <small>(3)</small></li>
 	
-	<li><a href="../tags/wordpress/">wordpress</a> <small>(2)</small></li>
+	<li><a href="../tags/maths/">maths</a> <small>(2)</small></li>
 	
 	<li><a href="../tags/galeries/">galeries</a> <small>(2)</small></li>
 	
-	<li><a href="../tags/maths/">maths</a> <small>(2)</small></li>
+	<li><a href="../tags/wordpress/">wordpress</a> <small>(2)</small></li>
 	
 	<li><a href="../tags/web/">web</a> <small>(2)</small></li>
 	
@@ -110,3 +112,16 @@
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script>
+$(function(){
+	$('#sb-expand').click(function(){
+		$('#sidebar > *').css('display', 'block');
+		$('#sb-expand').hide();
+	});
+	$('#sb-roll').click(function(){
+		$('#sidebar > *').hide();
+		$('#sidebar > *.mini').css('display', 'initial');
+	});
+});
+</script>
