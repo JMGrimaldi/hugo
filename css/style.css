@@ -359,7 +359,7 @@ span.cv {
 
 @media screen and (max-width : 700px) {
 	div#sidebar {position: static; width: 100%; padding: 1em 1em;}
-	div.content {margin: -1.5em 0 0 0; max-width: 100%;}
+	div.content {margin: -2.5em 0 0 0; max-width: 100%;}
 	.large-width {display: none;}
 	.short-width {display: initial;}
 	div#sidebar > * {display: none;}
