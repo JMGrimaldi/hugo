@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/linux/</link>
+    <link>http://localhost:1313/tags/linux/</link>
     <description>Derniers contenus Linux de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 28 May 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Encodage H.264 avec GStreamer</title>
-      <link>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</link>
+      <link>http://localhost:1313/post/encodage-h264-avec-gstreamer/</link>
       <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</guid>
+      <guid>http://localhost:1313/post/encodage-h264-avec-gstreamer/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
@@ -97,10 +97,10 @@ rm -f x264_2pass.log*
     
     <item>
       <title>Backup linux</title>
-      <link>http://grimaldi.me/post/backup-linux/</link>
+      <link>http://localhost:1313/post/backup-linux/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/backup-linux/</guid>
+      <guid>http://localhost:1313/post/backup-linux/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/backup.jpg&#34; /&gt;&lt;/p&gt;
@@ -280,10 +280,10 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
     
     <item>
       <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
+      <link>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</link>
       <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
+      <guid>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/shuffle.png&#34;&gt;&lt;/p&gt;
@@ -355,10 +355,10 @@ doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0
     
     <item>
       <title>Pixma MG5250 sur Ubuntu</title>
-      <link>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</link>
+      <link>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</link>
       <pubDate>Mon, 10 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</guid>
+      <guid>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment installer l&amp;rsquo;imprimante-scanner Canon Pixma MG5250
@@ -418,10 +418,10 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
     
     <item>
       <title>Installer Ubuntu sur Samsung 370R5E-S02</title>
-      <link>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
+      <link>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
       <pubDate>Sun, 21 Jul 2013 22:11:16 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
+      <guid>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
       <description>
 
 &lt;p&gt;Le Samsung 370R5E-S02 est un portable 15,6″ équipé d’un CPU Intel Core i5 3210M. Cette page décrit quelques particularités de l’installation d’Ubuntu 13.04 sur ce PC.&lt;/p&gt;
@@ -516,10 +516,10 @@ Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple
     
     <item>
       <title>Envoi de mails sur Ubuntu</title>
-      <link>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</link>
+      <link>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</link>
       <pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</guid>
+      <guid>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment envoyer des mails en ligne de commande avec Ubuntu
@@ -569,10 +569,10 @@ vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-
     
     <item>
       <title>Cinergy 250 PCI &amp; Linux</title>
-      <link>http://grimaldi.me/post/cinergy-linux/</link>
+      <link>http://localhost:1313/post/cinergy-linux/</link>
       <pubDate>Wed, 04 Aug 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/cinergy-linux/</guid>
+      <guid>http://localhost:1313/post/cinergy-linux/</guid>
       <description>
 
 &lt;p&gt;This page explains how to have Terratec Cinergy 250 PCI video card work under
@@ -660,10 +660,10 @@ the PC; for other usage you might need some tweaking. Here are the last steps:&l
     
     <item>
       <title>Exports NFS</title>
-      <link>http://grimaldi.me/post/exports-nfs/</link>
+      <link>http://localhost:1313/post/exports-nfs/</link>
       <pubDate>Tue, 24 Feb 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/exports-nfs/</guid>
+      <guid>http://localhost:1313/post/exports-nfs/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment faire une installation très simple de partages NFS
@@ -727,10 +727,10 @@ mount mon_serveur:/srv /mnt/mon_serveur
     
     <item>
       <title>Passerelle ADSL-Wifi</title>
-      <link>http://grimaldi.me/post/passerelle-adsl-wifi/</link>
+      <link>http://localhost:1313/post/passerelle-adsl-wifi/</link>
       <pubDate>Sat, 13 Aug 2005 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/passerelle-adsl-wifi/</guid>
+      <guid>http://localhost:1313/post/passerelle-adsl-wifi/</guid>
       <description>
 
 &lt;p&gt;La page &lt;a href=&#34;../../post/speedtouch-debian/&#34;&gt;Speedtouch &amp;amp; Debian&lt;/a&gt; expliquait comment connecter
@@ -1046,10 +1046,10 @@ entendeur&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>SpeedTouch &amp; Debian</title>
-      <link>http://grimaldi.me/post/speedtouch-debian/</link>
+      <link>http://localhost:1313/post/speedtouch-debian/</link>
       <pubDate>Sun, 26 Jun 2005 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/speedtouch-debian/</guid>
+      <guid>http://localhost:1313/post/speedtouch-debian/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1306,10 +1306,10 @@ iface ppp0 inet ppp
     
     <item>
       <title>JOnAS</title>
-      <link>http://grimaldi.me/post/jonas/</link>
+      <link>http://localhost:1313/post/jonas/</link>
       <pubDate>Sat, 25 Sep 2004 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/jonas/</guid>
+      <guid>http://localhost:1313/post/jonas/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1447,10 +1447,10 @@ beans !&lt;/p&gt;
     
     <item>
       <title>gCDrip</title>
-      <link>http://grimaldi.me/post/gcdrip/</link>
+      <link>http://localhost:1313/post/gcdrip/</link>
       <pubDate>Thu, 01 Jan 2004 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/gcdrip/</guid>
+      <guid>http://localhost:1313/post/gcdrip/</guid>
       <description>
 
 &lt;ul&gt;
@@ -1528,10 +1528,10 @@ comment.&lt;/p&gt;
     
     <item>
       <title>deldup</title>
-      <link>http://grimaldi.me/post/deldup/</link>
+      <link>http://localhost:1313/post/deldup/</link>
       <pubDate>Wed, 12 Nov 2003 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/deldup/</guid>
+      <guid>http://localhost:1313/post/deldup/</guid>
       <description>
 
 &lt;h2 id=&#34;what-is-deldup&#34;&gt;What is deldup?&lt;/h2&gt;
@@ -1561,10 +1561,10 @@ box-perl&lt;/code&gt;), then simply run:&lt;/p&gt;
     
     <item>
       <title>Fontes &amp; linux</title>
-      <link>http://grimaldi.me/post/fontes-linux/</link>
+      <link>http://localhost:1313/post/fontes-linux/</link>
       <pubDate>Sun, 23 Feb 2003 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/fontes-linux/</guid>
+      <guid>http://localhost:1313/post/fontes-linux/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1654,10 +1654,10 @@ par exemple, depuis Gimp (outil texte).&lt;/li&gt;
     
     <item>
       <title>gSoko</title>
-      <link>http://grimaldi.me/post/gsoko/</link>
+      <link>http://localhost:1313/post/gsoko/</link>
       <pubDate>Mon, 25 Sep 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/gsoko/</guid>
+      <guid>http://localhost:1313/post/gsoko/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Updated on March 26, 2005&lt;/div&gt;

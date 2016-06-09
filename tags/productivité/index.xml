@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Productivité - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/productivit%C3%A9/</link>
+    <link>http://localhost:1313/tags/productivit%C3%A9/</link>
     <description>Derniers contenus Productivité de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Mon, 20 Aug 2007 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/productivit%C3%A9/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/productivit%C3%A9/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Classer ses actions avec GTD</title>
-      <link>http://grimaldi.me/post/freestyle/classer-ses-actions-avec-gtd/</link>
+      <link>http://localhost:1313/post/freestyle/classer-ses-actions-avec-gtd/</link>
       <pubDate>Mon, 20 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/classer-ses-actions-avec-gtd/</guid>
+      <guid>http://localhost:1313/post/freestyle/classer-ses-actions-avec-gtd/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/milkman.jpg&#34;&gt;&lt;/p&gt;
@@ -58,10 +58,10 @@
     
     <item>
       <title>Concentré : stop aux interruptions</title>
-      <link>http://grimaldi.me/post/freestyle/concentr%C3%A9-stop-aux-interruptions/</link>
+      <link>http://localhost:1313/post/freestyle/concentr%C3%A9-stop-aux-interruptions/</link>
       <pubDate>Sat, 18 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/concentr%C3%A9-stop-aux-interruptions/</guid>
+      <guid>http://localhost:1313/post/freestyle/concentr%C3%A9-stop-aux-interruptions/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/sagesse.png&#34;&gt;&lt;/p&gt;
@@ -96,10 +96,10 @@
     
     <item>
       <title>Une Inbox vide pour un esprit libre</title>
-      <link>http://grimaldi.me/post/freestyle/une-inbox-vide-pour-un-esprit-libre/</link>
+      <link>http://localhost:1313/post/freestyle/une-inbox-vide-pour-un-esprit-libre/</link>
       <pubDate>Fri, 17 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/une-inbox-vide-pour-un-esprit-libre/</guid>
+      <guid>http://localhost:1313/post/freestyle/une-inbox-vide-pour-un-esprit-libre/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/trustedtrio.png&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Si vous avez suivi le billet d’&lt;a href=&#34;../../post/freestyle/email-gagnez-20-minutes-par-jour/&#34;&gt;hier&lt;/a&gt;, vous n’avez plus qu’un sous-dossier dans votre Inbox, &lt;em&gt;Archive&lt;/em&gt;, ce qui en plus du temps de classement gagné est assez relaxant : si ce n’est pas là, pas la peine de chercher ailleurs.&lt;/p&gt;
@@ -138,10 +138,10 @@
     
     <item>
       <title>Email : gagnez 20 minutes par jour</title>
-      <link>http://grimaldi.me/post/freestyle/email-gagnez-20-minutes-par-jour/</link>
+      <link>http://localhost:1313/post/freestyle/email-gagnez-20-minutes-par-jour/</link>
       <pubDate>Thu, 16 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/email-gagnez-20-minutes-par-jour/</guid>
+      <guid>http://localhost:1313/post/freestyle/email-gagnez-20-minutes-par-jour/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/library.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../post/freestyle/email-introduction-%C3%A0-la-productivit%C3%A9/&#34;&gt;Hier&lt;/a&gt; nous avons vu la situation de départ qui a deux caractéristiques :&lt;/p&gt;
@@ -171,10 +171,10 @@
     
     <item>
       <title>Email : introduction à la productivité</title>
-      <link>http://grimaldi.me/post/freestyle/email-introduction-%C3%A0-la-productivit%C3%A9/</link>
+      <link>http://localhost:1313/post/freestyle/email-introduction-%C3%A0-la-productivit%C3%A9/</link>
       <pubDate>Wed, 15 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/email-introduction-%C3%A0-la-productivit%C3%A9/</guid>
+      <guid>http://localhost:1313/post/freestyle/email-introduction-%C3%A0-la-productivit%C3%A9/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/paperwork.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -202,10 +202,10 @@
     
     <item>
       <title>Pour se coucher moins bête</title>
-      <link>http://grimaldi.me/post/dotclear/pour-se-coucher-moins-b%C3%AAte/</link>
+      <link>http://localhost:1313/post/dotclear/pour-se-coucher-moins-b%C3%AAte/</link>
       <pubDate>Sat, 11 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/dotclear/pour-se-coucher-moins-b%C3%AAte/</guid>
+      <guid>http://localhost:1313/post/dotclear/pour-se-coucher-moins-b%C3%AAte/</guid>
       <description>&lt;p&gt;S&amp;rsquo;il vous arrive parfois le soir de vous demander ce que vous avez fait de votre journée, voire de votre semaine, alors ce billet va vous intéresser : &lt;a href=&#34;http://business.tutsplus.com/articles/10-easy-ways-to-get-the-most-out-of-your-day--fsw-220&#34;&gt;10 easy ways to get the most out of your day&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Mes 3 préférés :&lt;/p&gt;
@@ -220,10 +220,10 @@
     
     <item>
       <title>Outlook : Ranger ses mails au clavier</title>
-      <link>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
+      <link>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
       <pubDate>Sat, 28 Jul 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
+      <guid>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/inboxzero.jpg&#34;&gt;&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/windows/</link>
+    <link>http://localhost:1313/tags/windows/</link>
     <description>Derniers contenus Windows de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Tue, 11 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Définir la vue par défaut des dossiers Windows</title>
-      <link>http://grimaldi.me/post/vue-par-d%C3%A9faut/</link>
+      <link>http://localhost:1313/post/vue-par-d%C3%A9faut/</link>
       <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/vue-par-d%C3%A9faut/</guid>
+      <guid>http://localhost:1313/post/vue-par-d%C3%A9faut/</guid>
       <description>&lt;p&gt;Comment faire, dans l&amp;rsquo;explorateur de fichiers Windows 7, pour que la vue du dossier actuel (tri par Nom ou par Type, largeur des colonnes, etc.) s&amp;rsquo;applique à tous les dossiers ?&lt;/p&gt;
 
 &lt;ul&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title>Automatiser Excel</title>
-      <link>http://grimaldi.me/post/automatiser-excel/</link>
+      <link>http://localhost:1313/post/automatiser-excel/</link>
       <pubDate>Mon, 10 Aug 2015 17:47:49 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/automatiser-excel/</guid>
+      <guid>http://localhost:1313/post/automatiser-excel/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/excel.png&#34;&gt;&lt;/p&gt;
@@ -80,10 +80,10 @@
     
     <item>
       <title>Traverser un proxy NTLM/SSPI</title>
-      <link>http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/</link>
+      <link>http://localhost:1313/post/traverser-un-proxy-ntlm-sspi/</link>
       <pubDate>Mon, 02 Sep 2013 20:10:23 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/</guid>
+      <guid>http://localhost:1313/post/traverser-un-proxy-ntlm-sspi/</guid>
       <description>&lt;p&gt;Sous Windows, un proxy NTLM/SSPI récupère automatiquement l’identité de votre session pour vous donner accès à Internet. L’avantage est que vous n’avez pas à saisir de mot de passe ; l’inconvénient est que si vous utilisez un outil qui ne supporte pas ce protocole (svn, wget, …), la connexion est impossible.&lt;/p&gt;
 
 &lt;p&gt;La solution est d’installer un proxy local qui gèrera l’authentification auprès du proxy SSPI. Le programme qui permet de faire cela s’appelle Cntlm.&lt;/p&gt;
@@ -127,10 +127,10 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
     
     <item>
       <title>Outlook : Ranger ses mails au clavier</title>
-      <link>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
+      <link>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
       <pubDate>Sat, 28 Jul 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
+      <guid>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/inboxzero.jpg&#34;&gt;&lt;/p&gt;

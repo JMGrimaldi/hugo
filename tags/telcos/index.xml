@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Telcos - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/telcos/</link>
+    <link>http://localhost:1313/tags/telcos/</link>
     <description>Derniers contenus Telcos de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Tue, 01 Jan 2008 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/telcos/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/telcos/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Le progrès carbure à l’abondance</title>
-      <link>http://grimaldi.me/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</link>
+      <link>http://localhost:1313/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</link>
       <pubDate>Tue, 01 Jan 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</guid>
+      <guid>http://localhost:1313/post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/canderson.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Chris Anderson est l’inventeur en 2004 du concept de la &lt;em&gt;Long tail&lt;/em&gt;. Il est aussi l’éditeur du magazine &lt;em&gt;Wired&lt;/em&gt;. Dans une &lt;a href=&#34;http://www.techdigest.tv/2007/12/liveblog_wireds.html&#34;&gt;allocution&lt;/a&gt; donnée à la conférence Nokia World le 5 décembre dernier, Chris nous fait réfléchir sur l’impact de l’abondance dans le progrès technologique : lors de l’introduction du nucléaire domestique dans les années 50, certains ont affirmé que ce progrès rendrait l’électricité gratuite, car infiniment disponible. On sait aujourd’hui que c’est faux, mais que se passerait-il si c’était vrai : à quoi ressemblerait le monde si l’électricité était réellement gratuite, si on disposait ainsi d’une source d’énergie infinie ?&lt;/p&gt;
@@ -45,10 +45,10 @@
     
     <item>
       <title>Skype out : autopsie et enseignements</title>
-      <link>http://grimaldi.me/post/freestyle/skype-out-autopsie-et-enseignements/</link>
+      <link>http://localhost:1313/post/freestyle/skype-out-autopsie-et-enseignements/</link>
       <pubDate>Tue, 21 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/skype-out-autopsie-et-enseignements/</guid>
+      <guid>http://localhost:1313/post/freestyle/skype-out-autopsie-et-enseignements/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/skypeout.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Niels Bohr, prix nobel de physique en 1922, disait qu’« un expert est une personne qui a fait toutes les erreurs possibles dans un domaine très restreint. » Tant qu’à faire, si on peut apprendre des erreurs des autres, c’est peut-être un peu moins efficace mais certainement aussi beaucoup moins douloureux.&lt;/p&gt;
@@ -67,10 +67,10 @@
     
     <item>
       <title>Faut-il virer ses clients ?</title>
-      <link>http://grimaldi.me/post/freestyle/faut-il-virer-ses-clients/</link>
+      <link>http://localhost:1313/post/freestyle/faut-il-virer-ses-clients/</link>
       <pubDate>Sun, 19 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/faut-il-virer-ses-clients/</guid>
+      <guid>http://localhost:1313/post/freestyle/faut-il-virer-ses-clients/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/exit.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Dans son livre &lt;em&gt;The 4-hour workweek&lt;/em&gt;, en tête des ventes du New York Times dans la catégorie Business au début du mois, Tim Ferris recommande aux entrepreneurs de virer les clients pour lesquels le rapport gains/efforts est le plus faible : en application de la &lt;a href=&#34;http://fr.wikipedia.org/wiki/Loi_de_Pareto&#34;&gt;loi de Pareto&lt;/a&gt; (ou loi des 80/20), 20% des clients représentent en effet 80% du chiffre d’affaires. Et 20%, pas nécessairement les mêmes justement, représentent 80% des réclamations, de l’insatisfaction, et au final du stress pour l’entreprise. Tim conseille donc simplement de virer les 20% de clients les plus récriminants, et à la limite de ne garder que les 20% les plus productifs.&lt;/p&gt;
@@ -83,10 +83,10 @@
     
     <item>
       <title>Au service de l’état</title>
-      <link>http://grimaldi.me/post/freestyle/au-service-de-l-%C3%A9tat/</link>
+      <link>http://localhost:1313/post/freestyle/au-service-de-l-%C3%A9tat/</link>
       <pubDate>Thu, 17 May 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/au-service-de-l-%C3%A9tat/</guid>
+      <guid>http://localhost:1313/post/freestyle/au-service-de-l-%C3%A9tat/</guid>
       <description>&lt;p&gt;Chez un opérateur Internet, quand un client s’abonne à la Voix sur IP par exemple, il faut configurer le logiciel qui tourne dans sa box : adresse du serveur VoIP, login et mot de passe du client, etc. C’est ce qu’on appelle l’activation du terminal. Alors soit on envoie ces infos au client par mail et c’est à lui de les rentrer dans la box, soit on essaye de lui faciliter la vie avec un mécanisme d’auto-provisioning.&lt;/p&gt;
 
 &lt;p&gt;Ça paraît simple, mais ça ne l’est pas tant que ça : il faut être certain qu’on configure la bonne box, il ne faut pas que n’importe qui puisse faire la même chose, la box peut être éteinte, lors d’un échange de box il faut automatiquement déconfigurer l’ancienne et reconfigurer la nouvelle, etc.&lt;/p&gt;
@@ -105,10 +105,10 @@
     
     <item>
       <title>Plaintes à haut débit en 2006</title>
-      <link>http://grimaldi.me/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</link>
+      <link>http://localhost:1313/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</link>
       <pubDate>Sun, 18 Mar 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</guid>
+      <guid>http://localhost:1313/post/freestyle/plaintes-%C3%A0-haut-d%C3%A9bit-en-2006/</guid>
       <description>&lt;p&gt;Je reviens après quelques semaines, vacances lointaines, autres priorités, etc. L’&lt;a href=&#34;https://web.archive.org/web/20070322172425/http://www.afutt.org/particuliers/index.html&#34;&gt;Afutt&lt;/a&gt; publie aujourd’hui dans le JDD son observatoire annuel des plaintes dans le secteur des télécoms. J’y ai ajouté le ratio plaintes/parc qui permet de voir chez qui les clients sont les plus mécontents. Résultat des courses :&lt;/p&gt;
 
 &lt;table&gt;
@@ -188,10 +188,10 @@
     
     <item>
       <title>Tu tires ou tu pousses ?</title>
-      <link>http://grimaldi.me/post/freestyle/tu-tires-ou-tu-pousses/</link>
+      <link>http://localhost:1313/post/freestyle/tu-tires-ou-tu-pousses/</link>
       <pubDate>Sun, 28 Jan 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/tu-tires-ou-tu-pousses/</guid>
+      <guid>http://localhost:1313/post/freestyle/tu-tires-ou-tu-pousses/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/devices.jpg&#34;&gt;&lt;/p&gt;
@@ -272,10 +272,10 @@
     
     <item>
       <title>Dopage à l’IP fixe</title>
-      <link>http://grimaldi.me/post/freestyle/dopage-%C3%A0-l-ip-fixe/</link>
+      <link>http://localhost:1313/post/freestyle/dopage-%C3%A0-l-ip-fixe/</link>
       <pubDate>Wed, 17 Jan 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/dopage-%C3%A0-l-ip-fixe/</guid>
+      <guid>http://localhost:1313/post/freestyle/dopage-%C3%A0-l-ip-fixe/</guid>
       <description>&lt;p&gt;XiTi vient de publier son &lt;a href=&#34;https://web.archive.org/web/20070210082044/http://www.xitimonitor.com/fr-FR/Technique/FAI_Janvier_2007/index-1-1-3-71.html&#34;&gt;Palmarès des FAI en France&lt;/a&gt;, calculé en décembre 2006 par la provenance des requêtes sur une base de 5189 sites.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../static/freestyle/FAI-200701-1.png&#34;&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/FAI-200701-1-150x150.png&#34;&gt;&lt;/a&gt;&lt;br /&gt;
@@ -293,10 +293,10 @@ Le résultat en images ci-contre. Orange a comme d’habitude un peu moins de 50
     
     <item>
       <title>FAI 2.0</title>
-      <link>http://grimaldi.me/post/freestyle/fai-2-0/</link>
+      <link>http://localhost:1313/post/freestyle/fai-2-0/</link>
       <pubDate>Fri, 05 Jan 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/fai-2-0/</guid>
+      <guid>http://localhost:1313/post/freestyle/fai-2-0/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://web.archive.org/web/20070114105430/http://www.01net.com/article/337206.html&#34;&gt;Les enquêtes Médiamétrie&lt;/a&gt; sur l’audience Web en France montrent que les portails des FAI sont des poids lourds du web : Free est 3ème et Orange 4ème avec plus de 13 millions de visiteurs uniques chacun, devant Microsoft, eBay, etc. Orange vient même flirter avec le n°1 Google si l’on ajoute Voila.&lt;/p&gt;
 
 &lt;p&gt;Les FAI ont donc un levier de communication formidable, qui dépasse largement leur base de clients. Pourtant, que proposent ces FAI à leurs visiteurs ? Simplement une publication de type magazine. Certes Orange revendique sa transformation d’opérateur télécom en fournisseur de services, mais alors que l’économie du Web bâtit une croissance formidable sur les valeurs 2.0 « social, collaboration, sharing », nos FAI sont absents de cette actualité.&lt;/p&gt;

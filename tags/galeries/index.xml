@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Galeries - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/galeries/</link>
+    <link>http://localhost:1313/tags/galeries/</link>
     <description>Derniers contenus Galeries de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Thu, 23 May 2002 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/galeries/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/galeries/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>M.C. Escher</title>
-      <link>http://grimaldi.me/post/escher/</link>
+      <link>http://localhost:1313/post/escher/</link>
       <pubDate>Thu, 23 May 2002 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/escher/</guid>
+      <guid>http://localhost:1313/post/escher/</guid>
       <description>&lt;p&gt;&lt;em&gt;Les images qui suivent sont protégées, et sont reproduites ici avec la
 permission explicite des ayant droits (&lt;a href=&#34;http://www.mcescher.com&#34;&gt;www.mcescher.com&lt;/a&gt;).&lt;/em&gt;&lt;br /&gt;
 All M.C. Escher works &amp;copy; 2000 Cordon Art BV - Baarn - the Netherlands. All
@@ -389,10 +389,10 @@ rights reserved.&lt;/p&gt;
     
     <item>
       <title>John Howe</title>
-      <link>http://grimaldi.me/post/howe/</link>
+      <link>http://localhost:1313/post/howe/</link>
       <pubDate>Thu, 27 Apr 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/howe/</guid>
+      <guid>http://localhost:1313/post/howe/</guid>
       <description>&lt;p&gt;Quelques superbes peintures de John Howe, inspirées par l&amp;rsquo;oeuvre de Tolkien,
 notamment le Silmarillon et le Seigneur des anneaux.&lt;br /&gt;
 &lt;em&gt;&amp;copy;&amp;nbsp;John Howe&amp;nbsp;: les droits de
