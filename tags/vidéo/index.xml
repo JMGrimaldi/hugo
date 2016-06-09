@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vidéo - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/vid%C3%A9o/</link>
+    <link>http://grimaldi.me/tags/vid%C3%A9o/</link>
     <description>Derniers contenus Vidéo de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 28 May 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/vid%C3%A9o/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/vid%C3%A9o/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Encodage H.264 avec GStreamer</title>
-      <link>http://localhost:1313/post/encodage-h264-avec-gstreamer/</link>
+      <link>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</link>
       <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/encodage-h264-avec-gstreamer/</guid>
+      <guid>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;

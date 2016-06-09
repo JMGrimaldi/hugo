@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>http://grimaldi.me/tags/python/</link>
     <description>Derniers contenus Python de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Mon, 06 Jan 2014 19:19:29 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Accéder à GnuCash en Python</title>
-      <link>http://localhost:1313/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</link>
+      <link>http://grimaldi.me/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</link>
       <pubDate>Mon, 06 Jan 2014 19:19:29 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</guid>
+      <guid>http://grimaldi.me/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</guid>
       <description>&lt;p&gt;Il existe un module Python pour accéder aux fichiers GnuCash. Cela permet d’analyser vos comptes. Mais ce module est si mal documenté que le plus simple est encore de lire le source du module! Voici donc quelques exemples concrets d’utilisation.&lt;/p&gt;
 
 &lt;ol&gt;

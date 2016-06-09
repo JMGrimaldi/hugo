@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Business - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/business/</link>
+    <link>http://grimaldi.me/tags/business/</link>
     <description>Derniers contenus Business de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Fri, 13 Sep 2013 23:05:58 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/business/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/business/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Batterie Bolloré : prête pour la maison ?</title>
-      <link>http://localhost:1313/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</link>
+      <link>http://grimaldi.me/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</link>
       <pubDate>Fri, 13 Sep 2013 23:05:58 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</guid>
+      <guid>http://grimaldi.me/post/batterie-bollor%C3%A9-pr%C3%AAte-pour-la-maison/</guid>
       <description>&lt;p&gt;Si &lt;em&gt;Blue solutions&lt;/em&gt; fait &lt;a href=&#34;http://tempsreel.nouvelobs.com/economie/20130913.OBS6970/bollore-prepare-l-entree-en-bourse-de-ses-batteries.html&#34;&gt;parler&lt;/a&gt; d’elle ces jours-ci, c’est qu’elle entre en bourse le 20 octobre. Cette filiale du groupe Bolloré fournit la batterie de la &lt;em&gt;Bluecar&lt;/em&gt; utilisée par Autolib’.&lt;/p&gt;
 
 &lt;p&gt;Les caractéristiques de cette batterie Lithium-Métal-Polymère sont décrites sur le &lt;a href=&#34;http://www.bluecar.fr/les-batteries-lmp-lithium-metal-polymere&#34;&gt;site de Bluecar&lt;/a&gt; : volume de 300 L (environ 28 x 75 x 140 cm), poids de 300 kg, capacité de 30 kWh, durée de vie de 400.000 km ce qui avec une consommation de &lt;a href=&#34;http://fr.wikipedia.org/wiki/Bollor%C3%A9_Bluecar&#34;&gt;14 kWh aux 100 km&lt;/a&gt; correspond à 56.000 kWh.&lt;/p&gt;
@@ -29,10 +29,10 @@
     
     <item>
       <title>Faut-il virer ses clients ?</title>
-      <link>http://localhost:1313/post/freestyle/faut-il-virer-ses-clients/</link>
+      <link>http://grimaldi.me/post/freestyle/faut-il-virer-ses-clients/</link>
       <pubDate>Sun, 19 Aug 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/freestyle/faut-il-virer-ses-clients/</guid>
+      <guid>http://grimaldi.me/post/freestyle/faut-il-virer-ses-clients/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/exit.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Dans son livre &lt;em&gt;The 4-hour workweek&lt;/em&gt;, en tête des ventes du New York Times dans la catégorie Business au début du mois, Tim Ferris recommande aux entrepreneurs de virer les clients pour lesquels le rapport gains/efforts est le plus faible : en application de la &lt;a href=&#34;http://fr.wikipedia.org/wiki/Loi_de_Pareto&#34;&gt;loi de Pareto&lt;/a&gt; (ou loi des 80/20), 20% des clients représentent en effet 80% du chiffre d’affaires. Et 20%, pas nécessairement les mêmes justement, représentent 80% des réclamations, de l’insatisfaction, et au final du stress pour l’entreprise. Tim conseille donc simplement de virer les 20% de clients les plus récriminants, et à la limite de ne garder que les 20% les plus productifs.&lt;/p&gt;
@@ -45,10 +45,10 @@
     
     <item>
       <title>Microsoft 1.0</title>
-      <link>http://localhost:1313/post/freestyle/microsoft-1-0/</link>
+      <link>http://grimaldi.me/post/freestyle/microsoft-1-0/</link>
       <pubDate>Mon, 30 Jul 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/freestyle/microsoft-1-0/</guid>
+      <guid>http://grimaldi.me/post/freestyle/microsoft-1-0/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/zeppelin.png&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;2007. Le desktop est depuis longtemps devenu une commodity. Google mène la danse pour développer des applications en ligne s’exécutant dans le navigateur indépendamment de l’OS. Dans un monde où le « Software As A Service » n’est plus seulement un buzzword, où les entreprises proposent à leurs clients non plus des produits à faire fonctionner au prix fort, mais des services hébergés exposés sur des API ouvertes, Steve Ballmer, CEO de Microsoft, ex-maître du monde, se résigne : « There is a big disruption going on in our business. And some investors will say it’s scary, it’s this, it’s that, are you going to embrace it? We have no choice. »&lt;/p&gt;
@@ -67,10 +67,10 @@
     
     <item>
       <title>L’économie ne sera pas virtuelle</title>
-      <link>http://localhost:1313/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</link>
+      <link>http://grimaldi.me/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</link>
       <pubDate>Fri, 22 Dec 2006 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</guid>
+      <guid>http://grimaldi.me/post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/</guid>
       <description>&lt;p&gt;Le dernier billet d’&lt;a href=&#34;http://ecosphere.wordpress.com/2006/12/21/yahoo-facebook-techcrunch-bulle/&#34;&gt;ecosphere&lt;/a&gt; met le doigt sur la bulle 2.0 : les survivants de la nouvelle économie n’ont pas tiré de la déroute de leurs anciens confrères les même leçons que les banques, et dans le contexte des absorptions déjà évoquées &lt;a href=&#34;../../post/freestyle/hype-2-0/&#34;&gt;là&lt;/a&gt; valorisent leurs proies à des tarifs faramineux.&lt;/p&gt;
 
 &lt;p&gt;Ainsi Yahoo! a-t-il valorisé &lt;a href=&#34;http://en.wikipedia.org/wiki/Facebook&#34;&gt;Facebook&lt;/a&gt;, site de social networking centré sur les universités US et qui &lt;a href=&#34;https://web.archive.org/web/20070106222907/http://fr.techcrunch.com/2006/12/16/evidemment-facebook-nest-pas-a-vendre-comme-youtube/&#34;&gt;a rejeté l’offre&lt;/a&gt;, à 1 milliard de dollars. Il faut savoir que le résultat net attendu par Facebook en 2006 est de 9 millions de dollars. Comment arrive-t-on à valoriser une entreprise plus de 100 fois ses bénéfices alors qu’à titre de comparaison le ratio est de 20 pour Microsoft, 40 pour Yahoo!, ou 10 pour Total qui est la plus grosse capitalisation française ?&lt;/p&gt;

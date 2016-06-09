@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Voyages - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/voyages/</link>
+    <link>http://grimaldi.me/tags/voyages/</link>
     <description>Derniers contenus Voyages de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sun, 30 Jul 2006 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/voyages/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/voyages/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Arizona dream</title>
-      <link>http://localhost:1313/post/dotclear/arizona-dream/</link>
+      <link>http://grimaldi.me/post/dotclear/arizona-dream/</link>
       <pubDate>Sun, 30 Jul 2006 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/dotclear/arizona-dream/</guid>
+      <guid>http://grimaldi.me/post/dotclear/arizona-dream/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/dotclear/train.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Je suis assis sur une étagère dans le train. En face un vieil homme barbu me propose de la poudre de Betel Nuts. Sous lui une femme voilée demande à un jeune homme de lui fermer la fenêtre. À deux mètres et dix personnes de là, un sosie de Groucho Marx a les deux poignets tenus par un moustachu jovial qui lui fait taper dans ses mains. Près d&amp;rsquo;eux une fillette dort sur le bedon d&amp;rsquo;un vieil homme habillé tout en blanc. Le sol est jonché de restes de cacahuètes. À la gare, dans la pièce des guichets, deux gamins cassaient le mur à coups de marteau, perchés sur un échaffaudage fait de trois bambous. Un garçon expliquait à tous les touristes qu&amp;rsquo;il faisait une collection de monnaies du monde. Un homme dormait par terre au milieu de la queue. Une fillette guidait un vieil aveugle vers les touristes pour mendier. Une autre apprenait à dire &amp;ldquo;Hello, what&amp;rsquo;s your name?&amp;rdquo; avec sa mère. Hier j&amp;rsquo;ai croisé quatre jeunes hommes surexcités. Le plus grand d&amp;rsquo;entre eux figurerait dans le Guinness Book car il ouvre des noix de coco avec ses dents. Les trois autres font des oeuvres d&amp;rsquo;art à partir de bouteilles de soda. Ils m&amp;rsquo;ont laissé leur carte de visite, où l&amp;rsquo;on voit l&amp;rsquo;un deux entouré du gouverneur de la région et du président. En face de moi le vieux au betel lit un journal en arabe sur la couverture duquel apparaissent côté à côte des cercueils américains, un Bush tête baissée, et des GI qui prient. Ce n&amp;rsquo;est pas un rêve, c&amp;rsquo;est l&amp;rsquo;Inde.&lt;/p&gt;
@@ -23,10 +23,10 @@
     
     <item>
       <title>Voyage en Chine</title>
-      <link>http://localhost:1313/post/chine/</link>
+      <link>http://grimaldi.me/post/chine/</link>
       <pubDate>Sat, 08 Feb 2003 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/chine/</guid>
+      <guid>http://grimaldi.me/post/chine/</guid>
       <description>
 
 &lt;p&gt;Ce carnet relate le voyage d&amp;rsquo;un mois en Chine du Sud effectué avec Ghiz et
@@ -1401,10 +1401,10 @@ chance d&amp;rsquo;être, ici, maintenant, et pour reprendre la phrase finale du
     
     <item>
       <title>Cambodge</title>
-      <link>http://localhost:1313/post/cambodge/</link>
+      <link>http://grimaldi.me/post/cambodge/</link>
       <pubDate>Thu, 23 May 2002 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/cambodge/</guid>
+      <guid>http://grimaldi.me/post/cambodge/</guid>
       <description>
 
 &lt;p&gt;En introduction au récit de mon voyage au Cambodge, j&amp;rsquo;ai écrit un petit poème

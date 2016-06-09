@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projets - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/projets/</link>
+    <link>http://grimaldi.me/tags/projets/</link>
     <description>Derniers contenus Projets de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Tue, 26 Oct 2010 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/projets/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/projets/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>minishowcase-jm</title>
-      <link>http://localhost:1313/post/minishowcase-jm/</link>
+      <link>http://grimaldi.me/post/minishowcase-jm/</link>
       <pubDate>Tue, 26 Oct 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/minishowcase-jm/</guid>
+      <guid>http://grimaldi.me/post/minishowcase-jm/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Updated on Jul 30, 2011&lt;/div&gt;
@@ -93,10 +93,10 @@ website&lt;/a&gt;.&lt;/p&gt;
     
     <item>
       <title>Comiker</title>
-      <link>http://localhost:1313/post/comiker/</link>
+      <link>http://grimaldi.me/post/comiker/</link>
       <pubDate>Thu, 16 Sep 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/comiker/</guid>
+      <guid>http://grimaldi.me/post/comiker/</guid>
       <description>&lt;p&gt;Comiker is a cartoon maker I wrote to learn Python programming. I am an avid
 reader of webcomics like &lt;a href=&#34;http://dilbert.com/&#34;&gt;Dilbert&lt;/a&gt; or &lt;a href=&#34;http://xkcd.com&#34;&gt;xkcd&lt;/a&gt; where
 the drawing is quite repetitive and I thought it would be great to let people
@@ -131,10 +131,10 @@ especially in that it handles new players in a much cleaner way.&lt;/p&gt;
     
     <item>
       <title>gCDrip</title>
-      <link>http://localhost:1313/post/gcdrip/</link>
+      <link>http://grimaldi.me/post/gcdrip/</link>
       <pubDate>Thu, 01 Jan 2004 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/gcdrip/</guid>
+      <guid>http://grimaldi.me/post/gcdrip/</guid>
       <description>
 
 &lt;ul&gt;
@@ -212,10 +212,10 @@ comment.&lt;/p&gt;
     
     <item>
       <title>JMparse</title>
-      <link>http://localhost:1313/post/jmparse/</link>
+      <link>http://grimaldi.me/post/jmparse/</link>
       <pubDate>Fri, 09 Aug 2002 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/jmparse/</guid>
+      <guid>http://grimaldi.me/post/jmparse/</guid>
       <description>&lt;div class=&#34;message&#34;&gt;Cet article est obsolète. Le site utilise désormais le générateur &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/div&gt;
 
 &lt;p&gt;JMparse c&amp;rsquo;est le script grâce auquel toutes les pages de ce site ont été
@@ -238,10 +238,10 @@ lors de la génération par le fichier de contenu, $menu$ par un menu, etc.&lt;/
     
     <item>
       <title>gSoko</title>
-      <link>http://localhost:1313/post/gsoko/</link>
+      <link>http://grimaldi.me/post/gsoko/</link>
       <pubDate>Mon, 25 Sep 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/gsoko/</guid>
+      <guid>http://grimaldi.me/post/gsoko/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Updated on March 26, 2005&lt;/div&gt;
