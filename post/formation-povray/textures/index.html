@@ -71,20 +71,20 @@ T_Stone21.</p>
 
 <p>Je peux alors écrire :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
-<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;metals.inc&quot;</span>
-<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;stones1.inc&quot;</span>
+<p>
+#include "colors.inc"
+#include "metals.inc"
+#include "stones1.inc"
 
-<span style="color: #999999">sphere</span> {<span style="color: #009999">0</span>,<span style="color: #009999">1</span> <span style="font-weight: bold">texture</span> {T_Silver_3C}}
-<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span> <span style="font-weight: bold">texture</span> {T_Stone21}}
+sphere {0,1 texture {T_Silver_3C}}
+plane {y,-1 texture {T_Stone21}}
 
-<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">10</span>,<span style="font-weight: bold">-</span><span style="color: #009999">8</span>&gt; White} 
+light_source {<-6,10,-8> White} 
 
-<span style="color: #999999">camera</span> {
- <span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">4</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span>
- <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>
+camera {
+ location -4*z
+ look_at 0
 }
-</pre></div>
 </p>
 
 <p><img src="../../../img/pov/texture.jpg" alt="sphère d'argent sur son plan de marbre" />
@@ -141,10 +141,10 @@ plus clair sur un exemple :</p>
 
 <p>Dans l&rsquo;image ci-dessus le pigment est :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">marble</span>
-   <span style="font-weight: bold">color_map</span> {[<span style="color: #009999">0</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">.5</span>,<span style="color: #009999">.3</span>,<span style="color: #009999">0</span>&gt;][<span style="color: #009999">.3</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;][<span style="color: #009999">.8</span> <span style="font-weight: bold">rgb</span> <span style="color: #009999">.9</span>]}
+<p>
+ pigment {marble
+   color_map {[0 rgb <.5,.3,0>][.3 rgb <1,.9,.8>][.8 rgb .9]}
  }
-</pre></div>
 </p>
 
 <p>On précise donc la couleur en 0 : &lt;.5,.3,0&gt; (marron), en .3 : <1,.9,.8>
@@ -156,11 +156,11 @@ On voit que le motif <code>marble</code> correspond à des plans uniformes paral
 Comme c&rsquo;est peut-être un peu trop régulier pour être réaliste, on peut ajouter
 de la turbulence (0=pas de turbulence / &gt;1=très turbulent) :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">marble</span>
-   <span style="font-weight: bold">color_map</span> {[<span style="color: #009999">0</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">.5</span>,<span style="color: #009999">.3</span>,<span style="color: #009999">0</span>&gt;][<span style="color: #009999">.3</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;][<span style="color: #009999">.8</span> <span style="font-weight: bold">rgb</span> <span style="color: #009999">.9</span>]}
-   <span style="font-weight: bold">turbulence</span> <span style="color: #009999">.4</span>
+<p>
+ pigment {marble
+   color_map {[0 rgb <.5,.3,0>][.3 rgb <1,.9,.8>][.8 rgb .9]}
+   turbulence .4
  }
-</pre></div>
 </p>
 
 <p><a href="../../../static/pov/marble1.pov"><img src="../../../img/pov/marble1.jpg" alt="marbre turbulent" />

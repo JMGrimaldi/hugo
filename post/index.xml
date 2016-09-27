@@ -6,8 +6,61 @@
     <description>Derniers contenus Posts de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Thu, 09 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Sep 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://grimaldi.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Automatiser une tâche sous Windows</title>
+      <link>http://grimaldi.me/post/automatiser-windows/</link>
+      <pubDate>Tue, 27 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://grimaldi.me/post/automatiser-windows/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/crontab.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &amp;ldquo;Planificateur de tâches&amp;rdquo; rame et plante au point qu&amp;rsquo;il est inutilisable. Voici donc comment s&amp;rsquo;en passer via la ligne de commande (&lt;code&gt;cmd.exe&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;La commande que l&amp;rsquo;on utilise est &lt;code&gt;schtasks&lt;/code&gt;. Pour voir l&amp;rsquo;aide de la commande :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour créer une tâche nommée jm.backup et lancer la commande ci-dessous à 13h38 (il était 13h37 à ce moment-là ; ça me permet de tester le bon déroulement de la tâche) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Create /TN jm.backup /TR &amp;quot;&#39;C:\My Program Files\cygwin\bin\bash.exe&#39; -l -c &#39;/home/jm/snapshot.sh daily&#39;&amp;quot; /SC ONCE /ST 13:38
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour relancer manuellement la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Run /TN jm.backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour voir tous les paramètres de la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Query /TN jm.backup /FO list /V
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour recréer la tâche avec une répétition quotidienne à 13h (l&amp;rsquo;effet de la commande &lt;code&gt;/Change&lt;/code&gt; est différent, bizarrement) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Create /TN jm.backup /TR &amp;quot;&#39;C:\My Program Files\cygwin\bin\bash.exe&#39; -l -c &#39;/home/jm/snapshot.sh daily&#39;&amp;quot; /SC DAILY /ST 13:00 /F
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour désactiver la tâche (&lt;code&gt;/ENABLE&lt;/code&gt; pour réactiver) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Change /TN jm.backup /DISABLE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour supprimer la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Delete /TN jm.backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt; &lt;code&gt;schtasks&lt;/code&gt; ne propose pas toutes les options, comme permettre l&amp;rsquo;exécution d&amp;rsquo;une tâche lorsque l&amp;rsquo;ordinateur est sur batterie. Pour cela il faut sortir le fichier XML de la tâche, l&amp;rsquo;éditer puis l&amp;rsquo;importer :&lt;/p&gt;
+
+&lt;pre&gt;schtasks /Query /TN jm.backup /XML &gt;jm.xml
+&lt;em&gt;... (on édite jm.xml)&lt;/em&gt;
+schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Rencontres du troisième type</title>
@@ -365,32 +418,32 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;On extrait les images du PDF :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;pdfimages -j doc.pdf doc
-&lt;/pre&gt;&lt;/div&gt;
+
+$ pdfimages -j doc.pdf doc
 
 Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for &lt;/span&gt;i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do &lt;/span&gt;convert -quality 95 -rotate 90 -crop 50%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+$ for i in doc-*.jpg; do convert -quality 95 -rotate 90 -crop 50%x0 &#34;$i&#34; &#34;$i&#34; &amp;&amp; rm &#34;$i&#34;;done
 
 Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate 180 &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+$ i=doc-0007-0.jpg; jpegtran -rotate 180 $i $i
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+
+$ pages=`perl -e &#39;$n=8; for $k (1..$n*2){printf &#34;doc-%.4i-%i.jpg &#34;, ($k&gt;$n?$k-$n:$n-$k+1)-1, $k%2};&#39;`; echo $pages
 doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;convert -density 300 -quality 80 &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
-&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;rm *jpg
-&lt;/pre&gt;&lt;/div&gt;
+
+$ convert -density 300 -quality 80 $pages out.pdf
+$ rm *jpg
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -416,15 +469,15 @@ doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0
 &lt;li&gt;&lt;p&gt;On peut récupérer un disque dur HS sans débourser une fortune auprès d&amp;rsquo;un labo de récupération de données.&lt;br /&gt;
 Mon disque dur, un Seagate Backup+ Slim d&amp;rsquo;1To âgé d&amp;rsquo;à peine 1 an, se mettait bien sous tension mais n&amp;rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&amp;rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.&lt;br /&gt;
 Sous Ubuntu, le disque apparaissait avec &lt;code&gt;lsusb&lt;/code&gt;, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&amp;rsquo;allait pas plus loin. &lt;code&gt;/var/log/syslog&lt;/code&gt; montrait l&amp;rsquo;erreur suivante :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
-sd 6:0:0:0: Attached scsi generic sg1 &lt;span style=&#34;color: #999999&#34;&gt;type &lt;/span&gt;0
-sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; Spinning up disk...
+
+scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
+sd 6:0:0:0: Attached scsi generic sg1 type 0
+sd 6:0:0:0: [sdb] Spinning up disk...
 usb 4-1: USB disconnect, device number 2
 ......................ready
-sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; READ CAPACITY failed
-sd 6:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;
-Result: &lt;span style=&#34;color: #008080&#34;&gt;hostbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DID_NO_CONNECT &lt;span style=&#34;color: #008080&#34;&gt;driverbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DRIVER_OK
-&lt;/pre&gt;&lt;/div&gt;
+sd 6:0:0:0: [sdb] READ CAPACITY failed
+sd 6:0:0:0: [sdb]
+Result: hostbyte=DID_NO_CONNECT driverbyte=DRIVER_OK
 
 Puis j&amp;rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&amp;rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&amp;rsquo;avais rien à perdre.&lt;br /&gt;
 Alors j&amp;rsquo;ai suivi &lt;a href=&#34;https://www.youtube.com/watch?v=ijFCOvwd_Zo&#34;&gt;cette vidéo&lt;/a&gt; pour sortir le disque dur de son boîtier, puis &lt;a href=&#34;https://www.youtube.com/watch?v=7m5cil6KezI&#34;&gt;celle-ci&lt;/a&gt; pour ouvrir le disque et décoincer la tête de lecture.&lt;br /&gt;
@@ -459,13 +512,9 @@ chmod +x apt-cyg
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;NB :&lt;/strong&gt; chez moi la version de gzip installée n&amp;rsquo;accepte pas l&amp;rsquo;option -k, ce qui provoque une erreur quand on supprime un package. Pour l&amp;rsquo;éviter, remplacez la ligne :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;gzip -dk setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst.gz
-&lt;/pre&gt;&lt;/div&gt;
-
+gzip -dk setup/&#34;$pkg&#34;.lst.gz
 par :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;gzip -dc setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst.gz &amp;gt; setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$pkg&amp;quot;&lt;/span&gt;.lst
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
+gzip -dc setup/&#34;$pkg&#34;.lst.gz &gt; setup/&#34;$pkg&#34;.lst&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;La première fois, lancez &lt;em&gt;apt-cyg&lt;/em&gt; en précisant le miroir à utiliser et le répertoire de téléchargement. Si l’opération fonctionne, il s’en souviendra pour le prochain lancement:&lt;/p&gt;
@@ -520,13 +569,13 @@ par :
 
 &lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
-    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
-    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
-    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
-    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+Sub efface_1_colonne_sur_2()
+    Range(&#34;C1&#34;).Select
+    For i = 1 To 35
+    ActiveCell.Offset(0, i).EntireColumn.Delete
+    Next
+End Sub
 &lt;/p&gt;
 
 &lt;p&gt;Quelques explications :&lt;/p&gt;
@@ -663,51 +712,49 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Installer le module sous Ubuntu&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo apt-get install python-gnucash
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+sudo apt-get install python-gnucash&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Ouvrir un fichier de données et afficher l’arborescence des comptes&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
-FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
-book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
-a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()
-&lt;span style=&#34;font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;atree&lt;/span&gt;(a, prefix&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;):
-	s &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; prefix&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
-	&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; suba &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_children():
-		suba &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Account(instance &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; suba)
-		s &lt;span style=&#34;font-weight: bold&#34;&gt;+=&lt;/span&gt; atree(suba, &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;  &amp;#39;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;prefix)
-	&lt;span style=&#34;font-weight: bold&#34;&gt;return&lt;/span&gt; s
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; atree(a_root)
-session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
-session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
-&lt;/pre&gt;&lt;/div&gt;
+#!/usr/bin/python
+import gnucash
+FILE = &#34;/chemin/de/mon/fichier/GnuCash&#34;
+
+session = gnucash.Session(FILE, ignore_lock=True, is_new=False)
+book = session.book
+a_root = book.get_root_account()
+def atree(a, prefix=&#39;&#39;):
+	s = prefix+a.GetName()+&#39;\n&#39;
+	for suba in a.get_children():
+		suba = gnucash.Account(instance = suba)
+		s += atree(suba, &#39;  &#39;+prefix)
+	return s
+print atree(a_root)
+session.end()
+session.destroy()
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Afficher la transaction la plus récente d’un compte, avec ses détails&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
-FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
-COMPTE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;label du compte dans GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
-book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
-a &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;lookup_by_name(COMPTE)
-end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; s &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetSplitList():
-	cur &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDate()
-	&lt;span style=&#34;font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;not&lt;/span&gt; end &lt;span style=&#34;font-weight: bold&#34;&gt;or&lt;/span&gt; cur &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; end:
-		end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; cur, s
-t &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent
-t_date &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;date&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;fromtimestamp(end)&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;%d/%m/%Y&amp;#39;&lt;/span&gt;)
-target &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetOtherSplit()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAccount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
-session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
-session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
-&lt;/pre&gt;&lt;/div&gt;
+#!/usr/bin/python
+import datetime, gnucash
+FILE = &#34;/chemin/de/mon/fichier/GnuCash&#34;
+COMPTE = &#34;label du compte dans GnuCash&#34;
+
+session = gnucash.Session(FILE, ignore_lock=True, is_new=False)
+book = session.book
+a = book.get_root_account().lookup_by_name(COMPTE)
+end, last = None, None
+for s in a.GetSplitList():
+	cur = s.parent.GetDate()
+	if not end or cur &gt; end:
+		end, last = cur, s
+t = s.parent
+t_date = datetime.date.fromtimestamp(end).strftime(&#39;%d/%m/%Y&#39;)
+target = s.GetOtherSplit().GetAccount().GetName()
+print &#34;%s %.2f &gt; %s : %s&#34; % (t_date, s.GetAmount().to_double(), target, t.GetDescription())
+session.end()
+session.destroy()
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -722,35 +769,35 @@ session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
       <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
+
+	$(&#39;a.th&#39;).fancybox({
+		&#39;transitionIn&#39;	: &#39;none&#39;,
+		&#39;transitionOut&#39;	: &#39;none&#39;,
+		&#39;type&#39;		: &#39;inline&#39;,
+		&#39;onComplete&#39;	: function() {
+			$(&#39;#fancybox-wrap&#39;).hover(function() {
+				$(&#39;#fancybox-title&#39;).show();
+			}, function() {
+				$(&#39;#fancybox-title&#39;).hide();
 			});
 		}
 	});
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox2&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
+
+	$(&#39;a.th&#39;).fancybox({
+		&#39;nextEffect&#39;	: &#39;none&#39;,
+		&#39;prevEffect&#39;	: &#39;none&#39;,
+		&#39;type&#39;		: &#39;ajax&#39;,
+		&#39;afterShow&#39;	: function() {
+			$(&#39;.fancybox-wrap&#39;).hover(function() {
+				$(&#39;.fancybox-title&#39;).show();
+			}, function() {
+				$(&#39;.fancybox-title&#39;).hide();
 			});
 		}
 	});
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 </description>
     </item>
@@ -771,27 +818,6 @@ session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
 &lt;li&gt;Sur l’écran suivant qui vous demande de choisir le mode d’autorisation, sélectionnez &lt;em&gt;OAuth 2.0 Client ID&lt;/em&gt;  ;&lt;/li&gt;
 &lt;li&gt;Renseignez dans &lt;em&gt;REDIRECT URI&lt;/em&gt; l’adresse de la page d’admin Owncloud (&lt;em&gt;http://&lt;adresse de votre cloud&gt;/index.php/settings/personal&lt;/em&gt;) puis cliquez sur &lt;em&gt;Generate&lt;/em&gt; et notez les valeurs de &lt;em&gt;Client ID&lt;/em&gt; et &lt;em&gt;Client Secret&lt;/em&gt;  ;&lt;/li&gt;
 &lt;li&gt;Dans l’admin Owncloud, dans la rubrique &lt;em&gt;Stockage externe&lt;/em&gt; ajoutez une source Google Drive, et dans &lt;em&gt;Client ID/secret&lt;/em&gt; saisissez les valeurs notées à l’étape précédente.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Booter le Samsung 370R5E-S02 sur un support USB</title>
-      <link>http://grimaldi.me/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</link>
-      <pubDate>Wed, 02 Oct 2013 22:53:58 +0200</pubDate>
-      
-      <guid>http://grimaldi.me/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</guid>
-      <description>&lt;p&gt;Le PC Samsung 370R5E-S02 est livré avec Windows 8 préinstallé, et les réglages par défaut du BIOS ne permettent pas de booter sur un support USB.&lt;/p&gt;
-
-&lt;p&gt;Pour changer cela :&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Bootez le PC et appuyez sur F2 dès le splash screen jusqu’à l’apparition de la config du BIOS ;&lt;/li&gt;
-&lt;li&gt;Dans l’onglet &lt;em&gt;Advanced&lt;/em&gt;, mettez &lt;em&gt;Fast BIOS Mode&lt;/em&gt; à &lt;em&gt;[Disabled]&lt;/em&gt; ;&lt;/li&gt;
-&lt;li&gt;Dans l’onglet &lt;em&gt;Boot&lt;/em&gt;, mettez &lt;em&gt;Secure Boot&lt;/em&gt; à &lt;em&gt;[Disabled]&lt;/em&gt; ;&lt;/li&gt;
-&lt;li&gt;Appuyez sur F10 pour sauvegarder la configuration et redémarrer ;&lt;/li&gt;
-&lt;li&gt;À nouveau, appuyez sur F2 pour entrer dans la config du BIOS ;&lt;/li&gt;
-&lt;li&gt;Dans l’onglet &lt;em&gt;Boot&lt;/em&gt;, sélectionnez &lt;em&gt;Boot Device Priority&lt;/em&gt; et dans &lt;em&gt;Boot Option #1&lt;/em&gt; choisissez votre support USB (&lt;strong&gt;NB :&lt;/strong&gt; avec un disque externe, il peut falloir un reboot supplémentaire pour qu’il soit reconnu), puis appuyez sur F10.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>

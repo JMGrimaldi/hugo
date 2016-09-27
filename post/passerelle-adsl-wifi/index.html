@@ -171,18 +171,18 @@ dans <code>/etc/modutils/aliases</code> une ligne <code>alias ath0 ath_pci</code
 
 <p>Ensuite on complète le <code>/etc/network/interfaces</code> :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999988; font-style: italic"># Interface WLAN : cf. iwconfig(8)</span>
+<p>
+# Interface WLAN : cf. iwconfig(8)
 auto ath0
 iface ath0 inet static
 	address		192.168.0.1
 	netmask		255.255.255.0
 	pre-up /sbin/iwpriv ath0 mode 3
-	<span style="color: #999988; font-style: italic"># Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a</span>
+	# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a
 	wireless_essid	Nom-du-reseau
 	wireless_mode	Master
 	wireless_channel	9
 	wireless_key	off
-</pre></div>
 </p>
 
 <p><strong>NB :</strong></p>
@@ -212,60 +212,60 @@ suffixe <code>.sh</code>, de sorte qu&rsquo;il sera appelé par le <code>run-par
 de l&rsquo;interface lo (mais si on veut tester sans rebooter on peut très bien le
 lancer à la main, voire faire un <code>/etc/init.d/networking restart</code>) :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999988; font-style: italic">#!/bin/sh</span>
-<span style="color: #999988; font-style: italic"># /etc/network/if-pre-up.d/iptables-start</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Initialise les règles de filtrage iptables</span>
-<span style="color: #999988; font-style: italic"># D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh</span>
-<span style="color: #999988; font-style: italic">#####</span>
+<p>
+#!/bin/sh
+# /etc/network/if-pre-up.d/iptables-start
+#
+# Initialise les règles de filtrage iptables
+# D'après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh
+#####
 
-<span style="color: #999988; font-style: italic"># Remise à zéro des règles</span>
+# Remise à zéro des règles
 iptables -F
 iptables -t nat -F
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Politiques par défaut</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Accepte les connexions entrantes</span>
+#
+# Politiques par défaut
+#
+#####
+# Accepte les connexions entrantes
 iptables -P INPUT ACCEPT
-<span style="color: #999988; font-style: italic"># Accepte les connexions destinées à être forwardées</span>
+# Accepte les connexions destinées à être forwardées
 iptables -P FORWARD ACCEPT
-<span style="color: #999988; font-style: italic"># Accepte les connexions sortantes</span>
+# Accepte les connexions sortantes
 iptables -P OUTPUT ACCEPT
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Règles de filtrage</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Pas de filtrage</span>
+#
+# Règles de filtrage
+#
+#####
+# Pas de filtrage
 iptables -A INPUT -j ACCEPT
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Règles pour le partage de connexion (le NAT)</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Le système fait serveur NAT ; l&#39;interface extérieure est ppp0</span>
+#
+# Règles pour le partage de connexion (le NAT)
+#
+#####
+# Le système fait serveur NAT ; l'interface extérieure est ppp0
 iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 
-<span style="color: #999988; font-style: italic"># Si la connexion que vous partagez est une connexion ADSL, vous</span>
-<span style="color: #999988; font-style: italic"># serez probablement confronté au fameux problème du MTU. En résumé,</span>
-<span style="color: #999988; font-style: italic"># le problème vient du fait que le MTU de la liaison entre votre</span>
-<span style="color: #999988; font-style: italic"># fournisseur d&#39;accès et le serveur NAT est un petit peu inférieur au</span>
-<span style="color: #999988; font-style: italic"># MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui</span>
-<span style="color: #999988; font-style: italic"># sont derrière le NAT. Pour résoudre ce problème :</span>
+# Si la connexion que vous partagez est une connexion ADSL, vous
+# serez probablement confronté au fameux problème du MTU. En résumé,
+# le problème vient du fait que le MTU de la liaison entre votre
+# fournisseur d'accès et le serveur NAT est un petit peu inférieur au
+# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui
+# sont derrière le NAT. Pour résoudre ce problème :
 iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS -o ppp0 --clamp-mss-to-pmtu
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Règles de port forwarding</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Décommentez la ligne suivante pour que les requêtes TCP reçues sur</span>
-<span style="color: #999988; font-style: italic"># le port 80 de l&#39;interface eth0 soient forwardées à la machine dont</span>
-<span style="color: #999988; font-style: italic"># l&#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera</span>
-<span style="color: #999988; font-style: italic"># forwardée au client)</span>
-<span style="color: #999988; font-style: italic">#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80</span>
-</pre></div>
+#
+# Règles de port forwarding
+#
+#####
+# Décommentez la ligne suivante pour que les requêtes TCP reçues sur
+# le port 80 de l'interface eth0 soient forwardées à la machine dont
+# l'IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera
+# forwardée au client)
+#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80
 </p>
 
 <p>Là encore, lorsque le réseau fonctionnera, ce sera une bonne idée de le
@@ -290,51 +290,51 @@ pourrait imaginer un mécanisme de recopie à partir du resolv.conf lorsque ppp0
 est montée&hellip;) : <code>apt-get install dhcp3-server</code>, puis on édite
 <code>/etc/dhcp3/dhcpd.conf</code> :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999988; font-style: italic"># /etc/dhcp3/dhcpd.conf</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Config du serveur DHCP de l&#39;ISC (package &#39;dhcp3-server&#39;)</span>
-<span style="color: #999988; font-style: italic"># D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf</span>
-<span style="color: #999988; font-style: italic"># cf. dhcpd.conf(5)</span>
-<span style="color: #999988; font-style: italic">#####</span>
+<p>
+# /etc/dhcp3/dhcpd.conf
+#
+# Config du serveur DHCP de l'ISC (package 'dhcp3-server')
+# D'après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf
+# cf. dhcpd.conf(5)
+#####
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Options globales</span>
-<span style="color: #999988; font-style: italic"># (s&#39;appliqueront par défaut à tous les sous-réseaux)</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Nom de domaine</span>
-<span style="color: #999988; font-style: italic">#option domain-name &quot;exemple.org&quot;;</span>
+#
+# Options globales
+# (s'appliqueront par défaut à tous les sous-réseaux)
+#####
+# Nom de domaine
+#option domain-name "exemple.org";
 
-<span style="color: #999988; font-style: italic"># Adresses des serveurs DNS (séparées par une virgule)</span>
+# Adresses des serveurs DNS (séparées par une virgule)
 option domain-name-servers 80.10.246.1, 80.10.246.132;
 
-<span style="color: #999988; font-style: italic"># Durée du bail en secondes</span>
+# Durée du bail en secondes
 default-lease-time 6000;
 max-lease-time 6000;
 
-<span style="color: #999988; font-style: italic"># Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous</span>
+# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous
 authoritative;
 
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic"># Déclaration des sous-réseaux et des machines</span>
-<span style="color: #999988; font-style: italic">#</span>
-<span style="color: #999988; font-style: italic">#####</span>
-<span style="color: #999988; font-style: italic"># Déclaration du sous-réseau 192.168.0.0/255.255.255.0</span>
+#
+# Déclaration des sous-réseaux et des machines
+#
+#####
+# Déclaration du sous-réseau 192.168.0.0/255.255.255.0
 subnet 192.168.0.0 netmask 255.255.255.0
-<span style="font-weight: bold">{</span>
-	<span style="color: #999988; font-style: italic"># Adresse du routeur</span>
+{
+	# Adresse du routeur
 	option routers 192.168.0.1;
-	<span style="color: #999988; font-style: italic"># Plage d&#39;adresses à attribuer pour les machines non déclarées</span>
+	# Plage d'adresses à attribuer pour les machines non déclarées
 	range 192.168.0.100 192.168.0.200;
-<span style="color: #999988; font-style: italic">#	deny unknown-clients;</span>
-<span style="font-weight: bold">}</span>
+#	deny unknown-clients;
+}
 
-<span style="color: #999988; font-style: italic"># La déclaration d&#39;une machine permet de lui attribuer une adresse IP fixe</span>
+# La déclaration d'une machine permet de lui attribuer une adresse IP fixe
 host MonLaptop
-<span style="font-weight: bold">{</span>
-  hardware ethernet 00:0b:cd:5a:fb:43;	<span style="color: #999988; font-style: italic"># @MAC de la carte Wifi du laptop</span>
+{
+  hardware ethernet 00:0b:cd:5a:fb:43;	# @MAC de la carte Wifi du laptop
   fixed-address 192.168.0.12;
-<span style="font-weight: bold">}</span>
-</pre></div>
+}
 </p>
 
 <p>NB : là encore pour sécuriser on pourrait retirer le commentaire devant <code>deny

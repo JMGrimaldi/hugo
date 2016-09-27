@@ -6,8 +6,61 @@
     <description>Derniers contenus Windows de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Tue, 11 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Sep 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://grimaldi.me/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Automatiser une tâche sous Windows</title>
+      <link>http://grimaldi.me/post/automatiser-windows/</link>
+      <pubDate>Tue, 27 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://grimaldi.me/post/automatiser-windows/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/crontab.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &amp;ldquo;Planificateur de tâches&amp;rdquo; rame et plante au point qu&amp;rsquo;il est inutilisable. Voici donc comment s&amp;rsquo;en passer via la ligne de commande (&lt;code&gt;cmd.exe&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;La commande que l&amp;rsquo;on utilise est &lt;code&gt;schtasks&lt;/code&gt;. Pour voir l&amp;rsquo;aide de la commande :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour créer une tâche nommée jm.backup et lancer la commande ci-dessous à 13h38 (il était 13h37 à ce moment-là ; ça me permet de tester le bon déroulement de la tâche) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Create /TN jm.backup /TR &amp;quot;&#39;C:\My Program Files\cygwin\bin\bash.exe&#39; -l -c &#39;/home/jm/snapshot.sh daily&#39;&amp;quot; /SC ONCE /ST 13:38
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour relancer manuellement la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Run /TN jm.backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour voir tous les paramètres de la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Query /TN jm.backup /FO list /V
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour recréer la tâche avec une répétition quotidienne à 13h (l&amp;rsquo;effet de la commande &lt;code&gt;/Change&lt;/code&gt; est différent, bizarrement) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Create /TN jm.backup /TR &amp;quot;&#39;C:\My Program Files\cygwin\bin\bash.exe&#39; -l -c &#39;/home/jm/snapshot.sh daily&#39;&amp;quot; /SC DAILY /ST 13:00 /F
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour désactiver la tâche (&lt;code&gt;/ENABLE&lt;/code&gt; pour réactiver) :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Change /TN jm.backup /DISABLE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour supprimer la tâche :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;schtasks /Delete /TN jm.backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt; &lt;code&gt;schtasks&lt;/code&gt; ne propose pas toutes les options, comme permettre l&amp;rsquo;exécution d&amp;rsquo;une tâche lorsque l&amp;rsquo;ordinateur est sur batterie. Pour cela il faut sortir le fichier XML de la tâche, l&amp;rsquo;éditer puis l&amp;rsquo;importer :&lt;/p&gt;
+
+&lt;pre&gt;schtasks /Query /TN jm.backup /XML &gt;jm.xml
+&lt;em&gt;... (on édite jm.xml)&lt;/em&gt;
+schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Définir la vue par défaut des dossiers Windows</title>
@@ -52,13 +105,13 @@
 
 &lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
-    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
-    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
-    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
-    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+Sub efface_1_colonne_sur_2()
+    Range(&#34;C1&#34;).Select
+    For i = 1 To 35
+    ActiveCell.Offset(0, i).EntireColumn.Delete
+    Next
+End Sub
 &lt;/p&gt;
 
 &lt;p&gt;Quelques explications :&lt;/p&gt;
@@ -94,25 +147,21 @@
 &lt;li&gt;&lt;p&gt;Éditez le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; et renseignez les infos &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; de votre compte Windows (le &lt;code&gt;Password&lt;/code&gt; est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, &lt;em&gt;Shift+Clic droit&lt;/em&gt; sur le répertoire, puis &lt;em&gt;Ouvrir une fenêtre de commandes ici&lt;/em&gt;), et lancez la commande suivante :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;cntlm -M http://test.com
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+cntlm -M http://test.com&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Cntlm vous demande de saisir votre &lt;em&gt;Password&lt;/em&gt; (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;Config profile  1/4... OK &lt;span style=&#34;font-weight: bold&#34;&gt;(&lt;/span&gt;HTTP code: 200&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; 
-----------------------------&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt; Profile  0 &lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;------
+
+Config profile  1/4... OK (HTTP code: 200) 
+----------------------------[ Profile  0 ]------
 Auth            NTLMv2
 PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ajoutez ces 2 lignes (&lt;em&gt;Auth&lt;/em&gt; et &lt;em&gt;PassNTLMv2&lt;/em&gt;) dans le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; après &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;cntlm -v
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+cntlm -v&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ensuite paramétrez votre navigateur pour utiliser le proxy &lt;code&gt;localhost:3128&lt;/code&gt; et vérifiez que la navigation se fait bien en HTTP et en HTTPS ;&lt;/p&gt;&lt;/li&gt;
 

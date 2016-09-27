@@ -66,15 +66,15 @@
 <li><p>On peut récupérer un disque dur HS sans débourser une fortune auprès d&rsquo;un labo de récupération de données.<br />
 Mon disque dur, un Seagate Backup+ Slim d&rsquo;1To âgé d&rsquo;à peine 1 an, se mettait bien sous tension mais n&rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.<br />
 Sous Ubuntu, le disque apparaissait avec <code>lsusb</code>, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&rsquo;allait pas plus loin. <code>/var/log/syslog</code> montrait l&rsquo;erreur suivante :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
-sd 6:0:0:0: Attached scsi generic sg1 <span style="color: #999999">type </span>0
-sd 6:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> Spinning up disk...
+
+scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
+sd 6:0:0:0: Attached scsi generic sg1 type 0
+sd 6:0:0:0: [sdb] Spinning up disk...
 usb 4-1: USB disconnect, device number 2
 ......................ready
-sd 6:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> READ CAPACITY failed
-sd 6:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span>
-Result: <span style="color: #008080">hostbyte</span><span style="font-weight: bold">=</span>DID_NO_CONNECT <span style="color: #008080">driverbyte</span><span style="font-weight: bold">=</span>DRIVER_OK
-</pre></div>
+sd 6:0:0:0: [sdb] READ CAPACITY failed
+sd 6:0:0:0: [sdb]
+Result: hostbyte=DID_NO_CONNECT driverbyte=DRIVER_OK
 
 Puis j&rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&rsquo;avais rien à perdre.<br />
 Alors j&rsquo;ai suivi <a href="https://www.youtube.com/watch?v=ijFCOvwd_Zo">cette vidéo</a> pour sortir le disque dur de son boîtier, puis <a href="https://www.youtube.com/watch?v=7m5cil6KezI">celle-ci</a> pour ouvrir le disque et décoincer la tête de lecture.<br />

@@ -90,32 +90,32 @@
 
 <ol>
 <li><p>On extrait les images du PDF :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span>pdfimages -j doc.pdf doc
-</pre></div>
+
+$ pdfimages -j doc.pdf doc
 
 Cela crée des fichiers <code>doc-0000.jpg</code> à <code>doc-0007.jpg</code>.</p></li>
 
 <li><p>On splitte chaque scan en 2 pages distinctes (<code>-rotate 90</code> tourne la page de 90° avant de la couper en 2 ; le retirer si l&rsquo;orientation est déjà bonne) :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span><span style="font-weight: bold">for </span>i in doc-*.jpg; <span style="font-weight: bold">do </span>convert -quality 95 -rotate 90 -crop 50%x0 <span style="color: #bb8844">&quot;$i&quot;</span> <span style="color: #bb8844">&quot;$i&quot;</span> <span style="font-weight: bold">&amp;&amp;</span> rm <span style="color: #bb8844">&quot;$i&quot;</span>;<span style="font-weight: bold">done</span>
-</pre></div>
+
+$ for i in doc-*.jpg; do convert -quality 95 -rotate 90 -crop 50%x0 "$i" "$i" && rm "$i";done
 
 Cela remplace <code>doc-0000.jpg</code> par <code>doc-0000-0.jpg</code> (page de gauche) et <code>doc-0000-1.jpg</code> (page de droite), etc.</p></li>
 
 <li><p>Si une page est à l&rsquo;envers (p.ex. dernière page d&rsquo;une brochure au format paysage) on la retourne :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ i</span><span style="font-weight: bold">=</span>doc-0007-0.jpg; jpegtran -rotate 180 <span style="color: #008080">$i</span> <span style="color: #008080">$i</span>
-</pre></div>
+
+$ i=doc-0007-0.jpg; jpegtran -rotate 180 $i $i
 </p></li>
 
 <li><p>Puis on génère la liste des scans à prendre pour remettre les pages dans l&rsquo;ordre :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ pages</span><span style="font-weight: bold">=</span><span style="color: #bb8844">`</span>perl -e <span style="color: #bb8844">&#39;$n=8; for $k (1..$n*2){printf &quot;doc-%.4i-%i.jpg &quot;, ($k&gt;$n?$k-$n:$n-$k+1)-1, $k%2};&#39;`</span>; <span style="color: #999999">echo</span> <span style="color: #008080">$pages</span>
+
+$ pages=`perl -e '$n=8; for $k (1..$n*2){printf "doc-%.4i-%i.jpg ", ($k>$n?$k-$n:$n-$k+1)-1, $k%2};'`; echo $pages
 doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
-</pre></div>
 </p></li>
 
 <li><p>Enfin on construit le PDF final (<code>-density 300</code> correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008080">$ </span>convert -density 300 -quality 80 <span style="color: #008080">$pages</span> out.pdf
-<span style="color: #008080">$ </span>rm *jpg
-</pre></div>
+
+$ convert -density 300 -quality 80 $pages out.pdf
+$ rm *jpg
 </p></li>
 </ol>
 

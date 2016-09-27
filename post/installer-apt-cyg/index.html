@@ -65,13 +65,9 @@ chmod +x apt-cyg
 
 <ul>
 <li><strong>NB :</strong> chez moi la version de gzip installée n&rsquo;accepte pas l&rsquo;option -k, ce qui provoque une erreur quand on supprime un package. Pour l&rsquo;éviter, remplacez la ligne :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">gzip -dk setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst.gz
-</pre></div>
-
+gzip -dk setup/"$pkg".lst.gz
 par :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">gzip -dc setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst.gz &gt; setup/<span style="color: #bb8844">&quot;$pkg&quot;</span>.lst
-</pre></div>
-</li>
+gzip -dc setup/"$pkg".lst.gz > setup/"$pkg".lst</li>
 </ul>
 
 <p>La première fois, lancez <em>apt-cyg</em> en précisant le miroir à utiliser et le répertoire de téléchargement. Si l’opération fonctionne, il s’en souviendra pour le prochain lancement:</p>

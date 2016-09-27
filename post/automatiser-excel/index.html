@@ -72,13 +72,13 @@
 
 <p>Saisissez le code suivant :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="font-weight: bold">Sub</span> <span style="color: #990000; font-weight: bold">efface_1_colonne_sur_2</span>()
-    Range(<span style="color: #bb8844">&quot;C1&quot;</span>).Select
-    <span style="font-weight: bold">For</span> i <span style="font-weight: bold">=</span> <span style="color: #009999">1</span> <span style="font-weight: bold">To</span> <span style="color: #009999">35</span>
-    ActiveCell.Offset(<span style="color: #009999">0</span>, i).EntireColumn.Delete
-    <span style="font-weight: bold">Next</span>
-<span style="font-weight: bold">End</span> <span style="font-weight: bold">Sub</span>
-</pre></div>
+<p>
+Sub efface_1_colonne_sur_2()
+    Range("C1").Select
+    For i = 1 To 35
+    ActiveCell.Offset(0, i).EntireColumn.Delete
+    Next
+End Sub
 </p>
 
 <p>Quelques explications :</p>

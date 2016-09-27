@@ -62,25 +62,21 @@
 <li><p>Éditez le fichier <code>cntlm.ini</code> et renseignez les infos <code>Username</code> et <code>Domain</code> de votre compte Windows (le <code>Password</code> est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;</p></li>
 
 <li><p>Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, <em>Shift+Clic droit</em> sur le répertoire, puis <em>Ouvrir une fenêtre de commandes ici</em>), et lancez la commande suivante :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">cntlm -M http://test.com
-</pre></div>
-</p></li>
+cntlm -M http://test.com</p></li>
 
 <li><p>Cntlm vous demande de saisir votre <em>Password</em> (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">Config profile  1/4... OK <span style="font-weight: bold">(</span>HTTP code: 200<span style="font-weight: bold">)</span> 
-----------------------------<span style="font-weight: bold">[</span> Profile  0 <span style="font-weight: bold">]</span>------
+
+Config profile  1/4... OK (HTTP code: 200) 
+----------------------------[ Profile  0 ]------
 Auth            NTLMv2
 PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
-</pre></div>
 </p></li>
 
 <li><p>Ajoutez ces 2 lignes (<em>Auth</em> et <em>PassNTLMv2</em>) dans le fichier <code>cntlm.ini</code> après <code>Username</code> et <code>Domain</code> ;</p></li>
 
 <li><p>Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">cntlm -v
-</pre></div>
-</p></li>
+cntlm -v</p></li>
 
 <li><p>Ensuite paramétrez votre navigateur pour utiliser le proxy <code>localhost:3128</code> et vérifiez que la navigation se fait bien en HTTP et en HTTPS ;</p></li>
 

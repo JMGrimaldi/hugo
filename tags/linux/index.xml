@@ -322,32 +322,32 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;On extrait les images du PDF :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;pdfimages -j doc.pdf doc
-&lt;/pre&gt;&lt;/div&gt;
+
+$ pdfimages -j doc.pdf doc
 
 Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for &lt;/span&gt;i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do &lt;/span&gt;convert -quality 95 -rotate 90 -crop 50%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+$ for i in doc-*.jpg; do convert -quality 95 -rotate 90 -crop 50%x0 &#34;$i&#34; &#34;$i&#34; &amp;&amp; rm &#34;$i&#34;;done
 
 Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate 180 &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+$ i=doc-0007-0.jpg; jpegtran -rotate 180 $i $i
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+
+$ pages=`perl -e &#39;$n=8; for $k (1..$n*2){printf &#34;doc-%.4i-%i.jpg &#34;, ($k&gt;$n?$k-$n:$n-$k+1)-1, $k%2};&#39;`; echo $pages
 doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;convert -density 300 -quality 80 &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
-&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;rm *jpg
-&lt;/pre&gt;&lt;/div&gt;
+
+$ convert -density 300 -quality 80 $pages out.pdf
+$ rm *jpg
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -434,29 +434,23 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Installez les prérequis :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo apt-get install debhelper execstack dh-modaliases dkms
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+sudo apt-get install debhelper execstack dh-modaliases dkms&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Téléchargez les drivers (version &lt;a href=&#34;http://support.amd.com/en-us/download/desktop?os=Linux+x86&#34;&gt;13.12&lt;/a&gt; à date ; utiliser la version bêta n’est pas nécessaire) ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Compilez les packages d’installation :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;mkdir tmp; &lt;span style=&#34;color: #999999&#34;&gt;cd &lt;/span&gt;tmp
+
+mkdir tmp; cd tmp
 unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
 chmod +x *run
-./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&amp;lt;/pre&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
+./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&lt;/pre&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Installez les packages :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo dpkg -i *deb
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+sudo dpkg -i *deb&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande &lt;code&gt;amdconfig --pxl&lt;/code&gt; ne fonctionne pas) :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;sudo amdconfig --initial -f
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
+sudo amdconfig --initial -f&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Rebootez.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -485,30 +479,30 @@ chmod +x *run
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Pour l’installer tapez les commandes suivantes dans un terminal :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;git clone https://github.com/marcoDallas/acpi_call_GUI.git
-&lt;span style=&#34;color: #999999&#34;&gt;cd &lt;/span&gt;acpi_call_GUI
-sudo chmod +x install.sh&amp;lt;/pre&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+git clone https://github.com/marcoDallas/acpi_call_GUI.git
+cd acpi_call_GUI
+sudo chmod +x install.sh&lt;/pre&gt;
 
 Éditez &lt;code&gt;install.sh&lt;/code&gt; et remplacez &lt;code&gt;gksudo&lt;/code&gt; par &lt;code&gt;gksu&lt;/code&gt;, puis exécutez &lt;code&gt;sudo ./install.sh&lt;/code&gt;. Après l’installation lancez acpi_call_GUI avec la commande &lt;code&gt;java -jar $HOME/acpi_call_GUI.jar&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Sélectionnez &lt;em&gt;Install acpi_call&lt;/em&gt; puis &lt;em&gt;Execute&lt;/em&gt;, et saisissez le code &lt;code&gt;\_SB.PCI0.PEG0.PEGP._OFF&lt;/code&gt; ; cela installe le module et crée sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; deux répertoires &lt;code&gt;acpi_call/&lt;/code&gt; et &lt;code&gt;acpi_call_GUI/&lt;/code&gt;. Pour vérifier que le module est bien chargé, dans une console tapez &lt;code&gt;lsmod | grep acpi_call&lt;/code&gt; et vérifiez qu’une ligne est renvoyée ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Exécutez ensuite &lt;em&gt;Turn off discrete GPU&lt;/em&gt;, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande &lt;code&gt;upower etc.&lt;/code&gt; ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (&lt;em&gt;0×0&lt;/em&gt; si la désactivation s’est bien passée) :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;\_SB.PCI0.PEG0.PEGP._OFF&amp;#39;&lt;/span&gt; | sudo tee /proc/acpi/call
+
+echo &#39;\_SB.PCI0.PEG0.PEGP._OFF&#39; | sudo tee /proc/acpi/call
 sudo cat /proc/acpi/call
-&lt;/pre&gt;&lt;/div&gt;
 
 Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant &lt;em&gt;OFF&lt;/em&gt; par &lt;em&gt;ON&lt;/em&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Si cela fonctionne, exécutez &lt;em&gt;Automate disabling discrete GPU every boot&lt;/em&gt;, cela ajoute dans &lt;code&gt;/etc/rc.local&lt;/code&gt; (vérifiez que ce fichier est exécutable) un appel à &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; et déplacer la ligne &lt;code&gt;sudo insmod acpi_call.ko&lt;/code&gt; après la ligne &lt;code&gt;fi&lt;/code&gt; (au passage on peut supprimer le &lt;em&gt;sudo&lt;/em&gt; devant &lt;em&gt;insmod&lt;/em&gt;) ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Le bouton &lt;em&gt;Automate etc.&lt;/em&gt; ajoute également dans &lt;code&gt;/etc/rc.local&lt;/code&gt; un appel à &lt;code&gt;deactivate.sh&lt;/code&gt;. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : &lt;code&gt;sleep 60 &amp;amp;&amp;amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;amp;&lt;/code&gt;. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous &lt;code&gt;/etc/pm/sleep.d/&lt;/code&gt; un script &lt;code&gt;99_acpi&lt;/code&gt; à qui j’ai rajouté les droits +x, avec le contenu suivant :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt; in
-	thaw|resume&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
-&lt;span style=&#34;font-weight: bold&#34;&gt;esac&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+
+#!/bin/sh
+case &#34;$1&#34; in
+	thaw|resume) /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+esac
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -603,30 +597,29 @@ Video Broadcast Decoder (rev d0)
 &lt;code&gt;drivers/media/video/saa7134/saa7134-cards.c&lt;/code&gt; (this patch is for kernel 2.6.34
 but you can manually add the &lt;code&gt;name_comp1&lt;/code&gt; section to any other version):&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;    
-&lt;span style=&#34;color: #999999&#34;&gt;diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200&lt;/span&gt;
-&lt;span style=&#34;color: #aaaaaa&#34;&gt;@@ -2831,11 +2831,15 @@&lt;/span&gt;
+&lt;p&gt;    
+diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c
+--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300
++++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200
+@@ -2831,11 +2831,15 @@
  			.vmux = 1,
  			.amux = TV,
  			.tv   = 1,
-&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		},{&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.name = name_comp1,&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.vmux = 3,&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
+-		},{
++		}, {
++			.name = name_comp1,
++			.vmux = 3,
++			.amux = LINE2,
++		}, {
  			.name = name_svideo,  /* NOT tested */
  			.vmux = 8,
-&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-			.amux = LINE1,&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		}},&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
-&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		} },&lt;/span&gt;
+-			.amux = LINE1,
+-		}},
++			.amux = LINE2,
++		} },
  		.radio = {
  			.name   = name_radio,
  			.amux   = TV,
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;This done, rebuild your module and install it:&lt;/p&gt;
@@ -850,18 +843,18 @@ dans &lt;code&gt;/etc/modutils/aliases&lt;/code&gt; une ligne &lt;code&gt;alias 
 
 &lt;p&gt;Ensuite on complète le &lt;code&gt;/etc/network/interfaces&lt;/code&gt; :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Interface WLAN : cf. iwconfig(8)&lt;/span&gt;
+&lt;p&gt;
+# Interface WLAN : cf. iwconfig(8)
 auto ath0
 iface ath0 inet static
 	address		192.168.0.1
 	netmask		255.255.255.0
 	pre-up /sbin/iwpriv ath0 mode 3
-	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a&lt;/span&gt;
+	# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a
 	wireless_essid	Nom-du-reseau
 	wireless_mode	Master
 	wireless_channel	9
 	wireless_key	off
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt;&lt;/p&gt;
@@ -891,60 +884,60 @@ suffixe &lt;code&gt;.sh&lt;/code&gt;, de sorte qu&amp;rsquo;il sera appelé par 
 de l&amp;rsquo;interface lo (mais si on veut tester sans rebooter on peut très bien le
 lancer à la main, voire faire un &lt;code&gt;/etc/init.d/networking restart&lt;/code&gt;) :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/network/if-pre-up.d/iptables-start&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Initialise les règles de filtrage iptables&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;p&gt;
+#!/bin/sh
+# /etc/network/if-pre-up.d/iptables-start
+#
+# Initialise les règles de filtrage iptables
+# D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh
+#####
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Remise à zéro des règles&lt;/span&gt;
+# Remise à zéro des règles
 iptables -F
 iptables -t nat -F
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Politiques par défaut&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions entrantes&lt;/span&gt;
+#
+# Politiques par défaut
+#
+#####
+# Accepte les connexions entrantes
 iptables -P INPUT ACCEPT
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions destinées à être forwardées&lt;/span&gt;
+# Accepte les connexions destinées à être forwardées
 iptables -P FORWARD ACCEPT
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions sortantes&lt;/span&gt;
+# Accepte les connexions sortantes
 iptables -P OUTPUT ACCEPT
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de filtrage&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Pas de filtrage&lt;/span&gt;
+#
+# Règles de filtrage
+#
+#####
+# Pas de filtrage
 iptables -A INPUT -j ACCEPT
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles pour le partage de connexion (le NAT)&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le système fait serveur NAT ; l&amp;#39;interface extérieure est ppp0&lt;/span&gt;
+#
+# Règles pour le partage de connexion (le NAT)
+#
+#####
+# Le système fait serveur NAT ; l&#39;interface extérieure est ppp0
 iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Si la connexion que vous partagez est une connexion ADSL, vous&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# serez probablement confronté au fameux problème du MTU. En résumé,&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le problème vient du fait que le MTU de la liaison entre votre&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# fournisseur d&amp;#39;accès et le serveur NAT est un petit peu inférieur au&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# sont derrière le NAT. Pour résoudre ce problème :&lt;/span&gt;
+# Si la connexion que vous partagez est une connexion ADSL, vous
+# serez probablement confronté au fameux problème du MTU. En résumé,
+# le problème vient du fait que le MTU de la liaison entre votre
+# fournisseur d&#39;accès et le serveur NAT est un petit peu inférieur au
+# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui
+# sont derrière le NAT. Pour résoudre ce problème :
 iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS -o ppp0 --clamp-mss-to-pmtu
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de port forwarding&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Décommentez la ligne suivante pour que les requêtes TCP reçues sur&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le port 80 de l&amp;#39;interface eth0 soient forwardées à la machine dont&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# l&amp;#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# forwardée au client)&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+#
+# Règles de port forwarding
+#
+#####
+# Décommentez la ligne suivante pour que les requêtes TCP reçues sur
+# le port 80 de l&#39;interface eth0 soient forwardées à la machine dont
+# l&#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera
+# forwardée au client)
+#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80
 &lt;/p&gt;
 
 &lt;p&gt;Là encore, lorsque le réseau fonctionnera, ce sera une bonne idée de le
@@ -969,51 +962,51 @@ pourrait imaginer un mécanisme de recopie à partir du resolv.conf lorsque ppp0
 est montée&amp;hellip;) : &lt;code&gt;apt-get install dhcp3-server&lt;/code&gt;, puis on édite
 &lt;code&gt;/etc/dhcp3/dhcpd.conf&lt;/code&gt; :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/dhcp3/dhcpd.conf&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Config du serveur DHCP de l&amp;#39;ISC (package &amp;#39;dhcp3-server&amp;#39;)&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# cf. dhcpd.conf(5)&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;p&gt;
+# /etc/dhcp3/dhcpd.conf
+#
+# Config du serveur DHCP de l&#39;ISC (package &#39;dhcp3-server&#39;)
+# D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf
+# cf. dhcpd.conf(5)
+#####
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Options globales&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# (s&amp;#39;appliqueront par défaut à tous les sous-réseaux)&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Nom de domaine&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#option domain-name &amp;quot;exemple.org&amp;quot;;&lt;/span&gt;
+#
+# Options globales
+# (s&#39;appliqueront par défaut à tous les sous-réseaux)
+#####
+# Nom de domaine
+#option domain-name &#34;exemple.org&#34;;
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresses des serveurs DNS (séparées par une virgule)&lt;/span&gt;
+# Adresses des serveurs DNS (séparées par une virgule)
 option domain-name-servers 80.10.246.1, 80.10.246.132;
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Durée du bail en secondes&lt;/span&gt;
+# Durée du bail en secondes
 default-lease-time 6000;
 max-lease-time 6000;
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous&lt;/span&gt;
+# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous
 authoritative;
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration des sous-réseaux et des machines&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration du sous-réseau 192.168.0.0/255.255.255.0&lt;/span&gt;
+#
+# Déclaration des sous-réseaux et des machines
+#
+#####
+# Déclaration du sous-réseau 192.168.0.0/255.255.255.0
 subnet 192.168.0.0 netmask 255.255.255.0
-&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresse du routeur&lt;/span&gt;
+{
+	# Adresse du routeur
 	option routers 192.168.0.1;
-	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Plage d&amp;#39;adresses à attribuer pour les machines non déclarées&lt;/span&gt;
+	# Plage d&#39;adresses à attribuer pour les machines non déclarées
 	range 192.168.0.100 192.168.0.200;
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#	deny unknown-clients;&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
+#	deny unknown-clients;
+}
 
-&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# La déclaration d&amp;#39;une machine permet de lui attribuer une adresse IP fixe&lt;/span&gt;
+# La déclaration d&#39;une machine permet de lui attribuer une adresse IP fixe
 host MonLaptop
-&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
-  hardware ethernet 00:0b:cd:5a:fb:43;	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# @MAC de la carte Wifi du laptop&lt;/span&gt;
+{
+  hardware ethernet 00:0b:cd:5a:fb:43;	# @MAC de la carte Wifi du laptop
   fixed-address 192.168.0.12;
-&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+}
 &lt;/p&gt;
 
 &lt;p&gt;NB : là encore pour sécuriser on pourrait retirer le commentaire devant &lt;code&gt;deny

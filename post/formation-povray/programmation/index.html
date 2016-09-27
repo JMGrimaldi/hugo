@@ -74,29 +74,29 @@ exemple), mais aussi de faire des boucles.</p>
 Souvent on désire créer n objets pour lesquels on fait varier un paramètre ;
 il suffit de déclarer un compteur :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
-<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;textures.inc&quot;</span>
+<p>
+#include "colors.inc"
+#include "textures.inc"
 
-<span style="color: #999999; font-weight: bold">#declare</span> i<span style="font-weight: bold">=</span><span style="color: #009999">1</span>;
-<span style="color: #999999; font-weight: bold">#while</span> (i&lt;<span style="color: #009999">50</span>)
- <span style="color: #999999">sphere</span> {&lt;<span style="color: #009999">8</span><span style="font-weight: bold">*log</span>(i),<span style="color: #009999">0</span>,i<span style="font-weight: bold">*</span>i<span style="font-weight: bold">/</span><span style="color: #009999">2</span>&gt;,<span style="color: #009999">1</span>
-  <span style="font-weight: bold">texture</span> {Orange_Glass <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">color</span> <span style="font-weight: bold">rgb</span>&lt;<span style="color: #009999">1</span>,<span style="color: #009999">1</span><span style="font-weight: bold">-</span><span style="color: #009999">.8</span><span style="font-weight: bold">/</span>i,<span style="color: #009999">0</span>&gt; <span style="font-weight: bold">filter</span> <span style="color: #009999">.6</span>}}
+#declare i=1;
+#while (i<50)
+ sphere {<8*log(i),0,i*i/2>,1
+  texture {Orange_Glass pigment {color rgb<1,1-.8/i,0> filter .6}}
  }
- <span style="color: #999999; font-weight: bold">#declare</span> i<span style="font-weight: bold">=</span>i<span style="font-weight: bold">+</span><span style="color: #009999">1</span>;
-<span style="color: #999999; font-weight: bold">#end</span>
+ #declare i=i+1;
+#end
 
-<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span>
- <span style="font-weight: bold">pigment</span> {White}
- <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">reflection</span> <span style="color: #009999">.4</span>}
- <span style="font-weight: bold">normal</span> {<span style="font-weight: bold">bozo</span> <span style="color: #009999">.02</span> <span style="font-weight: bold">scale</span> <span style="color: #009999">.1</span>}}
+plane {y,-1
+ pigment {White}
+ finish {ambient .2 reflection .4}
+ normal {bozo .02 scale .1}}
 
-<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">20</span>,<span style="font-weight: bold">-</span><span style="color: #009999">12</span>&gt;, White <span style="font-weight: bold">area_light</span> <span style="color: #009999">5</span><span style="font-weight: bold">*</span><span style="color: #999999">x</span>, <span style="color: #009999">5</span><span style="font-weight: bold">*</span><span style="color: #999999">y</span>, <span style="color: #009999">5</span>, <span style="color: #009999">5</span>}
+light_source {<-6,20,-12>, White area_light 5*x, 5*y, 5, 5}
 
-<span style="color: #999999">camera</span> {
- <span style="font-weight: bold">location</span> &lt;<span style="color: #009999">0</span>,<span style="color: #009999">8</span>,<span style="font-weight: bold">-</span><span style="color: #009999">8</span>&gt;
- <span style="font-weight: bold">look_at</span> &lt;<span style="color: #009999">2</span>,<span style="color: #009999">0</span>,<span style="color: #009999">8</span>&gt;
+camera {
+ location <0,8,-8>
+ look_at <2,0,8>
 }
-</pre></div>
 </p>
 
 <p><img src="../../../img/pov/while.jpg" alt="while" />
@@ -111,8 +111,8 @@ il suffit de déclarer un compteur :</p>
 <p>Après la définition ci-dessus, si l&rsquo;on tape <code><em>nom</em>(&hellip;)</code>, cela sera remplacé
 par <em>contenu</em>, qui peut dépendre des paramètres de la macro. Par exemple :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999; font-weight: bold">#macro</span> carre(i) (i)<span style="font-weight: bold">*</span>(i) <span style="color: #999999; font-weight: bold">#end</span>
-</pre></div>
+<p>
+#macro carre(i) (i)*(i) #end
 </p>
 
 <p><strong>Attention :</strong> Ne pas oublier les précautions d&rsquo;usage relatives aux macros, notamment les parenthèses. Ainsi, si au lieu de <code>(i)*(i)</code> on avait mis <code>i*i</code>, alors <code>carre(1+1)</code> ne vaudrait pas 4, mais 1+1*1+1, soit 3.</p>

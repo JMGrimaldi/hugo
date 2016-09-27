@@ -195,11 +195,11 @@ Un petit dessin valant parfois mieux qu&rsquo;un long discours, voici un exemple
 sauvée au format gif sous le nom <em>map.gif</em>. Dans l&rsquo;image de droite, le
 height_field est obtenu par :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">height_field</span> {<span style="font-weight: bold">gif</span> <span style="color: #bb8844">&quot;map.gif&quot;</span>
- <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
- <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.005</span>}
+<p>
+height_field {gif "map.gif"
+ pigment {rgb <1,.9,.8>}
+ finish {ambient .2 diffuse 1 specular .2 roughness .005}
 }
-</pre></div>
 </p>
 
 <h3 id="text">text</h3>
@@ -224,11 +224,11 @@ et suivant Z ils vont de 0 à p où p est la profondeur.</p>
 <p>Dans l&rsquo;image ci-dessus le fichier <em>ariblk.ttf</em> se trouve dans le même
 répertoire que le fichier .pov et l&rsquo;objet texte est obtenu par :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">text</span> {<span style="font-weight: bold">ttf</span> <span style="color: #bb8844">&quot;ariblk.ttf&quot;</span> <span style="color: #bb8844">&quot;PovRay&quot;</span> <span style="color: #009999">.4</span>,<span style="color: #009999">0</span>
- <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
- <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.5</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.01</span>}
+<p>
+text {ttf "ariblk.ttf" "PovRay" .4,0
+ pigment {rgb <1,.9,.8>}
+ finish {ambient .2 diffuse 1 specular .5 roughness .01}
 }
-</pre></div>
 </p>
 
 <p><center>[ <a href="../../../post/formation-povray/espace/">Page précédente</a> | <a href="../../../post/formation-povray/">Sommaire</a> | <a href="../../../post/formation-povray/textures/">Page suivante</a> ]</center></p>

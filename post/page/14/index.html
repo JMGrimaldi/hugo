@@ -45,6 +45,26 @@
 	
 		
 	<div class="post">
+		<h1 class="post-title"><a href="../../../post/formation-povray/espace/">Formation POV #3: Espace</a></h1>
+		<div class="post-date">28 avril 2000</div>
+		
+		<h2 id="données-de-base">Données de base</h2>
+
+<p>Une <em>scène</em> POV se construit dans un espace à trois dimensions X, Y et Z. Elle
+est constituée d&rsquo;<em>objets</em> paramétrés essentiellement à partir de nombres
+(<em>float</em>) et de vecteurs (<em>vector</em>).</p>
+
+<p>Un <strong>nombre</strong> peut s&rsquo;écrire 2, -3.14, 1.7e3 (=1700), .012 (équivalent à 0.012,
+ou encore à 12e-3),&hellip;</p>
+
+	
+		<div class="read-more-link"><a href="../../../post/formation-povray/espace/">Lire la suite &#8594;</a></div>
+	
+	</div>
+
+	
+		
+	<div class="post">
 		<h1 class="post-title"><a href="../../../post/formation-povray/1ere-scene/">Formation POV #2: 1ère scène</a></h1>
 		<div class="post-date">28 avril 2000</div>
 		
@@ -53,21 +73,21 @@
 
 <h2 id="source">Source</h2>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
+<p>
+#include "colors.inc"
 
-<span style="color: #999999">sphere</span> {&lt;<span style="color: #009999">0</span>,<span style="color: #009999">0</span>,<span style="color: #009999">0</span>&gt;,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {Red}}
-<span style="color: #999999">sphere</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">3</span>,<span style="color: #009999">.5</span>,<span style="font-weight: bold">-</span><span style="color: #009999">3</span>&gt;,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {Blue}}
-<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span>
- <span style="font-weight: bold">pigment</span> {White}
- <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">reflection</span> <span style="color: #009999">.4</span>}
- <span style="font-weight: bold">normal</span> {<span style="font-weight: bold">bozo</span> <span style="color: #009999">.02</span> <span style="font-weight: bold">scale</span> <span style="color: #009999">.1</span>}}
+sphere {<0,0,0>,1 pigment {Red}}
+sphere {<-3,.5,-3>,1 pigment {Blue}}
+plane {y,-1
+ pigment {White}
+ finish {reflection .4}
+ normal {bozo .02 scale .1}}
 
-<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">12</span>,<span style="font-weight: bold">-</span><span style="color: #009999">10</span>&gt;, White}
+light_source {<-6,12,-10>, White}
 
-<span style="color: #999999">camera</span> {
- <span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">10</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span>
- <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>}
-</pre></div>
+camera {
+ location -10*z
+ look_at 0}
 </p>
 
 	
@@ -91,10 +111,10 @@ en retour l&rsquo;image correspondante.</p>
 
 <p>Par exemple, on peut écrire un fichier <em>essai.pov</em> contenant le texte suivant :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999">sphere</span> {<span style="color: #009999">0</span>,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">green</span> <span style="color: #009999">1</span>}}
-<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">5</span>,<span style="color: #009999">8</span>,<span style="font-weight: bold">-</span><span style="color: #009999">9</span>&gt; <span style="font-weight: bold">rgb</span> <span style="color: #009999">1</span>}
-<span style="color: #999999">camera</span> {<span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">3</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span> <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>}
-</pre></div>
+<p>
+sphere {0,1 pigment {green 1}}
+light_source {<-5,8,-9> rgb 1}
+camera {location -3*z look_at 0}
 </p>
 
 <p><img src="../../../img/pov/scene.gif" alt="une superbe boule verte..." />

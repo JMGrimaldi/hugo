@@ -59,21 +59,21 @@
 
 <h2 id="source">Source</h2>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
+<p>
+#include "colors.inc"
 
-<span style="color: #999999">sphere</span> {&lt;<span style="color: #009999">0</span>,<span style="color: #009999">0</span>,<span style="color: #009999">0</span>&gt;,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {Red}}
-<span style="color: #999999">sphere</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">3</span>,<span style="color: #009999">.5</span>,<span style="font-weight: bold">-</span><span style="color: #009999">3</span>&gt;,<span style="color: #009999">1</span> <span style="font-weight: bold">pigment</span> {Blue}}
-<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span>
- <span style="font-weight: bold">pigment</span> {White}
- <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">reflection</span> <span style="color: #009999">.4</span>}
- <span style="font-weight: bold">normal</span> {<span style="font-weight: bold">bozo</span> <span style="color: #009999">.02</span> <span style="font-weight: bold">scale</span> <span style="color: #009999">.1</span>}}
+sphere {<0,0,0>,1 pigment {Red}}
+sphere {<-3,.5,-3>,1 pigment {Blue}}
+plane {y,-1
+ pigment {White}
+ finish {reflection .4}
+ normal {bozo .02 scale .1}}
 
-<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">12</span>,<span style="font-weight: bold">-</span><span style="color: #009999">10</span>&gt;, White}
+light_source {<-6,12,-10>, White}
 
-<span style="color: #999999">camera</span> {
- <span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">10</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span>
- <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>}
-</pre></div>
+camera {
+ location -10*z
+ look_at 0}
 </p>
 
 <h2 id="explications">Explications</h2>
