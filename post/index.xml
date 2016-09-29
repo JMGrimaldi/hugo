@@ -10,11 +10,11 @@
     <atom:link href="http://grimaldi.me/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Automatiser une tâche sous Windows</title>
-      <link>http://grimaldi.me/post/automatiser-windows/</link>
+      <title>Planifier une tâche sous Windows</title>
+      <link>http://grimaldi.me/post/planifier-windows/</link>
       <pubDate>Tue, 27 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/automatiser-windows/</guid>
+      <guid>http://grimaldi.me/post/planifier-windows/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/crontab.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &amp;ldquo;Planificateur de tâches&amp;rdquo; rame et plante au point qu&amp;rsquo;il est inutilisable. Voici donc comment s&amp;rsquo;en passer via la ligne de commande (&lt;code&gt;cmd.exe&lt;/code&gt;).&lt;/p&gt;
