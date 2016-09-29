@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Planifier une tâche sous Windows</title>
+	<meta name="generator" content="Hugo 0.14" />
+	<link rel="canonical" href="http://grimaldi.me/post/planifier-windows/">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
+	<link rel="stylesheet" href="../../css/fonts.css">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/google-cse.css">
+
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+</head>
+
+
+<body>
+<div id="sidebar">
+	<div id="sb-expand" class="toggle mini">+</div>
+	<div id="sb-roll" class="toggle">&#x2715;</div>
+	<img class="avatar" src="../../img/jm.jpg">
+	<h1 class="mini"><a href="../../">JM.Grimaldi</a></h1>
+	<p>Journal d&#39;un homme de projets, de telcos, papa, geek, cinéphile, sportif du dimanche, et cætera.</p>
+	<nav>
+		<a href="../../cv/">CV</a> /
+		<a href="../../">Articles</a> /
+		<a href="../../tags/">Tags</a> /
+		<a href="mailto:Jean-Michel.Grimaldi&#064;centraliens.net">Contact</a>
+	</nav>
+	<div class="hr"></div>
+	<ul class="social">
+		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
+		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
+		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
+		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+	</ul>
+	<gcse:search></gcse:search>
+	<div class="hr"></div>
+	<div class="copyright">&copy; 2000-2016</div>
+</div>
+
+<div class="content">
+	<div class="post">
+		<h1 class="post-title"><a href="../../post/planifier-windows/">Planifier une tâche sous Windows</a></h1>
+		<div class="post-date">27 septembre 2016</div>
+		<div class="share">
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Planifier%20une%20t%c3%a2che%20sous%20Windows&url=http%3a%2f%2fgrimaldi.me%2fpost%2fplanifier-windows%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fplanifier-windows%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Planifier%20une%20t%c3%a2che%20sous%20Windows&url=http%3a%2f%2fgrimaldi.me%2fpost%2fplanifier-windows%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Planifier%20une%20t%c3%a2che%20sous%20Windows&url=http%3a%2f%2fgrimaldi.me%2fpost%2fplanifier-windows%2f"><span class="icon">&#xe806;</span></a>
+</div>
+
+		<p><img class="fr" src="../../img/crontab.png" /></p>
+
+<p>Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &ldquo;Planificateur de tâches&rdquo; rame et plante au point qu&rsquo;il est inutilisable. Voici donc comment s&rsquo;en passer via la ligne de commande (<code>cmd.exe</code>).</p>
+
+<p>La commande que l&rsquo;on utilise est <code>schtasks</code>. Pour voir l&rsquo;aide de la commande :</p>
+
+<pre><code>schtasks /?
+</code></pre>
+
+<p>Pour créer une tâche nommée jm.backup et lancer la commande ci-dessous à 13h38 (il était 13h37 à ce moment-là ; ça me permet de tester le bon déroulement de la tâche) :</p>
+
+<pre><code>schtasks /Create /TN jm.backup /TR &quot;'C:\My Program Files\cygwin\bin\bash.exe' -l -c '/home/jm/snapshot.sh daily'&quot; /SC ONCE /ST 13:38
+</code></pre>
+
+<p>Pour relancer manuellement la tâche :</p>
+
+<pre><code>schtasks /Run /TN jm.backup
+</code></pre>
+
+<p>Pour voir tous les paramètres de la tâche :</p>
+
+<pre><code>schtasks /Query /TN jm.backup /FO list /V
+</code></pre>
+
+<p>Pour recréer la tâche avec une répétition quotidienne à 13h (l&rsquo;effet de la commande <code>/Change</code> est différent, bizarrement) :</p>
+
+<pre><code>schtasks /Create /TN jm.backup /TR &quot;'C:\My Program Files\cygwin\bin\bash.exe' -l -c '/home/jm/snapshot.sh daily'&quot; /SC DAILY /ST 13:00 /F
+</code></pre>
+
+<p>Pour désactiver la tâche (<code>/ENABLE</code> pour réactiver) :</p>
+
+<pre><code>schtasks /Change /TN jm.backup /DISABLE
+</code></pre>
+
+<p>Pour supprimer la tâche :</p>
+
+<pre><code>schtasks /Delete /TN jm.backup
+</code></pre>
+
+<p><strong>NB :</strong> <code>schtasks</code> ne propose pas toutes les options, comme permettre l&rsquo;exécution d&rsquo;une tâche lorsque l&rsquo;ordinateur est sur batterie. Pour cela il faut sortir le fichier XML de la tâche, l&rsquo;éditer puis l&rsquo;importer :</p>
+
+<pre>schtasks /Query /TN jm.backup /XML >jm.xml
+<em>... (on édite jm.xml)</em>
+schtasks /Create /TN jm.backup /XML jm.xml /F</pre>
+
+		
+	</div>
+	
+	<hr />
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+	
+		<div class="tags"><b>En lire plus sur :</b>
+		
+	
+	<a href="../../tags/windows/">windows</a>
+
+
+</div>
+
+	
+</div>
+</body>
+</html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-315313-6', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  (function() {
+    var cx = '004862264560868958374:tskuof8s2yk';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script src="../../js/jquery-1.11.1.min.js"></script>
+<script>
+$(function(){
+	$('#sb-expand').click(function(){
+		$('#sidebar > *').css('display', 'block');
+		$('#sb-expand').hide();
+	});
+	$('#sb-roll').click(function(){
+		$('#sidebar > *').hide();
+		$('#sidebar > *.mini').css('display', 'initial');
+	});
+});
+</script>
