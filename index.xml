@@ -6,8 +6,61 @@
     <description>Derniers contenus de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Tue, 27 Sep 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://grimaldi.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Envoi de mails sur Ubuntu</title>
+      <link>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</link>
+      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;Cette page explique comment envoyer des mails en ligne de commande avec Ubuntu
+et un compte Gmail (vous pouvez utiliser n&amp;rsquo;importe quel serveur SMTP mais les
+mécanismes de sécurité seront alors différents).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt; &lt;code&gt;%&lt;/code&gt; représente le début de la ligne de commande.&lt;/p&gt;
+
+&lt;h2 id=&#34;installer-les-programmes-nécessaires&#34;&gt;Installer les programmes nécessaires&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% sudo apt-get install mailutils exim4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;configurer-exim&#34;&gt;Configurer exim&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% sudo dpkg-reconfigure exim4-config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sélectionner &lt;code&gt;Envoi via relais (« smarthost ») - réception SMTP ou fetchmail&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du &lt;em&gt;smarthost&lt;/em&gt; :&lt;/li&gt;
+&lt;li&gt;Entrez &lt;code&gt;smtp.gmail.com::587&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du destinataire des courriels de root et postmaster : entrez votre username habituel&lt;/li&gt;
+&lt;li&gt;La configuration est terminée.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Le SMTP Google requiert une authentification avec un compte Google (et
+n&amp;rsquo;autorise l&amp;rsquo;envoi que de 100 mails par jour) :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Éditez &lt;code&gt;/etc/exim4/passwd.client&lt;/code&gt; (NB: ce fichier doit être lisible par le user et/ou le groupe &lt;code&gt;Debian-exim&lt;/code&gt;) et ajoutez la ligne suivante (NB: &lt;em&gt;yourAccountName&lt;/em&gt; est le compte Gmail sans le suffixe @gmail.com, et le paramètre &lt;em&gt;&amp;ldquo;Autoriser les applications moins sécurisées&amp;rdquo;&lt;/em&gt; doit être activé &lt;a href=&#34;https://myaccount.google.com/lesssecureapps&#34;&gt;ici&lt;/a&gt;) :
+&lt;pre&gt;smtp.gmail.com:yourAccountName:y0uRpaSsw0RD&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Sauvegardez le fichier puis lancez la commande suivante :
+&lt;pre&gt;% sudo update-exim4.conf&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tester-l-installation&#34;&gt;Tester l&amp;rsquo;installation&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;% echo Testing  | mail -s Bla your@mail.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si cela ne marche pas votre serveur SMTP a probablement des mécanismes de
+sécurité: vérification de votre IP, authentification par mot de passe,
+vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-vous sur ces mécanismes.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Planifier une tâche sous Windows</title>
@@ -799,26 +852,6 @@ session.destroy()
 		}
 	});
 &lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Connecter Google Drive dans Owncloud</title>
-      <link>http://grimaldi.me/post/connecter-google-drive-dans-owncloud/</link>
-      <pubDate>Sun, 17 Nov 2013 01:21:42 +0200</pubDate>
-      
-      <guid>http://grimaldi.me/post/connecter-google-drive-dans-owncloud/</guid>
-      <description>&lt;p&gt;Google ayant compliqué la procédure d’accès à ses API, voici comment récupérer un ID/secret pour connecter Google Drive dans Owncloud 5 et plus :&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Allez sur la &lt;a href=&#34;https://cloud.google.com/console&#34;&gt;console Google Cloud&lt;/a&gt; ;&lt;/li&gt;
-&lt;li&gt;Créez un nouveau projet, choisissez un nom (p.ex. &lt;em&gt;API Project&lt;/em&gt;) et un ID pour ce projet ;&lt;/li&gt;
-&lt;li&gt;Entrez dans la console du projet en cliquant sur son nom, puis &lt;em&gt;APIs &amp;amp; auth &amp;gt; Registered apps&lt;/em&gt;, et choisissez &lt;em&gt;Register app&lt;/em&gt;  ;&lt;/li&gt;
-&lt;li&gt;Choisissez un nom pour cette application (p.ex. &lt;em&gt;Owncloud&lt;/em&gt;), comme plate-forme &lt;em&gt;Web Application&lt;/em&gt;, et cliquez sur &lt;em&gt;Register&lt;/em&gt;  ;&lt;/li&gt;
-&lt;li&gt;Sur l’écran suivant qui vous demande de choisir le mode d’autorisation, sélectionnez &lt;em&gt;OAuth 2.0 Client ID&lt;/em&gt;  ;&lt;/li&gt;
-&lt;li&gt;Renseignez dans &lt;em&gt;REDIRECT URI&lt;/em&gt; l’adresse de la page d’admin Owncloud (&lt;em&gt;http://&lt;adresse de votre cloud&gt;/index.php/settings/personal&lt;/em&gt;) puis cliquez sur &lt;em&gt;Generate&lt;/em&gt; et notez les valeurs de &lt;em&gt;Client ID&lt;/em&gt; et &lt;em&gt;Client Secret&lt;/em&gt;  ;&lt;/li&gt;
-&lt;li&gt;Dans l’admin Owncloud, dans la rubrique &lt;em&gt;Stockage externe&lt;/em&gt; ajoutez une source Google Drive, et dans &lt;em&gt;Client ID/secret&lt;/em&gt; saisissez les valeurs notées à l’étape précédente.&lt;/li&gt;
-&lt;/ol&gt;
 </description>
     </item>
     

@@ -38,13 +38,13 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2016</div>
+	<div class="copyright">&copy; 2000-2020</div>
 </div>
 
 <div class="content">
 	<div class="post">
 		<h1 class="post-title"><a href="../../post/envoi-de-mails-sur-ubuntu/">Envoi de mails sur Ubuntu</a></h1>
-		<div class="post-date">15 avril 2012</div>
+		<div class="post-date">23 février 2020</div>
 		<div class="share">
 <a class="twitter" target="_blank" href="https://twitter.com/share?text=Envoi%20de%20mails%20sur%20Ubuntu&url=http%3a%2f%2fgrimaldi.me%2fpost%2fenvoi-de-mails-sur-ubuntu%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
 <a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fenvoi-de-mails-sur-ubuntu%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
@@ -82,8 +82,8 @@ mécanismes de sécurité seront alors différents).</p>
 n&rsquo;autorise l&rsquo;envoi que de 100 mails par jour) :</p>
 
 <ul>
-<li>Éditez <code>/etc/exim4/passwd.client</code> (NB: ce fichier doit être lisible par le user et/ou le groupe <code>Debian-exim</code>) et ajoutez la ligne suivante :
-<pre>*.google.com:yourAccountName@gmail.com:y0uRpaSsw0RD</pre></li>
+<li>Éditez <code>/etc/exim4/passwd.client</code> (NB: ce fichier doit être lisible par le user et/ou le groupe <code>Debian-exim</code>) et ajoutez la ligne suivante (NB: <em>yourAccountName</em> est le compte Gmail sans le suffixe @gmail.com, et le paramètre <em>&ldquo;Autoriser les applications moins sécurisées&rdquo;</em> doit être activé <a href="https://myaccount.google.com/lesssecureapps">ici</a>) :
+<pre>smtp.gmail.com:yourAccountName:y0uRpaSsw0RD</pre></li>
 <li>Sauvegardez le fichier puis lancez la commande suivante :
 <pre>% sudo update-exim4.conf</pre></li>
 </ul>

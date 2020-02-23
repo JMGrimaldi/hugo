@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://grimaldi.me/</loc>
-    <lastmod>2016-09-27T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -120,11 +125,6 @@
   <url>
     <loc>http://grimaldi.me/post/installer-wordpress-avec-sqlite/</loc>
     <lastmod>2013-05-20T23:26:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</loc>
-    <lastmod>2012-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
