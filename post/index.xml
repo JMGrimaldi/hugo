@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts - JM.Grimaldi</title>
-    <link>http://localhost:1313/post/</link>
+    <link>http://grimaldi.me/post/</link>
     <description>Derniers contenus Posts de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Envoi de mails sur Ubuntu</title>
-      <link>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</link>
+      <link>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</link>
       <pubDate>Wed, 03 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</guid>
+      <guid>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment envoyer des mails en ligne de commande avec Ubuntu
@@ -64,10 +64,10 @@ vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-
     
     <item>
       <title>Planifier une tâche sous Windows</title>
-      <link>http://localhost:1313/post/planifier-windows/</link>
+      <link>http://grimaldi.me/post/planifier-windows/</link>
       <pubDate>Tue, 27 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/planifier-windows/</guid>
+      <guid>http://grimaldi.me/post/planifier-windows/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/crontab.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &amp;ldquo;Planificateur de tâches&amp;rdquo; rame et plante au point qu&amp;rsquo;il est inutilisable. Voici donc comment s&amp;rsquo;en passer via la ligne de commande (&lt;code&gt;cmd.exe&lt;/code&gt;).&lt;/p&gt;
@@ -117,10 +117,10 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
     
     <item>
       <title>Rencontres du troisième type</title>
-      <link>http://localhost:1313/post/rencontres-du-troisi%C3%A8me-type/</link>
+      <link>http://grimaldi.me/post/rencontres-du-troisi%C3%A8me-type/</link>
       <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/rencontres-du-troisi%C3%A8me-type/</guid>
+      <guid>http://grimaldi.me/post/rencontres-du-troisi%C3%A8me-type/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/3e-type.jpg&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Cette semaine j&amp;rsquo;étais à une conférence à Paris, l&amp;rsquo;USI. Deux jours passionnants où l&amp;rsquo;on vient écouter des entrepreneurs, des philosophes, des ingénieurs et autres artistes raconter comment ils changent le monde, et réfléchir à son tour sur l&amp;rsquo;impact que l&amp;rsquo;on a ou que l&amp;rsquo;on pourrait avoir. Où l&amp;rsquo;on vient changer d&amp;rsquo;air et discuter avec des collègues, mais surtout avec des inconnus venus d&amp;rsquo;horizons différents, des qui passent leurs journées sur d&amp;rsquo;autres problèmes que les nôtres.&lt;/p&gt;
@@ -137,10 +137,10 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
     
     <item>
       <title>Encodage H.264 avec GStreamer</title>
-      <link>http://localhost:1313/post/encodage-h264-avec-gstreamer/</link>
+      <link>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</link>
       <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/encodage-h264-avec-gstreamer/</guid>
+      <guid>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
@@ -223,10 +223,10 @@ rm -f x264_2pass.log*
     
     <item>
       <title>Backup linux</title>
-      <link>http://localhost:1313/post/backup-linux/</link>
+      <link>http://grimaldi.me/post/backup-linux/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/backup-linux/</guid>
+      <guid>http://grimaldi.me/post/backup-linux/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/backup.jpg&#34; /&gt;&lt;/p&gt;
@@ -406,10 +406,10 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
     
     <item>
       <title>Niveau des champions d&#39;échecs sur 150 ans</title>
-      <link>http://localhost:1313/post/niveau-des-champions-d-%C3%A9checs/</link>
+      <link>http://grimaldi.me/post/niveau-des-champions-d-%C3%A9checs/</link>
       <pubDate>Tue, 25 Aug 2015 22:39:58 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/niveau-des-champions-d-%C3%A9checs/</guid>
+      <guid>http://grimaldi.me/post/niveau-des-champions-d-%C3%A9checs/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/kasparov.jpg&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Le système Elo est le système de classement des joueurs d&amp;rsquo;échecs. Il est censé refléter la probabilité de gain d&amp;rsquo;une partie : si un joueur classé 2000 joue contre un joueur classé 1800, sa probabilité de gain est de 75%. S&amp;rsquo;il joue contre un 1600, elle dépasse 90%.&lt;/p&gt;
@@ -429,10 +429,10 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
     
     <item>
       <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</link>
+      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
       <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</guid>
+      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/shuffle.png&#34;&gt;&lt;/p&gt;
@@ -504,10 +504,10 @@ $ rm *jpg
     
     <item>
       <title>Série noire</title>
-      <link>http://localhost:1313/post/s%C3%A9rie-noire/</link>
+      <link>http://grimaldi.me/post/s%C3%A9rie-noire/</link>
       <pubDate>Sat, 22 Aug 2015 14:38:46 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/s%C3%A9rie-noire/</guid>
+      <guid>http://grimaldi.me/post/s%C3%A9rie-noire/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/panne.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Certains disent que la foudre ne tombe jamais deux fois au même endroit. D&amp;rsquo;autres que les problèmes volent en escadrille. J&amp;rsquo;ai fait le test&amp;hellip;&lt;/p&gt;
@@ -548,10 +548,10 @@ Bingo, le disque est reparti ! À cause des poussières qui se sont déposées 
     
     <item>
       <title>Cygwin: installer apt-cyg</title>
-      <link>http://localhost:1313/post/installer-apt-cyg/</link>
+      <link>http://grimaldi.me/post/installer-apt-cyg/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/installer-apt-cyg/</guid>
+      <guid>http://grimaldi.me/post/installer-apt-cyg/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/apt-cyg.png&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Sous Cygwin, &lt;em&gt;apt-cyg&lt;/em&gt; fournit un fonctionnement proche d’&lt;em&gt;apt-get&lt;/em&gt;, que je trouve plus efficace que l’interface par défaut &lt;em&gt;setup.exe&lt;/em&gt;.&lt;/p&gt;
@@ -585,10 +585,10 @@ par :
     
     <item>
       <title>Définir la vue par défaut des dossiers Windows</title>
-      <link>http://localhost:1313/post/vue-par-d%C3%A9faut/</link>
+      <link>http://grimaldi.me/post/vue-par-d%C3%A9faut/</link>
       <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/vue-par-d%C3%A9faut/</guid>
+      <guid>http://grimaldi.me/post/vue-par-d%C3%A9faut/</guid>
       <description>&lt;p&gt;Comment faire, dans l&amp;rsquo;explorateur de fichiers Windows 7, pour que la vue du dossier actuel (tri par Nom ou par Type, largeur des colonnes, etc.) s&amp;rsquo;applique à tous les dossiers ?&lt;/p&gt;
 
 &lt;ul&gt;
@@ -602,10 +602,10 @@ par :
     
     <item>
       <title>Automatiser Excel</title>
-      <link>http://localhost:1313/post/automatiser-excel/</link>
+      <link>http://grimaldi.me/post/automatiser-excel/</link>
       <pubDate>Mon, 10 Aug 2015 17:47:49 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/automatiser-excel/</guid>
+      <guid>http://grimaldi.me/post/automatiser-excel/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../img/excel.png&#34;&gt;&lt;/p&gt;
@@ -654,10 +654,10 @@ par :
     
     <item>
       <title>Powered by Hugo</title>
-      <link>http://localhost:1313/post/powered-by-hugo/</link>
+      <link>http://grimaldi.me/post/powered-by-hugo/</link>
       <pubDate>Mon, 10 Aug 2015 10:07:10 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/powered-by-hugo/</guid>
+      <guid>http://grimaldi.me/post/powered-by-hugo/</guid>
       <description>
 
 &lt;p&gt;Depuis deux jours ce site a fait peau neuve, à la fois côté vitrine et dans l&amp;rsquo;arrière-boutique.&lt;/p&gt;
@@ -698,10 +698,10 @@ Les avantages d&amp;rsquo;un site statique, par rapport à un site dynamique qui
     
     <item>
       <title>Pixma MG5250 sur Ubuntu</title>
-      <link>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</link>
+      <link>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</link>
       <pubDate>Mon, 10 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</guid>
+      <guid>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment installer l&amp;rsquo;imprimante-scanner Canon Pixma MG5250
@@ -761,10 +761,10 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
     
     <item>
       <title>Accéder à GnuCash en Python</title>
-      <link>http://localhost:1313/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</link>
+      <link>http://grimaldi.me/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</link>
       <pubDate>Mon, 06 Jan 2014 19:19:29 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</guid>
+      <guid>http://grimaldi.me/post/acc%C3%A9der-%C3%A0-gnucash-en-python/</guid>
       <description>&lt;p&gt;Il existe un module Python pour accéder aux fichiers GnuCash. Cela permet d’analyser vos comptes. Mais ce module est si mal documenté que le plus simple est encore de lire le source du module! Voici donc quelques exemples concrets d’utilisation.&lt;/p&gt;
 
 &lt;ol&gt;
@@ -821,10 +821,10 @@ session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
     
     <item>
       <title>Passer de FancyBox à fancyBox2</title>
-      <link>http://localhost:1313/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
+      <link>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
       <pubDate>Wed, 01 Jan 2014 14:59:25 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
+      <guid>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
       <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :

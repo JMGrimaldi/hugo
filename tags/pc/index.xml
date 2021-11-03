@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pc - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/pc/</link>
+    <link>http://grimaldi.me/tags/pc/</link>
     <description>Derniers contenus Pc de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 22 Aug 2015 14:38:46 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/pc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/pc/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Série noire</title>
-      <link>http://localhost:1313/post/s%C3%A9rie-noire/</link>
+      <link>http://grimaldi.me/post/s%C3%A9rie-noire/</link>
       <pubDate>Sat, 22 Aug 2015 14:38:46 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/s%C3%A9rie-noire/</guid>
+      <guid>http://grimaldi.me/post/s%C3%A9rie-noire/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/panne.jpg&#34;&gt;&lt;/p&gt;
 
 &lt;p&gt;Certains disent que la foudre ne tombe jamais deux fois au même endroit. D&amp;rsquo;autres que les problèmes volent en escadrille. J&amp;rsquo;ai fait le test&amp;hellip;&lt;/p&gt;
@@ -55,10 +55,10 @@ Bingo, le disque est reparti ! À cause des poussières qui se sont déposées 
     
     <item>
       <title>Booter le Samsung 370R5E-S02 sur un support USB</title>
-      <link>http://localhost:1313/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</link>
+      <link>http://grimaldi.me/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</link>
       <pubDate>Wed, 02 Oct 2013 22:53:58 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</guid>
+      <guid>http://grimaldi.me/post/booter-le-samsung-370r5e-s02-sur-un-support-usb/</guid>
       <description>&lt;p&gt;Le PC Samsung 370R5E-S02 est livré avec Windows 8 préinstallé, et les réglages par défaut du BIOS ne permettent pas de booter sur un support USB.&lt;/p&gt;
 
 &lt;p&gt;Pour changer cela :&lt;/p&gt;
@@ -76,10 +76,10 @@ Bingo, le disque est reparti ! À cause des poussières qui se sont déposées 
     
     <item>
       <title>Installer Ubuntu sur Samsung 370R5E-S02</title>
-      <link>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
+      <link>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
       <pubDate>Sun, 21 Jul 2013 22:11:16 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
+      <guid>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
       <description>
 
 &lt;p&gt;Le Samsung 370R5E-S02 est un portable 15,6″ équipé d’un CPU Intel Core i5 3210M. Cette page décrit quelques particularités de l’installation d’Ubuntu 13.04 sur ce PC.&lt;/p&gt;

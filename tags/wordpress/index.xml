@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wordpress - JM.Grimaldi</title>
-    <link>http://localhost:1313/tags/wordpress/</link>
+    <link>http://grimaldi.me/tags/wordpress/</link>
     <description>Derniers contenus Wordpress de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Fri, 06 Sep 2013 17:37:50 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://grimaldi.me/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>WordPress : URL sans domaine</title>
-      <link>http://localhost:1313/post/wordpress-url-sans-domaine/</link>
+      <link>http://grimaldi.me/post/wordpress-url-sans-domaine/</link>
       <pubDate>Fri, 06 Sep 2013 17:37:50 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/wordpress-url-sans-domaine/</guid>
+      <guid>http://grimaldi.me/post/wordpress-url-sans-domaine/</guid>
       <description>&lt;p&gt;La configuration de WordPress vous oblige à saisir une URL complète pour l’adresse web de votre site. Cela empêche d’accéder au même site depuis plusieurs adresses, par exemple &lt;em&gt;mondomaine.com&lt;/em&gt;, &lt;em&gt;localhost&lt;/em&gt;, ou &lt;em&gt;192.168.1.42&lt;/em&gt;, ce qui peut être gênant si par exemple on héberge son site à la maison et que l’IP publique n’y est pas routée.&lt;/p&gt;
 
 &lt;p&gt;Pour contourner ce problème, si votre site a comme adresse &lt;em&gt;mondomaine.com/foobar/&lt;/em&gt;, éditez la table &lt;em&gt;wp_options&lt;/em&gt; de votre base de données (vous pouvez utilisez phpMyAdmin avec une base MySQL, ou sqlitebrowser &lt;a href=&#34;../../post/installer-wordpress-avec-sqlite/&#34;&gt;avec une base SQLite&lt;/a&gt;) et remplacez les entrées &lt;em&gt;siteurl&lt;/em&gt; et &lt;em&gt;home&lt;/em&gt; par &lt;code&gt;/foobar&lt;/code&gt;, au lieu de &lt;code&gt;http://mondomaine.com/foobar&lt;/code&gt; .&lt;/p&gt;
@@ -25,10 +25,10 @@
     
     <item>
       <title>Installer WordPress avec SQLite</title>
-      <link>http://localhost:1313/post/installer-wordpress-avec-sqlite/</link>
+      <link>http://grimaldi.me/post/installer-wordpress-avec-sqlite/</link>
       <pubDate>Mon, 20 May 2013 23:26:27 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/installer-wordpress-avec-sqlite/</guid>
+      <guid>http://grimaldi.me/post/installer-wordpress-avec-sqlite/</guid>
       <description>&lt;p&gt;Cet article explique comment installer un blog WordPress utilisant une base SQLite (fichier plat) au lieu d’une base MySQL. Cela permet d’avoir tout le blog dans un seul répertoire et facilite les sauvegardes. Il faut bien sûr que l’hébergeur supporte SQLite.&lt;/p&gt;
 
 &lt;p&gt;Quelle que soit la version de WordPress que l’on souhaite utiliser à la fin, il faut commencer par installer la version 3.1.2.&lt;/p&gt;
