@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Formation POV #7: Programmation</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/formation-povray/programmation/">
+	<link rel="canonical" href="http://localhost:1313/post/formation-povray/programmation/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../../css/fonts.css">
 	<link rel="stylesheet" href="../../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../../post/formation-povray/programmation/">Formation POV #7: Programmation</a></h1>
 		<div class="post-date">28 avril 2000</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%237%3a%20Programmation&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fprogrammation%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -74,29 +74,29 @@ exemple), mais aussi de faire des boucles.</p>
 Souvent on désire créer n objets pour lesquels on fait varier un paramètre ;
 il suffit de déclarer un compteur :</p>
 
-<p>
-#include "colors.inc"
-#include "textures.inc"
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;textures.inc&quot;</span>
 
-#declare i=1;
-#while (i<50)
- sphere {<8*log(i),0,i*i/2>,1
-  texture {Orange_Glass pigment {color rgb<1,1-.8/i,0> filter .6}}
+<span style="color: #999999; font-weight: bold">#declare</span> i<span style="font-weight: bold">=</span><span style="color: #009999">1</span>;
+<span style="color: #999999; font-weight: bold">#while</span> (i&lt;<span style="color: #009999">50</span>)
+ <span style="color: #999999">sphere</span> {&lt;<span style="color: #009999">8</span><span style="font-weight: bold">*log</span>(i),<span style="color: #009999">0</span>,i<span style="font-weight: bold">*</span>i<span style="font-weight: bold">/</span><span style="color: #009999">2</span>&gt;,<span style="color: #009999">1</span>
+  <span style="font-weight: bold">texture</span> {Orange_Glass <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">color</span> <span style="font-weight: bold">rgb</span>&lt;<span style="color: #009999">1</span>,<span style="color: #009999">1</span><span style="font-weight: bold">-</span><span style="color: #009999">.8</span><span style="font-weight: bold">/</span>i,<span style="color: #009999">0</span>&gt; <span style="font-weight: bold">filter</span> <span style="color: #009999">.6</span>}}
  }
- #declare i=i+1;
-#end
+ <span style="color: #999999; font-weight: bold">#declare</span> i<span style="font-weight: bold">=</span>i<span style="font-weight: bold">+</span><span style="color: #009999">1</span>;
+<span style="color: #999999; font-weight: bold">#end</span>
 
-plane {y,-1
- pigment {White}
- finish {ambient .2 reflection .4}
- normal {bozo .02 scale .1}}
+<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span>
+ <span style="font-weight: bold">pigment</span> {White}
+ <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">reflection</span> <span style="color: #009999">.4</span>}
+ <span style="font-weight: bold">normal</span> {<span style="font-weight: bold">bozo</span> <span style="color: #009999">.02</span> <span style="font-weight: bold">scale</span> <span style="color: #009999">.1</span>}}
 
-light_source {<-6,20,-12>, White area_light 5*x, 5*y, 5, 5}
+<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">20</span>,<span style="font-weight: bold">-</span><span style="color: #009999">12</span>&gt;, White <span style="font-weight: bold">area_light</span> <span style="color: #009999">5</span><span style="font-weight: bold">*</span><span style="color: #999999">x</span>, <span style="color: #009999">5</span><span style="font-weight: bold">*</span><span style="color: #999999">y</span>, <span style="color: #009999">5</span>, <span style="color: #009999">5</span>}
 
-camera {
- location <0,8,-8>
- look_at <2,0,8>
+<span style="color: #999999">camera</span> {
+ <span style="font-weight: bold">location</span> &lt;<span style="color: #009999">0</span>,<span style="color: #009999">8</span>,<span style="font-weight: bold">-</span><span style="color: #009999">8</span>&gt;
+ <span style="font-weight: bold">look_at</span> &lt;<span style="color: #009999">2</span>,<span style="color: #009999">0</span>,<span style="color: #009999">8</span>&gt;
 }
+</pre></div>
 </p>
 
 <p><img src="../../../img/pov/while.jpg" alt="while" />
@@ -111,8 +111,8 @@ camera {
 <p>Après la définition ci-dessus, si l&rsquo;on tape <code><em>nom</em>(&hellip;)</code>, cela sera remplacé
 par <em>contenu</em>, qui peut dépendre des paramètres de la macro. Par exemple :</p>
 
-<p>
-#macro carre(i) (i)*(i) #end
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#macro</span> carre(i) (i)<span style="font-weight: bold">*</span>(i) <span style="color: #999999; font-weight: bold">#end</span>
+</pre></div>
 </p>
 
 <p><strong>Attention :</strong> Ne pas oublier les précautions d&rsquo;usage relatives aux macros, notamment les parenthèses. Ainsi, si au lieu de <code>(i)*(i)</code> on avait mis <code>i*i</code>, alors <code>carre(1+1)</code> ne vaudrait pas 4, mais 1+1*1+1, soit 3.</p>
@@ -126,7 +126,10 @@ par <em>contenu</em>, qui peut dépendre des paramètres de la macro. Par exempl
 	
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

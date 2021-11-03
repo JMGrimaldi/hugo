@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/linux/</link>
+    <link>http://localhost:1313/tags/linux/</link>
     <description>Derniers contenus Linux de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Envoi de mails sur Ubuntu</title>
-      <link>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <link>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</link>
+      <pubDate>Wed, 03 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/envoi-de-mails-sur-ubuntu/</guid>
+      <guid>http://localhost:1313/post/envoi-de-mails-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment envoyer des mails en ligne de commande avec Ubuntu
@@ -35,7 +35,7 @@ mécanismes de sécurité seront alors différents).&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Sélectionner &lt;code&gt;Envoi via relais (« smarthost ») - réception SMTP ou fetchmail&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du &lt;em&gt;smarthost&lt;/em&gt; :&lt;/li&gt;
+&lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du &lt;em&gt;smarthost&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;Entrez &lt;code&gt;smtp.gmail.com::587&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Laissez les valeurs par défaut pour les écrans suivants jusqu&amp;rsquo;à la configuration du destinataire des courriels de root et postmaster : entrez votre username habituel&lt;/li&gt;
 &lt;li&gt;La configuration est terminée.&lt;/li&gt;
@@ -45,7 +45,7 @@ mécanismes de sécurité seront alors différents).&lt;/p&gt;
 n&amp;rsquo;autorise l&amp;rsquo;envoi que de 100 mails par jour) :&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Éditez &lt;code&gt;/etc/exim4/passwd.client&lt;/code&gt; (NB: ce fichier doit être lisible par le user et/ou le groupe &lt;code&gt;Debian-exim&lt;/code&gt;) et ajoutez la ligne suivante (NB: &lt;em&gt;yourAccountName&lt;/em&gt; est le compte Gmail sans le suffixe @gmail.com, et le paramètre &lt;em&gt;&amp;ldquo;Autoriser les applications moins sécurisées&amp;rdquo;&lt;/em&gt; doit être activé &lt;a href=&#34;https://myaccount.google.com/lesssecureapps&#34;&gt;ici&lt;/a&gt;) :
+&lt;li&gt;Éditez &lt;code&gt;/etc/exim4/passwd.client&lt;/code&gt; (NB : ce fichier doit être lisible par le user et/ou le groupe &lt;code&gt;Debian-exim&lt;/code&gt;) et ajoutez la ligne suivante où &lt;em&gt;yourAccountName&lt;/em&gt; est le compte Gmail sans le suffixe @gmail.com (NB : soit l&amp;rsquo;authentification à 2 facteurs de votre compte Google est désactivée et le paramètre &lt;em&gt;&amp;ldquo;Autoriser les applications moins sécurisées&amp;rdquo;&lt;/em&gt; doit être activé &lt;a href=&#34;https://myaccount.google.com/lesssecureapps&#34;&gt;ici&lt;/a&gt;, soit elle est activée et vous devez créer un mot de passe d&amp;rsquo;application en suivant les instructions &lt;a href=&#34;https://devanswers.co/create-application-specific-password-gmail/&#34;&gt;là&lt;/a&gt;) :
 &lt;pre&gt;smtp.gmail.com:yourAccountName:y0uRpaSsw0RD&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;Sauvegardez le fichier puis lancez la commande suivante :
 &lt;pre&gt;% sudo update-exim4.conf&lt;/pre&gt;&lt;/li&gt;
@@ -64,10 +64,10 @@ vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-
     
     <item>
       <title>Encodage H.264 avec GStreamer</title>
-      <link>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</link>
+      <link>http://localhost:1313/post/encodage-h264-avec-gstreamer/</link>
       <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/encodage-h264-avec-gstreamer/</guid>
+      <guid>http://localhost:1313/post/encodage-h264-avec-gstreamer/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/x264enc/film.jpg&#34; /&gt;&lt;/p&gt;
@@ -150,10 +150,10 @@ rm -f x264_2pass.log*
     
     <item>
       <title>Backup linux</title>
-      <link>http://grimaldi.me/post/backup-linux/</link>
+      <link>http://localhost:1313/post/backup-linux/</link>
       <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/backup-linux/</guid>
+      <guid>http://localhost:1313/post/backup-linux/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/backup.jpg&#34; /&gt;&lt;/p&gt;
@@ -333,10 +333,10 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
     
     <item>
       <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
+      <link>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</link>
       <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
+      <guid>http://localhost:1313/post/remettre-les-pages-dans-l-ordre/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/shuffle.png&#34;&gt;&lt;/p&gt;
@@ -375,32 +375,32 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;On extrait les images du PDF :
-
-$ pdfimages -j doc.pdf doc
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ pdfimages -j doc.pdf doc
+&lt;/pre&gt;&lt;/div&gt;
 
 Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
-
-$ for i in doc-*.jpg; do convert -quality 95 -rotate 90 -crop 50%x0 &#34;$i&#34; &#34;$i&#34; &amp;&amp; rm &#34;$i&#34;;done
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do&lt;/span&gt; convert -quality &lt;span style=&#34;color: #009999&#34;&gt;95&lt;/span&gt; -rotate &lt;span style=&#34;color: #009999&#34;&gt;90&lt;/span&gt; -crop &lt;span style=&#34;color: #009999&#34;&gt;50&lt;/span&gt;%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
-
-$ i=doc-0007-0.jpg; jpegtran -rotate 180 $i $i
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #008080&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate &lt;span style=&#34;color: #009999&#34;&gt;180&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
-
-$ pages=`perl -e &#39;$n=8; for $k (1..$n*2){printf &#34;doc-%.4i-%i.jpg &#34;, ($k&gt;$n?$k-$n:$n-$k+1)-1, $k%2};&#39;`; echo $pages
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #008080&#34;&gt;pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
 doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
-
-$ convert -density 300 -quality 80 $pages out.pdf
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ convert -density &lt;span style=&#34;color: #009999&#34;&gt;300&lt;/span&gt; -quality &lt;span style=&#34;color: #009999&#34;&gt;80&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
 $ rm *jpg
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -408,10 +408,10 @@ $ rm *jpg
     
     <item>
       <title>Pixma MG5250 sur Ubuntu</title>
-      <link>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</link>
+      <link>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</link>
       <pubDate>Mon, 10 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/pixma-mg5250-sur-ubuntu/</guid>
+      <guid>http://localhost:1313/post/pixma-mg5250-sur-ubuntu/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment installer l&amp;rsquo;imprimante-scanner Canon Pixma MG5250
@@ -471,10 +471,10 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
     
     <item>
       <title>Installer Ubuntu sur Samsung 370R5E-S02</title>
-      <link>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
+      <link>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</link>
       <pubDate>Sun, 21 Jul 2013 22:11:16 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
+      <guid>http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/</guid>
       <description>
 
 &lt;p&gt;Le Samsung 370R5E-S02 est un portable 15,6″ équipé d’un CPU Intel Core i5 3210M. Cette page décrit quelques particularités de l’installation d’Ubuntu 13.04 sur ce PC.&lt;/p&gt;
@@ -487,23 +487,29 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Installez les prérequis :
-sudo apt-get install debhelper execstack dh-modaliases dkms&lt;/p&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install debhelper execstack dh-modaliases dkms
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Téléchargez les drivers (version &lt;a href=&#34;http://support.amd.com/en-us/download/desktop?os=Linux+x86&#34;&gt;13.12&lt;/a&gt; à date ; utiliser la version bêta n’est pas nécessaire) ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Compilez les packages d’installation :
-
-mkdir tmp; cd tmp
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mkdir tmp; &lt;span style=&#34;color: #999999&#34;&gt;cd&lt;/span&gt; tmp
 unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
 chmod +x *run
-./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&lt;/pre&gt;
+./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&amp;lt;/pre&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Installez les packages :
-sudo dpkg -i *deb&lt;/p&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo dpkg -i *deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande &lt;code&gt;amdconfig --pxl&lt;/code&gt; ne fonctionne pas) :
-sudo amdconfig --initial -f&lt;/p&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo amdconfig --initial -f
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Rebootez.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -532,30 +538,30 @@ sudo amdconfig --initial -f&lt;/p&gt;&lt;/li&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Pour l’installer tapez les commandes suivantes dans un terminal :
-
-git clone https://github.com/marcoDallas/acpi_call_GUI.git
-cd acpi_call_GUI
-sudo chmod +x install.sh&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;git clone https://github.com/marcoDallas/acpi_call_GUI.git
+&lt;span style=&#34;color: #999999&#34;&gt;cd&lt;/span&gt; acpi_call_GUI
+sudo chmod +x install.sh&amp;lt;/pre&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 Éditez &lt;code&gt;install.sh&lt;/code&gt; et remplacez &lt;code&gt;gksudo&lt;/code&gt; par &lt;code&gt;gksu&lt;/code&gt;, puis exécutez &lt;code&gt;sudo ./install.sh&lt;/code&gt;. Après l’installation lancez acpi_call_GUI avec la commande &lt;code&gt;java -jar $HOME/acpi_call_GUI.jar&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Sélectionnez &lt;em&gt;Install acpi_call&lt;/em&gt; puis &lt;em&gt;Execute&lt;/em&gt;, et saisissez le code &lt;code&gt;\_SB.PCI0.PEG0.PEGP._OFF&lt;/code&gt; ; cela installe le module et crée sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; deux répertoires &lt;code&gt;acpi_call/&lt;/code&gt; et &lt;code&gt;acpi_call_GUI/&lt;/code&gt;. Pour vérifier que le module est bien chargé, dans une console tapez &lt;code&gt;lsmod | grep acpi_call&lt;/code&gt; et vérifiez qu’une ligne est renvoyée ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Exécutez ensuite &lt;em&gt;Turn off discrete GPU&lt;/em&gt;, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande &lt;code&gt;upower etc.&lt;/code&gt; ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (&lt;em&gt;0×0&lt;/em&gt; si la désactivation s’est bien passée) :
-
-echo &#39;\_SB.PCI0.PEG0.PEGP._OFF&#39; | sudo tee /proc/acpi/call
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;\_SB.PCI0.PEG0.PEGP._OFF&amp;#39;&lt;/span&gt; | sudo tee /proc/acpi/call
 sudo cat /proc/acpi/call
+&lt;/pre&gt;&lt;/div&gt;
 
 Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant &lt;em&gt;OFF&lt;/em&gt; par &lt;em&gt;ON&lt;/em&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Si cela fonctionne, exécutez &lt;em&gt;Automate disabling discrete GPU every boot&lt;/em&gt;, cela ajoute dans &lt;code&gt;/etc/rc.local&lt;/code&gt; (vérifiez que ce fichier est exécutable) un appel à &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier &lt;code&gt;agg_acpi_call.sh&lt;/code&gt; et déplacer la ligne &lt;code&gt;sudo insmod acpi_call.ko&lt;/code&gt; après la ligne &lt;code&gt;fi&lt;/code&gt; (au passage on peut supprimer le &lt;em&gt;sudo&lt;/em&gt; devant &lt;em&gt;insmod&lt;/em&gt;) ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Le bouton &lt;em&gt;Automate etc.&lt;/em&gt; ajoute également dans &lt;code&gt;/etc/rc.local&lt;/code&gt; un appel à &lt;code&gt;deactivate.sh&lt;/code&gt;. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : &lt;code&gt;sleep 60 &amp;amp;&amp;amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;amp;&lt;/code&gt;. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous &lt;code&gt;/etc/pm/sleep.d/&lt;/code&gt; un script &lt;code&gt;99_acpi&lt;/code&gt; à qui j’ai rajouté les droits +x, avec le contenu suivant :
-
-#!/bin/sh
-case &#34;$1&#34; in
-	thaw|resume) /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
-esac
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$1&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt; in
+	thaw|resume&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+&lt;span style=&#34;font-weight: bold&#34;&gt;esac&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -563,10 +569,10 @@ esac
     
     <item>
       <title>Cinergy 250 PCI &amp; Linux</title>
-      <link>http://grimaldi.me/post/cinergy-linux/</link>
+      <link>http://localhost:1313/post/cinergy-linux/</link>
       <pubDate>Wed, 04 Aug 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/cinergy-linux/</guid>
+      <guid>http://localhost:1313/post/cinergy-linux/</guid>
       <description>
 
 &lt;p&gt;This page explains how to have Terratec Cinergy 250 PCI video card work under
@@ -597,29 +603,30 @@ Video Broadcast Decoder (rev d0)
 &lt;code&gt;drivers/media/video/saa7134/saa7134-cards.c&lt;/code&gt; (this patch is for kernel 2.6.34
 but you can manually add the &lt;code&gt;name_comp1&lt;/code&gt; section to any other version):&lt;/p&gt;
 
-&lt;p&gt;    
-diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c
---- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300
-+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200
-@@ -2831,11 +2831,15 @@
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;    
+&lt;span style=&#34;color: #999999&#34;&gt;diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200&lt;/span&gt;
+&lt;span style=&#34;color: #aaaaaa&#34;&gt;@@ -2831,11 +2831,15 @@&lt;/span&gt;
  			.vmux = 1,
  			.amux = TV,
  			.tv   = 1,
--		},{
-+		}, {
-+			.name = name_comp1,
-+			.vmux = 3,
-+			.amux = LINE2,
-+		}, {
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		},{&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.name = name_comp1,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.vmux = 3,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		}, {&lt;/span&gt;
  			.name = name_svideo,  /* NOT tested */
  			.vmux = 8,
--			.amux = LINE1,
--		}},
-+			.amux = LINE2,
-+		} },
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-			.amux = LINE1,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ffdddd&#34;&gt;-		}},&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+			.amux = LINE2,&lt;/span&gt;
+&lt;span style=&#34;color: #000000; background-color: #ddffdd&#34;&gt;+		} },&lt;/span&gt;
  		.radio = {
  			.name   = name_radio,
  			.amux   = TV,
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;This done, rebuild your module and install it:&lt;/p&gt;
@@ -653,10 +660,10 @@ the PC; for other usage you might need some tweaking. Here are the last steps:&l
     
     <item>
       <title>Exports NFS</title>
-      <link>http://grimaldi.me/post/exports-nfs/</link>
+      <link>http://localhost:1313/post/exports-nfs/</link>
       <pubDate>Tue, 24 Feb 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/exports-nfs/</guid>
+      <guid>http://localhost:1313/post/exports-nfs/</guid>
       <description>
 
 &lt;p&gt;Cette page explique comment faire une installation très simple de partages NFS
@@ -720,10 +727,10 @@ mount mon_serveur:/srv /mnt/mon_serveur
     
     <item>
       <title>Passerelle ADSL-Wifi</title>
-      <link>http://grimaldi.me/post/passerelle-adsl-wifi/</link>
+      <link>http://localhost:1313/post/passerelle-adsl-wifi/</link>
       <pubDate>Sat, 13 Aug 2005 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/passerelle-adsl-wifi/</guid>
+      <guid>http://localhost:1313/post/passerelle-adsl-wifi/</guid>
       <description>
 
 &lt;p&gt;La page &lt;a href=&#34;../../post/speedtouch-debian/&#34;&gt;Speedtouch &amp;amp; Debian&lt;/a&gt; expliquait comment connecter
@@ -843,18 +850,18 @@ dans &lt;code&gt;/etc/modutils/aliases&lt;/code&gt; une ligne &lt;code&gt;alias 
 
 &lt;p&gt;Ensuite on complète le &lt;code&gt;/etc/network/interfaces&lt;/code&gt; :&lt;/p&gt;
 
-&lt;p&gt;
-# Interface WLAN : cf. iwconfig(8)
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Interface WLAN : cf. iwconfig(8)&lt;/span&gt;
 auto ath0
 iface ath0 inet static
-	address		192.168.0.1
-	netmask		255.255.255.0
-	pre-up /sbin/iwpriv ath0 mode 3
-	# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a
+	address		&lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.1
+	netmask		&lt;span style=&#34;color: #009999&#34;&gt;255&lt;/span&gt;.255.255.0
+	pre-up /sbin/iwpriv ath0 mode &lt;span style=&#34;color: #009999&#34;&gt;3&lt;/span&gt;
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a&lt;/span&gt;
 	wireless_essid	Nom-du-reseau
 	wireless_mode	Master
-	wireless_channel	9
+	wireless_channel	&lt;span style=&#34;color: #009999&#34;&gt;9&lt;/span&gt;
 	wireless_key	off
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NB :&lt;/strong&gt;&lt;/p&gt;
@@ -884,60 +891,60 @@ suffixe &lt;code&gt;.sh&lt;/code&gt;, de sorte qu&amp;rsquo;il sera appelé par 
 de l&amp;rsquo;interface lo (mais si on veut tester sans rebooter on peut très bien le
 lancer à la main, voire faire un &lt;code&gt;/etc/init.d/networking restart&lt;/code&gt;) :&lt;/p&gt;
 
-&lt;p&gt;
-#!/bin/sh
-# /etc/network/if-pre-up.d/iptables-start
-#
-# Initialise les règles de filtrage iptables
-# D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh
-#####
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/network/if-pre-up.d/iptables-start&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Initialise les règles de filtrage iptables&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/iptables-start.sh&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
 
-# Remise à zéro des règles
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Remise à zéro des règles&lt;/span&gt;
 iptables -F
 iptables -t nat -F
 
-#
-# Politiques par défaut
-#
-#####
-# Accepte les connexions entrantes
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Politiques par défaut&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions entrantes&lt;/span&gt;
 iptables -P INPUT ACCEPT
-# Accepte les connexions destinées à être forwardées
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions destinées à être forwardées&lt;/span&gt;
 iptables -P FORWARD ACCEPT
-# Accepte les connexions sortantes
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Accepte les connexions sortantes&lt;/span&gt;
 iptables -P OUTPUT ACCEPT
 
-#
-# Règles de filtrage
-#
-#####
-# Pas de filtrage
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de filtrage&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Pas de filtrage&lt;/span&gt;
 iptables -A INPUT -j ACCEPT
 
-#
-# Règles pour le partage de connexion (le NAT)
-#
-#####
-# Le système fait serveur NAT ; l&#39;interface extérieure est ppp0
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles pour le partage de connexion (le NAT)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le système fait serveur NAT ; l&amp;#39;interface extérieure est ppp0&lt;/span&gt;
 iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 
-# Si la connexion que vous partagez est une connexion ADSL, vous
-# serez probablement confronté au fameux problème du MTU. En résumé,
-# le problème vient du fait que le MTU de la liaison entre votre
-# fournisseur d&#39;accès et le serveur NAT est un petit peu inférieur au
-# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui
-# sont derrière le NAT. Pour résoudre ce problème :
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Si la connexion que vous partagez est une connexion ADSL, vous&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# serez probablement confronté au fameux problème du MTU. En résumé,&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le problème vient du fait que le MTU de la liaison entre votre&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# fournisseur d&amp;#39;accès et le serveur NAT est un petit peu inférieur au&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# sont derrière le NAT. Pour résoudre ce problème :&lt;/span&gt;
 iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS -o ppp0 --clamp-mss-to-pmtu
 
-#
-# Règles de port forwarding
-#
-#####
-# Décommentez la ligne suivante pour que les requêtes TCP reçues sur
-# le port 80 de l&#39;interface eth0 soient forwardées à la machine dont
-# l&#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera
-# forwardée au client)
-#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Règles de port forwarding&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Décommentez la ligne suivante pour que les requêtes TCP reçues sur&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# le port 80 de l&amp;#39;interface eth0 soient forwardées à la machine dont&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# l&amp;#39;IP est 192.168.0.3 sur son port 80 (la réponse à la requête sera&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# forwardée au client)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.3:80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Là encore, lorsque le réseau fonctionnera, ce sera une bonne idée de le
@@ -962,51 +969,51 @@ pourrait imaginer un mécanisme de recopie à partir du resolv.conf lorsque ppp0
 est montée&amp;hellip;) : &lt;code&gt;apt-get install dhcp3-server&lt;/code&gt;, puis on édite
 &lt;code&gt;/etc/dhcp3/dhcpd.conf&lt;/code&gt; :&lt;/p&gt;
 
-&lt;p&gt;
-# /etc/dhcp3/dhcpd.conf
-#
-# Config du serveur DHCP de l&#39;ISC (package &#39;dhcp3-server&#39;)
-# D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf
-# cf. dhcpd.conf(5)
-#####
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# /etc/dhcp3/dhcpd.conf&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Config du serveur DHCP de l&amp;#39;ISC (package &amp;#39;dhcp3-server&amp;#39;)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# D&amp;#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# cf. dhcpd.conf(5)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
 
-#
-# Options globales
-# (s&#39;appliqueront par défaut à tous les sous-réseaux)
-#####
-# Nom de domaine
-#option domain-name &#34;exemple.org&#34;;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Options globales&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# (s&amp;#39;appliqueront par défaut à tous les sous-réseaux)&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Nom de domaine&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#option domain-name &amp;quot;exemple.org&amp;quot;;&lt;/span&gt;
 
-# Adresses des serveurs DNS (séparées par une virgule)
-option domain-name-servers 80.10.246.1, 80.10.246.132;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresses des serveurs DNS (séparées par une virgule)&lt;/span&gt;
+option domain-name-servers &lt;span style=&#34;color: #009999&#34;&gt;80&lt;/span&gt;.10.246.1, &lt;span style=&#34;color: #009999&#34;&gt;80&lt;/span&gt;.10.246.132;
 
-# Durée du bail en secondes
-default-lease-time 6000;
-max-lease-time 6000;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Durée du bail en secondes&lt;/span&gt;
+default-lease-time &lt;span style=&#34;color: #009999&#34;&gt;6000&lt;/span&gt;;
+max-lease-time &lt;span style=&#34;color: #009999&#34;&gt;6000&lt;/span&gt;;
 
-# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous&lt;/span&gt;
 authoritative;
 
-#
-# Déclaration des sous-réseaux et des machines
-#
-#####
-# Déclaration du sous-réseau 192.168.0.0/255.255.255.0
-subnet 192.168.0.0 netmask 255.255.255.0
-{
-	# Adresse du routeur
-	option routers 192.168.0.1;
-	# Plage d&#39;adresses à attribuer pour les machines non déclarées
-	range 192.168.0.100 192.168.0.200;
-#	deny unknown-clients;
-}
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration des sous-réseaux et des machines&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#####&lt;/span&gt;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Déclaration du sous-réseau 192.168.0.0/255.255.255.0&lt;/span&gt;
+subnet &lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.0 netmask &lt;span style=&#34;color: #009999&#34;&gt;255&lt;/span&gt;.255.255.0
+&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Adresse du routeur&lt;/span&gt;
+	option routers &lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.1;
+	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# Plage d&amp;#39;adresses à attribuer pour les machines non déclarées&lt;/span&gt;
+	range &lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.100 &lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.200;
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#	deny unknown-clients;&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
 
-# La déclaration d&#39;une machine permet de lui attribuer une adresse IP fixe
+&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# La déclaration d&amp;#39;une machine permet de lui attribuer une adresse IP fixe&lt;/span&gt;
 host MonLaptop
-{
-  hardware ethernet 00:0b:cd:5a:fb:43;	# @MAC de la carte Wifi du laptop
-  fixed-address 192.168.0.12;
-}
+&lt;span style=&#34;font-weight: bold&#34;&gt;{&lt;/span&gt;
+  hardware ethernet &lt;span style=&#34;color: #009999&#34;&gt;00&lt;/span&gt;:0b:cd:5a:fb:43;	&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;# @MAC de la carte Wifi du laptop&lt;/span&gt;
+  fixed-address &lt;span style=&#34;color: #009999&#34;&gt;192&lt;/span&gt;.168.0.12;
+&lt;span style=&#34;font-weight: bold&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;NB : là encore pour sécuriser on pourrait retirer le commentaire devant &lt;code&gt;deny
@@ -1039,10 +1046,10 @@ entendeur&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>SpeedTouch &amp; Debian</title>
-      <link>http://grimaldi.me/post/speedtouch-debian/</link>
+      <link>http://localhost:1313/post/speedtouch-debian/</link>
       <pubDate>Sun, 26 Jun 2005 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/speedtouch-debian/</guid>
+      <guid>http://localhost:1313/post/speedtouch-debian/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1299,10 +1306,10 @@ iface ppp0 inet ppp
     
     <item>
       <title>JOnAS</title>
-      <link>http://grimaldi.me/post/jonas/</link>
+      <link>http://localhost:1313/post/jonas/</link>
       <pubDate>Sat, 25 Sep 2004 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/jonas/</guid>
+      <guid>http://localhost:1313/post/jonas/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1440,10 +1447,10 @@ beans !&lt;/p&gt;
     
     <item>
       <title>gCDrip</title>
-      <link>http://grimaldi.me/post/gcdrip/</link>
+      <link>http://localhost:1313/post/gcdrip/</link>
       <pubDate>Thu, 01 Jan 2004 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/gcdrip/</guid>
+      <guid>http://localhost:1313/post/gcdrip/</guid>
       <description>
 
 &lt;ul&gt;
@@ -1521,10 +1528,10 @@ comment.&lt;/p&gt;
     
     <item>
       <title>deldup</title>
-      <link>http://grimaldi.me/post/deldup/</link>
+      <link>http://localhost:1313/post/deldup/</link>
       <pubDate>Wed, 12 Nov 2003 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/deldup/</guid>
+      <guid>http://localhost:1313/post/deldup/</guid>
       <description>
 
 &lt;h2 id=&#34;what-is-deldup&#34;&gt;What is deldup?&lt;/h2&gt;
@@ -1554,10 +1561,10 @@ box-perl&lt;/code&gt;), then simply run:&lt;/p&gt;
     
     <item>
       <title>Fontes &amp; linux</title>
-      <link>http://grimaldi.me/post/fontes-linux/</link>
+      <link>http://localhost:1313/post/fontes-linux/</link>
       <pubDate>Sun, 23 Feb 2003 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/fontes-linux/</guid>
+      <guid>http://localhost:1313/post/fontes-linux/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Cet article est obsolète.&lt;/div&gt;
@@ -1647,10 +1654,10 @@ par exemple, depuis Gimp (outil texte).&lt;/li&gt;
     
     <item>
       <title>gSoko</title>
-      <link>http://grimaldi.me/post/gsoko/</link>
+      <link>http://localhost:1313/post/gsoko/</link>
       <pubDate>Mon, 25 Sep 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/gsoko/</guid>
+      <guid>http://localhost:1313/post/gsoko/</guid>
       <description>
 
 &lt;div class=&#34;message&#34;&gt;Updated on March 26, 2005&lt;/div&gt;

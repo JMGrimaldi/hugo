@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Automatiser Excel</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/automatiser-excel/">
+	<link rel="canonical" href="http://localhost:1313/post/automatiser-excel/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../post/automatiser-excel/">Automatiser Excel</a></h1>
 		<div class="post-date">10 août 2015</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Automatiser%20Excel&url=http%3a%2f%2fgrimaldi.me%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Automatiser%20Excel&url=http%3a%2f%2fgrimaldi.me%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Automatiser%20Excel&url=http%3a%2f%2fgrimaldi.me%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Automatiser%20Excel&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Automatiser%20Excel&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Automatiser%20Excel&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fautomatiser-excel%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -72,13 +72,13 @@
 
 <p>Saisissez le code suivant :</p>
 
-<p>
-Sub efface_1_colonne_sur_2()
-    Range("C1").Select
-    For i = 1 To 35
-    ActiveCell.Offset(0, i).EntireColumn.Delete
-    Next
-End Sub
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="font-weight: bold">Sub</span> <span style="color: #990000; font-weight: bold">efface_1_colonne_sur_2</span>()
+    Range(<span style="color: #bb8844">&quot;C1&quot;</span>).Select
+    <span style="font-weight: bold">For</span> i <span style="font-weight: bold">=</span> <span style="color: #009999">1</span> <span style="font-weight: bold">To</span> <span style="color: #009999">35</span>
+    ActiveCell.Offset(<span style="color: #009999">0</span>, i).EntireColumn.Delete
+    <span style="font-weight: bold">Next</span>
+<span style="font-weight: bold">End</span> <span style="font-weight: bold">Sub</span>
+</pre></div>
 </p>
 
 <p>Quelques explications :</p>
@@ -150,7 +150,10 @@ End Sub
 
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

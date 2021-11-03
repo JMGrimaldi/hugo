@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Formation POV #4: Objets</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/formation-povray/objets/">
+	<link rel="canonical" href="http://localhost:1313/post/formation-povray/objets/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../../css/fonts.css">
 	<link rel="stylesheet" href="../../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../../post/formation-povray/objets/">Formation POV #4: Objets</a></h1>
 		<div class="post-date">28 avril 2000</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%234%3a%20Objets&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2fobjets%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -195,11 +195,11 @@ Un petit dessin valant parfois mieux qu&rsquo;un long discours, voici un exemple
 sauvée au format gif sous le nom <em>map.gif</em>. Dans l&rsquo;image de droite, le
 height_field est obtenu par :</p>
 
-<p>
-height_field {gif "map.gif"
- pigment {rgb <1,.9,.8>}
- finish {ambient .2 diffuse 1 specular .2 roughness .005}
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999">height_field</span> {<span style="font-weight: bold">gif</span> <span style="color: #bb8844">&quot;map.gif&quot;</span>
+ <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
+ <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.005</span>}
 }
+</pre></div>
 </p>
 
 <h3 id="text">text</h3>
@@ -224,11 +224,11 @@ et suivant Z ils vont de 0 à p où p est la profondeur.</p>
 <p>Dans l&rsquo;image ci-dessus le fichier <em>ariblk.ttf</em> se trouve dans le même
 répertoire que le fichier .pov et l&rsquo;objet texte est obtenu par :</p>
 
-<p>
-text {ttf "ariblk.ttf" "PovRay" .4,0
- pigment {rgb <1,.9,.8>}
- finish {ambient .2 diffuse 1 specular .5 roughness .01}
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999">text</span> {<span style="font-weight: bold">ttf</span> <span style="color: #bb8844">&quot;ariblk.ttf&quot;</span> <span style="color: #bb8844">&quot;PovRay&quot;</span> <span style="color: #009999">.4</span>,<span style="color: #009999">0</span>
+ <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;}
+ <span style="font-weight: bold">finish</span> {<span style="font-weight: bold">ambient</span> <span style="color: #009999">.2</span> <span style="font-weight: bold">diffuse</span> <span style="color: #009999">1</span> <span style="font-weight: bold">specular</span> <span style="color: #009999">.5</span> <span style="font-weight: bold">roughness</span> <span style="color: #009999">.01</span>}
 }
+</pre></div>
 </p>
 
 <p><center>[ <a href="../../../post/formation-povray/espace/">Page précédente</a> | <a href="../../../post/formation-povray/">Sommaire</a> | <a href="../../../post/formation-povray/textures/">Page suivante</a> ]</center></p>
@@ -240,7 +240,10 @@ text {ttf "ariblk.ttf" "PovRay" .4,0
 	
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

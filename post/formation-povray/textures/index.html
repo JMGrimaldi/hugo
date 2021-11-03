@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Formation POV #5: Textures</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/formation-povray/textures/">
+	<link rel="canonical" href="http://localhost:1313/post/formation-povray/textures/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../../css/fonts.css">
 	<link rel="stylesheet" href="../../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../../post/formation-povray/textures/">Formation POV #5: Textures</a></h1>
 		<div class="post-date">28 avril 2000</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2fgrimaldi.me%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Formation%20POV%20%235%3a%20Textures&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fformation-povray%2ftextures%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -71,20 +71,20 @@ T_Stone21.</p>
 
 <p>Je peux alors écrire :</p>
 
-<p>
-#include "colors.inc"
-#include "metals.inc"
-#include "stones1.inc"
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;colors.inc&quot;</span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;metals.inc&quot;</span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #bb8844">&quot;stones1.inc&quot;</span>
 
-sphere {0,1 texture {T_Silver_3C}}
-plane {y,-1 texture {T_Stone21}}
+<span style="color: #999999">sphere</span> {<span style="color: #009999">0</span>,<span style="color: #009999">1</span> <span style="font-weight: bold">texture</span> {T_Silver_3C}}
+<span style="color: #999999">plane</span> {<span style="color: #999999">y</span>,<span style="font-weight: bold">-</span><span style="color: #009999">1</span> <span style="font-weight: bold">texture</span> {T_Stone21}}
 
-light_source {<-6,10,-8> White} 
+<span style="color: #999999">light_source</span> {&lt;<span style="font-weight: bold">-</span><span style="color: #009999">6</span>,<span style="color: #009999">10</span>,<span style="font-weight: bold">-</span><span style="color: #009999">8</span>&gt; White} 
 
-camera {
- location -4*z
- look_at 0
+<span style="color: #999999">camera</span> {
+ <span style="font-weight: bold">location</span> <span style="font-weight: bold">-</span><span style="color: #009999">4</span><span style="font-weight: bold">*</span><span style="color: #999999">z</span>
+ <span style="font-weight: bold">look_at</span> <span style="color: #009999">0</span>
 }
+</pre></div>
 </p>
 
 <p><img src="../../../img/pov/texture.jpg" alt="sphère d'argent sur son plan de marbre" />
@@ -141,10 +141,10 @@ plus clair sur un exemple :</p>
 
 <p>Dans l&rsquo;image ci-dessus le pigment est :</p>
 
-<p>
- pigment {marble
-   color_map {[0 rgb <.5,.3,0>][.3 rgb <1,.9,.8>][.8 rgb .9]}
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">marble</span>
+   <span style="font-weight: bold">color_map</span> {[<span style="color: #009999">0</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">.5</span>,<span style="color: #009999">.3</span>,<span style="color: #009999">0</span>&gt;][<span style="color: #009999">.3</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;][<span style="color: #009999">.8</span> <span style="font-weight: bold">rgb</span> <span style="color: #009999">.9</span>]}
  }
+</pre></div>
 </p>
 
 <p>On précise donc la couleur en 0 : &lt;.5,.3,0&gt; (marron), en .3 : <1,.9,.8>
@@ -156,11 +156,11 @@ On voit que le motif <code>marble</code> correspond à des plans uniformes paral
 Comme c&rsquo;est peut-être un peu trop régulier pour être réaliste, on peut ajouter
 de la turbulence (0=pas de turbulence / &gt;1=très turbulent) :</p>
 
-<p>
- pigment {marble
-   color_map {[0 rgb <.5,.3,0>][.3 rgb <1,.9,.8>][.8 rgb .9]}
-   turbulence .4
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span> <span style="font-weight: bold">pigment</span> {<span style="font-weight: bold">marble</span>
+   <span style="font-weight: bold">color_map</span> {[<span style="color: #009999">0</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">.5</span>,<span style="color: #009999">.3</span>,<span style="color: #009999">0</span>&gt;][<span style="color: #009999">.3</span> <span style="font-weight: bold">rgb</span> &lt;<span style="color: #009999">1</span>,<span style="color: #009999">.9</span>,<span style="color: #009999">.8</span>&gt;][<span style="color: #009999">.8</span> <span style="font-weight: bold">rgb</span> <span style="color: #009999">.9</span>]}
+   <span style="font-weight: bold">turbulence</span> <span style="color: #009999">.4</span>
  }
+</pre></div>
 </p>
 
 <p><a href="../../../static/pov/marble1.pov"><img src="../../../img/pov/marble1.jpg" alt="marbre turbulent" />
@@ -262,7 +262,10 @@ de la documentation).</p>
 	
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

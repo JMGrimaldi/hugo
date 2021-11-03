@@ -2,61 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/web/</link>
+    <link>http://localhost:1313/tags/web/</link>
     <description>Derniers contenus Web de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Wed, 01 Jan 2014 14:59:25 +0200</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Passer de FancyBox à fancyBox2</title>
-      <link>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
+      <link>http://localhost:1313/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
       <pubDate>Wed, 01 Jan 2014 14:59:25 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
+      <guid>http://localhost:1313/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
       <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :
-
-	$(&#39;a.th&#39;).fancybox({
-		&#39;transitionIn&#39;	: &#39;none&#39;,
-		&#39;transitionOut&#39;	: &#39;none&#39;,
-		&#39;type&#39;		: &#39;inline&#39;,
-		&#39;onComplete&#39;	: function() {
-			$(&#39;#fancybox-wrap&#39;).hover(function() {
-				$(&#39;#fancybox-title&#39;).show();
-			}, function() {
-				$(&#39;#fancybox-title&#39;).hide();
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
+			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
 			});
 		}
 	});
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox2&lt;/a&gt; :
-
-	$(&#39;a.th&#39;).fancybox({
-		&#39;nextEffect&#39;	: &#39;none&#39;,
-		&#39;prevEffect&#39;	: &#39;none&#39;,
-		&#39;type&#39;		: &#39;ajax&#39;,
-		&#39;afterShow&#39;	: function() {
-			$(&#39;.fancybox-wrap&#39;).hover(function() {
-				$(&#39;.fancybox-title&#39;).show();
-			}, function() {
-				$(&#39;.fancybox-title&#39;).hide();
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
+		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
+			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
+				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
 			});
 		}
 	});
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Connecter Google Drive dans Owncloud</title>
-      <link>http://grimaldi.me/post/connecter-google-drive-dans-owncloud/</link>
+      <link>http://localhost:1313/post/connecter-google-drive-dans-owncloud/</link>
       <pubDate>Sun, 17 Nov 2013 01:21:42 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/connecter-google-drive-dans-owncloud/</guid>
+      <guid>http://localhost:1313/post/connecter-google-drive-dans-owncloud/</guid>
       <description>&lt;p&gt;Google ayant compliqué la procédure d’accès à ses API, voici comment récupérer un ID/secret pour connecter Google Drive dans Owncloud 5 et plus :&lt;/p&gt;
 
 &lt;ol&gt;

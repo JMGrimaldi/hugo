@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Example Content</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/example-content/">
+	<link rel="canonical" href="http://localhost:1313/post/example-content/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../post/example-content/">Example Content</a></h1>
 		
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Example%20Content&url=http%3a%2f%2fgrimaldi.me%2fpost%2fexample-content%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fexample-content%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Example%20Content&url=http%3a%2f%2fgrimaldi.me%2fpost%2fexample-content%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Example%20Content&url=http%3a%2f%2fgrimaldi.me%2fpost%2fexample-content%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Example%20Content&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fexample-content%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fexample-content%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Example%20Content&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fexample-content%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Example%20Content&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fexample-content%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -88,15 +88,15 @@
 
 <p>Cum sociis natoque penatibus et magnis dis <code>code element</code> montes, nascetur ridiculus mus.</p>
 
-<p>
-// Example can be run directly in your JavaScript console
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// Example can be run directly in your JavaScript console</span>
 
-// Create a function that takes two arguments and returns the sum of those arguments
-var adder = new Function("a", "b", "return a + b");
+<span style="color: #999988; font-style: italic">// Create a function that takes two arguments and returns the sum of those arguments</span>
+<span style="font-weight: bold">var</span> adder <span style="font-weight: bold">=</span> <span style="font-weight: bold">new</span> <span style="color: #999999">Function</span>(<span style="color: #bb8844">&quot;a&quot;</span>, <span style="color: #bb8844">&quot;b&quot;</span>, <span style="color: #bb8844">&quot;return a + b&quot;</span>);
 
-// Call the function
-adder(2, 6);
-// > 8
+<span style="color: #999988; font-style: italic">// Call the function</span>
+adder(<span style="color: #009999">2</span>, <span style="color: #009999">6</span>);
+<span style="color: #999988; font-style: italic">// &gt; 8</span>
+</pre></div>
 </p>
 
 <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
@@ -192,7 +192,10 @@ adder(2, 6);
 	
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

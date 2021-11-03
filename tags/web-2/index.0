@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
-	<title>Annuaire inversé</title>
+	<title>Web 2.0</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://localhost:1313/post/annuaire_inverse/">
+	<link rel="canonical" href="http://localhost:1313/tags/web-2/index.0/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="../../css/google-cse.css">
 
 	<link rel="shortcut icon" href="../../img/favicon.ico">
-	<link href="../../index.xml" rel="alternate" type="application/rss+xml">
+	<link href="http://localhost:1313/tags/web-2.0/index.xml" rel="alternate" type="application/rss+xml">
 </head>
 
 
@@ -34,7 +33,7 @@
 		<li class="social-linkedin"><a href="https://www.linkedin.com/in/grimaldi">&#xe806;</a></li>
 		<li class="social-twitter"><a href="https://twitter.com/jmgrimaldi">&#xe80d;</a></li>
 		<li class="social-facebook"><a href="http://facebook.com/jeanmichel.grimaldi">&#xe802;</a></li>
-		<li class="social-rss"><a href="../../index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
+		<li class="social-rss"><a href="http://localhost:1313/tags/web-2.0/index.xml" type="application/rss+xml" target="_blank">&#xe805;</a></li>
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
@@ -42,30 +41,32 @@
 </div>
 
 <div class="content">
-	<div class="post">
-		<h1 class="post-title"><a href="../../post/annuaire_inverse/">Annuaire inversé</a></h1>
-		<div class="post-date">15 novembre 2008</div>
-		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Annuaire%20invers%c3%a9&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fannuaire_inverse%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fannuaire_inverse%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Annuaire%20invers%c3%a9&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fannuaire_inverse%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Annuaire%20invers%c3%a9&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fannuaire_inverse%2f"><span class="icon">&#xe806;</span></a>
-</div>
-
-		<p>Ce formulaire vous permet, à partir du numéro de téléphone à 10 chiffres, de retrouver le nom et l&rsquo;adresse de l&rsquo;abonné.</p>
-
-<form name="RechercheInverseForm" action="http://www.pagesjaunes.fr/pagesblanches/rechercheInverse.do" method="POST" style="box-sizing: border-box; padding: .8em 1.2em; margin: 1em auto 0; width: 22em; max-width: 100% !important; background-color: #fff0f9; color:#666 ; border: 1px solid #ccc;">
-<b>Entrez ici les 10 chiffres du numéro de téléphone</b>
-<center style="margin-top: .6em"><input type="text" name="numeroTelephone" size="20" maxlength="18">
-<a href="javascript:document.forms['RechercheInverseForm'].submit();" style="display: inline-block;"><img src="../../img/ok.gif" style="border: none; margin-bottom: -8px;"></a></center>
-</form>
-
-		
-	</div>
+	<h1 id="title">Web 2.0</h1>
 	
-	<hr />
-	
-	
+	<ul>
+	<li><a href="../../post/freestyle/le-progr%C3%A8s-carbure-%C3%A0-l-abondance/">Le progrès carbure à l’abondance</a>
+		 <span class="post-date">1 janvier 2008</span>
+	</li>
+	<li><a href="../../post/freestyle/skype-out-autopsie-et-enseignements/">Skype out : autopsie et enseignements</a>
+		 <span class="post-date">21 août 2007</span>
+	</li>
+	<li><a href="../../post/freestyle/microsoft-1-0/">Microsoft 1.0</a>
+		 <span class="post-date">30 juillet 2007</span>
+	</li>
+	<li><a href="../../post/freestyle/la-prochaine-ouverture/">La prochaine ouverture ?</a>
+		 <span class="post-date">11 février 2007</span>
+	</li>
+	<li><a href="../../post/freestyle/fai-2-0/">FAI 2.0</a>
+		 <span class="post-date">5 janvier 2007</span>
+	</li>
+	<li><a href="../../post/freestyle/l-%C3%A9conomie-ne-sera-pas-virtuelle/">L’économie ne sera pas virtuelle</a>
+		 <span class="post-date">22 décembre 2006</span>
+	</li>
+	<li><a href="../../post/freestyle/hype-2-0/">Hype 2.0</a>
+		 <span class="post-date">8 décembre 2006</span>
+	</li>
+
+	</ul>
 </div>
 <script data-no-instant>document.write('<script src="http://'
         + (location.host || 'localhost').split(':')[0]

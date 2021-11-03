@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Traverser un proxy NTLM/SSPI</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/">
+	<link rel="canonical" href="http://localhost:1313/post/traverser-un-proxy-ntlm-sspi/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../post/traverser-un-proxy-ntlm-sspi/">Traverser un proxy NTLM/SSPI</a></h1>
 		<div class="post-date">2 septembre 2013</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2fgrimaldi.me%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2flocalhost%3a1313%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2flocalhost%3a1313%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Traverser%20un%20proxy%20NTLM%2fSSPI&url=http%3a%2f%2flocalhost%3a1313%2fpost%2ftraverser-un-proxy-ntlm-sspi%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		<p>Sous Windows, un proxy NTLM/SSPI récupère automatiquement l’identité de votre session pour vous donner accès à Internet. L’avantage est que vous n’avez pas à saisir de mot de passe ; l’inconvénient est que si vous utilisez un outil qui ne supporte pas ce protocole (svn, wget, …), la connexion est impossible.</p>
@@ -62,21 +62,25 @@
 <li><p>Éditez le fichier <code>cntlm.ini</code> et renseignez les infos <code>Username</code> et <code>Domain</code> de votre compte Windows (le <code>Password</code> est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;</p></li>
 
 <li><p>Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, <em>Shift+Clic droit</em> sur le répertoire, puis <em>Ouvrir une fenêtre de commandes ici</em>), et lancez la commande suivante :
-cntlm -M http://test.com</p></li>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cntlm -M http://test.com
+</pre></div>
+</p></li>
 
 <li><p>Cntlm vous demande de saisir votre <em>Password</em> (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-
-Config profile  1/4... OK (HTTP code: 200) 
-----------------------------[ Profile  0 ]------
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Config profile  <span style="color: #009999">1</span>/4... OK <span style="font-weight: bold">(</span>HTTP code: <span style="color: #009999">200</span><span style="font-weight: bold">)</span> 
+----------------------------<span style="font-weight: bold">[</span> Profile  <span style="color: #009999">0</span> <span style="font-weight: bold">]</span>------
 Auth            NTLMv2
 PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
+</pre></div>
 </p></li>
 
 <li><p>Ajoutez ces 2 lignes (<em>Auth</em> et <em>PassNTLMv2</em>) dans le fichier <code>cntlm.ini</code> après <code>Username</code> et <code>Domain</code> ;</p></li>
 
 <li><p>Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-cntlm -v</p></li>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cntlm -v
+</pre></div>
+</p></li>
 
 <li><p>Ensuite paramétrez votre navigateur pour utiliser le proxy <code>localhost:3128</code> et vérifiez que la navigation se fait bien en HTTP et en HTTPS ;</p></li>
 
@@ -141,7 +145,10 @@ cntlm -v</p></li>
 
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

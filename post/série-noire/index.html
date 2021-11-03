@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Série noire</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/s%C3%A9rie-noire/">
+	<link rel="canonical" href="http://localhost:1313/post/s%C3%A9rie-noire/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../post/s%C3%A9rie-noire/">Série noire</a></h1>
 		<div class="post-date">22 août 2015</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=S%c3%a9rie%20noire&url=http%3a%2f%2fgrimaldi.me%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=S%c3%a9rie%20noire&url=http%3a%2f%2fgrimaldi.me%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=S%c3%a9rie%20noire&url=http%3a%2f%2fgrimaldi.me%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=S%c3%a9rie%20noire&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=S%c3%a9rie%20noire&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=S%c3%a9rie%20noire&url=http%3a%2f%2flocalhost%3a1313%2fpost%2fs%25C3%25A9rie-noire%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		<p><img class="fr" src="../../img/panne.jpg"></p>
@@ -66,15 +66,15 @@
 <li><p>On peut récupérer un disque dur HS sans débourser une fortune auprès d&rsquo;un labo de récupération de données.<br />
 Mon disque dur, un Seagate Backup+ Slim d&rsquo;1To âgé d&rsquo;à peine 1 an, se mettait bien sous tension mais n&rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.<br />
 Sous Ubuntu, le disque apparaissait avec <code>lsusb</code>, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&rsquo;allait pas plus loin. <code>/var/log/syslog</code> montrait l&rsquo;erreur suivante :
-
-scsi 6:0:0:0: Direct-Access     Seagate  Backup+  SL      0143 PQ: 0 ANSI: 6
-sd 6:0:0:0: Attached scsi generic sg1 type 0
-sd 6:0:0:0: [sdb] Spinning up disk...
-usb 4-1: USB disconnect, device number 2
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>scsi <span style="color: #009999">6</span>:0:0:0: Direct-Access     Seagate  Backup+  SL      <span style="color: #009999">0143</span> PQ: <span style="color: #009999">0</span> ANSI: <span style="color: #009999">6</span>
+sd <span style="color: #009999">6</span>:0:0:0: Attached scsi generic sg1 <span style="color: #999999">type</span> <span style="color: #009999">0</span>
+sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> Spinning up disk...
+usb <span style="color: #009999">4</span>-1: USB disconnect, device number <span style="color: #009999">2</span>
 ......................ready
-sd 6:0:0:0: [sdb] READ CAPACITY failed
-sd 6:0:0:0: [sdb]
-Result: hostbyte=DID_NO_CONNECT driverbyte=DRIVER_OK
+sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> READ CAPACITY failed
+sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span>
+Result: <span style="color: #008080">hostbyte</span><span style="font-weight: bold">=</span>DID_NO_CONNECT <span style="color: #008080">driverbyte</span><span style="font-weight: bold">=</span>DRIVER_OK
+</pre></div>
 
 Puis j&rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&rsquo;avais rien à perdre.<br />
 Alors j&rsquo;ai suivi <a href="https://www.youtube.com/watch?v=ijFCOvwd_Zo">cette vidéo</a> pour sortir le disque dur de son boîtier, puis <a href="https://www.youtube.com/watch?v=7m5cil6KezI">celle-ci</a> pour ouvrir le disque et décoincer la tête de lecture.<br />
@@ -142,7 +142,10 @@ Bingo, le disque est reparti ! À cause des poussières qui se sont déposées 
 
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Installer Ubuntu sur Samsung 370R5E-S02</title>
 	<meta name="generator" content="Hugo 0.14" />
-	<link rel="canonical" href="http://grimaldi.me/post/installer-ubuntu-sur-samsung-370r5e-s02/">
+	<link rel="canonical" href="http://localhost:1313/post/installer-ubuntu-sur-samsung-370r5e-s02/">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
 	<link rel="stylesheet" href="../../css/fonts.css">
 	<link rel="stylesheet" href="../../css/style.css">
@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2020</div>
+	<div class="copyright">&copy; 2000-2021</div>
 </div>
 
 <div class="content">
@@ -46,10 +46,10 @@
 		<h1 class="post-title"><a href="../../post/installer-ubuntu-sur-samsung-370r5e-s02/">Installer Ubuntu sur Samsung 370R5E-S02</a></h1>
 		<div class="post-date">21 juillet 2013</div>
 		<div class="share">
-<a class="twitter" target="_blank" href="https://twitter.com/share?text=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2fgrimaldi.me%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
-<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fgrimaldi.me%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
-<a class="google" target="_blank" href="https://plus.google.com/share?text=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2fgrimaldi.me%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe801;</span></a>
-<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2fgrimaldi.me%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe806;</span></a>
+<a class="twitter" target="_blank" href="https://twitter.com/share?text=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2flocalhost%3a1313%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe80d;</span> <span class="large-width">Partager sur Twitter</span><span class="short-width">Tweeter</span></a>
+<a class="facebook" target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe802;</span> Partager<span class="large-width"> sur Facebook</span></a>
+<a class="google" target="_blank" href="https://plus.google.com/share?text=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2flocalhost%3a1313%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe801;</span></a>
+<a class="linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?trk=Installer%20Ubuntu%20sur%20Samsung%20370R5E-S02&url=http%3a%2f%2flocalhost%3a1313%2fpost%2finstaller-ubuntu-sur-samsung-370r5e-s02%2f"><span class="icon">&#xe806;</span></a>
 </div>
 
 		
@@ -64,23 +64,29 @@
 
 <ol>
 <li><p>Installez les prérequis :
-sudo apt-get install debhelper execstack dh-modaliases dkms</p></li>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install debhelper execstack dh-modaliases dkms
+</pre></div>
+</p></li>
 
 <li><p>Téléchargez les drivers (version <a href="http://support.amd.com/en-us/download/desktop?os=Linux+x86">13.12</a> à date ; utiliser la version bêta n’est pas nécessaire) ;</p></li>
 
 <li><p>Compilez les packages d’installation :
-
-mkdir tmp; cd tmp
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir tmp; <span style="color: #999999">cd</span> tmp
 unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
 chmod +x *run
-./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring</pre>
+./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&lt;/pre&gt;
+</pre></div>
 </p></li>
 
 <li><p>Installez les packages :
-sudo dpkg -i *deb</p></li>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo dpkg -i *deb
+</pre></div>
+</p></li>
 
 <li><p>Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande <code>amdconfig --pxl</code> ne fonctionne pas) :
-sudo amdconfig --initial -f</p></li>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo amdconfig --initial -f
+</pre></div>
+</p></li>
 
 <li><p>Rebootez.</p></li>
 </ol>
@@ -109,30 +115,30 @@ sudo amdconfig --initial -f</p></li>
 
 <ol>
 <li><p>Pour l’installer tapez les commandes suivantes dans un terminal :
-
-git clone https://github.com/marcoDallas/acpi_call_GUI.git
-cd acpi_call_GUI
-sudo chmod +x install.sh</pre>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>git clone https://github.com/marcoDallas/acpi_call_GUI.git
+<span style="color: #999999">cd</span> acpi_call_GUI
+sudo chmod +x install.sh&lt;/pre&gt;
+</pre></div>
 
 Éditez <code>install.sh</code> et remplacez <code>gksudo</code> par <code>gksu</code>, puis exécutez <code>sudo ./install.sh</code>. Après l’installation lancez acpi_call_GUI avec la commande <code>java -jar $HOME/acpi_call_GUI.jar</code> ;</p></li>
 
 <li><p>Sélectionnez <em>Install acpi_call</em> puis <em>Execute</em>, et saisissez le code <code>\_SB.PCI0.PEG0.PEGP._OFF</code> ; cela installe le module et crée sous <code>/usr/local/bin/</code> deux répertoires <code>acpi_call/</code> et <code>acpi_call_GUI/</code>. Pour vérifier que le module est bien chargé, dans une console tapez <code>lsmod | grep acpi_call</code> et vérifiez qu’une ligne est renvoyée ;</p></li>
 
 <li><p>Exécutez ensuite <em>Turn off discrete GPU</em>, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande <code>upower etc.</code> ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (<em>0×0</em> si la désactivation s’est bien passée) :
-
-echo '\_SB.PCI0.PEG0.PEGP._OFF' | sudo tee /proc/acpi/call
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999">echo</span> <span style="color: #bb8844">&#39;\_SB.PCI0.PEG0.PEGP._OFF&#39;</span> | sudo tee /proc/acpi/call
 sudo cat /proc/acpi/call
+</pre></div>
 
 Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant <em>OFF</em> par <em>ON</em> ;</p></li>
 
 <li><p>Si cela fonctionne, exécutez <em>Automate disabling discrete GPU every boot</em>, cela ajoute dans <code>/etc/rc.local</code> (vérifiez que ce fichier est exécutable) un appel à <code>agg_acpi_call.sh</code> qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier <code>agg_acpi_call.sh</code> et déplacer la ligne <code>sudo insmod acpi_call.ko</code> après la ligne <code>fi</code> (au passage on peut supprimer le <em>sudo</em> devant <em>insmod</em>) ;</p></li>
 
 <li><p>Le bouton <em>Automate etc.</em> ajoute également dans <code>/etc/rc.local</code> un appel à <code>deactivate.sh</code>. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : <code>sleep 60 &amp;&amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;</code>. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous <code>/etc/pm/sleep.d/</code> un script <code>99_acpi</code> à qui j’ai rajouté les droits +x, avec le contenu suivant :
-
-#!/bin/sh
-case "$1" in
-	thaw|resume) /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
-esac
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!/bin/sh</span>
+<span style="font-weight: bold">case</span> <span style="color: #bb8844">&quot;</span><span style="color: #008080">$1</span><span style="color: #bb8844">&quot;</span> in
+	thaw|resume<span style="font-weight: bold">)</span> /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+<span style="font-weight: bold">esac</span>
+</pre></div>
 </p></li>
 </ol>
 
@@ -194,7 +200,10 @@ esac
 
 	
 </div>
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows - JM.Grimaldi</title>
-    <link>http://grimaldi.me/tags/windows/</link>
+    <link>http://localhost:1313/tags/windows/</link>
     <description>Derniers contenus Windows de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Tue, 27 Sep 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://grimaldi.me/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Planifier une tâche sous Windows</title>
-      <link>http://grimaldi.me/post/planifier-windows/</link>
+      <link>http://localhost:1313/post/planifier-windows/</link>
       <pubDate>Tue, 27 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/planifier-windows/</guid>
+      <guid>http://localhost:1313/post/planifier-windows/</guid>
       <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/crontab.png&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Je voulais automatiser la sauvegarde de mon PC sous Windows, mais il se trouve que le &amp;ldquo;Planificateur de tâches&amp;rdquo; rame et plante au point qu&amp;rsquo;il est inutilisable. Voici donc comment s&amp;rsquo;en passer via la ligne de commande (&lt;code&gt;cmd.exe&lt;/code&gt;).&lt;/p&gt;
@@ -64,10 +64,10 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
     
     <item>
       <title>Définir la vue par défaut des dossiers Windows</title>
-      <link>http://grimaldi.me/post/vue-par-d%C3%A9faut/</link>
+      <link>http://localhost:1313/post/vue-par-d%C3%A9faut/</link>
       <pubDate>Tue, 11 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/vue-par-d%C3%A9faut/</guid>
+      <guid>http://localhost:1313/post/vue-par-d%C3%A9faut/</guid>
       <description>&lt;p&gt;Comment faire, dans l&amp;rsquo;explorateur de fichiers Windows 7, pour que la vue du dossier actuel (tri par Nom ou par Type, largeur des colonnes, etc.) s&amp;rsquo;applique à tous les dossiers ?&lt;/p&gt;
 
 &lt;ul&gt;
@@ -81,10 +81,10 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
     
     <item>
       <title>Automatiser Excel</title>
-      <link>http://grimaldi.me/post/automatiser-excel/</link>
+      <link>http://localhost:1313/post/automatiser-excel/</link>
       <pubDate>Mon, 10 Aug 2015 17:47:49 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/automatiser-excel/</guid>
+      <guid>http://localhost:1313/post/automatiser-excel/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../img/excel.png&#34;&gt;&lt;/p&gt;
@@ -105,13 +105,13 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
 
 &lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
 
-&lt;p&gt;
-Sub efface_1_colonne_sur_2()
-    Range(&#34;C1&#34;).Select
-    For i = 1 To 35
-    ActiveCell.Offset(0, i).EntireColumn.Delete
-    Next
-End Sub
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
+    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
+    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
+    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
+    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Quelques explications :&lt;/p&gt;
@@ -133,10 +133,10 @@ End Sub
     
     <item>
       <title>Traverser un proxy NTLM/SSPI</title>
-      <link>http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/</link>
+      <link>http://localhost:1313/post/traverser-un-proxy-ntlm-sspi/</link>
       <pubDate>Mon, 02 Sep 2013 20:10:23 +0200</pubDate>
       
-      <guid>http://grimaldi.me/post/traverser-un-proxy-ntlm-sspi/</guid>
+      <guid>http://localhost:1313/post/traverser-un-proxy-ntlm-sspi/</guid>
       <description>&lt;p&gt;Sous Windows, un proxy NTLM/SSPI récupère automatiquement l’identité de votre session pour vous donner accès à Internet. L’avantage est que vous n’avez pas à saisir de mot de passe ; l’inconvénient est que si vous utilisez un outil qui ne supporte pas ce protocole (svn, wget, …), la connexion est impossible.&lt;/p&gt;
 
 &lt;p&gt;La solution est d’installer un proxy local qui gèrera l’authentification auprès du proxy SSPI. Le programme qui permet de faire cela s’appelle Cntlm.&lt;/p&gt;
@@ -147,21 +147,25 @@ End Sub
 &lt;li&gt;&lt;p&gt;Éditez le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; et renseignez les infos &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; de votre compte Windows (le &lt;code&gt;Password&lt;/code&gt; est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, &lt;em&gt;Shift+Clic droit&lt;/em&gt; sur le répertoire, puis &lt;em&gt;Ouvrir une fenêtre de commandes ici&lt;/em&gt;), et lancez la commande suivante :
-cntlm -M http://test.com&lt;/p&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm -M http://test.com
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Cntlm vous demande de saisir votre &lt;em&gt;Password&lt;/em&gt; (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-
-Config profile  1/4... OK (HTTP code: 200) 
-----------------------------[ Profile  0 ]------
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Config profile  &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt;/4... OK &lt;span style=&#34;font-weight: bold&#34;&gt;(&lt;/span&gt;HTTP code: &lt;span style=&#34;color: #009999&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; 
+----------------------------&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt; Profile  &lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;------
 Auth            NTLMv2
 PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ajoutez ces 2 lignes (&lt;em&gt;Auth&lt;/em&gt; et &lt;em&gt;PassNTLMv2&lt;/em&gt;) dans le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; après &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-cntlm -v&lt;/p&gt;&lt;/li&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm -v
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ensuite paramétrez votre navigateur pour utiliser le proxy &lt;code&gt;localhost:3128&lt;/code&gt; et vérifiez que la navigation se fait bien en HTTP et en HTTPS ;&lt;/p&gt;&lt;/li&gt;
 
@@ -176,10 +180,10 @@ cntlm -v&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Outlook : Ranger ses mails au clavier</title>
-      <link>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
+      <link>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</link>
       <pubDate>Sat, 28 Jul 2007 00:00:00 +0000</pubDate>
       
-      <guid>http://grimaldi.me/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
+      <guid>http://localhost:1313/post/freestyle/outlook-ranger-ses-mails-au-clavier/</guid>
       <description>
 
 &lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;../../static/freestyle/inboxzero.jpg&#34;&gt;&lt;/p&gt;
