@@ -114,21 +114,18 @@ Cela remplace <code>doc-0000.jpg</code> par <code>doc-0000-0.jpg</code> (page de
 <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>$<span style="color: #bbbbbb"> </span><span style="color: #008080">pages</span><span style="font-weight: bold">=</span><span style="color: #bb8844">`</span>python3<span style="color: #bbbbbb"> </span>-c<span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;n=8; print(&quot; &quot;.join(f&quot;doc-{(k-n if k&gt;n else n-k+1)-1:04d}-{k%2}.jpg&quot; for k in range(1, n*2+1)))&#39;`</span>;<span style="color: #bbbbbb"> </span><span style="color: #999999">echo</span><span style="color: #bbbbbb"> </span><span style="color: #008080">$pages</span>
 doc-0007-1.jpg<span style="color: #bbbbbb"> </span>doc-0006-0.jpg<span style="color: #bbbbbb"> </span>doc-0005-1.jpg<span style="color: #bbbbbb"> </span>doc-0004-0.jpg<span style="color: #bbbbbb"> </span>doc-0003-1.jpg<span style="color: #bbbbbb"> </span>doc-0002-0.jpg<span style="color: #bbbbbb"> </span>doc-0001-1.jpg<span style="color: #bbbbbb"> </span>doc-0000-0.jpg<span style="color: #bbbbbb"> </span>doc-0000-1.jpg<span style="color: #bbbbbb"> </span>doc-0001-0.jpg<span style="color: #bbbbbb"> </span>doc-0002-1.jpg<span style="color: #bbbbbb"> </span>doc-0003-0.jpg<span style="color: #bbbbbb"> </span>doc-0004-1.jpg<span style="color: #bbbbbb"> </span>doc-0005-0.jpg<span style="color: #bbbbbb"> </span>doc-0006-1.jpg<span style="color: #bbbbbb"> </span>doc-0007-0.jpg
 </pre></div>
-</p></li>
-</ol>
 
-<p>Si on a scanné dans l&rsquo;autre sens et qu&rsquo;on a les pages 2n et 1 sur le scan 1, puis 2 et 2n-1, etc. jusqu&rsquo;à n et n+1 sur le scan n :
+Si on a scanné dans l&rsquo;autre sens et qu&rsquo;on a les pages 2n et 1 sur le scan 1, puis 2 et 2n-1, etc. jusqu&rsquo;à n et n+1 sur le scan n :
 <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>$<span style="color: #bbbbbb"> </span><span style="color: #008080">pages</span><span style="font-weight: bold">=</span><span style="color: #bb8844">`</span>python3<span style="color: #bbbbbb"> </span>-c<span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;n=8; print(&quot; &quot;.join(f&quot;doc-{(n*2+1-k if k&gt;n else k)-1:04d}-{k%2}.jpg&quot; for k in range(1, n*2+1)))&#39;`</span>;<span style="color: #bbbbbb"> </span><span style="color: #999999">echo</span><span style="color: #bbbbbb"> </span><span style="color: #008080">$pages</span>
 doc-0000-1.jpg<span style="color: #bbbbbb"> </span>doc-0001-0.jpg<span style="color: #bbbbbb"> </span>doc-0002-1.jpg<span style="color: #bbbbbb"> </span>doc-0003-0.jpg<span style="color: #bbbbbb"> </span>doc-0004-1.jpg<span style="color: #bbbbbb"> </span>doc-0005-0.jpg<span style="color: #bbbbbb"> </span>doc-0006-1.jpg<span style="color: #bbbbbb"> </span>doc-0007-0.jpg<span style="color: #bbbbbb"> </span>doc-0007-1.jpg<span style="color: #bbbbbb"> </span>doc-0006-0.jpg<span style="color: #bbbbbb"> </span>doc-0005-1.jpg<span style="color: #bbbbbb"> </span>doc-0004-0.jpg<span style="color: #bbbbbb"> </span>doc-0003-1.jpg<span style="color: #bbbbbb"> </span>doc-0002-0.jpg<span style="color: #bbbbbb"> </span>doc-0001-1.jpg<span style="color: #bbbbbb"> </span>doc-0000-0.jpg
 </pre></div>
-</p>
+</p></li>
 
-<ol>
-<li>Enfin on construit le PDF final (<code>-density 300</code> correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
+<li><p>Enfin on construit le PDF final (<code>-density 300</code> correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
 <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>$<span style="color: #bbbbbb"> </span>convert<span style="color: #bbbbbb"> </span>-density<span style="color: #bbbbbb"> </span><span style="color: #009999">300</span><span style="color: #bbbbbb"> </span>-quality<span style="color: #bbbbbb"> </span><span style="color: #009999">80</span><span style="color: #bbbbbb"> </span><span style="color: #008080">$pages</span><span style="color: #bbbbbb"> </span>out.pdf
 $<span style="color: #bbbbbb"> </span>rm<span style="color: #bbbbbb"> </span>*jpg
 </pre></div>
-</li>
+</p></li>
 </ol>
 
 		<em>Cet article publié en août 2015 a été mis à jour.</em>
