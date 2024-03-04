@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -171,17 +171,17 @@ dans <code>/etc/modutils/aliases</code> une ligne <code>alias ath0 ath_pci</code
 
 <p>Ensuite on complète le <code>/etc/network/interfaces</code> :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># Interface WLAN : cf. iwconfig(8)</span>
-auto ath0
-iface ath0 inet static
-	address		<span style="color: #009999">192</span>.168.0.1
-	netmask		<span style="color: #009999">255</span>.255.255.0
-	pre-up /sbin/iwpriv ath0 mode <span style="color: #009999">3</span>
-	<span style="color: #999988; font-style: italic"># Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a</span>
-	wireless_essid	Nom-du-reseau
-	wireless_mode	Master
-	wireless_channel	<span style="color: #009999">9</span>
-	wireless_key	off
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic"># Interface WLAN : cf. iwconfig(8)</span>
+auto<span style="color: #bbbbbb"> </span>ath0
+iface<span style="color: #bbbbbb"> </span>ath0<span style="color: #bbbbbb"> </span>inet<span style="color: #bbbbbb"> </span>static
+<span style="color: #bbbbbb">	</span>address<span style="color: #bbbbbb">		</span><span style="color: #009999">192</span>.168.0.1
+<span style="color: #bbbbbb">	</span>netmask<span style="color: #bbbbbb">		</span><span style="color: #009999">255</span>.255.255.0
+<span style="color: #bbbbbb">	</span>pre-up<span style="color: #bbbbbb"> </span>/sbin/iwpriv<span style="color: #bbbbbb"> </span>ath0<span style="color: #bbbbbb"> </span>mode<span style="color: #bbbbbb"> </span><span style="color: #009999">3</span>
+<span style="color: #bbbbbb">	</span><span style="color: #999988; font-style: italic"># Mode 3 = 802.11g / 2 = 802.11b / 1 = 802.11a</span>
+<span style="color: #bbbbbb">	</span>wireless_essid<span style="color: #bbbbbb">	</span>Nom-du-reseau
+<span style="color: #bbbbbb">	</span>wireless_mode<span style="color: #bbbbbb">	</span>Master
+<span style="color: #bbbbbb">	</span>wireless_channel<span style="color: #bbbbbb">	</span><span style="color: #009999">9</span>
+<span style="color: #bbbbbb">	</span>wireless_key<span style="color: #bbbbbb">	</span>off
 </pre></div>
 </p>
 
@@ -212,7 +212,7 @@ suffixe <code>.sh</code>, de sorte qu&rsquo;il sera appelé par le <code>run-par
 de l&rsquo;interface lo (mais si on veut tester sans rebooter on peut très bien le
 lancer à la main, voire faire un <code>/etc/init.d/networking restart</code>) :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!/bin/sh</span>
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic">#!/bin/sh</span>
 <span style="color: #999988; font-style: italic"># /etc/network/if-pre-up.d/iptables-start</span>
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Initialise les règles de filtrage iptables</span>
@@ -220,33 +220,33 @@ lancer à la main, voire faire un <code>/etc/init.d/networking restart</code>) 
 <span style="color: #999988; font-style: italic">#####</span>
 
 <span style="color: #999988; font-style: italic"># Remise à zéro des règles</span>
-iptables -F
-iptables -t nat -F
+iptables<span style="color: #bbbbbb"> </span>-F
+iptables<span style="color: #bbbbbb"> </span>-t<span style="color: #bbbbbb"> </span>nat<span style="color: #bbbbbb"> </span>-F
 
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Politiques par défaut</span>
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic">#####</span>
 <span style="color: #999988; font-style: italic"># Accepte les connexions entrantes</span>
-iptables -P INPUT ACCEPT
+iptables<span style="color: #bbbbbb"> </span>-P<span style="color: #bbbbbb"> </span>INPUT<span style="color: #bbbbbb"> </span>ACCEPT
 <span style="color: #999988; font-style: italic"># Accepte les connexions destinées à être forwardées</span>
-iptables -P FORWARD ACCEPT
+iptables<span style="color: #bbbbbb"> </span>-P<span style="color: #bbbbbb"> </span>FORWARD<span style="color: #bbbbbb"> </span>ACCEPT
 <span style="color: #999988; font-style: italic"># Accepte les connexions sortantes</span>
-iptables -P OUTPUT ACCEPT
+iptables<span style="color: #bbbbbb"> </span>-P<span style="color: #bbbbbb"> </span>OUTPUT<span style="color: #bbbbbb"> </span>ACCEPT
 
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Règles de filtrage</span>
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic">#####</span>
 <span style="color: #999988; font-style: italic"># Pas de filtrage</span>
-iptables -A INPUT -j ACCEPT
+iptables<span style="color: #bbbbbb"> </span>-A<span style="color: #bbbbbb"> </span>INPUT<span style="color: #bbbbbb"> </span>-j<span style="color: #bbbbbb"> </span>ACCEPT
 
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Règles pour le partage de connexion (le NAT)</span>
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic">#####</span>
 <span style="color: #999988; font-style: italic"># Le système fait serveur NAT ; l&#39;interface extérieure est ppp0</span>
-iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+iptables<span style="color: #bbbbbb"> </span>-t<span style="color: #bbbbbb"> </span>nat<span style="color: #bbbbbb"> </span>-A<span style="color: #bbbbbb"> </span>POSTROUTING<span style="color: #bbbbbb"> </span>-o<span style="color: #bbbbbb"> </span>ppp0<span style="color: #bbbbbb"> </span>-j<span style="color: #bbbbbb"> </span>MASQUERADE
 
 <span style="color: #999988; font-style: italic"># Si la connexion que vous partagez est une connexion ADSL, vous</span>
 <span style="color: #999988; font-style: italic"># serez probablement confronté au fameux problème du MTU. En résumé,</span>
@@ -254,7 +254,7 @@ iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 <span style="color: #999988; font-style: italic"># fournisseur d&#39;accès et le serveur NAT est un petit peu inférieur au</span>
 <span style="color: #999988; font-style: italic"># MTU de la liaison Ethernet qui relie le serveur NAT aux machines qui</span>
 <span style="color: #999988; font-style: italic"># sont derrière le NAT. Pour résoudre ce problème :</span>
-iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS -o ppp0 --clamp-mss-to-pmtu
+iptables<span style="color: #bbbbbb"> </span>-A<span style="color: #bbbbbb"> </span>FORWARD<span style="color: #bbbbbb"> </span>-p<span style="color: #bbbbbb"> </span>tcp<span style="color: #bbbbbb"> </span>--tcp-flags<span style="color: #bbbbbb"> </span>SYN,RST<span style="color: #bbbbbb"> </span>SYN<span style="color: #bbbbbb"> </span>-j<span style="color: #bbbbbb"> </span>TCPMSS<span style="color: #bbbbbb"> </span>-o<span style="color: #bbbbbb"> </span>ppp0<span style="color: #bbbbbb"> </span>--clamp-mss-to-pmtu
 
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Règles de port forwarding</span>
@@ -290,7 +290,7 @@ pourrait imaginer un mécanisme de recopie à partir du resolv.conf lorsque ppp0
 est montée&hellip;) : <code>apt-get install dhcp3-server</code>, puis on édite
 <code>/etc/dhcp3/dhcpd.conf</code> :</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># /etc/dhcp3/dhcpd.conf</span>
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic"># /etc/dhcp3/dhcpd.conf</span>
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic"># Config du serveur DHCP de l&#39;ISC (package &#39;dhcp3-server&#39;)</span>
 <span style="color: #999988; font-style: italic"># D&#39;après http://people.via.ecp.fr/~alexis/formation-linux/config/dhcpd.conf</span>
@@ -305,11 +305,11 @@ est montée&hellip;) : <code>apt-get install dhcp3-server</code>, puis on édit
 <span style="color: #999988; font-style: italic">#option domain-name &quot;exemple.org&quot;;</span>
 
 <span style="color: #999988; font-style: italic"># Adresses des serveurs DNS (séparées par une virgule)</span>
-option domain-name-servers <span style="color: #009999">80</span>.10.246.1, <span style="color: #009999">80</span>.10.246.132;
+option<span style="color: #bbbbbb"> </span>domain-name-servers<span style="color: #bbbbbb"> </span><span style="color: #009999">80</span>.10.246.1,<span style="color: #bbbbbb"> </span><span style="color: #009999">80</span>.10.246.132;
 
 <span style="color: #999988; font-style: italic"># Durée du bail en secondes</span>
-default-lease-time <span style="color: #009999">6000</span>;
-max-lease-time <span style="color: #009999">6000</span>;
+default-lease-time<span style="color: #bbbbbb"> </span><span style="color: #009999">6000</span>;
+max-lease-time<span style="color: #bbbbbb"> </span><span style="color: #009999">6000</span>;
 
 <span style="color: #999988; font-style: italic"># Le serveur DHCP est autoritaire pour les sous-réseaux déclarés ci-dessous</span>
 authoritative;
@@ -319,20 +319,20 @@ authoritative;
 <span style="color: #999988; font-style: italic">#</span>
 <span style="color: #999988; font-style: italic">#####</span>
 <span style="color: #999988; font-style: italic"># Déclaration du sous-réseau 192.168.0.0/255.255.255.0</span>
-subnet <span style="color: #009999">192</span>.168.0.0 netmask <span style="color: #009999">255</span>.255.255.0
+subnet<span style="color: #bbbbbb"> </span><span style="color: #009999">192</span>.168.0.0<span style="color: #bbbbbb"> </span>netmask<span style="color: #bbbbbb"> </span><span style="color: #009999">255</span>.255.255.0
 <span style="font-weight: bold">{</span>
-	<span style="color: #999988; font-style: italic"># Adresse du routeur</span>
-	option routers <span style="color: #009999">192</span>.168.0.1;
-	<span style="color: #999988; font-style: italic"># Plage d&#39;adresses à attribuer pour les machines non déclarées</span>
-	range <span style="color: #009999">192</span>.168.0.100 <span style="color: #009999">192</span>.168.0.200;
+<span style="color: #bbbbbb">	</span><span style="color: #999988; font-style: italic"># Adresse du routeur</span>
+<span style="color: #bbbbbb">	</span>option<span style="color: #bbbbbb"> </span>routers<span style="color: #bbbbbb"> </span><span style="color: #009999">192</span>.168.0.1;
+<span style="color: #bbbbbb">	</span><span style="color: #999988; font-style: italic"># Plage d&#39;adresses à attribuer pour les machines non déclarées</span>
+<span style="color: #bbbbbb">	</span>range<span style="color: #bbbbbb"> </span><span style="color: #009999">192</span>.168.0.100<span style="color: #bbbbbb"> </span><span style="color: #009999">192</span>.168.0.200;
 <span style="color: #999988; font-style: italic">#	deny unknown-clients;</span>
 <span style="font-weight: bold">}</span>
 
 <span style="color: #999988; font-style: italic"># La déclaration d&#39;une machine permet de lui attribuer une adresse IP fixe</span>
-host MonLaptop
+host<span style="color: #bbbbbb"> </span>MonLaptop
 <span style="font-weight: bold">{</span>
-  hardware ethernet <span style="color: #009999">00</span>:0b:cd:5a:fb:43;	<span style="color: #999988; font-style: italic"># @MAC de la carte Wifi du laptop</span>
-  fixed-address <span style="color: #009999">192</span>.168.0.12;
+<span style="color: #bbbbbb">  </span>hardware<span style="color: #bbbbbb"> </span>ethernet<span style="color: #bbbbbb"> </span><span style="color: #009999">00</span>:0b:cd:5a:fb:43;<span style="color: #bbbbbb">	</span><span style="color: #999988; font-style: italic"># @MAC de la carte Wifi du laptop</span>
+<span style="color: #bbbbbb">  </span>fixed-address<span style="color: #bbbbbb"> </span><span style="color: #009999">192</span>.168.0.12;
 <span style="font-weight: bold">}</span>
 </pre></div>
 </p>

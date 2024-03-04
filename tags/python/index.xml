@@ -19,16 +19,16 @@
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Installer le module sous Ubuntu&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install python-gnucash
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;apt-get&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;install&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;python-gnucash
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Ouvrir un fichier de données et afficher l’arborescence des comptes&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
 FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=False&lt;/span&gt;)
 book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
 a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()
 &lt;span style=&#34;font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;atree&lt;/span&gt;(a, prefix&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;):
@@ -37,22 +37,22 @@ a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span
 		suba &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Account(instance &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; suba)
 		s &lt;span style=&#34;font-weight: bold&#34;&gt;+=&lt;/span&gt; atree(suba, &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;  &amp;#39;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;prefix)
 	&lt;span style=&#34;font-weight: bold&#34;&gt;return&lt;/span&gt; s
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; atree(a_root)
+&lt;span style=&#34;color: #999999&#34;&gt;print&lt;/span&gt; atree(a_root)
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Afficher la transaction la plus récente d’un compte, avec ses détails&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
 FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
 COMPTE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;label du compte dans GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=False&lt;/span&gt;)
 book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
 a &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;lookup_by_name(COMPTE)
-end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;
+end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;font-weight: bold&#34;&gt;None&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; s &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetSplitList():
 	cur &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDate()
 	&lt;span style=&#34;font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;not&lt;/span&gt; end &lt;span style=&#34;font-weight: bold&#34;&gt;or&lt;/span&gt; cur &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; end:
@@ -60,7 +60,7 @@ end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span 
 t &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent
 t_date &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;date&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;fromtimestamp(end)&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;%d/%m/%Y&amp;#39;&lt;/span&gt;)
 target &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetOtherSplit()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAccount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
+&lt;span style=&#34;color: #999999&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
 &lt;/pre&gt;&lt;/div&gt;

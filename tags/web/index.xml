@@ -18,34 +18,34 @@
       <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
-			});
-		}
-	});
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;				&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;},&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;				&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;});
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;}
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;});
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Version &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox2&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
-			});
-		}
-	});
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;				&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;},&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;				&lt;/span&gt;$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;			&lt;/span&gt;});
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;		&lt;/span&gt;}
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;});
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 </description>

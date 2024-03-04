@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -66,14 +66,14 @@
 <li><p>On peut récupérer un disque dur HS sans débourser une fortune auprès d&rsquo;un labo de récupération de données.<br />
 Mon disque dur, un Seagate Backup+ Slim d&rsquo;1To âgé d&rsquo;à peine 1 an, se mettait bien sous tension mais n&rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.<br />
 Sous Ubuntu, le disque apparaissait avec <code>lsusb</code>, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&rsquo;allait pas plus loin. <code>/var/log/syslog</code> montrait l&rsquo;erreur suivante :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>scsi <span style="color: #009999">6</span>:0:0:0: Direct-Access     Seagate  Backup+  SL      <span style="color: #009999">0143</span> PQ: <span style="color: #009999">0</span> ANSI: <span style="color: #009999">6</span>
-sd <span style="color: #009999">6</span>:0:0:0: Attached scsi generic sg1 <span style="color: #999999">type</span> <span style="color: #009999">0</span>
-sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> Spinning up disk...
-usb <span style="color: #009999">4</span>-1: USB disconnect, device number <span style="color: #009999">2</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>scsi<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>:0:0:0:<span style="color: #bbbbbb"> </span>Direct-Access<span style="color: #bbbbbb">     </span>Seagate<span style="color: #bbbbbb">  </span>Backup+<span style="color: #bbbbbb">  </span>SL<span style="color: #bbbbbb">      </span><span style="color: #009999">0143</span><span style="color: #bbbbbb"> </span>PQ:<span style="color: #bbbbbb"> </span><span style="color: #009999">0</span><span style="color: #bbbbbb"> </span>ANSI:<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>
+sd<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>:0:0:0:<span style="color: #bbbbbb"> </span>Attached<span style="color: #bbbbbb"> </span>scsi<span style="color: #bbbbbb"> </span>generic<span style="color: #bbbbbb"> </span>sg1<span style="color: #bbbbbb"> </span><span style="color: #999999">type</span><span style="color: #bbbbbb"> </span><span style="color: #009999">0</span>
+sd<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>:0:0:0:<span style="color: #bbbbbb"> </span><span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span><span style="color: #bbbbbb"> </span>Spinning<span style="color: #bbbbbb"> </span>up<span style="color: #bbbbbb"> </span>disk...
+usb<span style="color: #bbbbbb"> </span><span style="color: #009999">4</span>-1:<span style="color: #bbbbbb"> </span>USB<span style="color: #bbbbbb"> </span>disconnect,<span style="color: #bbbbbb"> </span>device<span style="color: #bbbbbb"> </span>number<span style="color: #bbbbbb"> </span><span style="color: #009999">2</span>
 ......................ready
-sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span> READ CAPACITY failed
-sd <span style="color: #009999">6</span>:0:0:0: <span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span>
-Result: <span style="color: #008080">hostbyte</span><span style="font-weight: bold">=</span>DID_NO_CONNECT <span style="color: #008080">driverbyte</span><span style="font-weight: bold">=</span>DRIVER_OK
+sd<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>:0:0:0:<span style="color: #bbbbbb"> </span><span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span><span style="color: #bbbbbb"> </span>READ<span style="color: #bbbbbb"> </span>CAPACITY<span style="color: #bbbbbb"> </span>failed
+sd<span style="color: #bbbbbb"> </span><span style="color: #009999">6</span>:0:0:0:<span style="color: #bbbbbb"> </span><span style="font-weight: bold">[</span>sdb<span style="font-weight: bold">]</span>
+Result:<span style="color: #bbbbbb"> </span><span style="color: #008080">hostbyte</span><span style="font-weight: bold">=</span>DID_NO_CONNECT<span style="color: #bbbbbb"> </span><span style="color: #008080">driverbyte</span><span style="font-weight: bold">=</span>DRIVER_OK
 </pre></div>
 
 Puis j&rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&rsquo;avais rien à perdre.<br />

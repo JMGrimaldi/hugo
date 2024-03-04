@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -82,29 +82,29 @@ Video Broadcast Decoder (rev d0)
 <code>drivers/media/video/saa7134/saa7134-cards.c</code> (this patch is for kernel 2.6.34
 but you can manually add the <code>name_comp1</code> section to any other version):</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>    
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb"> </span>   
 <span style="color: #999999">diff -r 9652f85e688a linux/drivers/media/video/saa7134/saa7134-cards.c</span>
 <span style="color: #000000; background-color: #ffdddd">--- a/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu May 27 02:02:09 2010 -0300</span>
 <span style="color: #000000; background-color: #ddffdd">+++ b/linux/drivers/media/video/saa7134/saa7134-cards.c	Thu Jul 08 22:15:56 2010 +0200</span>
 <span style="color: #aaaaaa">@@ -2831,11 +2831,15 @@</span>
- 			.vmux = 1,
- 			.amux = TV,
- 			.tv   = 1,
+<span style="color: #bbbbbb"> </span>			.vmux = 1,
+<span style="color: #bbbbbb"> </span>			.amux = TV,
+<span style="color: #bbbbbb"> </span>			.tv   = 1,
 <span style="color: #000000; background-color: #ffdddd">-		},{</span>
 <span style="color: #000000; background-color: #ddffdd">+		}, {</span>
 <span style="color: #000000; background-color: #ddffdd">+			.name = name_comp1,</span>
 <span style="color: #000000; background-color: #ddffdd">+			.vmux = 3,</span>
 <span style="color: #000000; background-color: #ddffdd">+			.amux = LINE2,</span>
 <span style="color: #000000; background-color: #ddffdd">+		}, {</span>
- 			.name = name_svideo,  /* NOT tested */
- 			.vmux = 8,
+<span style="color: #bbbbbb"> </span>			.name = name_svideo,  /* NOT tested */
+<span style="color: #bbbbbb"> </span>			.vmux = 8,
 <span style="color: #000000; background-color: #ffdddd">-			.amux = LINE1,</span>
 <span style="color: #000000; background-color: #ffdddd">-		}},</span>
 <span style="color: #000000; background-color: #ddffdd">+			.amux = LINE2,</span>
 <span style="color: #000000; background-color: #ddffdd">+		} },</span>
- 		.radio = {
- 			.name   = name_radio,
- 			.amux   = TV,
+<span style="color: #bbbbbb"> </span>		.radio = {
+<span style="color: #bbbbbb"> </span>			.name   = name_radio,
+<span style="color: #bbbbbb"> </span>			.amux   = TV,
 </pre></div>
 </p>
 

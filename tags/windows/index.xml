@@ -105,12 +105,12 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
 
 &lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
-    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
-    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
-    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
-    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i).EntireColumn.Delete
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
@@ -147,15 +147,15 @@ schtasks /Create /TN jm.backup /XML jm.xml /F&lt;/pre&gt;
 &lt;li&gt;&lt;p&gt;Éditez le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; et renseignez les infos &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; de votre compte Windows (le &lt;code&gt;Password&lt;/code&gt; est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, &lt;em&gt;Shift+Clic droit&lt;/em&gt; sur le répertoire, puis &lt;em&gt;Ouvrir une fenêtre de commandes ici&lt;/em&gt;), et lancez la commande suivante :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm -M http://test.com
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-M&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;http://test.com
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Cntlm vous demande de saisir votre &lt;em&gt;Password&lt;/em&gt; (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Config profile  &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt;/4... OK &lt;span style=&#34;font-weight: bold&#34;&gt;(&lt;/span&gt;HTTP code: &lt;span style=&#34;color: #009999&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt; 
-----------------------------&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt; Profile  &lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;------
-Auth            NTLMv2
-PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;Config&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;profile&lt;span style=&#34;color: #bbbbbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt;/4...&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;OK&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;(&lt;/span&gt;HTTP&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;code:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;
+----------------------------&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;Profile&lt;span style=&#34;color: #bbbbbb&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;------
+Auth&lt;span style=&#34;color: #bbbbbb&#34;&gt;            &lt;/span&gt;NTLMv2
+PassNTLMv2&lt;span style=&#34;color: #bbbbbb&#34;&gt;      &lt;/span&gt;7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
@@ -163,7 +163,7 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 &lt;li&gt;&lt;p&gt;Ajoutez ces 2 lignes (&lt;em&gt;Auth&lt;/em&gt; et &lt;em&gt;PassNTLMv2&lt;/em&gt;) dans le fichier &lt;code&gt;cntlm.ini&lt;/code&gt; après &lt;code&gt;Username&lt;/code&gt; et &lt;code&gt;Domain&lt;/code&gt; ;&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm -v
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;cntlm&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-v
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 

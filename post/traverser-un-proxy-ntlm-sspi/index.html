@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -62,15 +62,15 @@
 <li><p>Éditez le fichier <code>cntlm.ini</code> et renseignez les infos <code>Username</code> et <code>Domain</code> de votre compte Windows (le <code>Password</code> est inutile), puis le nom ou l’IP du proxy SSPI. Par défaut Cntlm utilise le port 3128 mais vous pouvez le modifier ;</p></li>
 
 <li><p>Ouvrez une fenêtre de commandes dans le répertoire de Cntlm (depuis l’explorateur de fichiers, <em>Shift+Clic droit</em> sur le répertoire, puis <em>Ouvrir une fenêtre de commandes ici</em>), et lancez la commande suivante :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cntlm -M http://test.com
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>cntlm<span style="color: #bbbbbb"> </span>-M<span style="color: #bbbbbb"> </span>http://test.com
 </pre></div>
 </p></li>
 
 <li><p>Cntlm vous demande de saisir votre <em>Password</em> (celui de votre compte Windows), puis teste différentes options NTLM. Si la connexion réussit, il vous renvoie 2 lignes comme celles-ci :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Config profile  <span style="color: #009999">1</span>/4... OK <span style="font-weight: bold">(</span>HTTP code: <span style="color: #009999">200</span><span style="font-weight: bold">)</span> 
-----------------------------<span style="font-weight: bold">[</span> Profile  <span style="color: #009999">0</span> <span style="font-weight: bold">]</span>------
-Auth            NTLMv2
-PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>Config<span style="color: #bbbbbb"> </span>profile<span style="color: #bbbbbb">  </span><span style="color: #009999">1</span>/4...<span style="color: #bbbbbb"> </span>OK<span style="color: #bbbbbb"> </span><span style="font-weight: bold">(</span>HTTP<span style="color: #bbbbbb"> </span>code:<span style="color: #bbbbbb"> </span><span style="color: #009999">200</span><span style="font-weight: bold">)</span><span style="color: #bbbbbb"> </span>
+----------------------------<span style="font-weight: bold">[</span><span style="color: #bbbbbb"> </span>Profile<span style="color: #bbbbbb">  </span><span style="color: #009999">0</span><span style="color: #bbbbbb"> </span><span style="font-weight: bold">]</span>------
+Auth<span style="color: #bbbbbb">            </span>NTLMv2
+PassNTLMv2<span style="color: #bbbbbb">      </span>7EC64ACD3326B069CF6B4ACD3326B0BD
 ------------------------------------------------
 </pre></div>
 </p></li>
@@ -78,7 +78,7 @@ PassNTLMv2      7EC64ACD3326B069CF6B4ACD3326B0BD
 <li><p>Ajoutez ces 2 lignes (<em>Auth</em> et <em>PassNTLMv2</em>) dans le fichier <code>cntlm.ini</code> après <code>Username</code> et <code>Domain</code> ;</p></li>
 
 <li><p>Pour vérifier que Cntlm fonctionne, revenez à la fenêtre de commandes et lancez-le en mode verbeux :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>cntlm -v
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>cntlm<span style="color: #bbbbbb"> </span>-v
 </pre></div>
 </p></li>
 

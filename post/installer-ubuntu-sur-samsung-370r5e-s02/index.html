@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -64,27 +64,27 @@
 
 <ol>
 <li><p>Installez les prérequis :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install debhelper execstack dh-modaliases dkms
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>sudo<span style="color: #bbbbbb"> </span>apt-get<span style="color: #bbbbbb"> </span>install<span style="color: #bbbbbb"> </span>debhelper<span style="color: #bbbbbb"> </span>execstack<span style="color: #bbbbbb"> </span>dh-modaliases<span style="color: #bbbbbb"> </span>dkms
 </pre></div>
 </p></li>
 
 <li><p>Téléchargez les drivers (version <a href="http://support.amd.com/en-us/download/desktop?os=Linux+x86">13.12</a> à date ; utiliser la version bêta n’est pas nécessaire) ;</p></li>
 
 <li><p>Compilez les packages d’installation :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir tmp; <span style="color: #999999">cd</span> tmp
-unzip ../amd-catalyst-13.12-linux-x86.x86_64.zip
-chmod +x *run
-./amd-catalyst-13.12-linux-x86.x86_64.run --buildpkg Ubuntu/raring&lt;/pre&gt;
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>mkdir<span style="color: #bbbbbb"> </span>tmp;<span style="color: #bbbbbb"> </span><span style="color: #999999">cd</span><span style="color: #bbbbbb"> </span>tmp
+unzip<span style="color: #bbbbbb"> </span>../amd-catalyst-13.12-linux-x86.x86_64.zip
+chmod<span style="color: #bbbbbb"> </span>+x<span style="color: #bbbbbb"> </span>*run
+./amd-catalyst-13.12-linux-x86.x86_64.run<span style="color: #bbbbbb"> </span>--buildpkg<span style="color: #bbbbbb"> </span>Ubuntu/raring&lt;/pre&gt;
 </pre></div>
 </p></li>
 
 <li><p>Installez les packages :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo dpkg -i *deb
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>sudo<span style="color: #bbbbbb"> </span>dpkg<span style="color: #bbbbbb"> </span>-i<span style="color: #bbbbbb"> </span>*deb
 </pre></div>
 </p></li>
 
 <li><p>Créez le fichier /etc/X11/xorg.conf (ça peut fonctionner sans, mais en essayant la 1ère fois le clavier ne marchait plus ; ensuite la commande <code>amdconfig --pxl</code> ne fonctionne pas) :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo amdconfig --initial -f
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>sudo<span style="color: #bbbbbb"> </span>amdconfig<span style="color: #bbbbbb"> </span>--initial<span style="color: #bbbbbb"> </span>-f
 </pre></div>
 </p></li>
 
@@ -115,9 +115,9 @@ chmod +x *run
 
 <ol>
 <li><p>Pour l’installer tapez les commandes suivantes dans un terminal :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>git clone https://github.com/marcoDallas/acpi_call_GUI.git
-<span style="color: #999999">cd</span> acpi_call_GUI
-sudo chmod +x install.sh&lt;/pre&gt;
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>git<span style="color: #bbbbbb"> </span>clone<span style="color: #bbbbbb"> </span>https://github.com/marcoDallas/acpi_call_GUI.git
+<span style="color: #999999">cd</span><span style="color: #bbbbbb"> </span>acpi_call_GUI
+sudo<span style="color: #bbbbbb"> </span>chmod<span style="color: #bbbbbb"> </span>+x<span style="color: #bbbbbb"> </span>install.sh&lt;/pre&gt;
 </pre></div>
 
 Éditez <code>install.sh</code> et remplacez <code>gksudo</code> par <code>gksu</code>, puis exécutez <code>sudo ./install.sh</code>. Après l’installation lancez acpi_call_GUI avec la commande <code>java -jar $HOME/acpi_call_GUI.jar</code> ;</p></li>
@@ -125,8 +125,8 @@ sudo chmod +x install.sh&lt;/pre&gt;
 <li><p>Sélectionnez <em>Install acpi_call</em> puis <em>Execute</em>, et saisissez le code <code>\_SB.PCI0.PEG0.PEGP._OFF</code> ; cela installe le module et crée sous <code>/usr/local/bin/</code> deux répertoires <code>acpi_call/</code> et <code>acpi_call_GUI/</code>. Pour vérifier que le module est bien chargé, dans une console tapez <code>lsmod | grep acpi_call</code> et vérifiez qu’une ligne est renvoyée ;</p></li>
 
 <li><p>Exécutez ensuite <em>Turn off discrete GPU</em>, patientez 2 minutes puis vérifiez que la consommation a diminué à l’aide de la commande <code>upower etc.</code> ci-dessus. Si cela ne fonctionne pas vous pouvez appeler la commande de désactivation depuis la console, et vérifier le statut ensuite (<em>0×0</em> si la désactivation s’est bien passée) :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999999">echo</span> <span style="color: #bb8844">&#39;\_SB.PCI0.PEG0.PEGP._OFF&#39;</span> | sudo tee /proc/acpi/call
-sudo cat /proc/acpi/call
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999999">echo</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;\_SB.PCI0.PEG0.PEGP._OFF&#39;</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>sudo<span style="color: #bbbbbb"> </span>tee<span style="color: #bbbbbb"> </span>/proc/acpi/call
+sudo<span style="color: #bbbbbb"> </span>cat<span style="color: #bbbbbb"> </span>/proc/acpi/call
 </pre></div>
 
 Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple), utilisez la même commande en remplaçant <em>OFF</em> par <em>ON</em> ;</p></li>
@@ -134,9 +134,9 @@ Si vous souhaitez réactiver la carte (pour comparer la consommation par exemple
 <li><p>Si cela fonctionne, exécutez <em>Automate disabling discrete GPU every boot</em>, cela ajoute dans <code>/etc/rc.local</code> (vérifiez que ce fichier est exécutable) un appel à <code>agg_acpi_call.sh</code> qui recompile le module lorsque le noyau est mis à jour, et charge le module à chaque boot. Pour que cette dernière partie fonctionne, il faut cependant modifier <code>agg_acpi_call.sh</code> et déplacer la ligne <code>sudo insmod acpi_call.ko</code> après la ligne <code>fi</code> (au passage on peut supprimer le <em>sudo</em> devant <em>insmod</em>) ;</p></li>
 
 <li><p>Le bouton <em>Automate etc.</em> ajoute également dans <code>/etc/rc.local</code> un appel à <code>deactivate.sh</code>. Pour que cela fonctionne j’ai cependant dû l’encadrer ainsi : <code>sleep 60 &amp;&amp; /usr/local/bin/acpi_call_GUI/deactivate.sh &amp;</code>. Enfin comme la carte était réactivée à chaque sortie de veille, j’ai ajouté sous <code>/etc/pm/sleep.d/</code> un script <code>99_acpi</code> à qui j’ai rajouté les droits +x, avec le contenu suivant :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!/bin/sh</span>
-<span style="font-weight: bold">case</span> <span style="color: #bb8844">&quot;</span><span style="color: #008080">$1</span><span style="color: #bb8844">&quot;</span> in
-	thaw|resume<span style="font-weight: bold">)</span> /usr/local/bin/acpi_call_GUI/deactivate.sh ;;
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic">#!/bin/sh</span>
+<span style="font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&quot;</span><span style="color: #008080">$1</span><span style="color: #bb8844">&quot;</span><span style="color: #bbbbbb"> </span><span style="font-weight: bold">in</span>
+<span style="color: #bbbbbb">	</span>thaw|resume<span style="font-weight: bold">)</span><span style="color: #bbbbbb"> </span>/usr/local/bin/acpi_call_GUI/deactivate.sh<span style="color: #bbbbbb"> </span>;;
 <span style="font-weight: bold">esac</span>
 </pre></div>
 </p></li>

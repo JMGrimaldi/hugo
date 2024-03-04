@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -56,16 +56,16 @@
 
 <ol>
 <li><p><strong>Installer le module sous Ubuntu</strong>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>sudo apt-get install python-gnucash
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>sudo<span style="color: #bbbbbb"> </span>apt-get<span style="color: #bbbbbb"> </span>install<span style="color: #bbbbbb"> </span>python-gnucash
 </pre></div>
 </p></li>
 
 <li><p><strong>Ouvrir un fichier de données et afficher l’arborescence des comptes</strong>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!/usr/bin/python</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic">#!/usr/bin/python</span>
 <span style="font-weight: bold">import</span> <span style="color: #555555">gnucash</span>
 FILE <span style="font-weight: bold">=</span> <span style="color: #bb8844">&quot;/chemin/de/mon/fichier/GnuCash&quot;</span>
 
-session <span style="font-weight: bold">=</span> gnucash<span style="font-weight: bold">.</span>Session(FILE, ignore_lock<span style="font-weight: bold">=</span><span style="color: #999999">True</span>, is_new<span style="font-weight: bold">=</span><span style="color: #999999">False</span>)
+session <span style="font-weight: bold">=</span> gnucash<span style="font-weight: bold">.</span>Session(FILE, ignore_lock<span style="font-weight: bold">=True</span>, is_new<span style="font-weight: bold">=False</span>)
 book <span style="font-weight: bold">=</span> session<span style="font-weight: bold">.</span>book
 a_root <span style="font-weight: bold">=</span> book<span style="font-weight: bold">.</span>get_root_account()
 <span style="font-weight: bold">def</span> <span style="color: #990000; font-weight: bold">atree</span>(a, prefix<span style="font-weight: bold">=</span><span style="color: #bb8844">&#39;&#39;</span>):
@@ -74,22 +74,22 @@ a_root <span style="font-weight: bold">=</span> book<span style="font-weight: bo
 		suba <span style="font-weight: bold">=</span> gnucash<span style="font-weight: bold">.</span>Account(instance <span style="font-weight: bold">=</span> suba)
 		s <span style="font-weight: bold">+=</span> atree(suba, <span style="color: #bb8844">&#39;  &#39;</span><span style="font-weight: bold">+</span>prefix)
 	<span style="font-weight: bold">return</span> s
-<span style="font-weight: bold">print</span> atree(a_root)
+<span style="color: #999999">print</span> atree(a_root)
 session<span style="font-weight: bold">.</span>end()
 session<span style="font-weight: bold">.</span>destroy()
 </pre></div>
 </p></li>
 
 <li><p><strong>Afficher la transaction la plus récente d’un compte, avec ses détails</strong>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!/usr/bin/python</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #999988; font-style: italic">#!/usr/bin/python</span>
 <span style="font-weight: bold">import</span> <span style="color: #555555">datetime</span><span style="font-weight: bold">,</span> <span style="color: #555555">gnucash</span>
 FILE <span style="font-weight: bold">=</span> <span style="color: #bb8844">&quot;/chemin/de/mon/fichier/GnuCash&quot;</span>
 COMPTE <span style="font-weight: bold">=</span> <span style="color: #bb8844">&quot;label du compte dans GnuCash&quot;</span>
 
-session <span style="font-weight: bold">=</span> gnucash<span style="font-weight: bold">.</span>Session(FILE, ignore_lock<span style="font-weight: bold">=</span><span style="color: #999999">True</span>, is_new<span style="font-weight: bold">=</span><span style="color: #999999">False</span>)
+session <span style="font-weight: bold">=</span> gnucash<span style="font-weight: bold">.</span>Session(FILE, ignore_lock<span style="font-weight: bold">=True</span>, is_new<span style="font-weight: bold">=False</span>)
 book <span style="font-weight: bold">=</span> session<span style="font-weight: bold">.</span>book
 a <span style="font-weight: bold">=</span> book<span style="font-weight: bold">.</span>get_root_account()<span style="font-weight: bold">.</span>lookup_by_name(COMPTE)
-end, last <span style="font-weight: bold">=</span> <span style="color: #999999">None</span>, <span style="color: #999999">None</span>
+end, last <span style="font-weight: bold">=</span> <span style="font-weight: bold">None</span>, <span style="font-weight: bold">None</span>
 <span style="font-weight: bold">for</span> s <span style="font-weight: bold">in</span> a<span style="font-weight: bold">.</span>GetSplitList():
 	cur <span style="font-weight: bold">=</span> s<span style="font-weight: bold">.</span>parent<span style="font-weight: bold">.</span>GetDate()
 	<span style="font-weight: bold">if</span> <span style="font-weight: bold">not</span> end <span style="font-weight: bold">or</span> cur <span style="font-weight: bold">&gt;</span> end:
@@ -97,7 +97,7 @@ end, last <span style="font-weight: bold">=</span> <span style="color: #999999">
 t <span style="font-weight: bold">=</span> s<span style="font-weight: bold">.</span>parent
 t_date <span style="font-weight: bold">=</span> datetime<span style="font-weight: bold">.</span>date<span style="font-weight: bold">.</span>fromtimestamp(end)<span style="font-weight: bold">.</span>strftime(<span style="color: #bb8844">&#39;%d/%m/%Y&#39;</span>)
 target <span style="font-weight: bold">=</span> s<span style="font-weight: bold">.</span>GetOtherSplit()<span style="font-weight: bold">.</span>GetAccount()<span style="font-weight: bold">.</span>GetName()
-<span style="font-weight: bold">print</span> <span style="color: #bb8844">&quot;%s %.2f &gt; %s : %s&quot;</span> <span style="font-weight: bold">%</span> (t_date, s<span style="font-weight: bold">.</span>GetAmount()<span style="font-weight: bold">.</span>to_double(), target, t<span style="font-weight: bold">.</span>GetDescription())
+<span style="color: #999999">print</span> <span style="color: #bb8844">&quot;%s %.2f &gt; %s : %s&quot;</span> <span style="font-weight: bold">%</span> (t_date, s<span style="font-weight: bold">.</span>GetAmount()<span style="font-weight: bold">.</span>to_double(), target, t<span style="font-weight: bold">.</span>GetDescription())
 session<span style="font-weight: bold">.</span>end()
 session<span style="font-weight: bold">.</span>destroy()
 </pre></div>

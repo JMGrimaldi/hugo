@@ -6,8 +6,95 @@
     <description>Derniers contenus de JM.Grimaldi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://grimaldi.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
+      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
+      <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
+      <description>
+
+&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/shuffle.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Je viens de scanner un document imprimé en brochure/booklet après l&amp;rsquo;avoir dégrafé. C&amp;rsquo;est pratique, ça permet d&amp;rsquo;utiliser le chargeur automatique du scanner. Mais cela veut dire que sur chaque page scannée j&amp;rsquo;ai en réalité 2 pages, et dans un ordre assez bizarre: 8 et 9, 10 et 7, etc. Comment les remettre dans l&amp;rsquo;ordre ?&lt;/p&gt;
+
+&lt;h2 id=&#34;numérologie&#34;&gt;Numérologie&lt;/h2&gt;
+
+&lt;p&gt;D&amp;rsquo;abord, on constate qu&amp;rsquo;avec 2 pages par scan, le nombre de pages est un multiple de 2. Écrivons-le 2n.&lt;/p&gt;
+
+&lt;p&gt;On a les pages 1 à n dans la première moitié de la brochure, et les pages n+1 à 2n dans la seconde moitié. Ce qui veut dire que sur la première page scannée, on a les pages n (à gauche) et n+1 (à droite).&lt;/p&gt;
+
+&lt;p&gt;Au verso, c&amp;rsquo;est-à-dire sur la deuxième page scannée, on a les pages n-1 et n+2. Et ainsi de suite jusqu&amp;rsquo;à la n&lt;sup&gt;ième&lt;/sup&gt; page scannée, la couverture, où l&amp;rsquo;on a les pages 1 et 2n.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./img/leaflet.png&#34; alt=&#34;Numérotation d&#39;une brochure&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;À l&amp;rsquo;inverse, la page 1 est à droite du scan n, la page 2 à gauche du scan n-1, la page 3 à droite du scan n-2, &amp;hellip; la page n à gauche du scan 1, la page n+1 à droite du scan 1, etc.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est compris entre 1 et n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(n-k+1)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est supérieur à n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(k-n)&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;La page &lt;em&gt;k&lt;/em&gt; est à droite si &lt;em&gt;k&lt;/em&gt; est impair, à gauche si &lt;em&gt;k&lt;/em&gt; est pair.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;mise-en-pratique&#34;&gt;Mise en pratique&lt;/h2&gt;
+
+&lt;p&gt;Vous aurez besoin d&amp;rsquo;avoir installé ImageMagick, Ghostscript (version 32 bits), et Cygwin si vous êtes sous Windows. Vous aurez également besoin des utilitaires pdfimages et jpegtran :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pdfimages&lt;/strong&gt; permet d&amp;rsquo;extraire les images du PDF sans les dégrader. Sous Ubuntu il est dans le package &lt;code&gt;poppler-utils&lt;/code&gt; ; sous Windows il faut télécharger &lt;a href=&#34;http://www.foolabs.com/xpdf/download.html&#34;&gt;Xpdf&lt;/a&gt; puis copier &lt;code&gt;pdfimages.exe&lt;/code&gt; (celui de bin64/ si l&amp;rsquo;OS le permet, de bin32/ sinon) dans le &lt;code&gt;/usr/local/bin/&lt;/code&gt; de Cygwin.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;jpegtran&lt;/strong&gt; permet de faire pivoter une image JPEG sans la dégrader. Sous Ubuntu il est dans le package &lt;code&gt;libjpeg-turbo-progs&lt;/code&gt; ; sous Windows il est téléchargeable &lt;a href=&#34;http://jpegclub.org/jpegtran/&#34;&gt;ici&lt;/a&gt;, là encore le déposer sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; et s&amp;rsquo;assurer qu&amp;rsquo;il est exécutable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Après ces préliminaires, si l&amp;rsquo;on a un &lt;code&gt;doc.pdf&lt;/code&gt; de 8 scans (16 pages à la fin) :&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;On extrait les images du PDF :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;pdfimages&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-j&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc.pdf&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Si l&amp;rsquo;on a besoin de retourner 1 page sur 2 : &lt;code&gt;for i in {01..07..2};do exiftran -i1 doc-00$i.jpg;done&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° horaires avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-*.jpg;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;convert&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-quality&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;95&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-rotate&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;90&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-crop&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;50&lt;/span&gt;%x0&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;rm&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;jpegtran&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-rotate&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;180&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;python3&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;n=8; print(&amp;quot; &amp;quot;.join(f&amp;quot;doc-{(k-n if k&amp;gt;n else n-k+1)-1:04d}-{k%2}.jpg&amp;quot; for k in range(1, n*2+1)))&amp;#39;`&lt;/span&gt;;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+doc-0007-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0006-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0005-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0004-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0003-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0002-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0001-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0000-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0000-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0001-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0002-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0003-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0004-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0005-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0006-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0007-0.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Si on a scanné dans l&amp;rsquo;autre sens et qu&amp;rsquo;on a les pages 2n et 1 sur le scan 1, puis 2 et 2n-1, etc. jusqu&amp;rsquo;à n et n+1 sur le scan n :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;python3&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-c&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;n=8; print(&amp;quot; &amp;quot;.join(f&amp;quot;doc-{(n*2+1-k if k&amp;gt;n else k)-1:04d}-{k%2}.jpg&amp;quot; for k in range(1, n*2+1)))&amp;#39;`&lt;/span&gt;;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
+doc-0000-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0001-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0002-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0003-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0004-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0005-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0006-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0007-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0007-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0006-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0005-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0004-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0003-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0002-0.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0001-1.jpg&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-0000-0.jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;convert&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-density&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;300&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-quality&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;out.pdf
+$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;rm&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;*jpg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>Envoi de mails sur Ubuntu</title>
@@ -59,6 +146,70 @@ n&amp;rsquo;autorise l&amp;rsquo;envoi que de 100 mails par jour) :&lt;/p&gt;
 &lt;p&gt;Si cela ne marche pas votre serveur SMTP a probablement des mécanismes de
 sécurité: vérification de votre IP, authentification par mot de passe,
 vérification de l&amp;rsquo;adresse d&amp;rsquo;envoi, &amp;hellip; Renseignez-vous sur ces mécanismes.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bit suid ?</title>
+      <link>http://grimaldi.me/post/suid/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://grimaldi.me/post/suid/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/crontab.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;J&amp;rsquo;ai un répertoire partagé /alpha/, appartenant au groupe /toto/ qui un droit d&amp;rsquo;écriture dessus  :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir alpha; chmod g+w alpha; chown .toto alpha
+$ stat alpha
+Accès : (0750/drwxr-x---)  UID : ( 1000/      jm)   GID : ( 1001/      toto)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lorsque quelqu&amp;rsquo;un crée un fichier dedans, comment faire :
+1. Pour qu&amp;rsquo;il appartienne au groupe toto ?
+2. Pour que le groupe ait les droits d&amp;rsquo;écriture sur ce fichier ?&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Faire que les nouveaux fichiers du répertoire appartiennent au groupe toto ?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Le bit suid, dans les attributs d&amp;rsquo;un répertoire, fait que tout fichier créé dans ce répertoire appartiendra à celui qui possède le répertoire, et pas à celui qui crée le fichier. On peut le positionner au niveau de l&amp;rsquo;utilisateur et/ou du groupe :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod g+s alpha
+$ stat alpha
+Accès : (2750/drwxr-s---)  UID : ( 1000/      jm)   GID : ( 1001/      toto)
+
+$ touch alpha/fichier
+$ stat alpha/fichier
+Accès : (0644/-rw-r--r--)  UID : ( 1000/      jm)   GID : ( 1001/      toto)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NB : le bit suid est hérité, de sorte que si vous créez un répertoire /alpha/beta/ puis un fichier à l&amp;rsquo;intérieur, il appartiendra également au groupe toto.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Faire que le groupe ait les droits d&amp;rsquo;écriture sur ce fichier&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Lorsqu&amp;rsquo;on crée un fichier, Linux applique des permissions par défaut que l&amp;rsquo;on peut voir et modifier avec la commande &lt;code&gt;umask&lt;/code&gt; :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ umask -S
+u=rwx,g=rwx,o=rx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Sans l&amp;rsquo;option &lt;code&gt;-S&lt;/code&gt; umask affiche les permissions qui sont /retirées/, en additionnant 4 pour r, 2 pour w et 1 pour x, et avec 3 chiffres pour les permissions u, g et o :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ umask
+0002
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Le umask par défaut est rwxr-xr-x (022) pour root, et rwxrwxr-x (002) pour les autres utilisateurs.
+Si l&amp;rsquo;on veut modifier ces permissions par défaut :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ umask g-w
+$ umask -S
+u=rwx,g=rx,o=rx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Attention ce changement ne s&amp;rsquo;appliquera qu&amp;rsquo;à la sesssion en cours. Pour le rendre permanent uniquement pour notre utilisateur il faut ajouter la ligne &lt;code&gt;umask 0027&lt;/code&gt;à ~/.bashrc. Et si on veut le rendre permanent pour tous les utilisateurs, créer un fichier &lt;code&gt;/etc/default/login&lt;/code&gt;avec la ligne &lt;code&gt;UMASK 022&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -428,81 +579,6 @@ ajoutez la commande suivante pour qu&amp;rsquo;elle se lance avant le daily :&lt
     </item>
     
     <item>
-      <title>Remettre les pages d&#39;un PDF dans l&#39;ordre</title>
-      <link>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</link>
-      <pubDate>Mon, 24 Aug 2015 17:29:09 +0200</pubDate>
-      
-      <guid>http://grimaldi.me/post/remettre-les-pages-dans-l-ordre/</guid>
-      <description>
-
-&lt;p&gt;&lt;img class=&#34;fr&#34; src=&#34;./img/shuffle.png&#34;&gt;&lt;/p&gt;
-
-&lt;p&gt;Je viens de scanner un document imprimé en brochure/booklet après l&amp;rsquo;avoir dégrafé. C&amp;rsquo;est pratique, ça permet d&amp;rsquo;utiliser le chargeur automatique du scanner. Mais cela veut dire que sur chaque page scannée j&amp;rsquo;ai en réalité 2 pages, et dans un ordre assez bizarre: 8 et 9, 10 et 7, etc. Comment les remettre dans l&amp;rsquo;ordre ?&lt;/p&gt;
-
-&lt;h2 id=&#34;numérologie&#34;&gt;Numérologie&lt;/h2&gt;
-
-&lt;p&gt;D&amp;rsquo;abord, on constate qu&amp;rsquo;avec 2 pages par scan, le nombre de pages est un multiple de 2. Écrivons-le 2n.&lt;/p&gt;
-
-&lt;p&gt;On a les pages 1 à n dans la première moitié de la brochure, et les pages n+1 à 2n dans la seconde moitié. Ce qui veut dire que sur la première page scannée, on a les pages n (à gauche) et n+1 (à droite).&lt;/p&gt;
-
-&lt;p&gt;Au verso, c&amp;rsquo;est-à-dire sur la deuxième page scannée, on a les pages n-1 et n+2. Et ainsi de suite jusqu&amp;rsquo;à la n&lt;sup&gt;ième&lt;/sup&gt; page scannée, la couverture, où l&amp;rsquo;on a les pages 1 et 2n.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./img/leaflet.png&#34; alt=&#34;Numérotation d&#39;une brochure&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;À l&amp;rsquo;inverse, la page 1 est à droite du scan n, la page 2 à gauche du scan n-1, la page 3 à droite du scan n-2, &amp;hellip; la page n à gauche du scan 1, la page n+1 à droite du scan 1, etc.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est compris entre 1 et n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(n-k+1)&lt;/em&gt;;&lt;/li&gt;
-&lt;li&gt;Si &lt;em&gt;k&lt;/em&gt; est supérieur à n, la page &lt;em&gt;k&lt;/em&gt; est sur le scan &lt;em&gt;(k-n)&lt;/em&gt;;&lt;/li&gt;
-&lt;li&gt;La page &lt;em&gt;k&lt;/em&gt; est à droite si &lt;em&gt;k&lt;/em&gt; est impair, à gauche si &lt;em&gt;k&lt;/em&gt; est pair.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;mise-en-pratique&#34;&gt;Mise en pratique&lt;/h2&gt;
-
-&lt;p&gt;Vous aurez besoin d&amp;rsquo;avoir installé ImageMagick, Ghostscript (version 32 bits), et Cygwin si vous êtes sous Windows. Vous aurez également besoin des utilitaires pdfimages et jpegtran :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;pdfimages&lt;/strong&gt; permet d&amp;rsquo;extraire les images du PDF sans les dégrader. Sous Ubuntu il est dans le package &lt;code&gt;poppler-utils&lt;/code&gt; ; sous Windows il faut télécharger &lt;a href=&#34;http://www.foolabs.com/xpdf/download.html&#34;&gt;Xpdf&lt;/a&gt; puis copier &lt;code&gt;pdfimages.exe&lt;/code&gt; (celui de bin64/ si l&amp;rsquo;OS le permet, de bin32/ sinon) dans le &lt;code&gt;/usr/local/bin/&lt;/code&gt; de Cygwin.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;jpegtran&lt;/strong&gt; permet de faire pivoter une image JPEG sans la dégrader. Sous Ubuntu il est dans le package &lt;code&gt;libjpeg-turbo-progs&lt;/code&gt; ; sous Windows il est téléchargeable &lt;a href=&#34;http://jpegclub.org/jpegtran/&#34;&gt;ici&lt;/a&gt;, là encore le déposer sous &lt;code&gt;/usr/local/bin/&lt;/code&gt; et s&amp;rsquo;assurer qu&amp;rsquo;il est exécutable.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Après ces préliminaires, si l&amp;rsquo;on a un &lt;code&gt;doc.pdf&lt;/code&gt; de 8 scans (16 pages à la fin) :&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;On extrait les images du PDF :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ pdfimages -j doc.pdf doc
-&lt;/pre&gt;&lt;/div&gt;
-
-Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; i in doc-*.jpg; &lt;span style=&#34;font-weight: bold&#34;&gt;do&lt;/span&gt; convert -quality &lt;span style=&#34;color: #009999&#34;&gt;95&lt;/span&gt; -rotate &lt;span style=&#34;color: #009999&#34;&gt;90&lt;/span&gt; -crop &lt;span style=&#34;color: #009999&#34;&gt;50&lt;/span&gt;%x0 &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-Cela remplace &lt;code&gt;doc-0000.jpg&lt;/code&gt; par &lt;code&gt;doc-0000-0.jpg&lt;/code&gt; (page de gauche) et &lt;code&gt;doc-0000-1.jpg&lt;/code&gt; (page de droite), etc.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Si une page est à l&amp;rsquo;envers (p.ex. dernière page d&amp;rsquo;une brochure au format paysage) on la retourne :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #008080&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;doc-0007-0.jpg; jpegtran -rotate &lt;span style=&#34;color: #009999&#34;&gt;180&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Puis on génère la liste des scans à prendre pour remettre les pages dans l&amp;rsquo;ordre :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #008080&#34;&gt;pages&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;`&lt;/span&gt;perl -e &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;$n=8; for $k (1..$n*2){printf &amp;quot;doc-%.4i-%i.jpg &amp;quot;, ($k&amp;gt;$n?$k-$n:$n-$k+1)-1, $k%2};&amp;#39;`&lt;/span&gt;; &lt;span style=&#34;color: #999999&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt;
-doc-0007-1.jpg doc-0006-0.jpg doc-0005-1.jpg doc-0004-0.jpg doc-0003-1.jpg doc-0002-0.jpg doc-0001-1.jpg doc-0000-0.jpg doc-0000-1.jpg doc-0001-0.jpg doc-0002-1.jpg doc-0003-0.jpg doc-0004-1.jpg doc-0005-0.jpg doc-0006-1.jpg doc-0007-0.jpg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Enfin on construit le PDF final (&lt;code&gt;-density 300&lt;/code&gt; correspond à la résolution du scan, 300 dpi) et après vérification on fait le ménage :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ convert -density &lt;span style=&#34;color: #009999&#34;&gt;300&lt;/span&gt; -quality &lt;span style=&#34;color: #009999&#34;&gt;80&lt;/span&gt; &lt;span style=&#34;color: #008080&#34;&gt;$pages&lt;/span&gt; out.pdf
-$ rm *jpg
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Série noire</title>
       <link>http://grimaldi.me/post/s%C3%A9rie-noire/</link>
       <pubDate>Sat, 22 Aug 2015 14:38:46 +0200</pubDate>
@@ -522,14 +598,14 @@ $ rm *jpg
 &lt;li&gt;&lt;p&gt;On peut récupérer un disque dur HS sans débourser une fortune auprès d&amp;rsquo;un labo de récupération de données.&lt;br /&gt;
 Mon disque dur, un Seagate Backup+ Slim d&amp;rsquo;1To âgé d&amp;rsquo;à peine 1 an, se mettait bien sous tension mais n&amp;rsquo;était plus visible du BIOS et ne pouvait plus être accédé depuis Linux ni Windows. En tendant l&amp;rsquo;oreille, il y avait un « bzz bzz bzz » à la mise sous tension, puis plus rien.&lt;br /&gt;
 Sous Ubuntu, le disque apparaissait avec &lt;code&gt;lsusb&lt;/code&gt;, ses informations (modèle, numéro de série) étaient bien lues, mais ça n&amp;rsquo;allait pas plus loin. &lt;code&gt;/var/log/syslog&lt;/code&gt; montrait l&amp;rsquo;erreur suivante :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;scsi &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0: Direct-Access     Seagate  Backup+  SL      &lt;span style=&#34;color: #009999&#34;&gt;0143&lt;/span&gt; PQ: &lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt; ANSI: &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;
-sd &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0: Attached scsi generic sg1 &lt;span style=&#34;color: #999999&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;
-sd &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; Spinning up disk...
-usb &lt;span style=&#34;color: #009999&#34;&gt;4&lt;/span&gt;-1: USB disconnect, device number &lt;span style=&#34;color: #009999&#34;&gt;2&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;scsi&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;Direct-Access&lt;span style=&#34;color: #bbbbbb&#34;&gt;     &lt;/span&gt;Seagate&lt;span style=&#34;color: #bbbbbb&#34;&gt;  &lt;/span&gt;Backup+&lt;span style=&#34;color: #bbbbbb&#34;&gt;  &lt;/span&gt;SL&lt;span style=&#34;color: #bbbbbb&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;0143&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;PQ:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;ANSI:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;
+sd&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;Attached&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;scsi&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;generic&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;sg1&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;
+sd&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;Spinning&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;up&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;disk...
+usb&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;4&lt;/span&gt;-1:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;USB&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;disconnect,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;device&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;number&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;2&lt;/span&gt;
 ......................ready
-sd &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt; READ CAPACITY failed
-sd &lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0: &lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;
-Result: &lt;span style=&#34;color: #008080&#34;&gt;hostbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DID_NO_CONNECT &lt;span style=&#34;color: #008080&#34;&gt;driverbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DRIVER_OK
+sd&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;READ&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;CAPACITY&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;failed
+sd&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;6&lt;/span&gt;:0:0:0:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;[&lt;/span&gt;sdb&lt;span style=&#34;font-weight: bold&#34;&gt;]&lt;/span&gt;
+Result:&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;hostbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DID_NO_CONNECT&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;driverbyte&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;DRIVER_OK
 &lt;/pre&gt;&lt;/div&gt;
 
 Puis j&amp;rsquo;ai appris que ce bruit était probablement lié à la tête de lecture coincée sur le plateau, et qu&amp;rsquo;on pouvait la décoincer en ouvrant le disque. Opération risquée, mais je n&amp;rsquo;avais rien à perdre.&lt;br /&gt;
@@ -565,11 +641,11 @@ chmod +x apt-cyg
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;NB :&lt;/strong&gt; chez moi la version de gzip installée n&amp;rsquo;accepte pas l&amp;rsquo;option -k, ce qui provoque une erreur quand on supprime un package. Pour l&amp;rsquo;éviter, remplacez la ligne :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;gzip -dk setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst.gz
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;gzip&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-dk&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst.gz
 &lt;/pre&gt;&lt;/div&gt;
 
 par :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;gzip -dc setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst.gz &amp;gt; setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;gzip&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-dc&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst.gz&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;setup/&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$pkg&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;.lst
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -626,12 +702,12 @@ par :
 
 &lt;p&gt;Saisissez le code suivant :&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
-    Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
-    &lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt; i &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt; &lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
-    ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;, i).EntireColumn.Delete
-    &lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
-&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;efface_1_colonne_sur_2&lt;/span&gt;()
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;Range(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;).Select
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;For&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;To&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;35&lt;/span&gt;
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;ActiveCell.Offset(&lt;span style=&#34;color: #009999&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i).EntireColumn.Delete
+&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Next&lt;/span&gt;
+&lt;span style=&#34;font-weight: bold&#34;&gt;End&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;Sub&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;
 
@@ -769,16 +845,16 @@ pd-3.40-1_en.tar.gz&lt;/code&gt; (à décompresser avec &lt;code&gt;tar xvzf &am
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Installer le module sous Ubuntu&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install python-gnucash
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;apt-get&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;install&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;python-gnucash
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Ouvrir un fichier de données et afficher l’arborescence des comptes&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
 FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=False&lt;/span&gt;)
 book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
 a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()
 &lt;span style=&#34;font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #990000; font-weight: bold&#34;&gt;atree&lt;/span&gt;(a, prefix&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;):
@@ -787,22 +863,22 @@ a_root &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span
 		suba &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Account(instance &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; suba)
 		s &lt;span style=&#34;font-weight: bold&#34;&gt;+=&lt;/span&gt; atree(suba, &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;  &amp;#39;&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;+&lt;/span&gt;prefix)
 	&lt;span style=&#34;font-weight: bold&#34;&gt;return&lt;/span&gt; s
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; atree(a_root)
+&lt;span style=&#34;color: #999999&#34;&gt;print&lt;/span&gt; atree(a_root)
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Afficher la transaction la plus récente d’un compte, avec ses détails&lt;/strong&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #999988; font-style: italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #555555&#34;&gt;gnucash&lt;/span&gt;
 FILE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;/chemin/de/mon/fichier/GnuCash&amp;quot;&lt;/span&gt;
 COMPTE &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;label du compte dans GnuCash&amp;quot;&lt;/span&gt;
 
-session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #999999&#34;&gt;False&lt;/span&gt;)
+session &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; gnucash&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;Session(FILE, ignore_lock&lt;span style=&#34;font-weight: bold&#34;&gt;=True&lt;/span&gt;, is_new&lt;span style=&#34;font-weight: bold&#34;&gt;=False&lt;/span&gt;)
 book &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;book
 a &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; book&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;get_root_account()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;lookup_by_name(COMPTE)
-end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color: #999999&#34;&gt;None&lt;/span&gt;
+end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;font-weight: bold&#34;&gt;None&lt;/span&gt;
 &lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt; s &lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt; a&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetSplitList():
 	cur &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDate()
 	&lt;span style=&#34;font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;not&lt;/span&gt; end &lt;span style=&#34;font-weight: bold&#34;&gt;or&lt;/span&gt; cur &lt;span style=&#34;font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; end:
@@ -810,54 +886,12 @@ end, last &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span 
 t &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;parent
 t_date &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; datetime&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;date&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;fromtimestamp(end)&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;strftime(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;%d/%m/%Y&amp;#39;&lt;/span&gt;)
 target &lt;span style=&#34;font-weight: bold&#34;&gt;=&lt;/span&gt; s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetOtherSplit()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAccount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetName()
-&lt;span style=&#34;font-weight: bold&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
+&lt;span style=&#34;color: #999999&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;%s %.2f &amp;gt; %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;%&lt;/span&gt; (t_date, s&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetAmount()&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;to_double(), target, t&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;GetDescription())
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;end()
 session&lt;span style=&#34;font-weight: bold&#34;&gt;.&lt;/span&gt;destroy()
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Passer de FancyBox à fancyBox2</title>
-      <link>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</link>
-      <pubDate>Wed, 01 Jan 2014 14:59:25 +0200</pubDate>
-      
-      <guid>http://grimaldi.me/post/passer-de-fancybox-%C3%A0-fancybox2/</guid>
-      <description>&lt;p&gt;FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :&lt;/p&gt;
-
-&lt;p&gt;Version &lt;a href=&#34;http://fancybox.net/&#34;&gt;FancyBox&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionIn&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;transitionOut&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;inline&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;onComplete&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;#fancybox-title&amp;#39;&lt;/span&gt;).hide();
-			});
-		}
-	});
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Version &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox2&lt;/a&gt; :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;	$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;a.th&amp;#39;&lt;/span&gt;).fancybox({
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;nextEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;prevEffect&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;		&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;ajax&amp;#39;&lt;/span&gt;,
-		&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;afterShow&amp;#39;&lt;/span&gt;	&lt;span style=&#34;font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-			$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-wrap&amp;#39;&lt;/span&gt;).hover(&lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).show();
-			}, &lt;span style=&#34;font-weight: bold&#34;&gt;function&lt;/span&gt;() {
-				$(&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;#39;.fancybox-title&amp;#39;&lt;/span&gt;).hide();
-			});
-		}
-	});
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
 </description>
     </item>
     

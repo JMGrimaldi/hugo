@@ -38,7 +38,7 @@
 	</ul>
 	<gcse:search></gcse:search>
 	<div class="hr"></div>
-	<div class="copyright">&copy; 2000-2021</div>
+	<div class="copyright">&copy; 2000-2024</div>
 </div>
 
 <div class="content">
@@ -55,34 +55,34 @@
 		<p>FancyBox est un plugin jQuery qui permet de créer des galeries en popup ; très utile pour montrer des images. La version 2 est sortie, et nécessite quelques adaptations du code. Voici donc la modification que j’ai dû faire (en plus bien sûr d’inclure les .js et .css de la nouvelle version) :</p>
 
 <p>Version <a href="http://fancybox.net/">FancyBox</a> :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>	$(<span style="color: #bb8844">&#39;a.th&#39;</span>).fancybox({
-		<span style="color: #bb8844">&#39;transitionIn&#39;</span>	<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;none&#39;</span>,
-		<span style="color: #bb8844">&#39;transitionOut&#39;</span>	<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;none&#39;</span>,
-		<span style="color: #bb8844">&#39;type&#39;</span>		<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;inline&#39;</span>,
-		<span style="color: #bb8844">&#39;onComplete&#39;</span>	<span style="font-weight: bold">:</span> <span style="font-weight: bold">function</span>() {
-			$(<span style="color: #bb8844">&#39;#fancybox-wrap&#39;</span>).hover(<span style="font-weight: bold">function</span>() {
-				$(<span style="color: #bb8844">&#39;#fancybox-title&#39;</span>).show();
-			}, <span style="font-weight: bold">function</span>() {
-				$(<span style="color: #bb8844">&#39;#fancybox-title&#39;</span>).hide();
-			});
-		}
-	});
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">	</span>$(<span style="color: #bb8844">&#39;a.th&#39;</span>).fancybox({
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;transitionIn&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;none&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;transitionOut&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;none&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;type&#39;</span><span style="color: #bbbbbb">		</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;inline&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;onComplete&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">			</span>$(<span style="color: #bb8844">&#39;#fancybox-wrap&#39;</span>).hover(<span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">				</span>$(<span style="color: #bb8844">&#39;#fancybox-title&#39;</span>).show();
+<span style="color: #bbbbbb">			</span>},<span style="color: #bbbbbb"> </span><span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">				</span>$(<span style="color: #bb8844">&#39;#fancybox-title&#39;</span>).hide();
+<span style="color: #bbbbbb">			</span>});
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">	</span>});
 </pre></div>
 </p>
 
 <p>Version <a href="http://fancyapps.com/fancybox/">fancyBox2</a> :
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>	$(<span style="color: #bb8844">&#39;a.th&#39;</span>).fancybox({
-		<span style="color: #bb8844">&#39;nextEffect&#39;</span>	<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;none&#39;</span>,
-		<span style="color: #bb8844">&#39;prevEffect&#39;</span>	<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;none&#39;</span>,
-		<span style="color: #bb8844">&#39;type&#39;</span>		<span style="font-weight: bold">:</span> <span style="color: #bb8844">&#39;ajax&#39;</span>,
-		<span style="color: #bb8844">&#39;afterShow&#39;</span>	<span style="font-weight: bold">:</span> <span style="font-weight: bold">function</span>() {
-			$(<span style="color: #bb8844">&#39;.fancybox-wrap&#39;</span>).hover(<span style="font-weight: bold">function</span>() {
-				$(<span style="color: #bb8844">&#39;.fancybox-title&#39;</span>).show();
-			}, <span style="font-weight: bold">function</span>() {
-				$(<span style="color: #bb8844">&#39;.fancybox-title&#39;</span>).hide();
-			});
-		}
-	});
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">	</span>$(<span style="color: #bb8844">&#39;a.th&#39;</span>).fancybox({
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;nextEffect&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;none&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;prevEffect&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;none&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;type&#39;</span><span style="color: #bbbbbb">		</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&#39;ajax&#39;</span>,
+<span style="color: #bbbbbb">		</span><span style="color: #bb8844">&#39;afterShow&#39;</span><span style="color: #bbbbbb">	</span><span style="font-weight: bold">:</span><span style="color: #bbbbbb"> </span><span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">			</span>$(<span style="color: #bb8844">&#39;.fancybox-wrap&#39;</span>).hover(<span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">				</span>$(<span style="color: #bb8844">&#39;.fancybox-title&#39;</span>).show();
+<span style="color: #bbbbbb">			</span>},<span style="color: #bbbbbb"> </span><span style="font-weight: bold">function</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">				</span>$(<span style="color: #bb8844">&#39;.fancybox-title&#39;</span>).hide();
+<span style="color: #bbbbbb">			</span>});
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">	</span>});
 </pre></div>
 </p>
 
