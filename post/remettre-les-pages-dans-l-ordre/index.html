@@ -89,16 +89,13 @@
 <p>Après ces préliminaires, si l&rsquo;on a un <code>doc.pdf</code> de 8 scans (16 pages à la fin) :</p>
 
 <ol>
-<li>On extrait les images du PDF :
+<li><p>On extrait les images du PDF :
 <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>$<span style="color: #bbbbbb"> </span>pdfimages<span style="color: #bbbbbb"> </span>-j<span style="color: #bbbbbb"> </span>doc.pdf<span style="color: #bbbbbb"> </span>doc
 </pre></div>
 
-Cela crée des fichiers <code>doc-0000.jpg</code> à <code>doc-0007.jpg</code>.</li>
-</ol>
+Cela crée des fichiers <code>doc-0000.jpg</code> à <code>doc-0007.jpg</code>.<br />
+Si l&rsquo;on a besoin de retourner 1 page sur 2 : <code>for i in {01..07..2};do exiftran -i1 doc-00$i.jpg;done</code></p></li>
 
-<p>Si l&rsquo;on a besoin de retourner 1 page sur 2 : <code>for i in {01..07..2};do exiftran -i1 doc-00$i.jpg;done</code></p>
-
-<ol>
 <li><p>On splitte chaque scan en 2 pages distinctes (<code>-rotate 90</code> tourne la page de 90° horaires avant de la couper en 2 ; le retirer si l&rsquo;orientation est déjà bonne) :
 <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span>$<span style="color: #bbbbbb"> </span><span style="font-weight: bold">for</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="font-weight: bold">in</span><span style="color: #bbbbbb"> </span>doc-*.jpg;<span style="color: #bbbbbb"> </span><span style="font-weight: bold">do</span><span style="color: #bbbbbb"> </span>convert<span style="color: #bbbbbb"> </span>-quality<span style="color: #bbbbbb"> </span><span style="color: #009999">95</span><span style="color: #bbbbbb"> </span>-rotate<span style="color: #bbbbbb"> </span><span style="color: #009999">90</span><span style="color: #bbbbbb"> </span>-crop<span style="color: #bbbbbb"> </span><span style="color: #009999">50</span>%x0<span style="color: #bbbbbb"> </span><span style="color: #bb8844">&quot;</span><span style="color: #008080">$i</span><span style="color: #bb8844">&quot;</span><span style="color: #bbbbbb"> </span><span style="color: #bb8844">&quot;</span><span style="color: #008080">$i</span><span style="color: #bb8844">&quot;</span><span style="color: #bbbbbb"> </span><span style="font-weight: bold">&amp;&amp;</span><span style="color: #bbbbbb"> </span>rm<span style="color: #bbbbbb"> </span><span style="color: #bb8844">&quot;</span><span style="color: #008080">$i</span><span style="color: #bb8844">&quot;</span>;<span style="font-weight: bold">done</span>
 </pre></div>

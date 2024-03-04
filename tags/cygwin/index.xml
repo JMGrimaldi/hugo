@@ -52,16 +52,13 @@
 &lt;p&gt;Après ces préliminaires, si l&amp;rsquo;on a un &lt;code&gt;doc.pdf&lt;/code&gt; de 8 scans (16 pages à la fin) :&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;On extrait les images du PDF :
+&lt;li&gt;&lt;p&gt;On extrait les images du PDF :
 &lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;pdfimages&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-j&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc.pdf&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc
 &lt;/pre&gt;&lt;/div&gt;
 
-Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
+Cela crée des fichiers &lt;code&gt;doc-0000.jpg&lt;/code&gt; à &lt;code&gt;doc-0007.jpg&lt;/code&gt;.&lt;br /&gt;
+Si l&amp;rsquo;on a besoin de retourner 1 page sur 2 : &lt;code&gt;for i in {01..07..2};do exiftran -i1 doc-00$i.jpg;done&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;Si l&amp;rsquo;on a besoin de retourner 1 page sur 2 : &lt;code&gt;for i in {01..07..2};do exiftran -i1 doc-00$i.jpg;done&lt;/code&gt;&lt;/p&gt;
-
-&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;On splitte chaque scan en 2 pages distinctes (&lt;code&gt;-rotate 90&lt;/code&gt; tourne la page de 90° horaires avant de la couper en 2 ; le retirer si l&amp;rsquo;orientation est déjà bonne) :
 &lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%;&#34;&gt;&lt;span&gt;&lt;/span&gt;$&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;i&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;doc-*.jpg;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;convert&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-quality&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;95&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-rotate&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;90&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-crop&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #009999&#34;&gt;50&lt;/span&gt;%x0&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;font-weight: bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;rm&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #008080&#34;&gt;$i&lt;/span&gt;&lt;span style=&#34;color: #bb8844&#34;&gt;&amp;quot;&lt;/span&gt;;&lt;span style=&#34;font-weight: bold&#34;&gt;done&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
